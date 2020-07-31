@@ -14,10 +14,10 @@
 	<script type="text/javascript">
 		$(function(){
 			$('input[name=loginGo]').on('click',function(){
-				location.href='login_1.html';
+				location.href='userLogin.html';
 			});
 			$('input[name=homeGo]').on('click',function(){
-				location.href='';
+				location.href='home.jsp';
 			});
 		});
 	</script>
@@ -109,8 +109,8 @@
 		 	<br>환영합니다!</h1>
 		 	<img src="img/character/character1.png"/>
 		 		<form>
-		 			<input type="button" name="loginGo" value="LOGIN">
-		 			<a href="home.jsp"><input type="button" name="homeGo" value="HOME"></a>
+		 			<input type="button" name="loginGo" value="LOGIN" />
+		 			<input type="button" name="homeGo" value="HOME" />
 		 		</form>
 		</div>
 	 </section>

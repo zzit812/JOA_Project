@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="newMemberPointInsert" parameterType="String" >
-		insert into joalib.point values (#{member_id}, 0 , '회원가입', 0);
+		insert into joalib.point values (#{member_id}, 0 , curdate() ,'회원가입', 0);
 	</insert>
 	
 	

@@ -18,8 +18,7 @@ public class NewMemberPointAction implements Action {
 		ServletContext context = request.getServletContext();	//이전 페이지의 servletContext를 받아오고,
 		
 		//정보받기
-		String member_id = (String) request.getAttribute("NewMemberID");
-		System.out.println(member_id);
+		String member_id = (String) request.getParameter("member_id");
 		
 		//svc 연결
 		NewMemberPointInsertService svc = new NewMemberPointInsertService();
@@ -36,7 +35,7 @@ public class NewMemberPointAction implements Action {
 		
 		
 		
-		return null;
+		return forward;
 	}
 
 }

@@ -35,23 +35,21 @@ public class MemberInsertAction implements Action {
         		);
         mDTO.setMember_character(Integer.parseInt(request.getParameter("member_character")));
         mDTO.setMember_level("1");   
-        
-     	//세션에 저장
-        HttpSession session = request.getSession(false);
-        String member_name = request.getParameter("member_name");        
-        session.setAttribute("member_name",member_name);
+
         
         
         //svc 연결
         MemberInsertService svc = new MemberInsertService();
         
-		if(svc.MemberInsert(mDTO)) {
-			//정보저장
-	        request.setAttribute("NewMemberID", mDTO.getMember_id());
-	        
+		if(svc.MemberInsert(mDTO)) {			
+	        String member_id = mDTO.getMember_id();        
+	        //세션저장
+			HttpSession session = request.getSession(false);
+			String member_name = mDTO.getMember_name();
+	        session.setAttribute("member_name",member_name);	        
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("newMemberPointInsert.mem");
+			forward.setPath("newMemberPointInsert.mem?member_id="+member_id);
 		}else {
 			System.out.println("실패");
 		}
