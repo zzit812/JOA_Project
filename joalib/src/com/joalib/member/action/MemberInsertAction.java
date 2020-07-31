@@ -41,16 +41,22 @@ public class MemberInsertAction implements Action {
         String member_name = request.getParameter("member_name");        
         session.setAttribute("member_name",member_name);
         
+        
         //svc 연결
-        MemberInsertService svc = new MemberInsertService();		
+        MemberInsertService svc = new MemberInsertService();
+        
 		if(svc.MemberInsert(mDTO)) {
+			//정보저장
+	        request.setAttribute("NewMemberID", mDTO.getMember_id());
+	        
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("userLogin.html");
+			forward.setPath("newMemberPointInsert.mem");
 		}else {
 			System.out.println("실패");
 		}
 		
+				
 		return forward;
 	}
 

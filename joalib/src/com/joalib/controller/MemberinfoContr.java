@@ -46,6 +46,12 @@ public class MemberinfoContr extends javax.servlet.http.HttpServlet{
 			forward = new ActionForward();
 			forward.setRedirect(true);
 			forward.setPath("home.jsp");
+		}else if (command.equals("/newMemberPointInsert.mem")) {
+			action = new NewMemberPointAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
 		}
 		
 	

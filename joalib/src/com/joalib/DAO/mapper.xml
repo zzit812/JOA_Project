@@ -13,10 +13,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="memberLoginCheck" parameterType = "String" resultType="com.joalib.DTO.memberinfoDTO" >
 		select member_pw,member_name from joalib.memberinfo where member_id = #{checkID};
 	</select>
-	<insert id="board_add" parameterType ="com.joalib.DTO.BoardDTO" >
-		INSERT INTO joalib.board(board_title, board_text, board_date, member_id, board_hit) VALUES ( #{board_title}, #{board_text}, #{board_date},#{member_id},0);
+	
+	<insert id="newMemberPointInsert" parameterType="String" >
+		insert into joalib.point values (#{member_id}, 0 , '회원가입', 0);
 	</insert>
 	
+	
+	<insert id="board_add" parameterType ="com.joalib.DTO.BoardDTO" >
+		INSERT INTO joalib.board(board_title, board_text, board_date, member_id, board_hit) VALUES ( #{board_title}, #{board_text}, #{board_date},#{member_id},0);
+	</insert>	
 	
 	<select id="board_all" resultType="com.joalib.DTO.BoardDTO">
 		SELECT * FROM joalib.board order by board_no desc;

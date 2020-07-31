@@ -40,7 +40,7 @@ public class memberinfoDAO {
 	public int memberInsert (memberinfoDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();		
 		int i = sqlsession.insert("memberInsert", dto);
-		System.out.println("회원가입이 완료되었습니다.");
+//		System.out.println("회원가입이 완료되었습니다.");
 		sqlsession.commit();
 		sqlsession.close();
 		
@@ -57,4 +57,13 @@ public class memberinfoDAO {
 		return memberinfo;
 	}
 	
+	//회원가입시 point추가
+	public int pointInsert(String member_id) {
+		SqlSession sqlsession = sqlfactory.openSession();		
+		int i = sqlsession.insert("newMemberPointInsert", member_id);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}	
 }
