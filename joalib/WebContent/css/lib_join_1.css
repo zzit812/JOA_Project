@@ -1,0 +1,45 @@
+
+		#sidemenuBlook > div {
+			/*25 100 175 250 */
+			width: 220px;
+		    height: 280px;
+		    position: relative;
+		    top: -25px;
+		    transition: all 1s;
+		}
+
+		#terms {			
+			border-top: 1px solid gray;
+			border-bottom: 1px solid gray;
+			padding: 15px 5px;
+		    height: 200px;
+		    overflow: auto;
+		    margin: 30px 10px;
+		}
+		label[for=agreeTerms]{
+			margin: 10px 0 0 10px;
+	    	font-size: 20px;
+	    	font-weight: 300;
+		}
+		label > input[type=checkbox]{
+			width: 20px;
+		    height: 20px;
+		    margin-right: 10px;
+		}
+
+		h1{
+			font-size: 30px;
+			margin-left: 30px;
+		}
+		#btn{
+			margin: 50px auto;
+    		width: 504px;
+		}
+		input[type=button]{
+			margin: 0 10px;
+		    width: 230px;
+		    height: 50px;
+		    font-size: 17px;
+		    font-weight: 400;
+		    border: 0px;
+		}

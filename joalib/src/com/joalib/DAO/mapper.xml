@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="SqlData">
+	
+	<insert id="memberInsert" parameterType = "com.joalib.DTO.memberinfoDTO" >
+		INSERT INTO joalib.memberinfo VALUES ( #{member_id}, #{member_pw}, #{member_name}, #{member_tel}, #{member_birth} ,#{member_email} , #{member_city}, #{member_adress} , '1', #{member_character});
+	</insert>
+	
+	<select id="memberLoginCheck" parameterType = "String" resultType="com.joalib.DTO.memberinfoDTO" >
+		select member_pw,member_name from joalib.memberinfo where member_id = #{checkID};
+	</select>
+	<insert id="board_add" parameterType ="com.joalib.DTO.BoardDTO" >
+		INSERT INTO joalib.board(board_title, board_text, board_date, member_id, board_hit) VALUES ( #{board_title}, #{board_text}, #{board_date},#{member_id},0);
+	</insert>
+	
+	
+	<select id="board_all" resultType="com.joalib.DTO.BoardDTO">
+		SELECT * FROM joalib.board order by board_no desc;
+	</select>
+	
+	<select id="board_count" resultType="int">
+		SELECT count(*) as board_count FROM joalib.board;
+	</select>
+	
+	<select id="read_details" resultType="com.joalib.DTO.BoardDTO" parameterType="int">
+		select * from joalib.board where board_no= #{board_no};
+	</select>
+	
+	<update id="board_update" parameterType="com.joalib.DTO.BoardDTO">
+		UPDATE joalib.board SET board_title = #{board_title}, board_text = #{board_text} WHERE board_no = #{board_num};
+	</update>
+	
+	<update id="board_hitUp" parameterType="com.joalib.DTO.BoardDTO">
+		UPDATE joalib.board SET board_hit = (board_hit+1) WHERE board_no = #{board_num};
+	</update>
+	
+	<delete id="board_del" parameterType="com.joalib.DTO.BoardDTO">
+		delete from joalib.board where board_no = #{board_no};
+	</delete>
+		
+	</mapper>
+	

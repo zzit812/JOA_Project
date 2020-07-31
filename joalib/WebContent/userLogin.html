@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+	<title>조아도서관</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="js/join_1.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="css/lib_top.css">
+	<!-- <link rel="stylesheet" type="text/css" href="css/lib_join_1.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/lib_join.css"> -->
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+	<style type="text/css">
+		#info > div > p {
+			display: inline-block;
+		    width: 130px;		
+		    margin: 0;
+		    font-size: 25px;
+		}
+		#info > div {
+			margin: 15px 10px;
+		}
+		#info > div > input {
+			height: 25px;
+			width: 220px;
+		}
+		#info {
+			float: left;
+   	 		padding: 20px;
+		}
+		input[name=loginBtn]{
+			width: 121px;
+		    height: 80px;
+		    margin: 46px 0 0 20px;
+		    border-radius: 30px;
+		    border: 0px;
+		    color: white;
+		    font-size: 25px;
+		    background-color: #5d2f88;
+		    /*box-shadow:10px 10px 10px rgba(0, 0, 0, 10%);*/
+		}
+		form{
+			width: 600px;
+		    padding: 60px;
+		    height: 180px;
+		    border-radius: 50px;
+		    margin: 200px auto 20px auto;
+		    box-shadow: 11px 15px 23px rgba(0, 0, 0, 10%);
+		}
+		#joinMenu {
+			clear: both;
+    		margin: 60px 0 0 0;
+    		opacity: 80%;
+		    font-size: 15px;
+		    font-weight: 200;
+		}
+		#joinMenu > a {
+			margin: 0 50px 0 0;
+		}
+		#joinMenu > a > img {
+			width: 2.5%;
+			margin-right: 5px;
+		}
+
+	</style>
+	<script type="text/javascript">
+		
+	</script>
+</head>
+
+ <body>
+	 <header>
+		 <div id="top_size">
+		 	<!--로고-->
+			<img id="logo" src="img/icon_lib.png">
+			<!--탑네비-->
+			<nav>
+				<ul id="top_nav">
+					<li><a>HOME</a></li> | <li><a href='userJoinRule.html'>회원가입</a></li> | <li><a href='userLogin.html'>로그인</a></li> | <li><a>포인트충전</a></li>
+				</ul>
+			</nav>
+			<div class="clearF"></div>
+			<!--탑메뉴-->
+			<nav id="topMenuBorder">
+				<ul id="top_menu">
+				
+					<li><a href="book_search.html">자료검색</a>
+						<ul class ="sub_menu">
+							<li><a href="book_search.html">도서 검색</a></li>
+							<li><a href="">분야별 도서 조회</a></li>
+						</ul>
+					</li>
+					<li><a href="#">도서마당</a>
+						<ul>
+							<li><a href="">신착 도서</a></li>
+							<li><a href="">베스트 셀러</a></li>
+							<li><a href="">희망도서</a></li>
+						</ul>
+					</li>
+					<li><a href="#">이용안내</a>
+						<ul>
+							<li><a href="">시설안내</a></li>
+							<li><a href="">자료 현황</a></li>
+							<li><a href="">포인트</a></li>
+							<li><a href="">도서 대여</a></li>
+							<li><a href="">도서 예약</a></li>
+						</ul>
+					</li>				
+					<li><a href="#">커뮤니티</a>
+						<ul>
+							<li><a href="">공지사항</a></li>
+							<li><a href="">질문과 답변</a></li>
+							<li><a href="board.jsp">자유게시판</a></li>
+							<li><a href="">불량도서 신고</a></li>
+							<li><a href="">중고도서 나눔</a></li>
+						</ul>
+					</li>
+					<li><a href="mypage_main.jsp">나의서재</a>
+						<ul>
+							<li><a href="mypage_main.jsp">나의 서재</a></li>
+							<li><a href="">서비스 이용 내역</a></li>
+							<li><a href="">내가 쓴 글</a></li>
+							<li><a href="">포인트</a></li>
+							<li><a href="">정보 수정/ 탈퇴</a></li>
+						</ul>
+					</li>
+				</ul>
+				<div id="window_menu"></div>
+			</nav>
+		 </div>
+		 <script src="js/lib_top.js"></script>
+		 <div id="title"><p>로그인</p></div><!-- (타이틀에이미지넣을거에용) -->
+	 </header>
+
+	 <section id="side_size"><!-- id="side_size" 이거 크기 설정한거니깐 삭제하면 안돼요 -->
+	 	<form name="memberLogin" method="post" action="IDCheck.mem">
+	 		<div id="info">
+	 			<div><p>아이디</p><input type="text" name="member_id"></div>
+	 			<div><p>비밀번호</p><input type="password" name="member_pw"></div>
+ 			</div>
+ 			<input type="submit" name="loginBtn" value="LOGIN">
+ 			<div id="joinMenu"><a href="userJoinRule.html"><img src="img/personIcon.png">회원이 아니신가요?</a></div>
+ 		</form>
+	 </section>
+
+	 <footer>
+			(변경해야함) Library | 04524 서울특별시 중구 세종대로 110 | 전화번호: 02)120, 2133-0300~1</br>
+			이용시간: 화~금 09:00~19:00 / 토,일 09:00~17:00 /월요일,공휴일 휴관
+	 </footer>
+
+ 
+
+</body></html>

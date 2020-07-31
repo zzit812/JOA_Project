@@ -1,0 +1,40 @@
+
+		#sidemenuBlook > div {
+			/*25 100 175 250 */
+			width: 220px;
+		    height: 280px;
+		    position: relative;
+		    top: -250px;
+		    transition: all 1s;
+		}
+
+		#userName {
+		    font-size: 35px;
+		    margin: 0 0 10px 0;
+		    display: inline-block;
+		    text-decoration: underline;
+		    font-weight: 200;
+		}
+		h1{
+			font-weight: 600;
+			text-align: center;
+		}
+		#cont_size img{
+			width: 25%;
+			margin: 20px auto 50px auto;
+			display: block;
+		}
+		input[type=button]{
+			margin: 5px 10px;
+		    width: 165px;
+		    height: 45px;
+		    border-radius: 30px;
+		    border: 0px;
+		}
+		form{
+			width: 375px;
+    		margin: auto;
+		}
+
+
+		

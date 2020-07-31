@@ -1,0 +1,121 @@
+
+		#cont_size{	
+			float: left;
+			width: 75%;
+			font-size: 15px;
+			margin-top: 50px;	
+			height: 650px;		
+		}
+		
+		#sidemenu_size{ 
+			float: left;
+			width: 350px;
+			height: 100px;
+		}
+		#sidmenu_box > div{
+			text-align: center;
+		    width: 80%;
+		    margin: 15px auto;
+		    /*box-shadow: 10px 10px 14px rgba(0, 0, 0, 5%);*/
+		    padding: 20px 0;
+    		border-radius: 50px;
+		} 
+		#sidmenu_box > div  li {
+			display: block;
+		    text-align: center;
+		    margin: 20px auto;
+		    font-size: 19px;
+		    padding: 13px 0;
+		    width: 70%;
+		    /*background-color: #FFEB3B;*/
+		    border-radius: 30px;
+		    font-weight: 400;
+    		opacity: 90%;
+		}
+		#sidmenu_box > div > h1 {
+			border-bottom: 1px solid #e6e6e6;
+			border-top: 1px solid #e6e6e6;
+		    font-size: 30px;
+		    padding: 10px 0;
+		    width: 90%;
+    		margin: 10px auto 35px auto;
+    		opacity: 90%;
+    		font-weight: 300;
+		}
+		#cont_size > h1 {
+			padding: 0px 0 10px 30px;
+		    font-weight: 400;
+		    border-bottom: 1px solid #e6e6e6;
+		}		
+		#cont_1_size {	/* 자유게시판,커뮤니티 등등 */
+			margin:0px;
+		}
+		
+		/*                                   */
+		
+		#board_con {
+			margin: 0px 10px 0 10px;
+			padding-bottom: 30px;
+    		border-bottom: 1px solid #e6e6e6;
+		}
+		#board_con > ul {
+			padding: 3px 6px;
+			border-bottom: 1px solid #e6e6e6;
+			border-top: 1px solid #e6e6e6;
+		}
+		#board_con > ul > li{
+			display: inline-block;
+			border-right: 1px solid #e6e6e6;
+			text-align: center;
+		}
+		#board_con > ul >li:nth-child(1),#board_con > ul >li:nth-child(3),#board_con > ul >li:nth-child(4) {	/*게시번호*/
+			width: 14%;
+		}
+		#board_con > ul >li:nth-child(2) {	/*제목*/
+			width: 45%;
+		}
+		#board_con > ul >li:nth-child(5) {	/*조회수*/
+			width: 9.6%;
+			border-right: 0px;
+		}
+		/**/
+		#board_con >div> ul{
+			margin : 10px 0;
+		}
+		#board_con >div> ul > li{
+			display: inline-block;
+			text-align: left;
+			text-align: center;
+		}
+		#board_con > div>ul >li:nth-child(1),#board_con >div> ul >li:nth-child(3),#board_con >div> ul >li:nth-child(4) {	/*게시번호*/
+			width: 14%;
+		}
+		#board_con > div>ul >li:nth-child(1){
+			opacity: 50%;
+		}
+		#board_con >div> ul >li:nth-child(2) {	/*제목*/
+			width: 44%;
+			padding-left: 8px;
+			text-align: left;
+		}
+		#board_con >div> ul >li:nth-child(5) {	/*조회수*/
+			width: 10%;
+			opacity: 50%;
+			border-right: 0px;
+		}
+		#board_con >div {
+			margin : 0 0 30px 0;
+		}
+		#pageNumber{
+			text-align: center;
+    		margin: 20px;
+		}
+		#pageNumber > a{
+			font-size : 17px;
+			padding: 0 5px;    
+			font-weight: 400;						
+		}
+		
+		
+		
+		

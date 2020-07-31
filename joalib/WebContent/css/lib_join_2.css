@@ -1,0 +1,177 @@
+
+		#title{
+			/*background-color: #F0BF1D;*/
+		}
+		#join1 {
+			height: 950px;
+			overflow: hidden;
+			transition: height 0.5s;
+		}
+		#join2{
+			height: 0px;
+			overflow: hidden;
+			transition: height 0.5s;
+		}
+		#join2 > .character{
+			width: 300px;
+			height: 500px;
+			float: left;
+			text-align: center;
+			margin: 10px 37px 30px 37px;
+		}
+
+		#join2 > div > img{
+			width: 85%;
+			margin: 20px auto;
+			display: block;
+
+		}
+		input[name=member_character]{
+			width: 30px;
+    		height: 30px;
+			display: block;
+		    margin: 10px auto;
+		}
+		form > div> p{
+			width: 200px;
+			display: inline-block;		
+			font-size: 20px;	
+			margin: 30px 0 5px 0;
+		}
+		/*주소*/
+/*		form p:nth-child(27){	
+			color: red;
+			background-color: red;
+			position: relative;
+    		top: -35px;
+		}*/
+		/*form p:nth-child(60){
+			color: red;
+			background-color: red
+		}*/
+		#adress {
+			display: inline-block;	
+		}
+
+		form {
+			margin: 50px auto 0 auto;
+		    /* display: inline; */
+		    width: 750px;
+
+		}
+
+		#sidemenuBlook > div {
+			/*25 100 175 250 */
+			width: 220px;
+		    height: 280px;
+		    position: relative;
+		    top: -100px;
+		    transition: all 1s;
+		}
+
+		input {
+			border: 1px solid #673AB7;
+		    height: 30px;
+		    border-radius: 15px;
+		    padding-left: 10px;
+		}
+		input[type=button], select{
+			border: 0px;
+		}
+		input[name=member_pw],input[name=member_pw_check],input[name=member_name],input[name=member_birth],#adress>input[name=detailAddress]{
+			/*font-size: 100px;*/
+			width: 300px;
+			padding-right: 10px;
+
+		}
+		input[name=member_id]{
+			width: 165px;
+			margin-right: 20px;
+		}
+
+		select[name=member_tel1], input[name=member_tel2],input[name=member_tel3]{
+		    width: 90px;
+		    /*margin: 0 3px;*/
+		}
+		input[name=member_email_id],input[name=member_email_adress]{
+			width: 133px;
+			margin: 0 5px;
+		}
+		#adress{
+			margin: 10px 0;
+		}
+		#adress > input{
+			margin: 5px;
+		}
+		#adress>input[name=city]{
+			width: 35px;
+		}
+		#adress>input[name=address]{
+			width: 245px;
+		}
+		#favoite_select{
+			display: inline-block;
+			width: 400px;
+			padding-top: 20px;
+		}
+		#favoite_select input[type=checkbox]{
+			height: 12px;
+		}
+		#favoite_select label{
+			display: inline-block;
+			margin-right: 8px;
+		}
+		input[type=submit],input[name=next],input[name=prev]{
+			margin: 20px auto;
+			display: block;			
+			height: 50px;	
+		}
+		input[name=next],input[name=prev]{
+			width: 100px;
+		}
+		input[type=submit]{
+			width: 180px;
+			border: 0px;
+			font-size: 22px;
+			font-weight: 600;
+		}
+		#alarm>label >input[type=checkbox]{
+			height: 27px;
+			width: 22px;
+			margin: 0 0 0 10px;
+		}
+		#alarm{
+			margin-top: 30px;
+		}
+		#alarm label{
+			font-size: 20px;
+			margin: 0 40px 0 0px ;
+		}
+		input[type=button]{
+			height: 35px;
+			padding: 5px 15px;
+		}
+		.checkhide{
+			opacity: 40%;
+		    width: 300px;
+		    font-size: 15px;
+		    padding-left: 205px;
+		    margin: 0;
+		}
+		#samecheck{
+			opacity: 0%;
+		    width: 300px;
+		    font-size: 15px;
+		    padding-left: 205px;
+		    margin: 0;
+		}
+		#idCheck{
+			display: block;
+			opacity: 90%;
+		    width: 300px;
+		    font-size: 15px;
+		    padding-left: 205px;
+		    color: #db5757;
+		    margin: 0;		    
+		}
+
