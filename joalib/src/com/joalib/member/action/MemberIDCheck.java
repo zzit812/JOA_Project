@@ -27,28 +27,41 @@ public class MemberIDCheck implements Action{
 				
 		MemberIDCheckService svc = new MemberIDCheckService();
 		List<memberinfoDTO> memberinfo = svc.IDCheck(checkID);
-		String member_pw = memberinfo.get(0).getMember_pw();
-		String member_name = memberinfo.get(0).getMember_name();
-				
-		if(checkPW.equals(member_pw) && member_pw != null) {
-			//있는 아이디 && 동일한 비밀번호
-			//세션에 저장
-			HttpSession session = request.getSession();
-	        session.setAttribute("member_id",checkID);
-	        session.setAttribute("member_name", member_name);
-	        //
-			forward = new ActionForward();
-			forward.setRedirect(true);
-			forward.setPath("home.jsp");
-		}else {
-			//없는 아이디 && 동일하지 않은 비밀번호
+		
+		if(memberinfo.size() > 0) {
+			String member_pw = memberinfo.get(0).getMember_pw();
+			String member_name = memberinfo.get(0).getMember_name();
+			
+			if(checkPW.equals(member_pw) && member_pw != null) {
+				//있는 아이디 && 동일한 비밀번호
+				//세션에 저장
+				HttpSession session = request.getSession();
+		        session.setAttribute("member_id",checkID);
+		        session.setAttribute("member_name", member_name);
+		        //
+				forward = new ActionForward();
+				forward.setRedirect(true);
+				forward.setPath("home.jsp");
+			}else {
+				//동일하지 않은 비밀번호
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();	//왜 굳이 Writer을 부를까?
+				out.println("<script>");
+				out.println("alert('잘못된 비밀번호 입니다. 다시 입력해주세요!')");
+				out.println("history.back();"); //local.href=""
+				out.println("</script>");
+			}			
+		}else{
+			//없는 아이디
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();	//왜 굳이 Writer을 부를까?
 			out.println("<script>");
-			out.println("alert('존재하지 않은 회원이거나, 잘못된 비밀번호 입니다.')");
+			out.println("alert('존재하지 않은 회원입니다.')");
 			out.println("history.back();"); //local.href=""
 			out.println("</script>");
-		}
+		}		
+				
+		
 		
 		return forward;
 	}

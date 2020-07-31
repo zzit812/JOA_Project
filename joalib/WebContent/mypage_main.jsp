@@ -158,7 +158,7 @@
 					<div>
 						<p>회원님의 포인트는</p>
 						<p>1000P</p>
-						<a href="#" id="coinCharge">충전하기</a>
+						<a href="memberPointNowSelect.mem" id="coinCharge">충전하기</a>
 					</div>
 				</div>
 				<div>

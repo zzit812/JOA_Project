@@ -18,6 +18,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into joalib.point values (#{member_id}, 0 , curdate() ,'회원가입', 0);
 	</insert>
 	
+	<select id="pointNowSelect" parameterType="String" resultType="int">
+		select total_point from joalib.point where member_id = #{member_id};
+	</select>
+	
 	
 	<insert id="board_add" parameterType ="com.joalib.DTO.BoardDTO" >
 		INSERT INTO joalib.board(board_title, board_text, board_date, member_id, board_hit) VALUES ( #{board_title}, #{board_text}, #{board_date},#{member_id},0);
