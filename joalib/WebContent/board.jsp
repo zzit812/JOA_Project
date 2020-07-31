@@ -37,7 +37,7 @@
 						String member_id = null;
 									member_id = (String)session.getAttribute("member_id");
 									if ( member_id != null) {
-										out.print("<a href='logout.jsp'>로그아웃</a>");
+										out.print("<a href='memberLogout.mem'>로그아웃</a>");
 									}else{
 										out.print("<a href='userJoinRule.html'>회원가입</a></li> | <li><a href='userLogin.html'>로그인</a>");
 									}
