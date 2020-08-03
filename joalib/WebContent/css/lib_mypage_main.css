@@ -207,13 +207,13 @@
 	    opacity: 65%;
 	    float: left;
 	}
-	#cont_2_size > div>div p{
+	#cont_2_size >div p{
 		margin: 15px 0 5px 180px;
 	}
 	#cont_2_size > div>div p:first-child{
 		opacity: 75%;
 	}
-	#cont_2_size > div>div p:nth-child(2){
+	#cont_2_size >div p:nth-child(2){
 		font-size: 50px;
 		color: #fb0e02;
 		height: 70px;

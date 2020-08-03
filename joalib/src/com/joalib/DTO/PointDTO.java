@@ -7,8 +7,17 @@ public class PointDTO {
 	String update_date;
 	String point_reason;
 	int total_point;
+	String UPandDown;
 	
 	
+	
+	
+	public String getUPandDown() {
+		return UPandDown;
+	}
+	public void setUPandDown(String uPandDown) {
+		UPandDown = uPandDown;
+	}
 	public String getMember_id() {
 		return member_id;
 	}

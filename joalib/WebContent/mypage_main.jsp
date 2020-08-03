@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8	"
     pageEncoding="UTF-8"%>
+<%@ page import="com.joalib.DAO.PointDAO" %>
+<%@ page import="com.joalib.DTO.PointDTO" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +14,40 @@
 <link rel="stylesheet" type="text/css" href="css/lib_mypage_main.css">
 <link rel="stylesheet" type="text/css" href="css/lib_top.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<style type="text/css">
+
+	#pointSelect{
+		text-align : center;
+		font-size: 13px;
+		display: inline;
+		margin: 10px 0 0 15px;
+	}
+	#pointSelect tr > td:nth-child(1){
+		color: #ff3635;
+	}
+	#pointSelect tr > td:nth-child(2){
+		font-weight: 600;
+	}
+	#pointSelect tr > td:nth-child(3){
+		WIDTH: 60%;
+		opacity: 85%;
+	}
+	#pointSelect tr > td:nth-child(4){
+		opacity: 85%;
+	}
+	#pointSelect tr > td {
+		padding: 0 10px;
+	}
+	
+	#cont_2_size >div> h5{
+		margin: 8px 0;
+	    font-size: 17px;
+	    font-weight: 400;
+	    opacity: 70%;
+	    border-bottom: solid 1px #80808057;
+	    padding-bottom: 5px;
+	}
+</style>
 </head>
 
 <body>
@@ -157,18 +194,40 @@
 					<img src="img/mypage/coinIcon.png">
 					<div>
 						<p>회원님의 포인트는</p>
-						<p>1000P</p>
-						<a href="memberPointNowSelect.mem" id="coinCharge">충전하기</a>
+						<%
+						//포인트 조회
+						PointDAO dao = new PointDAO();
+						PointDAO.getinstance();
+						int pointNow = dao.memberPointNow(member_id);
+						%>
+						<p><%= pointNow %> P</p>
+						<a href="pointChargeTemp.po" id="coinCharge">충전하기</a>
 					</div>
 				</div>
-				<div>
-					<img src="img/mypage/coinIcon.png">
 					<div>
-						<p>포인트 내역</p>
-						<div id="포인트 사용 내역 list"></div>
-					</div>
+						<h5>포인트내역</h5>
+						<table border="0" id="pointSelect">
+							<!--  <tr><td>+/-</td><td>POINT</td><td>REASON</td><td>DATE</td></tr> -->
+							<% 								
+							List<PointDTO> list = dao.memberPointList(member_id);
+							for(int i = 0;  i < list.size(); i++){									
+								if( (i == 4) || (i == list.size()-1)){
+									break; 
+								}
+								String pulma = list.get(i).getUPandDown();
+								if(pulma.equals("*")){
+									pulma = " ";
+								}
+								out.print("<tr><td>");
+								out.print(pulma+"</td><td>");
+								out.print(list.get(i).getPoint()+"</td><td>");
+								out.print(list.get(i).getPoint_reason()+"</td><td>");
+								out.print(list.get(i).getUpdate_date().substring(0,10)+"</td></tr>");
+							}
+							%>
+						</table>
+						</div>
 				</div>
-			</div>
 
 			<p class="menuTitle">관심도서</p>
 			<div id="cont_3_size">

@@ -16,8 +16,7 @@ public class MemberNowPointSelectAction implements Action {
 		ActionForward forward=null;		
 		ServletContext context = request.getServletContext();	//이전 페이지의 servletContext를 받아오고,
 		
-		String referer = (String)request.getHeader("REFERER");	//이전페이지 url
-		System.out.println(referer);
+		
 		
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("member_id");

@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 import com.joalib.DTO.ActionForward;
 import com.joalib.point.action.*;
 
-@WebServlet("*.mem")
-public class PointContr {
+@WebServlet("*.po")
+public class PointContr extends javax.servlet.http.HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -24,9 +24,23 @@ public class PointContr {
 		ActionForward forward=null;
 		Action action = null;
 		
-		if(command.equals("/memberPointNowSelect.mem")) {
+		if(command.equals("/memberPointNowSelect.po")) {
 			//point select
 			action = new MemberNowPointSelectAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/pointChargeTemp.po")) {
+			//포인트 충전 (임시)
+			action = new PointChargeAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/boardPointCharge.po")) {
+			//포인트 충전 (임시)
+			action = new PointChargeAction();
 			try{
 				forward=action.execute(request, response);
 			}catch(Exception e){

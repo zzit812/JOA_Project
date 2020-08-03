@@ -35,6 +35,7 @@ public class BoardContr extends javax.servlet.http.HttpServlet
 			action  = new BoardWriteProAction();
 			try {
 				forward=action.execute(request, response );
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
