@@ -24,11 +24,9 @@ public class PointChargeService {
 	public boolean chargeTemp(String member_id) {
 		
 		boolean isSuccess = false;
-
 		PointDAO dao = new PointDAO();
-		PointDAO.getinstance();
-		
-		int i = dao.PointChargeTemp(member_id);
+		PointDAO.getinstance();		
+		int i = dao.PointChargeTemp(member_id);		
 		
 		if(i > 0) {
 			isSuccess = true;		}

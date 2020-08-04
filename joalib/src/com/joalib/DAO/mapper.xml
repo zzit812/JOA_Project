@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="pointChargeTemp" parameterType="String">
-		insert into joalib.point values (#{member_id}, 1000, now(), '테스트 입니다', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)+1000), '+');
+		insert into joalib.point values (#{member_id}, 1000, now(), '테스트 입니다', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)-1000), '-');
 	</insert>
 	
 	<insert id="boardPointCharge" parameterType="String">

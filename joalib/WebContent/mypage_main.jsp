@@ -26,7 +26,8 @@
 		color: #ff3635;
 	}
 	#pointSelect tr > td:nth-child(2){
-		font-weight: 600;
+		font-weight: 400;
+    	font-size: 16px;
 	}
 	#pointSelect tr > td:nth-child(3){
 		WIDTH: 60%;
@@ -40,7 +41,7 @@
 	}
 	
 	#cont_2_size >div> h5{
-		margin: 8px 0;
+		margin: 7px 0;
 	    font-size: 17px;
 	    font-weight: 400;
 	    opacity: 70%;
@@ -127,8 +128,7 @@
 
 		<div id="sidemenu_size" >
 			<div id="profile_img"><img  src = "img/character/character1.png" /></div>
-			<h1>User Name</h1>
-			<h5>닉네임</h5>
+			<h1><%= session.getAttribute("member_id") %></h1>
 			<nav>
 				<ul  id="sidmenu_box">
 					<li><a href="">나의 서재</a></li>
@@ -211,7 +211,7 @@
 							<% 								
 							List<PointDTO> list = dao.memberPointList(member_id);
 							for(int i = 0;  i < list.size(); i++){									
-								if( (i == 4) || (i == list.size()-1)){
+								if( (i > 3) || (i == list.size()-1)){
 									break; 
 								}
 								String pulma = list.get(i).getUPandDown();

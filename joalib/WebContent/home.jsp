@@ -311,8 +311,8 @@ https://www.hancomm.co.kr/index.do
 					<li><div class="menuHoverEvent"></div><a href="mypage_main.jsp">나의서재</a>
 						<ul>
 							<li><a href="mypage_main.jsp">나의 서재</a></li>
-							<li><a href="memberPointNowSelect.po">서비스 이용 내역</a></li>
-							<li><a href="">내가 쓴 글</a></li>
+							<li><a href="">서비스 이용 내역</a></li>
+							<li><a href="mypage_myPost.jsp">내가 쓴 글</a></li>
 							<li><a href="">포인트</a></li>
 							<li><a href="">정보 수정/ 탈퇴</a></li>
 						</ul>
