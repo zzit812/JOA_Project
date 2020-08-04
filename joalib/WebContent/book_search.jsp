@@ -9,20 +9,23 @@
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-	<title>Document</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	
-	<link rel="stylesheet" type="text/css" href="css/lib_top.css">
+<link rel="stylesheet" type="text/css" href="css/aaa_booksearch.css">
+<link rel="stylesheet" type="text/css" href="css/lib_top.css">
 	<link rel="stylesheet" type="text/css" href="css/search.css">
-
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 
- <body>
-	 <header>
+
+
+
+
+<body>
+<header>
 		 <div id="top_size">
 		 	<!--로고-->
 			<img id="logo" src="img/icon_lib.png">
@@ -85,10 +88,10 @@
 		 <script src="js/search.js"></script>
 	 </header>
 
-	 <section id="size_">
-		
-			<!--검색 틀 박스-->
-			<div class="search">
+
+
+<section id="book_search_size">
+<div class="search">
 				<div id="search_title">도서검색</div>
 				<div id="search_box">
 					<!--검색어-->
@@ -124,195 +127,22 @@
 					<!-- 검색바에 맞춰서 정렬할 것임 -->
 			</div>
 		</div>
-	
-		
-			<div id="book_box">
-				<div class="bookall">
-					<div class="book">
-						
-							<div class="book_hover">
-								<img src="img/book/book1.jpg">
-								<div class="book_add">
-									<span>&#9825;</span><span>관심도서 추가하기</span><br/>
-									<span>&#9675;</span><span>대출가능</span>			
-								</div>
-							</div>
-						<div>
-						<span>도서명</span><span class="book_name">편의점 도난 사건</span><br/>
-						<span>저자 </span><span class="book_writer">선보현</span><br/>
-						<span>발행처</span><span class="publisher">민음사</span>
-						</div>
-						
-						
-					</div>
 
-					<div class="book">
+<main class="page-content">
 
-						<div class="book_hover">
-							<img src="img/book/book2.jpg">
-							<div class="book_add">
-								<span>&#9825;</span><span>관심도서 추가하기</span><br/>
-								<span>&#9675;</span><span>대출가능</span>			
-								</div>
-						</div>
-					<div>
-					<span>도서명</span><span class="book_name">편의점 도난 사건</span><br/>
-					<span>저자 </span><span class="book_writer">선보현</span><br/>
-					<span>발행처</span><span class="publisher">민음사</span>
-					</div>
-
-					</div>
-					<div class="book">
-						<div class="book_hover">
-							<img src="img/book/book3.jpg">
-							<div class="book_add">
-								<span>&#9825;</span><span>관심도서 추가하기</span><br/>
-								<span>&#9675;</span><span>대출가능</span>			
-								</div>
-						</div>
-					<div>
-					<span>도서명</span><span class="book_name">편의점 도난 사건</span><br/>
-					<span>저자 </span><span class="book_writer">선보현</span><br/>
-					<span>발행처</span><span class="publisher">민음사</span>
-					</div>
-					</div>
-					<div class="book">
-						<div class="book_hover">
-							<img src="img/book/book10.jpg">
-							<div class="book_add">
-								<span>&#9825;</span><span>관심도서 추가하기</span><br/>
-								<span>&#9675;</span><span>대출가능</span>			
-								</div>
-						</div>
-					<div>
-					<span>도서명</span><span class="book_name">편의점 도난 사건</span><br/>
-					<span>저자 </span><span class="book_writer">선보현</span><br/>
-					<span>발행처</span><span class="publisher">민음사</span>
-					</div>
-					</div>
-				</div>
-
-
-
-				<div class="bookall">
-					<div class="book">
-						<div class="book_hover">
-							<img src="img/book/book4.jpg">
-							<div class="book_add">
-								<span>&#9825;</span><span>관심도서 추가하기</span><br/>
-								<span>&#9675;</span><span>대출가능</span>			
-								</div>
-						</div>
-					<div>
-					<span>도서명</span><span class="book_name">편의점 도난 사건</span><br/>
-					<span>저자 </span><span class="book_writer">선보현</span><br/>
-					<span>발행처</span><span class="publisher">민음사</span>
-					</div>
-					</div>
-					<div class="book">
-						<div class="book_hover">
-							<img src="img/book/book5.jpg">
-							<div class="book_add">
-								<span>&#9825;</span><span>관심도서 추가하기</span><br/>
-								<span>&#9675;</span><span>대출가능</span>			
-								</div>
-						</div>
-					<div>
-					<span>도서명</span><span class="book_name">편의점 도난 사건</span><br/>
-					<span>저자 </span><span class="book_writer">선보현</span><br/>
-					<span>발행처</span><span class="publisher">민음사</span>
-					</div>
-					</div>
-					<div class="book">
-						<div class="book_hover">
-							<img src="img/book/book6.jpg">
-							<div class="book_add">
-								<span>&#9825;</span><span>관심도서 추가하기</span><br/>
-								<span>&#9675;</span><span>대출가능</span>			
-								</div>
-						</div>
-					<div>
-					<span>도서명</span><span class="book_name">편의점 도난 사건</span><br/>
-					<span>저자 </span><span class="book_writer">선보현</span><br/>
-					<span>발행처</span><span class="publisher">민음사</span>
-					</div>
-					</div>
-					<div class="book">
-						<div class="book_hover">
-							<img src="img/book/book12.jpg">
-							<div class="book_add">
-								<span>&#9825;</span><span>관심도서 추가하기</span><br/>
-								<span>&#9675;</span><span>대출가능</span>			
-								</div>
-						</div>
-					<div>
-					<span>도서명</span><span class="book_name">편의점 도난 사건</span><br/>
-					<span>저자 </span><span class="book_writer">선보현</span><br/>
-					<span>발행처</span><span class="publisher">민음사</span>
-					</div>
-					</div>
-				</div>
-				<div class="bookall">
-					<div class="book">
-						<div class="book_hover">
-							<img src="img/book/book7.jpg">
-							<div class="book_add">
-								<span>&#9825;</span><span>관심도서 추가하기</span><br/>
-								<span>&#9675;</span><span>대출가능</span>			
-								</div>
-						</div>
-					<div>
-					<span>도서명</span><span class="book_name">편의점 도난 사건</span><br/>
-					<span>저자 </span><span class="book_writer">선보현</span><br/>
-					<span>발행처</span><span class="publisher">민음사</span>
-					</div>
-					</div>
-					<div class="book">
-						<div class="book_hover">
-							<img src="img/book/book8.jpg">
-							<div class="book_add">
-								<span>&#9825;</span><span>관심도서 추가하기</span><br/>
-								<span>&#9675;</span><span>대출가능</span>			
-								</div>
-						</div>
-					<div>
-					<span>도서명</span><span class="book_name">편의점 도난 사건</span><br/>
-					<span>저자 </span><span class="book_writer">선보현</span><br/>
-					<span>발행처</span><span class="publisher">민음사</span>
-					</div>
-					</div>
-					<div class="book">
-						<div class="book_hover">
-							<img src="img/book/book9.jpg">
-							<div class="book_add">
-								<span>&#9825;</span><span>관심도서 추가하기</span><br/>
-								<span>&#9675;</span><span>대출가능</span>			
-								</div>
-						</div>
-					<div>
-					<span>도서명</span><span class="book_name">편의점 도난 사건</span><br/>
-					<span>저자 </span><span class="book_writer">선보현</span><br/>
-					<span>발행처</span><span class="publisher">민음사</span>
-					</div>
-					</div>
-					<div class="book">
-						<div class="book_hover">
-							<img src="img/book/book11.jpg">
-							<div class="book_add">
-								<span>&#9825;</span><span>관심도서 추가하기</span><br/>
-								<span>&#9675;</span><span>대출가능</span>			
-								</div>
-						</div>
-					<div>
-					<span>도서명</span><span class="book_name">편의점 도난 사건</span><br/>
-					<span>저자 </span><span class="book_writer">선보현</span><br/>
-					<span>발행처</span><span class="publisher">민음사</span>
-					</div>
-					</div>
-				</div>
-			</div>
-			
-			<%
+  <%
+  for(int i=0; i<=11; i++){
+  %>
+  <div class="card">
+    <div class="content">
+      <h2 class="title"></h2>
+      <span class="btn">관심도서</span>
+      <span class="loan">대출가능</span>
+    </div>
+  </div>
+  <%} %>
+  
+  <%
 							DAO dao = new DAO(); 	
 							  		
 								  	int sitePage =1 ;	//현재페이지 //초기 페이지 = 1
@@ -399,20 +229,17 @@
 		  		%>
 		  		<a href="#" class="next">Next <i class="fa fa-angle-double-right"></i></i></a>
 			</div>
-
-
-
-
-	 </section> 
-	 <!-- 섹션 크기 설정하니까 삭제하면 안돼요 !!!!!!!!!!! -->
-
-	 <footer>
+  </section>
+  <footer>
 		 <div id="footer_size">
 			(변경해야함) Library | 04524 서울특별시 중구 세종대로 110 | 전화번호: 02)120, 2133-0300~1</br>
 			이용시간: 화~금 09:00~19:00 / 토,일 09:00~17:00 /월요일,공휴일 휴관
 		</div>
 	 </footer>
-
- 
-
-</body></html>
+  
+  
+  
+  
+</main>
+</body>
+</html>
