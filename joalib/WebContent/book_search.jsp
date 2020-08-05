@@ -1,3 +1,4 @@
+<%@page import="com.joalib.DTO.BookInfoDTO"%>
 <%@page import="com.joalib.DAO.BookInfoDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -172,10 +173,10 @@
 		<%
 	  				// 페이지당 게시물을 담는다.
 	  					  			// array 에 게시물을 담고, 배열에는 페이지를 담았다.	
-	  					  			
+	  					  		
 	  					  			int count = 0; 
-	  					  			List<BoardDTO> list = dao.select_board_all();
-	  					  			ArrayList<BoardDTO> array;							//array 하나당 하나의 페이지 > ex) array(0).get > = 페이지의 첫번째 게시물
+									List<BookInfoDTO> list = dao.select_book_info();
+	  					  			ArrayList<BookInfoDTO> array;							//array 하나당 하나의 페이지 > ex) array(0).get > = 페이지의 첫번째 게시물
 	  					  			ArrayList[] pageList = new ArrayList[totalPage];	//전체 페이지를 관리하는 배열 > ex) pageList(0) = 첫번째 페이지
 	  					  			
 	  					  			   //게시물총수 한페이지당게시물수
@@ -183,7 +184,7 @@
 	  					  				//나눈값이 0이다.
 	  					  				for(int x = 0; x < totalPage; x++ ){
 	  					  					              //페이지 갯수
-	  					  					array = new ArrayList<BoardDTO>();
+	  					  					array = new ArrayList<BookInfoDTO>();
 	  					  					for(int y = 0 ; y < countList; y++){		  						
 	  				  					array.add(list.get(count));
 	  				  					//count 0에서 시작함. countList가 10이니까, 그만큼
@@ -199,7 +200,7 @@
 	  					  				for(int x = 0; x < (totalPage-1); x++ ){
 	  					  					
 	  					  					
-	  					  					array = new ArrayList<BoardDTO>();
+	  					  					array = new ArrayList<BookInfoDTO>();
 	  					  					//마지막 페이지 전까지 어레이에 담는다.		  					
 	  					  					for(int y = 0 ; y < countList; y++){		  						
 	  				  					array.add(list.get(count));
@@ -208,7 +209,7 @@
 	  					  					pageList[x] = array;
 	  					  				}		  	
 	  					  				
-	  					  				array = new ArrayList<BoardDTO>();
+	  					  				array = new ArrayList<BookInfoDTO>();
 	  					  				for(int lastCount = count ; lastCount < totalCount ; lastCount++){		  					
 	  					  					array.add(list.get(lastCount));		  					
 	  					  				}
@@ -217,19 +218,20 @@
 	  			%> <!-- 페이징 -->
 	  			
 	  				<%
-  for(int i=0; i<=11; i++){
+  for(int i=0; i<pageList[sitePage-1].size(); i++){
+	  		ArrayList<BookInfoDTO> dtoArray = pageList[sitePage-1];
   %><div>
 			<div class="card"
-				style="background-image: url('img/book/book1.jpg'); background-size: cover;">
+				style="background-image: url('img/book/<%=dtoArray.get(i).getBook_img() %>'); background-size: cover;">
 				<div class="content">
 					<h2 class="title"></h2>
 					<span class="btn">관심도서</span> <span class="loan">대출가능</span>
 				</div>
 			</div>
 			<div class="bookinfo">
-				<p>도서명</p>
-				<p>저자</p>
-				<p>출판사</p>
+				<p>도서명 <%= dtoArray.get(i).getBook_title()%></p>
+				<p>저자<%=dtoArray.get(i).getAuthor()%></p>
+				<p>출판사<%=dtoArray.get(i).getPublisher() %></p>
 			</div>
 		</div>
 

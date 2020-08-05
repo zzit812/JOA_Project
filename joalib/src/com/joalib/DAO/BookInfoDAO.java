@@ -46,15 +46,19 @@ public class BookInfoDAO {
 	public int select_book_count() {  //검색결과 전체 자료수
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
+		//오는거 화긴
 		int total = sqlsession.selectOne("book_search_count");
+		//화긴
 		sqlsession.commit();
 		sqlsession.close();
 		return total;
 	}
-	public List<BookInfoDTO> select_book_info() {	//
+	public List<BookInfoDTO> select_book_info() {   //검색결과 데이터
 		getinstance();
+		//화긴
 		SqlSession sqlsession = sqlfactory.openSession();
-		List <BoardDTO> list = sqlsession.selectList("board_all");
+		List <BookInfoDTO> list = sqlsession.selectList("book_info");
+		System.out.println("여기까지..왔니..?");
 		sqlsession.commit();
 		sqlsession.close();
 		return list;

@@ -68,8 +68,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into joalib.bookinfo values(#{isbn},#{book_title},#{author},#{publisher},#{pub_date},#{isbn_pluscode},#{book_img},#{book_story});
 	</insert>
 	
-	<select id="book_search_count" parameterType="com.joalib.DTO.BookInfoDTO">
-		select * from joalib.bookinfo where isbn= #{isbn};
+	<select id="book_search_count" resultType="int">
+		select count(*) from joalib.bookinfo;
+	</select>
+	
+	<select id="book_info" resultType="com.joalib.DTO.BookInfoDTO">
+		select * from joalib.bookinfo;
 	</select>
 		
 	</mapper>
