@@ -17,7 +17,7 @@ public class BoardWriteProService {
 			isWriteSuccess = true;
 		}
 		
-		
+		 
 		return isWriteSuccess;
 
 	}

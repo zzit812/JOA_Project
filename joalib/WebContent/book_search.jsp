@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title></title>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/aaa_booksearch.css">
 <link rel="stylesheet" type="text/css" href="css/lib_top.css">
@@ -133,15 +133,26 @@
   <%
   for(int i=0; i<=11; i++){
   %>
-  <div class="card">
+	<div  class="card" >
     <div class="content">
       <h2 class="title"></h2>
       <span class="btn">관심도서</span>
       <span class="loan">대출가능</span>
     </div>
-  </div>
+    </div>
+
   <%} %>
+
+
+
+
   
+  
+
+ 
+  
+  
+
   <%
 							DAO dao = new DAO(); 	
 							  		

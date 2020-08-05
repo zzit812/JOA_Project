@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-
+ 
 public class BoardWriteProAction implements dbAction {
 
 	@Override
@@ -48,7 +48,7 @@ public class BoardWriteProAction implements dbAction {
 		boolean isWriteSuccess = boardWriteProService.registArticle(boardBean);
 //		System.out.println(isWriteSuccess);
 		
-		if(!isWriteSuccess){
+		if(!isWriteSuccess){ 
 			//게시물 추가 실패
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();

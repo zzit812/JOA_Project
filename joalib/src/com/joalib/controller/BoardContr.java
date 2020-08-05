@@ -18,7 +18,7 @@ import com.joalib.board.action.BoardModifyProAction;
 
 
 
-@WebServlet("*.bo")
+@WebServlet("*.bo") 
 public class BoardContr extends javax.servlet.http.HttpServlet
 {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
@@ -74,23 +74,7 @@ public class BoardContr extends javax.servlet.http.HttpServlet
 		
 		
 		
-		if(forward != null) {
-			
-			if(forward.isRedirect()) {
-				//boolean값임 트루인경우에 실행
-				response.sendRedirect(forward.getPath());
-			}else{
-				RequestDispatcher dispatcher=
-						request.getRequestDispatcher(forward.getPath());
-				//RequestDispatcher라는 클래스는 현재 request에 담긴 정보를 저장하고 있다가
-				//그 다음 페이지 그 다음페이지에도 해당 정보를 볼 수 있게 계속 저장하는 것
-				//한마디로 파라미터정보 유지를 위해 사용한다.
-				dispatcher.forward(request, response);
-			
-			}
-			
-			
-		}
+		
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 

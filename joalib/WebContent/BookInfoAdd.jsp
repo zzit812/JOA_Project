@@ -13,7 +13,7 @@
 
 	<section id="writeForm">
 		<h2>관리자용 도서추가 페이지</h2>
-		<form action="boardWritePro.bo" method="post"
+		<form action="bookInfoAdd.bk" method="post"
 			enctype="multipart/form-data" name="boardform">
 			<table>
 				<tr>
@@ -53,8 +53,8 @@
 							 required="required"></textarea></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="BOARD_FILE">book_img</label></td>
-					<td class="td_right"><input name="BOARD_FILE" type="file"
+					<td class="td_left"><label for=book_img>book_img</label></td>
+					<td class="td_right"><input name="book_img" type="file"
 					accept=".gif, .jpg, .png, .jpeg" id="BOARD_FILE" required="required" /></td>
 				</tr>
 			</table>

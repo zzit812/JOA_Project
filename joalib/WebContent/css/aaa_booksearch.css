@@ -44,12 +44,12 @@
   -webkit-box-align: end;
           align-items: flex-end;
   overflow: hidden;
+  margin-bottom:10px;
   padding: 1rem;
   width: 100%;
   text-align: center;
   color: whitesmoke;
   background-color: whitesmoke;
-  margin-bottom: 50px;
   margin-left: 10px;
   margin-right: 10px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1);
@@ -150,42 +150,6 @@
   border: none;
 }
 
-.card:nth-child(1):before {
-  background-image: url(https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
-}
-.card:nth-child(2):before {
-  background-image: url(https://images.unsplash.com/photo-1533903345306-15d1c30952de?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
-}
-.card:nth-child(3):before {
-  background-image: url(https://images.unsplash.com/photo-1545243424-0ce743321e11?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
-}
-.card:nth-child(4):before {
-  background-image: url(https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
-}
-.card:nth-child(5):before {
-  background-image: url(../img/book/book5.jpg);
-}
-.card:nth-child(6):before {
-  background-image: url(../img/book/book6.jpg);
-}
-.card:nth-child(7):before {
-  background-image: url(../img/book/book7.jpg);
-}
-.card:nth-child(8):before {
-  background-image: url(../img/book/book8.jpg);
-}
-.card:nth-child(9):before {
-  background-image: url(../img/book/book9.jpg);
-}
-.card:nth-child(10):before {
-  background-image: url(../img/book/book10.jpg);
-}
-.card:nth-child(11):before {
-  background-image: url(../img/book/book11.jpg);
-}
-.card:nth-child(12):before {
-  background-image: url(../img/book/book12.jpg);
-}
 
 @media (hover: hover) and (min-width: 600px) {
   .card:after {
@@ -241,5 +205,20 @@
   .card:focus-within .content > *:not(.title) {
     -webkit-transition-duration: 0s;
             transition-duration: 0s;
+            }
+            
+            
+  .bookinfo {
+  	position: relative;
+    left: 15px;
   }
+  .bookinfo p {
+    margin: 5px;
+  }
+
+  
+  
+  
+  
+  
 }
