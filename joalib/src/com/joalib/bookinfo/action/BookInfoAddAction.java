@@ -11,17 +11,17 @@ import com.joalib.bookinfo.svc.BookInfoAddService;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class BookInfoAddAction implements dbAction {
+public class BookInfoAddAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//여기까지는 옴
-		ActionForward forward=null;
-		BookInfoDTO bookBean = null;
+		ActionForward forward= new ActionForward();
+		BookInfoDTO bookBean = new BookInfoDTO();
 		
 		String realFolder="";
 		String saveFolder="/abc";
-		int fileSize=5*1024*1024; //5메가
+		int fileSize=5*1024*1024; //5메가?
 		ServletContext context = request.getServletContext();
 		realFolder=context.getRealPath(saveFolder);
 
@@ -30,21 +30,30 @@ public class BookInfoAddAction implements dbAction {
 				fileSize,
 				"UTF-8",
 				new DefaultFileRenamePolicy());
-
-		bookBean.setIsbn(request.getParameter("isbn"));
-		bookBean.setIsbn(request.getParameter("isbn_plus"));
-		bookBean.setIsbn(request.getParameter("author"));
-		bookBean.setIsbn(request.getParameter("publisher"));
-		bookBean.setIsbn(request.getParameter("book_title"));
-		bookBean.setIsbn(request.getParameter("pub_date"));
-		bookBean.setIsbn(request.getParameter("book_story"));
+		//화긴
+		bookBean.setIsbn(multi.getParameter("isbn"));
+		bookBean.setIsbn_pluscode(multi.getParameter("isbn_plus"));
+		bookBean.setAuthor(multi.getParameter("author"));
+		bookBean.setPublisher(multi.getParameter("publisher"));
+		bookBean.setBook_title(multi.getParameter("book_title"));
+		bookBean.setPub_date(multi.getParameter("pub_date"));
+		bookBean.setBook_story(multi.getParameter("book_story"));
 		
 		bookBean.setBook_img(
 		multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
+
+		
+//		System.out.println(bookBean.getAuthor());
+//		System.out.println(bookBean.getBook_img()); 확인
+		
 		BookInfoAddService bookInfoAddService = new BookInfoAddService();
-		boolean isWriteSuccess = bookInfoAddService.registArticle(bookBean);
+
+		bookInfoAddService.registArticle(bookBean);
 		
+
 		
+		forward.setRedirect(true);
+		forward.setPath("board.jsp");
 
 		return forward;
 	}

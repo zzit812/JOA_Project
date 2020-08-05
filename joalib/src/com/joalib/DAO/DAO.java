@@ -21,7 +21,6 @@ import com.joalib.DTO.memberinfoDTO;
 import com.joalib.DTO.BoardDTO;
 
 public class DAO {
-	Connection con;  //보현,MVC2패턴 하면서 추가
 	
 	SqlSessionFactory sqlfactory;
 	
@@ -39,9 +38,7 @@ public class DAO {
 		return instance;
 	}
 	
-	public void setConnection(Connection con){
-		this.con = con;
-	}//보현,MVC2패턴 하면서 추가
+
 	
 	
 	
@@ -141,6 +138,7 @@ public class DAO {
 		
 		return i;
 	}
+	
 
 
 

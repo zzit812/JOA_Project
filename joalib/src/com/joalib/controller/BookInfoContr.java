@@ -8,10 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.joalib.DTO.ActionForward;
-import com.joalib.board.action.dbAction;
-
+import com.joalib.bookinfo.action.Action;
 import com.joalib.bookinfo.action.BookInfoAddAction;
-
 
 
 @WebServlet("*.bk") 
@@ -25,20 +23,19 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 		String contextPath=request.getContextPath();
 		String command=RequestURI.substring(contextPath.length());
 		ActionForward forward=null;
-		dbAction action=null;
+		Action action=null;
 
-		
 		 if(command.equals("/bookInfoAdd.bk")){
+			 //화긴
 			 action = new BookInfoAddAction();
 				try{
 					forward=action.execute(request, response);
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-			}
+		  }
 		 
 		 if(forward != null) {
-				
 				if(forward.isRedirect()) {
 					//boolean값임 트루인경우에 실행
 					response.sendRedirect(forward.getPath());
