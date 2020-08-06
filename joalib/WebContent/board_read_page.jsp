@@ -3,8 +3,9 @@
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@ page import="com.joalib.DAO.DAO" %>
-<%@ page import="com.joalib.DTO.BoardDTO" %>
+<%@ page import="com.joalib.DTO.*" %>
 <%@ page import="com.joalib.board.action.dbAction" %>
+<%@ page import="com.joalib.board.svc.CommentListService" %>
 <%@ page import="java.util.List" %>
 
 
@@ -17,9 +18,156 @@
 	
 	<link rel="stylesheet" type="text/css" href="css/lib_top.css">
 	<link rel="stylesheet" type="text/css" href="css/board_base.css">
-	<link rel="stylesheet" type="text/css" href="css/board_readPage.css">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
+	
+	<style>
+		#cont_size{
+			height: auto;
+		}
+				
+		#write_box {
+			margin: 0 auto;
+  			width: 970px;
+			min-height: 350px;
+			padding: 1.5em;
+			border: 1px solid rgb(221 221 221);
+			border-radius: 1em;
+		}
+		#write_box > h2 {
+		    border-bottom: 1px solid #00000030;
+		    margin: 5px;
+		    font-size: 22px;
+		    font-weight: 500;
+		    padding-bottom: 5px;
+		    padding-left: 10px;
+		}
+		.member_character{
+			width: 40px;
+		    height: 40px;
+		    overflow: hidden;
+		    float: left;
+		    margin:0 10px 0 5px;
+		    border-radius: 80%;
+		}
+		.member_character > img {
+			width:40px;
+		}
+		#memberinfo {
+			float: left;
+    		width: 80%;
+		}
+		#memberinfo > p {
+			margin: 0;
+		}
+		#memberinfo  p:nth-child(1) {
+		    font-size: 16px;
+		    font-weight: 400;
+		    opacity: 80%;
+		    margin: 0;
+		    display: inline;
+		    float: left;
+		}
+		#memberinfo  p:nth-child(2){
+			 font-size: 12px;
+			 opacity: 50%;
+		}
+		
+		#board_text {
+			clear: both;
+		    min-height: 180px;
+		    width: 98%;
+		    padding: 10px;
+		    border: 1px solid #00000030;
+		    box-shadow: 0px 15px 10px rgba(0,0,0,7%);
+		    display: inline-block;
+		    margin-top: 10px;
+		}
+		.button {
+			margin: 22px 0;
+		    float: right;
+		    margin-right: 30px;
+		}
+		
+		form > h2 {
+			margin: 40px 0px 20px 0;
+		    padding:0 0 10px 20px;
+		    font-weight: 300;
+		    opacity: 85%;
+		    font-size: 18px;
+		    border-bottom: solid 1px #8080803b;
+		}
+		#board_comment_add {
+			margin: auto;
+		    width: 95%;
+		    padding-bottom: 20px;
+		}
+		#board_comment_add > input[type=text] {
+			border: 1px solid #00000030;
+			height: 40px;
+		    width: 75%;
+		    margin-left: 10px;
+		    padding: 0 10px;
+		}
+		
+		#board_comment_add > input[type=submit] {
+			margin: 0 10px;
+		    height: 40px;
+		    width: 10%;
+		    border: 0px;
+		    background-color: #FF9800;
+		    border-radius: 15px;
+		    float: right;
+		}
+		#boardComment_List {
+			min-height: 10px;
+			border-top: solid 1px #8080803b;
+			padding-top : 20px;
+		}
+		.boardComments{
+			padding: 2px 0;
+		}
+		.boardComments > .member_character{
+			width: 25px;
+		    height: 25px;
+		    overflow: hidden;
+		    float: left;
+		    margin:0 10px 0 5px;
+		    border-radius: 80%;
+		}
+		.boardComments > .member_character > img{
+			width: 25px;
+		}
+		.boardComments > h5:nth-child(2){
+    		display: inline-block;
+		    margin: 0 0 0 10px;
+		    font-size: 15px;
+		    font-weight: 500;
+		    opacity: 90%;
+		    
+		}
+		.boardComments > h5:nth-child(3){
+			/*댓글 날짜*/
+			display: inline-block;
+		    margin: 0 0 0 20px;
+		    font-weight: 400;
+		    opacity: 60%;
+		    font-size: 12px;
+		    border-left: solid 1px gray;
+    		padding-left: 8px;
+		}
+		.boardComments > p {
+			/*댓글 내용*/
+			clear: both;
+		    padding-left: 10px;
+		    font-size: 13px;
+		    font-weight: 300;
+		    margin: 10px 0;
+		    background-color: #dcdcdc4f;
+		    min-height: 40px;
+		}
+		
+		
+	</style>
 	
 </head>
 		
@@ -114,34 +262,68 @@
 			</div>
 		</div>
 		
-		<div id="cont_size">
-		    <h1>자유게시판</h1>
-		    <div id="cont_1_size">
-
-			<%BoardDTO article = (BoardDTO)request.getAttribute("article");%>
-			
-				<div id="write_box">                        
-				    <h2><%out.print(article.getBoard_title());%></h2>
-					<div id="member_character" ><img  src="img/character/character1.png"></div>
-					<p><%out.print(article.getMember_id());%></p>
-					<p><%out.print(article.getBoard_date());%></p>                    
-					<div id="board_text"><%out.print(article.getBoard_text());%></div>   
-					<form name="btns">         
+			<div id="cont_size">
+			    <h1>자유게시판</h1>
+			    <div id="cont_1_size">
+	
+				<%BoardDTO article = (BoardDTO)request.getAttribute("article");
+					System.out.println(article);
+				%>
+					
+					<div id="write_box">   
+						<!-- 게시글 내용 -->                     
+					    <h2><%out.print(article.getBoard_title());%></h2>
+					    <div id="memberinfo">
+							<div class="member_character" ><img  src="img/character/character1.png"></div>
+							<p><%out.print(article.getMember_id());%></p>
+							<p><%out.print(article.getBoard_date());%></p>  
+						</div>							                  
+						<div id="board_text"><%out.print(article.getBoard_text());%></div>   
+						
+						<form name="btns" method="post" action="commentWrite.bo?board_no=<%=article.getBoard_no()%>">
+						<!-- 댓글 -->     
+						<h2>Comment</h2>
+						<div id="board_comment_add">
+							<div class="member_character" ><img  src="img/character/character1.png"></div>
+							<input type="text" name ="boardComment" /><%  %>
+							<input type="submit" value="Comment"/>
+						</div>
+						<!-- 댓글 list -->
+						<div id="boardComment_List">
+							<%
+							CommentListService svc = new CommentListService();
+							List<Board_CommentDTO> list = svc.commentList(article.getBoard_no());
+							if(list.size() > 0){
+								for(int i = 0; i < list.size(); i++){
+							%>
+									<div class="boardComments">
+										<div class="member_character" ><img  src="img/character/character1.png"></div> <!-- 이미지 -->
+										<h5><%= list.get(i).getMember_id() %></h5><h5><%= list.get(i).getBc_date() %></h5>
+										<p><%= list.get(i).getBc_text() %></p>
+									</div>
+							<%} 
+							}
+							%>
+						</div>
+					</div>					
+					         
 						<div class="button">	<!-- 버튼 -->
-						<% int sitePage = (Integer)session.getAttribute("boardPageNum"); %>
+						<% int sitePage = 1;
+							if(session.getAttribute("boardPageNum") != null){								
+								sitePage = (Integer) session.getAttribute("boardPageNum");
+							}
+						%>
 						<input type="button" value = "목록" onClick="location.href='board.jsp?sitePage=<%= sitePage%>'"/>
 						<%	
 							if ( member_id != null && member_id.equals(article.getMember_id())) { 
-								request.setAttribute("article", article);
-							
-							%>
-								<input type='button'  value = '수정' onClick="location.href='boardModifyForm.bo?board_num=<%=article.getBoard_no()%>'"/>
-								<input type='button'  value = '삭제' onClick="removeCheck()"/>
+								request.setAttribute("article", article);							
+						%>
+						<input type='button'  value = '수정' onClick="location.href='boardModifyForm.bo?board_num=<%=article.getBoard_no()%>'"/>
+						<input type='button'  value = '삭제' onClick="removeCheck()"/>
 						<% }%>							
 						</div>
-					</form>		   
+					</form>
 				</div>
-			</div>
 			</div>
         </section>
         

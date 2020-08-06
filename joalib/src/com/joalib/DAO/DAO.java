@@ -16,6 +16,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.joalib.DTO.BoardDTO;
+import com.joalib.DTO.Board_CommentDTO;
 import com.joalib.DTO.memberinfoDTO;
 
 import com.joalib.DTO.BoardDTO;
@@ -139,6 +140,34 @@ public class DAO {
 		return i;
 	}
 	
+	//자유게시판 댓글 추가
+	public int boardCommnetAdd(Board_CommentDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i  = sqlsession.insert("boardComment_add", dto) ;
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}
+	
+	
+	public List<Board_CommentDTO> boardCommentList(int board_no) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		List<Board_CommentDTO> list  = sqlsession.selectList("boardComment_list", board_no) ;
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return list;
+	}
+	
+	public List<BoardDTO> myBoardView (String member_id) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		List<BoardDTO> list = sqlsession.selectList("myBoardView",member_id);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return list;
+	}
 
 
 

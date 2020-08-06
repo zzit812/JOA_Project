@@ -25,7 +25,7 @@ public class BoardDetailAction implements dbAction {
 		request.setAttribute("article", article);
 		
 		
-//		forward.setRedirect(true);
+		//forward.setRedirect(true);
 		forward.setPath("board_read_page.jsp");
 
 		return forward;

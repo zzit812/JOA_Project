@@ -34,6 +34,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into joalib.point values (#{member_id}, 100, now(), '게시글(자유게시판)', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)+100), '+');
 	</insert>
 	
+	<select id="myBoardView" parameterType="String" resultType="com.joalib.DTO.BoardDTO">
+		 select * from joalib.board where member_id = #{member_id} order by board_no desc; 
+	</select>
+	
 	
 	<insert id="board_add" parameterType ="com.joalib.DTO.BoardDTO" >
 		INSERT INTO joalib.board(board_title, board_text, board_date, member_id, board_hit) VALUES ( #{board_title}, #{board_text}, #{board_date},#{member_id},0);
@@ -62,7 +66,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="board_del" parameterType="com.joalib.DTO.BoardDTO">
 		delete from joalib.board where board_no = #{board_no};
 	</delete>
+
+	<insert id="boardComment_add" parameterType="com.joalib.DTO.Board_CommentDTO">
+		INSERT INTO joalib.board_comment VALUES ( #{board_no}, #{member_id}, #{bc_text},now() );
+	</insert>
 	
+	<select id="boardComment_list" parameterType="int" resultType="com.joalib.DTO.Board_CommentDTO">
+		select * from joalib.board_comment where board_no = #{board_no} ;
+	</select>
 	
 	<insert id="book_info_add" parameterType="com.joalib.DTO.BookInfoDTO">
 		insert into joalib.bookinfo values(#{isbn},#{book_title},#{author},#{publisher},#{pub_date},#{isbn_pluscode},#{book_img},#{book_story});

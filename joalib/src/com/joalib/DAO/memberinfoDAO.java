@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.joalib.DTO.Board_CommentDTO;
 import com.joalib.DTO.memberinfoDTO;
 
 public class memberinfoDAO {
@@ -60,13 +61,15 @@ public class memberinfoDAO {
 	
 	//회원가입시 point추가
 	public int pointInsert(String member_id) {
-		System.out.println("1: "+member_id);
 		SqlSession sqlsession = sqlfactory.openSession();		
 		int i = sqlsession.insert("newMemberPointInsert", member_id);
 		sqlsession.commit();
 		sqlsession.close();
-		System.out.println("2: "+member_id);
 		
 		return i;
-	}	
+	}
+	
+	
+	
+	
 }

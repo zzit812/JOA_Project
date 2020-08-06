@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8	"
     pageEncoding="UTF-8"%>
-<%@ page import="com.joalib.DAO.PointDAO" %>
-<%@ page import="com.joalib.DTO.PointDTO" %>
+<%@ page import="com.joalib.DAO.*" %>
+<%@ page import="com.joalib.DTO.*" %>
+<%@ page import="com.joalib.board.svc.MyBoardViewService" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,30 +21,136 @@
 	
 	#cont_size{
 		background-color: #e8e8e8;
-		min-height: 1000px;
+		min-height: 800px;
 	}
-	
-	
-	#valueList > #table1{
-		border-bottom: solid 1px black;
+	.tab_container div > #table1{
+		border-bottom: solid 1px #0000003d;
     	margin: 10px auto;
     	padding-bottom:5px;
 	}
-	
-	#valueList  tr > td:nth-child(1){
+	.tab_container div > #table1  tr > td {
+		text-align: center;
+		border-left: solid 1px #0000003d;
+	}
+	.tab_container div > #table1  tr > td:nth-child(1) {
+		border-left: none;
+	}
+	.tab_container div tr > td{
+		padding-left: 10px;
+		text-align: center;
+	}
+	.tab_container div tr > td:nth-child(1){
 		width:15%;
+		
 	}
-	#valueList  tr > td:nth-child(2){
+	.tab_container div tr > td:nth-child(2){
 		width:50%;
+		text-align: left;		
 	}
-	#valueList  tr > td:nth-child(3){
+	.tab_container div tr > td:nth-child(3){
 		width:20%;
 	}
-	#valueList  tr > td:nth-child(4){
+	.tab_container div> tr > td:nth-child(4){
 	}
-	#valueList > table {
+	.tab_container div > table {	
 		width: 90%;
-		margin: auto;		
+		margin: 5px auto;		
+	}
+	.tab_container div > table:nth-child(2){
+		/* list table */
+			
+		border-bottom: solid 1px #0000003d;
+		padding-bottom: 15px;
+	}
+	.tab_container div > table:nth-child(2)  tr {
+		height: 30px;
+	}
+	.tab_container h1 {
+		text-align: center;
+	    opacity: 75%;
+	    font-weight: 300;
+	    margin: 100px 0;
+	    font-size: 25px;
+	}
+	/* 하단 페이지 번호 */
+	
+	#pageNumber {
+		text-align : center;
+		margin-top : 30px;		
+	}
+	#pageNumber > a {
+		/*color : red;*/
+		font-weight: 400;
+		margin : 0 10px;
+	}
+	
+	/* 탭 설정 */
+	
+	ul.tabs {
+	  /* 윗쪽 공간, 탭 옆*/
+		margin: 0;
+		padding: 0;
+		float: left;
+		list-style: none;
+		height: 47px;
+		border-bottom: 1px solid  #3333331c;
+		width: 100%;	  
+	}
+	
+	ul.tabs li {
+	  /* 탭 안쪽 */
+		float: left;
+	    margin: 0;
+	    cursor: pointer;
+	    padding: 8px 30px;
+	    height: 31px;
+	    line-height: 31px;
+	    /* border-top: 1px solid #333; */
+	    /* border-left: 1px solid #333; */
+	    /* border-bottom: 1px solid #333; */
+	    /* background-color: #666; */
+	    /* color: #ccc; */
+	    overflow: hidden;
+	    position: relative;
+	    border-radius: 20px 20px 0 0;
+	}
+	
+	.tab_last {
+	  /* 탭 마지막 선,, 솔직히 필요한지는 모르겠당*/
+	  border-right: 1px solid #333; 
+	}
+	
+	ul.tabs li:hover {
+		background-color: #ccc;
+		color: #333;
+	}
+	
+	ul.tabs li.active {
+	  /*선택된 탭*/
+		background-color: #ff9f40;
+	    color: #41414ff0;
+	    /* border-bottom: 1px solid #fff; */
+	    display: block;
+	    font-size: 25px;
+    	font-weight: 600;
+	}
+	
+	.tab_container {
+	  /*탭 내용: 큰*/
+		/* border: 1px solid #333; */
+	    border-top: none;
+	    clear: both;
+	    float: left;
+	    width: 100%;
+	    /* background: #fff; */
+	    overflow: auto;
+	}
+	
+	.tab_content {
+	  /*탭 내용:작은*/
+		padding: 20px;
+		display: none;
+		height : 420px;	
 	}
 	
 	
@@ -52,12 +161,15 @@
 <body>
 <%
 	String member_id = (String)session.getAttribute("member_id"); 
-	if(member_id == null){%>
+	if(member_id == null){
+%>
 		<script type="text/javascript">
 		alert("로그인 후 이용해주세요");
 		location.href="userLogin.html";
 		</script>	
-	<%}else{%>
+	<%
+			}else{
+		%>
 <header>
 
 		 <div id="top_size">
@@ -126,7 +238,7 @@
 
 		<div id="sidemenu_size" >
 			<div id="profile_img"><img  src = "img/character/character1.png" /></div>
-			<h1><%= session.getAttribute("member_id") %></h1>
+			<h1><%=session.getAttribute("member_id")%></h1>
 			<nav>
 				<ul  id="sidmenu_box">
 					<li><a href="">나의 서재</a></li>
@@ -138,51 +250,82 @@
 		</div>
 
 		<div id="cont_size">
-			<h1>내가 쓴 글</h1>
-			<form name="mypostform">
-			<select id="changePage" name="changePage">
-				<option value="1">자유게시판</option>
-				<option value="2">불량도서신고</option>
-				<option value="3">중고나눔</option>
-			</select>
-			</form>
-			<div id ="valueList">
-				<table border="0" id="table1" cellspacing="0">
-					<tr><td>첫번째</td><td>두번째</td><td>세번째</td><td>네번째</td></tr>
-				</table>
-				<table border="0">
-					<tr><td>첫번째</td><td>두번째</td><td>세번째</td><td>네번째</td></tr>
-					<tr><td>첫번째</td><td>두번째</td><td>세번째</td><td>네번째</td></tr>
-					<tr><td>첫번째</td><td>두번째</td><td>세번째</td><td>네번째</td></tr>
-				</table>
+			<!-- <h1>내가 쓴 글</h1>  -->
+			<div id ="valueList" style="border: none;">					
+					<ul class="tabs">
+					  <li class="active" rel="tab1">자유게시판</li>
+					  <li rel="tab2">불량도서 신고</li>
+					  <li rel="tab3">중고나눔</li>
+					</ul>
+					
+					<div class="tab_container">
+						<!-- #tab1 -->
+					  <div id="tab1" class="tab_content">
+						<%
+							int boardPage = 1;
+							if(request.getParameter("boardPage") != null){
+								boardPage = Integer.parseInt(request.getParameter("boardPage")) ;
+							}
+							MyBoardViewService svc = new MyBoardViewService();
+							ArrayList[] pageList = svc.myBoardPost(member_id);
+							
+							
+							if(pageList.length < 1){
+								out.print("<h1>작성하신 게시물이 없습니다</h1>");
+							}else{
+								out.print("<table border='0' id='table1' cellspacing='0'><tr><td>게시글번호</td><td>제목</td><td>날짜</td><td>조회수</td></tr></table>");
+								out.print("<table border='0'>");
+								for(int j = 0 ; j < pageList[(boardPage)-1].size(); j++){
+									BoardDTO dto = (BoardDTO) pageList[(boardPage)-1].get(j);	//게시물 하나
+									//
+									int board_num = dto.getBoard_no();
+									out.print("<tr><td>"
+									+dto.getBoard_no()+"</td><td><a href='boardReadPage.bo?board_num="
+									+dto.getBoard_no()+"'>"
+									+dto.getBoard_title()+"</a></td><td>"
+									+dto.getBoard_date()+"</td><td>"
+									+dto.getBoard_hit()+"</td></tr>");  								
+								}
+								out.print("</table>"); 
+								out.print("<div id='pageNumber'>");
+								for(int i = 0; i < (pageList.length); i++){
+									if((i+1) == boardPage){
+										out.print("<a href='mypage_myPost.jsp?boardPage="+(i+1)+"' style='color: #009688; font-weight: 700;'>"+(i+1)+"</a>");
+									}else{
+										out.print("<a href='mypage_myPost.jsp?boardPage="+(i+1)+"'>"+(i+1)+"</a>");
+									}
+									
+								}
+								out.print(" </div>");
+							}
+						%>		  						
+					</div>
+					  <!-- #tab2 -->
+					  <div id="tab2" class="tab_content">
+					  	<h1>불량도서 준비중 </h1>
+					  </div>
+					  <!-- #tab3 -->
+					  <div id="tab3" class="tab_content">
+					  	<h1>중고도서 준비중</h1>
+					  </div>
 			</div>
 			
 			<script type="text/javascript">
-			
-				$(function(){
-					
-					var selValue = 1;
-					
-					$("#changePage").on("change", function(){
-						//option value값 받기
-						var st = document.querySelector('#changePage');	//select 가져옴
-						for(var i=0; i < st.length; i++){
-							if (st.options[i].selected){ 
-				 				selValue = st.options[i].value;			 				
-				 			}
-						}
-						//
-						if(selValue == 1){
-							console.log("자유게시판");
-							
-						}else if(selValue == 2){
-							console.log("불량도서");	
-						}else if(selValue == 3){
-							console.log("중고나눔");	
-						}
-						
-					});
-				})
+
+		    $(".tab_content").hide();
+		    $(".tab_content:first").show();
+
+		  	/* if in tab mode */
+		    $("ul.tabs li").click(function() {
+				
+		      $(".tab_content").hide();
+		      var activeTab = $(this).attr("rel"); 
+		      $("#"+activeTab).fadeIn();		
+				
+		      $("ul.tabs li").removeClass("active");
+		      $(this).addClass("active");
+			  
+		    });
 			
 			</script>
 			

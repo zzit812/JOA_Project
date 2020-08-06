@@ -11,6 +11,7 @@ import com.joalib.DTO.ActionForward;
 import com.joalib.board.action.dbAction;
 
 import com.joalib.board.action.BoardWriteProAction;
+import com.joalib.board.action.CommentWriteAction;
 import com.joalib.board.action.BoardDeleteAction;
 import com.joalib.board.action.BoardDetailAction;
 import com.joalib.board.action.BoardModifyFormAction;
@@ -34,13 +35,11 @@ public class BoardContr extends javax.servlet.http.HttpServlet
 		if(command.equals("/boardWritePro.bo")){ //글쓰기 데이터입력 후 완료버튼 눌렀을 때,
 			action  = new BoardWriteProAction();
 			try {
-				forward=action.execute(request, response );
-				
+				forward=action.execute(request, response );				
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
-			
-		}else if(command.equals("/boardReadPage.bo")){
+			}			
+		}else if(command.equals("/boardReadPage.bo")){			
 			action = new BoardDetailAction();
 			try{
 				forward=action.execute(request, response);
@@ -68,11 +67,25 @@ public class BoardContr extends javax.servlet.http.HttpServlet
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+		}else if(command.equals("/commentWrite.bo")){
+			action = new CommentWriteAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		
-		
-		
-		
+		if(forward != null){		
+			if(forward.isRedirect()){
+				response.sendRedirect(forward.getPath());	//반환하는 forward값이 있으면, 'forward.getPath()'으로 이동한다.
+			}else{
+				RequestDispatcher dispatcher=
+						request.getRequestDispatcher(forward.getPath());
+				dispatcher.forward(request, response);
+			}
+			
+		}	
 		
 		
 	}
