@@ -58,7 +58,7 @@ public class BookInfoDAO {
 		//화긴
 		SqlSession sqlsession = sqlfactory.openSession();
 		List <BookInfoDTO> list = sqlsession.selectList("book_info");
-		System.out.println("여기까지..왔니..?");
+
 		sqlsession.commit();
 		sqlsession.close();
 		return list;

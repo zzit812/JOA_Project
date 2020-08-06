@@ -14,7 +14,7 @@ public class BookInfoAddService {
 		int insertCount = dao.bookinfoadd(bookBean);
 		
 		if(insertCount > 0){
-			System.out.println("잘들어왔습니다.");
+		
 			isWriteSuccess = true;
 		}
 		

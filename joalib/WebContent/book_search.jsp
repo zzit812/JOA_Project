@@ -225,28 +225,30 @@
 				style="background-image: url('img/book/<%=dtoArray.get(i).getBook_img() %>'); background-size: cover;">
 				<div class="content">
 					<h2 class="title"></h2>
-					<span class="btn">관심도서</span> <span class="loan">대출가능</span>
+					<span class="btn">관심도서</span> <span class="loan">대출하기</span>
 				</div>
 			</div>
 			<div class="bookinfo">
-				<p>도서명 <%= dtoArray.get(i).getBook_title()%></p>
-				<p>저자<%=dtoArray.get(i).getAuthor()%></p>
-				<p>출판사<%=dtoArray.get(i).getPublisher() %></p>
+				<p>도서명  <%= dtoArray.get(i).getBook_title()%></p>
+				<p>저자  <%=dtoArray.get(i).getAuthor()%></p>
+				<p>출판사  <%=dtoArray.get(i).getPublisher() %></p>
 			</div>
 		</div>
 
 		<%} %> 
-		<div class="pagination">
+		
+	</section>
+	
+	<div class="pagination">
 			<a href="#" class="prev"><i class="fa fa-angle-double-left"></i>
 				Prev</a>
 			<%		
 			  	for (int iCount = startPage; iCount <= endPage; iCount++) {
-			  	       out.print(" <a href='board.jsp?sitePage="+iCount+"' class='page-number'> "+iCount+ "</a>");	
+			  	       out.print(" <a href='book_search.jsp?sitePage="+iCount+"' class='page-number'> "+iCount+ "</a>");	
 			  	}
 		  		%>
 			<a href="#" class="next">Next <i class="fa fa-angle-double-right"></i></i></a>
 		</div>
-	</section>
 	<footer>
 		<div id="footer_size">
 			(변경해야함) Library | 04524 서울특별시 중구 세종대로 110 | 전화번호: 02)120, 2133-0300~1</br>

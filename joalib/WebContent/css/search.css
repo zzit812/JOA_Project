@@ -275,9 +275,8 @@
 			
 			text-align: center;
 			font-family: arial;
-			margin-top: 6px;
+			margin: 20px;
 			position: relative;
-			top: 60px;
 		}
 		.pagination a {
 			display: inline-block;
