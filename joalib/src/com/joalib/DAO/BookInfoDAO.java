@@ -63,6 +63,19 @@ public class BookInfoDAO {
 		sqlsession.close();
 		return list;
 	}
+
+	public BookInfoDTO book_info_detail(int isbn) {
+	
+		// TODO Auto-generated method stub
+		getinstance();
+		SqlSession sqlsession = sqlfactory.openSession();
+		BookInfoDTO dto = new BookInfoDTO();
+		dto = sqlsession.selectOne("book_info_detail", isbn);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return dto;
+	}
 	
 	
 	

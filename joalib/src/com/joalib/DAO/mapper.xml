@@ -85,6 +85,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="book_info" resultType="com.joalib.DTO.BookInfoDTO">
 		select * from joalib.bookinfo;
 	</select>
+	<select id="book_info_detail" resultType="com.joalib.DTO.BookInfoDTO" parameterType="int">
+		select * from joalib.bookinfo where isbn= #{isbn};
+	</select>
 	
 	
 		

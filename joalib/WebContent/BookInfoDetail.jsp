@@ -1,8 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@page import="com.joalib.DTO.BookInfoDTO"%>
 <%@page import="com.joalib.DAO.BookInfoDAO"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+
 <%@ page import="java.util.List"%>
 <%@ page import="com.joalib.board.action.dbAction"%>
 <%@ page import="com.joalib.DAO.DAO"%>
@@ -88,27 +89,30 @@
 		<script src="js/lib_top.js"></script>
 	</header>
 
+	
+	<%
+	 BookInfoDTO article = (BookInfoDTO)request.getAttribute("article");
 
 
+	%>
+
+	
 	<section>
 		<div id="book_box">
 			<div id="img_box">
 				<span id="category">국내도서 > 소설</span>
-				<img id="book_img" alt="" src="img/book/book1.jpg">
 				<div id="button"><span id="favorite">관심도서등록</span> <span id="loan">대출하기</span></div>
 			</div>
 			<div id="detail_box">
+				<img id="back" src="img/back.png">
 				<div id="detail">
-				<h2>점심시간 언제와 배고팡</h2>
-				<div><b>저자사항</b> 선보현</div>
-				<div><b>발행사항</b> 그린출판</div>
-				<div><b>표준번호</b> ISBN:1234567894</div>
+				<h2>  </h2>
+				<div><b>저자사항</b>   </div>
+				<div><b>발행사항</b>    </div>
+				<div><b>표준번호</b> ISBN:   </div>
 				<div><b>상세정보</b></div>
 				<div>
-				부와 행운을 만나는 출발점, 마법의 감정 Having!국내 최초로 미국에서 선(先)출간되어 세계가 먼저 찾아 읽은 책!
-				영미권을 비롯 프랑스, 독일, 이탈리아, 러시아 등 21개국에 판권이 수출되어 ‘불안감이 사라지게 해준 책’, ‘행운의 바이블’,
-				‘이 책을 읽고 행운이 찾아왔다’ 등 찬사를 보낸 이 책 『더 해빙』은 마음가짐을 다듬으며 원하는 것을 얻는 놀라운 가르침을 담고 있다. 버락 오바마가 로스쿨 학생이던 시절 대통령의 자질을 알아보고 그를 세상에 알린 출판 에이전트 제인 디스털은
-				『더 해빙』의 전 세계 에이전트를 자처하며 “돈에 대해 우리가 가져야 할 마음가짐을 가장 새롭게 담고 있는 책이다”라고 말했다.</div> 
+				
 				</div>
 				
 				

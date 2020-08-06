@@ -228,11 +228,13 @@
 					<span class="btn">관심도서</span> <span class="loan">대출하기</span>
 				</div>
 			</div>
+			<a href='bookInfoDetail.bk?isbn=<%=dtoArray.get(i).getIsbn()%>'>
 			<div class="bookinfo">
 				<p>도서명  <%= dtoArray.get(i).getBook_title()%></p>
 				<p>저자  <%=dtoArray.get(i).getAuthor()%></p>
 				<p>출판사  <%=dtoArray.get(i).getPublisher() %></p>
 			</div>
+			</a>
 		</div>
 
 		<%} %> 
