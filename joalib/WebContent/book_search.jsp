@@ -221,13 +221,16 @@
   for(int i=0; i<pageList[sitePage-1].size(); i++){
 	  		ArrayList<BookInfoDTO> dtoArray = pageList[sitePage-1];
   %><div>
+			<a href='bookInfoDetail.bk?isbn=<%=dtoArray.get(i).getIsbn()%>'>
 			<div class="card"
 				style="background-image: url('img/book/<%=dtoArray.get(i).getBook_img() %>'); background-size: cover;">
 				<div class="content">
 					<h2 class="title"></h2>
+					<!-- 요기아래 버튼들은 제트인덱스로 훗날 만들것임.. -->
 					<span class="btn">관심도서</span> <span class="loan">대출하기</span>
 				</div>
 			</div>
+			</a>
 			<a href='bookInfoDetail.bk?isbn=<%=dtoArray.get(i).getIsbn()%>'>
 			<div class="bookinfo">
 				<p>도서명  <%= dtoArray.get(i).getBook_title()%></p>
