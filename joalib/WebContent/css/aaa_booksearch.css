@@ -13,10 +13,6 @@
 }
 
 
-#book_search_size {
-	height: 1900px;
-}
-
 
 .page-content {
   display: grid;
@@ -211,14 +207,10 @@
   .bookinfo {
   	position: relative;
     left: 15px;
+    margin-bottom: 75px;
   }
   .bookinfo p {
     margin: 5px;
   }
 
   
-  
-  
-  
-  
-}

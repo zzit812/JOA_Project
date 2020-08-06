@@ -76,6 +76,7 @@ public class BoardContr extends javax.servlet.http.HttpServlet
 			}
 		}
 		
+
 		if(forward != null){		
 			if(forward.isRedirect()){
 				response.sendRedirect(forward.getPath());	//반환하는 forward값이 있으면, 'forward.getPath()'으로 이동한다.
@@ -86,6 +87,19 @@ public class BoardContr extends javax.servlet.http.HttpServlet
 			}
 			
 		}	
+		
+		
+		if(forward != null){		
+			if(forward.isRedirect()){
+				response.sendRedirect(forward.getPath());	//반환하는 forward값이 있으면, 'forward.getPath()'으로 이동한다.
+			}else{
+				RequestDispatcher dispatcher=
+						request.getRequestDispatcher(forward.getPath());
+				dispatcher.forward(request, response);
+			}
+			
+		}
+
 		
 		
 	}

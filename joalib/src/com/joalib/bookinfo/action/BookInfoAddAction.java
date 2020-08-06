@@ -53,7 +53,7 @@ public class BookInfoAddAction implements Action {
 
 		
 		forward.setRedirect(true);
-		forward.setPath("board.jsp");
+		forward.setPath("book_search.jsp");
 
 		return forward;
 	}
