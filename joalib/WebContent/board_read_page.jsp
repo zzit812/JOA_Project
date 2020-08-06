@@ -155,15 +155,22 @@
 		    border-left: solid 1px gray;
     		padding-left: 8px;
 		}
+		.boardComments > a:nth-child(4), .boardComments > a:nth-child(5){
+			float: right;
+		    opacity: 80%;
+		    font-size: 13px;
+		    margin: 0 3px;
+			
+		}
 		.boardComments > p {
 			/*댓글 내용*/
 			clear: both;
-		    padding-left: 10px;
+		    padding: 5px 10px;
 		    font-size: 13px;
 		    font-weight: 300;
 		    margin: 10px 0;
 		    background-color: #dcdcdc4f;
-		    min-height: 40px;
+		    min-height: 35px;
 		}
 		
 		
@@ -298,7 +305,7 @@
 							%>
 									<div class="boardComments">
 										<div class="member_character" ><img  src="img/character/character1.png"></div> <!-- 이미지 -->
-										<h5><%= list.get(i).getMember_id() %></h5><h5><%= list.get(i).getBc_date() %></h5>
+										<h5><%= list.get(i).getMember_id() %></h5><h5><%= list.get(i).getBc_date() %></h5><a>삭제</a><a>수정</a>
 										<p><%= list.get(i).getBc_text() %></p>
 									</div>
 							<%} 

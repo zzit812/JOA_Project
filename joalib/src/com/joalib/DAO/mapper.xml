@@ -36,8 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="myBoardView" parameterType="String" resultType="com.joalib.DTO.BoardDTO">
 		 select * from joalib.board where member_id = #{member_id} order by board_no desc; 
-	</select>
-	
+	</select>	
 	
 	<insert id="board_add" parameterType ="com.joalib.DTO.BoardDTO" >
 		INSERT INTO joalib.board(board_title, board_text, board_date, member_id, board_hit) VALUES ( #{board_title}, #{board_text}, #{board_date},#{member_id},0);
@@ -82,6 +81,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="book_search_count" parameterType="com.joalib.DTO.BookInfoDTO">
 		select * from joalib.bookinfo where isbn= #{isbn};
 	</select>
+	
+	
 		
 	</mapper>
 	
