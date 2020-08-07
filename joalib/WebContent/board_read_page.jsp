@@ -339,6 +339,7 @@
 							<%} 
 							}
 							%>
+							
 							<script type="text/javascript">
 								$(function(){
 									var chlickCount = 1;
@@ -359,10 +360,8 @@
 											$(this).parent().children(".changeText").hide();
 											$(this).parent().children("input[name=changeBtn]").hide();
 											$(this).text('수정');
-										}
-																			
-									})
-															
+										}																			
+									})															
 								})
 							</script>
 						</div>

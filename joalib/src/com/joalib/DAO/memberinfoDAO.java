@@ -42,7 +42,6 @@ public class memberinfoDAO {
 	public int memberInsert (memberinfoDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();		
 		int i = sqlsession.insert("memberInsert", dto);
-		System.out.println("a123456789");
 		sqlsession.commit();
 		sqlsession.close();
 		
@@ -50,9 +49,9 @@ public class memberinfoDAO {
 	}
 	
 	//id 체크하고 pw,name값은 받아옴
-	public List<memberinfoDTO> memberIDCheck(String checkID) {
+	public memberinfoDTO memberIDCheck(String checkID) {
 		SqlSession sqlsession = sqlfactory.openSession();		
-		List<memberinfoDTO> memberinfo = sqlsession.selectList("memberLoginCheck", checkID);
+		memberinfoDTO memberinfo = sqlsession.selectOne("memberLoginCheck", checkID);
 		sqlsession.commit();
 		sqlsession.close();
 		

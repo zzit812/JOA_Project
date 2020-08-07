@@ -15,12 +15,13 @@ public class BoardDetailAction implements dbAction {
 		ActionForward forward = new ActionForward();
 		ServletContext context = request.getServletContext();
 		
-		int board_no =Integer.parseInt(request.getParameter("board_num"));
+		
+		String st = request.getParameter("board_num");
+		int board_no =Integer.parseInt(st);
 		
 		BoardDetailService boardDetailService = new BoardDetailService();
 		BoardDTO article = boardDetailService.getArticle(board_no);
 		//하나의 게시물에 대한 내용들이 담겨있음
-		
 		
 		request.setAttribute("article", article);		
 		
