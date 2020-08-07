@@ -172,7 +172,7 @@
 		    background-color: #dcdcdc4f;
 		    min-height: 35px;
 		}
-		input[name=changeText]{
+		.changeText{
 			border: 1px solid #00000030;
 			clear: both;
 		    padding: 5px 10px;
@@ -334,36 +334,26 @@
 										<% } %>
 										
 										<p><%= list.get(i).getBc_text() %></p>
-										<input type='text' class="changeText" name="changeText" value="<%= list.get(i).getBc_text() %>" />
-										<input type='button' name='changeBtn' class='changeBtn' value='수정' onClick="location.href='commentUpdate.bo?board_no=<%= list.get(i).getBoard_no() %>&member_id=<%= list.get(i).getMember_id() %>&bc_date=<%= list.get(i).getBc_date()%>&bc_text='+ document.querySelector('input[name=changeText]').value;" />
-									
+										<input type='text' class="changeText" name="changeText<%= i %>" value="<%= list.get(i).getBc_text() %>" />
+										<input type='button' name='changeBtn' value="수정" class='changeBtn'  onClick="location.href='commentUpdate.bo?board_no=<%= list.get(i).getBoard_no() %>&member_id=<%= list.get(i).getMember_id() %>&bc_date=<%= list.get(i).getBc_date()%>&bc_text='+ document.querySelector('input[name=changeText<%= i %>]').value; " />
 									</div>
 							<%} 
 							}
 							%>
 							<script type="text/javascript">
 								$(function(){		
-									$("input[name=changeText]").hide();
+									$(".changeText").hide();
 									$("input[name=changeBtn]").hide();
 									
+
 									//a태그 수정 눌렀을때
 									$('.boardComments > a:nth-child(5)').on('click', function(){
 										$(this).parent().children('p').remove();										
-										$(this).parent().children("input[name=changeText]").show();
+										$(this).parent().children(".changeText").show();
 										$(this).parent().children("input[name=changeBtn]").show();
 										//$(this).parent().append(
 										//		"<input type='button' name='changeBtn' class='changeBtn' value='수정' />");
 										$(this).hide();
-										
-										//수정 버튼 눌렀을때
-										//$(".changeBtn").on("click", function(){											
-											//var bc_text = document.querySelector('input[name=changeText]');												
-											//console.log(bc_text.value);											
-											//var member_id = document.querySelector('.boardComments > h5:nth-child(2)');
-											//var bc_date = document.querySelector('.boardComments > h5:nth-child(3)');											
-											//var bc_text = document.querySelector('.changeText');	//내용
-											//location.href= member_id.value ;
-										//})
 										
 									})								
 								})
