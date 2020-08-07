@@ -221,33 +221,23 @@
 			  				ArrayList<BoardDTO> dtoArray = pageList[sitePage-1];
 		  			%>
 		  			<ul>
-		  			<li>
-		  			<%=dtoArray.get(i).getBoard_no()%>
-		  			</li>
-		  			<li>
-		  			<a href='boardReadPage.bo?board_num=<%=dtoArray.get(i).getBoard_no() %>'>
-		  			<%=dtoArray.get(i).getBoard_title() %>
-		  			<% 
-		  			int commentCount = dao.CommnetCount(dtoArray.get(i).getBoard_no());
-		  			if( commentCount > 0){
-		  				out.print("<p class='commentCount'> ["+commentCount+"] </p>");
-		  			}
-		  			out.print("</a>");
-		  			//1
-		  			%>
-		  			</li>
-		  			<li>
-		  			<%=dtoArray.get(i).getMember_id() %>
-		  			</li>
-		  			<li>
-		  			<%=dtoArray.get(i).getBoard_date() %>
-		  			</li>
-		  			<li>
-		  			<%=dtoArray.get(i).getBoard_hit()%>
-		  			</li>
+			  			<li><%=dtoArray.get(i).getBoard_no()%></li>
+			  			<li>
+				  			<a href='boardReadPage.bo?board_num=<%=dtoArray.get(i).getBoard_no() %>'>
+				  			<%=dtoArray.get(i).getBoard_title() %>
+				  			<% 
+				  			int commentCount = dao.CommnetCount(dtoArray.get(i).getBoard_no());
+				  			if( commentCount > 0){
+				  				out.print("<p class='commentCount'> ["+commentCount+"] </p>");
+				  			}
+				  			out.print("</a>");
+				  			%>
+			  			</li>
+			  			<li><%=dtoArray.get(i).getMember_id() %></li>
+			  			<li><%= dtoArray.get(i).getBoard_date().substring(0, 10)%></li>
+			  			<li><%=dtoArray.get(i).getBoard_hit()%></li>
 		  			</ul>
 		  			<%} %>
-		  			
 
 		  		</div>
 		  		

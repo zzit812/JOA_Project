@@ -13,13 +13,12 @@ public class PointChargeAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		System.out.println("2");
-		
 		ActionForward forward=null;		
 		ServletContext context = request.getServletContext();	//이전 페이지의 servletContext를 받아오고,
 		
 		HttpSession session = request.getSession(false);
 		String member_id = (String) session.getAttribute("member_id");
+		
 		
 		String referer = (String)request.getHeader("REFERER");	//이전페이지 url
 		
@@ -46,6 +45,17 @@ public class PointChargeAction implements Action {
 			}else {
 				System.out.println("fail");
 			}
+		}else if(referer.contains("boardReadPage.bo")) {
+			int board_no = Integer.parseInt(request.getParameter("board_no"));
+			if(svc.chargeBoardCommnetWrite(member_id)) {				
+				//success
+				forward = new ActionForward();
+				forward.setRedirect(true);
+				forward.setPath("boardReadPage.bo?board_num="+board_no);
+			}else {
+				System.out.println("fail");
+			}
+			
 		}
 		
 		

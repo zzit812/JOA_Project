@@ -196,8 +196,7 @@
 						<p>회원님의 포인트는</p>
 						<%
 						//포인트 조회
-						PointDAO dao = new PointDAO();
-						PointDAO.getinstance();
+						PointDAO dao = PointDAO.getinstance();
 						int pointNow = dao.memberPointNow(member_id);
 						%>
 						<p><%= pointNow %> P</p>

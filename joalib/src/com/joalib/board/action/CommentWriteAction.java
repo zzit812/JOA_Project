@@ -25,11 +25,8 @@ public class CommentWriteAction implements dbAction {
 		String board_no = request.getParameter("board_no");
 		dto.setBoard_no(board_no);
 		String member_id = (String)session.getAttribute("member_id");
-		System.out.println("1. memberID: "+member_id);
-		
 		if(member_id != null) {
 			dto.setMember_id(member_id);
-			System.out.println("memberID: "+member_id);
 			dto.setBc_text(request.getParameter("boardComment"));
 			
 			CommentWriteService svc = new CommentWriteService();
@@ -37,7 +34,7 @@ public class CommentWriteAction implements dbAction {
 			if(svc.commentAdd(dto)) {
 				forward = new ActionForward();
 				forward.setRedirect(true);			
-				forward.setPath("boardReadPage.bo?board_num="+board_no);				
+				forward.setPath("boardPointCharge.po?member_id="+member_id+"&board_no="+board_no);				
 			}
 			else {
 				System.out.println("fail");
