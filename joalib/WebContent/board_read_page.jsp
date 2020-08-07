@@ -296,8 +296,7 @@
 			    <h1>자유게시판</h1>
 			    <div id="cont_1_size">
 	
-				<%BoardDTO article = (BoardDTO)request.getAttribute("article");
-				%>
+				<%BoardDTO article = (BoardDTO)request.getAttribute("article");%>
 					
 					<div id="write_box">   
 						<!-- 게시글 내용 -->                     
@@ -341,21 +340,29 @@
 							}
 							%>
 							<script type="text/javascript">
-								$(function(){		
+								$(function(){
+									var chlickCount = 1;
 									$(".changeText").hide();
-									$("input[name=changeBtn]").hide();
-									
-
+									$("input[name=changeBtn]").hide();		
 									//a태그 수정 눌렀을때
 									$('.boardComments > a:nth-child(5)').on('click', function(){
-										$(this).parent().children('p').remove();										
-										$(this).parent().children(".changeText").show();
-										$(this).parent().children("input[name=changeBtn]").show();
-										//$(this).parent().append(
-										//		"<input type='button' name='changeBtn' class='changeBtn' value='수정' />");
-										$(this).hide();
-										
-									})								
+										var change = $(this).text();
+										if(change == '수정'){
+											//console.log('수정이다');
+											$(this).parent().children('p').hide();										
+											$(this).parent().children(".changeText").show();
+											$(this).parent().children("input[name=changeBtn]").show();
+											$(this).text('취소');											
+										}else{
+											//console.log('수정 아니다');
+											$(this).parent().children('p').show();										
+											$(this).parent().children(".changeText").hide();
+											$(this).parent().children("input[name=changeBtn]").hide();
+											$(this).text('수정');
+										}
+																			
+									})
+															
 								})
 							</script>
 						</div>

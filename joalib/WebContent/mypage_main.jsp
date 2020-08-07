@@ -219,7 +219,7 @@
 								}
 								out.print("<tr><td>");
 								out.print(pulma+"</td><td>");
-								out.print(list.get(i).getPoint()+"</td><td>");
+								out.print(list.get(i).getPoint()+"</td><td>");    
 								out.print(list.get(i).getPoint_reason()+"</td><td>");
 								out.print(list.get(i).getUpdate_date().substring(0,10)+"</td></tr>");
 							}

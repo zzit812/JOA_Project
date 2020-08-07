@@ -46,8 +46,10 @@ public class PointChargeAction implements Action {
 				System.out.println("fail");
 			}
 		}else if(referer.contains("boardReadPage.bo")) {
+			
 			int board_no = Integer.parseInt(request.getParameter("board_no"));
-			if(svc.chargeBoardCommnetWrite(member_id)) {				
+			if(svc.chargeBoardCommnetWrite(member_id)) {	
+				System.out.println("여기가 문제일까?");
 				//success
 				forward = new ActionForward();
 				forward.setRedirect(true);

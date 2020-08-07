@@ -223,7 +223,7 @@
 		  			<ul>
 			  			<li><%=dtoArray.get(i).getBoard_no()%></li>
 			  			<li>
-				  			<a href='boardReadPage.bo?board_num=<%=dtoArray.get(i).getBoard_no() %>'>
+				  			<a  href='boardReadPage.bo?board_num=<%=dtoArray.get(i).getBoard_no() %>' onClick=" <% dao.hitUp(dtoArray.get(i).getBoard_no()); %> " >
 				  			<%=dtoArray.get(i).getBoard_title() %>
 				  			<% 
 				  			int commentCount = dao.CommnetCount(dtoArray.get(i).getBoard_no());
