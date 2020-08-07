@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.joalib.DTO.ActionForward;
+import com.joalib.DTO.BookInfoDTO;
 import com.joalib.bookinfo.action.Action;
 import com.joalib.bookinfo.action.BookInfoAddAction;
+import com.joalib.bookinfo.action.BookInfoDetailAction;
 
 
 @WebServlet("*.bk") 
@@ -33,8 +35,23 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-		  }
+		  }else if(command.equals("/bookInfoDetail.bk")){
+				 //화긴
+			action = new BookInfoDetailAction();
+				try{
+					forward=action.execute(request, response);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 		 
+				
+				
+				System.out.println(forward.getPath());
+				
+
+				System.out.println((BookInfoDTO)request.getAttribute("article"));
+				
+				
 		 if(forward != null) {
 				if(forward.isRedirect()) {
 					//boolean값임 트루인경우에 실행
@@ -48,9 +65,8 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 					dispatcher.forward(request, response);
 				
 				}
-				
-				
 			}
+		}
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {

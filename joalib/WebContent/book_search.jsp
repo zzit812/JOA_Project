@@ -18,7 +18,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/aaa_booksearch.css">
 <link rel="stylesheet" type="text/css" href="css/lib_top.css">
-<link rel="stylesheet" type="text/css" href="css/search.css">
+<<link rel="stylesheet" type="text/css" href="css/search.css">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
@@ -221,18 +221,23 @@
   for(int i=0; i<pageList[sitePage-1].size(); i++){
 	  		ArrayList<BookInfoDTO> dtoArray = pageList[sitePage-1];
   %><div>
+			<a href='bookInfoDetail.bk?isbn=<%=dtoArray.get(i).getIsbn()%>'>
 			<div class="card"
 				style="background-image: url('img/book/<%=dtoArray.get(i).getBook_img() %>'); background-size: cover;">
 				<div class="content">
 					<h2 class="title"></h2>
+					<!-- 요기아래 버튼들은 제트인덱스로 훗날 만들것임.. -->
 					<span class="btn">관심도서</span> <span class="loan">대출하기</span>
 				</div>
 			</div>
+			</a>
+			<a href='bookInfoDetail.bk?isbn=<%=dtoArray.get(i).getIsbn()%>'>
 			<div class="bookinfo">
 				<p>도서명  <%= dtoArray.get(i).getBook_title()%></p>
 				<p>저자  <%=dtoArray.get(i).getAuthor()%></p>
 				<p>출판사  <%=dtoArray.get(i).getPublisher() %></p>
 			</div>
+			</a>
 		</div>
 
 		<%} %> 
