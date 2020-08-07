@@ -19,6 +19,17 @@
 	<link rel="stylesheet" type="text/css" href="css/board_base.css">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	
+	<style>
+		.commentCount{
+			display: inline;
+		    margin: 0 0 0 20px;
+		    font-weight: 300;
+		    font-size: 13px;
+		    opacity: 75%;
+		}
+	</style>
+	
+	
 </head>
 <body>
 	
@@ -214,7 +225,16 @@
 		  			<%=dtoArray.get(i).getBoard_no()%>
 		  			</li>
 		  			<li>
-		  			<a href='boardReadPage.bo?board_num=<%=dtoArray.get(i).getBoard_no() %>'><%=dtoArray.get(i).getBoard_title() %></a>
+		  			<a href='boardReadPage.bo?board_num=<%=dtoArray.get(i).getBoard_no() %>'>
+		  			<%=dtoArray.get(i).getBoard_title() %>
+		  			<% 
+		  			int commentCount = dao.CommnetCount(dtoArray.get(i).getBoard_no());
+		  			if( commentCount > 0){
+		  				out.print("<p class='commentCount'> ["+commentCount+"] </p>");
+		  			}
+		  			out.print("</a>");
+		  			//1
+		  			%>
 		  			</li>
 		  			<li>
 		  			<%=dtoArray.get(i).getMember_id() %>

@@ -39,10 +39,6 @@ public class DAO {
 		return instance;
 	}
 	
-
-	
-	
-	
 	public DAO(){	
 		try {
 			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml ¿¬°á
@@ -190,6 +186,17 @@ public class DAO {
 		sqlsession.close();
 		
 		return list;
+	}
+	
+	//°Ô½Ã¹°´ç ´ñ±Û °¹¼ö
+	public int CommnetCount(int board_no){
+		getinstance();
+		SqlSession sqlsession = sqlfactory.openSession();
+		int count = sqlsession.selectOne("boardCommentCount",board_no);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return count;
 	}
 
 

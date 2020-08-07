@@ -97,6 +97,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE joalib.board_comment set bc_text = #{bc_text} where member_id = #{member_id} and bc_date = #{bc_date};
 	</update>
 	
+	<select id="boardCommentCount" parameterType="int" resultType="int">
+		select count(*) from joalib.board_comment where board_no = #{board_no};
+	</select>
+	
 	
 	
 	
