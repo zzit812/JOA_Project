@@ -150,7 +150,7 @@ public class DAO {
 		return i;
 	}
 	
-	
+	//자유게시판 댓글 리스트
 	public List<Board_CommentDTO> boardCommentList(int board_no) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		List<Board_CommentDTO> list  = sqlsession.selectList("boardComment_list", board_no) ;
@@ -160,6 +160,29 @@ public class DAO {
 		return list;
 	}
 	
+	//자유게시판 댓글 삭제
+	public int boardCommentDel(Board_CommentDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.delete("boardComment_delete", dto);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}
+	
+	//자유게시판 댓글 수정
+	public int boardCommentUpdate(Board_CommentDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.update("boardComment_update", dto);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}
+	
+	
+	
+	//내가 쓴 글 보기
 	public List<BoardDTO> myBoardView (String member_id) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		List<BoardDTO> list = sqlsession.selectList("myBoardView",member_id);
