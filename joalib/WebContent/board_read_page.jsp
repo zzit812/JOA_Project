@@ -172,6 +172,29 @@
 		    background-color: #dcdcdc4f;
 		    min-height: 35px;
 		}
+		.changeText{
+			border: 1px solid #00000030;
+			clear: both;
+		    padding: 5px 10px;
+		    font-size: 13px;
+		    font-weight: 300;
+		    margin: 10px 0;
+		    width: 79%;
+		    min-height: 35px;
+		}
+		
+		input[name=changeBtn]{
+			min-height: 35px;
+		    width: 10%;
+		    margin: auto 20px;
+		    border: 0px;
+		    border-radius: 15px;
+		    box-shadow: 5px 5px 8px rgba(0,0,0,15%);
+		    background-color: #c5c4c426;
+		    font-size: 16px;
+		    padding: 5px 0;
+		    font-weight: 500;
+		}
 		
 		
 	</style>
@@ -274,7 +297,6 @@
 			    <div id="cont_1_size">
 	
 				<%BoardDTO article = (BoardDTO)request.getAttribute("article");
-					System.out.println(article);
 				%>
 					
 					<div id="write_box">   
@@ -305,12 +327,37 @@
 							%>
 									<div class="boardComments">
 										<div class="member_character" ><img  src="img/character/character1.png"></div> <!-- 이미지 -->
-										<h5><%= list.get(i).getMember_id() %></h5><h5><%= list.get(i).getBc_date() %></h5><a>삭제</a><a>수정</a>
+										<h5><%= list.get(i).getMember_id() %></h5><h5><%= list.get(i).getBc_date() %></h5>
+										<% if(list.get(i).getMember_id().equals(member_id)){ %>
+											<a href="commentDelete.bo?board_no=<%= list.get(i).getBoard_no() %>&member_id=<%= list.get(i).getMember_id() %>&bc_date=<%= list.get(i).getBc_date()%>">삭제</a>
+											<a href="javacsript:void(0);" onclick="">수정</a>
+										<% } %>
+										
 										<p><%= list.get(i).getBc_text() %></p>
+										<input type='text' class="changeText" name="changeText<%= i %>" value="<%= list.get(i).getBc_text() %>" />
+										<input type='button' name='changeBtn' value="수정" class='changeBtn'  onClick="location.href='commentUpdate.bo?board_no=<%= list.get(i).getBoard_no() %>&member_id=<%= list.get(i).getMember_id() %>&bc_date=<%= list.get(i).getBc_date()%>&bc_text='+ document.querySelector('input[name=changeText<%= i %>]').value; " />
 									</div>
 							<%} 
 							}
 							%>
+							<script type="text/javascript">
+								$(function(){		
+									$(".changeText").hide();
+									$("input[name=changeBtn]").hide();
+									
+
+									//a태그 수정 눌렀을때
+									$('.boardComments > a:nth-child(5)').on('click', function(){
+										$(this).parent().children('p').remove();										
+										$(this).parent().children(".changeText").show();
+										$(this).parent().children("input[name=changeBtn]").show();
+										//$(this).parent().append(
+										//		"<input type='button' name='changeBtn' class='changeBtn' value='수정' />");
+										$(this).hide();
+										
+									})								
+								})
+							</script>
 						</div>
 					</div>					
 					         
@@ -345,8 +392,7 @@
     
        		function removeCheck() {
         	 	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
-        	 		location.href='boardDelete.bo?board_num=<%=article.getBoard_no()%>'
-        	 	
+        	 		location.href='boardDelete.bo?board_num=<%=article.getBoard_no()%>'        	 	
         	 	}else{  
         	    	 return false;
         	 	}

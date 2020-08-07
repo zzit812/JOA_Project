@@ -1,6 +1,7 @@
 package com.joalib.DTO;
 
 public class ActionForward {
+	
 	private boolean isRedirect=false;
 	private String path=null;
 	

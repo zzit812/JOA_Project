@@ -89,6 +89,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from joalib.bookinfo where isbn= #{isbn};
 	</select>
 	
+	<delete id="boardComment_delete" parameterType="com.joalib.DTO.BoardDTO">
+		delete from joalib.board_comment where member_id = #{member_id} and bc_date = #{bc_date};
+	</delete>
+	
+	<update id="boardComment_update" parameterType="com.joalib.DTO.BoardDTO">
+		UPDATE joalib.board_comment set bc_text = #{bc_text} where member_id = #{member_id} and bc_date = #{bc_date};
+	</update>
+	
+	<select id="boardCommentCount" parameterType="int" resultType="int">
+		select count(*) from joalib.board_comment where board_no = #{board_no};
+	</select>
+	
+	<insert id="boardCommnetPointCharge" parameterType="String">
+		insert into joalib.point values (#{member_id}, 30, now(), '댓글(자유게시판)', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)+30), '+');
+	</insert>
+	
+	
+	
 	
 		
 	</mapper>

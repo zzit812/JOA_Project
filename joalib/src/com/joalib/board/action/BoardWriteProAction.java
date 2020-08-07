@@ -60,8 +60,7 @@ public class BoardWriteProAction implements dbAction {
 		else{
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("boardPointCharge.po");
-			
+			forward.setPath("boardPointCharge.po");			
 		}
 		
 		return forward;

@@ -23,7 +23,7 @@ public class memberinfoDAO {
 	
 	public static memberinfoDAO getinstance() {
 		if (instance == null) {	// >DAO 객체 만든적 있어?
-			synchronized (DAO.class) {
+			synchronized (memberinfoDAO.class) {
 				instance = new memberinfoDAO();		}
 		}
 		return instance;

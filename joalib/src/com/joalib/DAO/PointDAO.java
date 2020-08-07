@@ -18,12 +18,12 @@ public class PointDAO {
 SqlSessionFactory sqlfactory;
 	
 	//싱글톤 패턴
-	private static memberinfoDAO instance;	
+	private static PointDAO instance;	
 	
-	public static memberinfoDAO getinstance() {
+	public static PointDAO getinstance() {
 		if (instance == null) {	// >DAO 객체 만든적 있어?
-			synchronized (DAO.class) {
-				instance = new memberinfoDAO();		}
+			synchronized (PointDAO.class) {
+				instance = new PointDAO();		}
 		}
 		return instance;
 	}	
@@ -57,26 +57,58 @@ SqlSessionFactory sqlfactory;
 		return dto;
 	}
 	//포인트 충전(임시)
-		public int PointChargeTemp(String member_id) {
-			
-			SqlSession sqlsession = sqlfactory.openSession();
-			int i = sqlsession.insert("pointChargeTemp",member_id);
-			sqlsession.commit();
-			sqlsession.close();
-			
-			return i;
-		} 
+	public int PointChargeTemp(String member_id) {
+		
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.insert("pointChargeTemp",member_id);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	} 
 		
 	//포인트 충전(자유게시판 포인트)
-			public int boardPointCharge(String member_id) {				
-				SqlSession sqlsession = sqlfactory.openSession();
-				int i = sqlsession.insert("boardPointCharge",member_id);
-				sqlsession.commit();
-				sqlsession.close();
-				
-				return i;
-			} 
+	public int boardPointCharge(String member_id) {				
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.insert("boardPointCharge",member_id);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	} 
 	
+	//포인트 충전(자유게시판 댓글 포인트)
+	public int boardCommentPointCharge(String member_id) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.insert("boardCommnetPointCharge",member_id);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	
 	//totalPoint를 가져와서 포인트 충전해주는 구문
 	////insert into joalib.point values ('test5', 1000, now(), 'test2', ((select total_point from joalib.point as temp where member_id = 'test5'  order by update_date desc limit 1)+1000));

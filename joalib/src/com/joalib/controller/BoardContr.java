@@ -10,18 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.joalib.DTO.ActionForward;
 import com.joalib.board.action.dbAction;
 
-import com.joalib.board.action.BoardWriteProAction;
-import com.joalib.board.action.CommentWriteAction;
-import com.joalib.board.action.BoardDeleteAction;
-import com.joalib.board.action.BoardDetailAction;
-import com.joalib.board.action.BoardModifyFormAction;
-import com.joalib.board.action.BoardModifyProAction;
+import com.joalib.board.action.*;
 
 
 
 @WebServlet("*.bo") 
-public class BoardContr extends javax.servlet.http.HttpServlet
-{
+public class BoardContr extends javax.servlet.http.HttpServlet{
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -70,38 +64,37 @@ public class BoardContr extends javax.servlet.http.HttpServlet
 		}else if(command.equals("/commentWrite.bo")){
 			action = new CommentWriteAction();
 			try{
-				forward=action.execute(request, response);
+				forward=action.execute(request, response);				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/commentDelete.bo")){
+			action = new CommentDelAction();
+			try{
+				forward=action.execute(request, response);				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/commentUpdate.bo")) {
+			action = new CommentUpdateAction();
+			try{
+				forward=action.execute(request, response);				
 			}catch(Exception e){
 				e.printStackTrace();
 			}
 		}
 		
-
 		if(forward != null){		
 			if(forward.isRedirect()){
 				response.sendRedirect(forward.getPath());	//반환하는 forward값이 있으면, 'forward.getPath()'으로 이동한다.
 			}else{
-				RequestDispatcher dispatcher=
-						request.getRequestDispatcher(forward.getPath());
-				dispatcher.forward(request, response);
-			}
-			
-		}	
-		
-		
-		if(forward != null){		
-			if(forward.isRedirect()){
-				response.sendRedirect(forward.getPath());	//반환하는 forward값이 있으면, 'forward.getPath()'으로 이동한다.
-			}else{
-				RequestDispatcher dispatcher=
-						request.getRequestDispatcher(forward.getPath());
+				RequestDispatcher dispatcher= request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
 			
 		}
 
-		
-		
+//doProcess END
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
