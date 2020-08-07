@@ -36,9 +36,17 @@
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
-					<li>HOME</li> |
-					<li>로그아웃</li> |
-					<li>포인트충전</li>
+					<li><a>HOME</a></li> | <li>
+					<%
+						String member_id = null;
+									member_id = (String)session.getAttribute("member_id");
+									if ( member_id != null) {
+										out.print("<a href='memberLogout.mem'>로그아웃</a>");
+									}else{
+										out.print("<a href='userJoinRule.html'>회원가입</a></li> | <li><a href='userLogin.html'>로그인</a>");
+									}
+					%>
+					</li> | <li><a>포인트충전</a></li>
 				</ul>
 			</nav>
 			<div class="clearF"></div>
@@ -135,7 +143,10 @@
 				<!-- 검색바에 맞춰서 정렬할 것임 -->
 			</div>
 		</div>
-
+		<div style="text-align: center;">
+		<a href="BookInfoAdd.jsp">임시,관리자 도서추가</a>
+		</div>
+		<br/>
 		<main class="page-content"> <%
 		BookInfoDAO dao = new BookInfoDAO();
 							int sitePage =1 ;	//현재페이지 //초기 페이지 = 1
@@ -242,10 +253,14 @@
 
 		<%} %> 
 		
+		
+		
+		
+		
 	</section>
-	
+	<!-- 다음페이지 이전페이지 아직 기능이 없음 추가해야대~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<div class="pagination">
-			<a href="#" class="prev"><i class="fa fa-angle-double-left"></i>
+			<a href="" class="prev"><i class="fa fa-angle-double-left"></i>
 				Prev</a>
 			<%		
 			  	for (int iCount = startPage; iCount <= endPage; iCount++) {

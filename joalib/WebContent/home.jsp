@@ -273,9 +273,9 @@ https://www.hancomm.co.kr/index.do
 	
 				<ul id="top_menu">			
 					
-					<li><div class="menuHoverEvent"></div><a href="book_search.html">자료검색</a>
+					<li><div class="menuHoverEvent"></div><a href="book_search.jsp">자료검색</a>
 						<ul class ="sub_menu">
-							<li><a href="book_search.html">도서 검색</a></li>
+							<li><a href="book_search.jsp">도서 검색</a></li>
 							<li><a href="">분야별 도서 조회</a></li>
 						</ul>
 					</li>

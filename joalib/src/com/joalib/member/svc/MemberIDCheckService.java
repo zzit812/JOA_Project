@@ -2,8 +2,9 @@ package com.joalib.member.svc;
 
 import java.util.List;
 
-import com.joalib.DAO.memberinfoDAO;
 import com.joalib.DTO.memberinfoDTO;
+
+import com.joalib.DAO.memberinfoDAO;
 
 public class MemberIDCheckService {
 	

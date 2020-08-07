@@ -28,27 +28,33 @@
 						id="isbn_plus" required="required" /></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="author">author</label></td>
+					<td class="td_left"><label for="category">카테고리명</label></td>
+					<td class="td_right"><input type="text" name="category"
+						id="category" required="required" /></td>
+				</tr>
+				<tr>
+					<td class="td_left"><label for="author">저자</label></td>
 					<td class="td_right"><input name="author" type="text"
 						id="author" required="required" /></td>
 				</tr>
+				
 				<tr>
-					<td class="td_left"><label for="publisher">publisher</label></td>
+					<td class="td_left"><label for="publisher">출판사</label></td>
 					<td class="td_right"><input name="publisher" type="text"
 						id="publisher" required="required" /></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="book_title">book_title</label></td>
+					<td class="td_left"><label for="book_title">제목</label></td>
 					<td class="td_right"><input name="book_title" type="text"
 						id="book_title" required="required" /></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="pub_date">pub_date</label></td>
+					<td class="td_left"><label for="pub_date">출판일</label></td>
 					<td class="td_right"><input name="pub_date" type="text"
 						id="pub_date" required="required" /></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="book_story">book_story</label></td>
+					<td class="td_left"><label for="book_story">줄거리</label></td>
 					<td><textarea id="book_story" name="book_story"
 					cols="40" rows="12" required="required"></textarea></td>
 				</tr>

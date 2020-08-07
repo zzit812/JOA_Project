@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.joalib.DAO.DAO;
 import com.joalib.DTO.Board_CommentDTO;
 import com.joalib.DTO.memberinfoDTO;
 

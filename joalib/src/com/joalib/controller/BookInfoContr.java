@@ -43,13 +43,10 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-		 
 				
 				
-				System.out.println(forward.getPath());
-				
-
-				System.out.println((BookInfoDTO)request.getAttribute("article"));
+				//System.out.println(forward.getPath());
+				//System.out.println((BookInfoDTO)request.getAttribute("article"));
 				
 				
 		 if(forward != null) {

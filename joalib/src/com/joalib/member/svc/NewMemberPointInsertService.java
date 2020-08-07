@@ -1,7 +1,6 @@
 package com.joalib.member.svc;
 
 import com.joalib.DAO.memberinfoDAO;
-
 public class NewMemberPointInsertService {
 	
 	public boolean newMemberPoint(String member_id) {

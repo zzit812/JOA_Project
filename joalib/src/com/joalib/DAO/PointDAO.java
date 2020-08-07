@@ -11,6 +11,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.joalib.DTO.PointDTO;
 
+import com.joalib.DAO.memberinfoDAO;
+
 public class PointDAO {
 	
 SqlSessionFactory sqlfactory;

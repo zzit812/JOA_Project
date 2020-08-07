@@ -3,7 +3,17 @@ package com.joalib.DTO;
 public class BookInfoDTO {
 	
 	String isbn,author,publisher,book_title,
-	pub_date,isbn_pluscode,book_img,book_story;
+	pub_date,isbn_pluscode,book_img,book_story,category;
+
+
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 	public String getIsbn() {
 		return isbn;

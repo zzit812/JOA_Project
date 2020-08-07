@@ -75,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="book_info_add" parameterType="com.joalib.DTO.BookInfoDTO">
-		insert into joalib.bookinfo values(#{isbn},#{book_title},#{author},#{publisher},#{pub_date},#{isbn_pluscode},#{book_img},#{book_story});
+		insert into joalib.bookinfo values(#{isbn},#{author},#{publisher},#{book_title},#{pub_date},#{isbn_pluscode},#{book_img},#{book_story},#{categoty});
 	</insert>
 	
 	<select id="book_search_count" resultType="int">
