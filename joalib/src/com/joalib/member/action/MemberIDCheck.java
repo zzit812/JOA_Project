@@ -26,11 +26,11 @@ public class MemberIDCheck implements Action{
 		
 				
 		MemberIDCheckService svc = new MemberIDCheckService();
-		List<memberinfoDTO> memberinfo = svc.IDCheck(checkID);
+		memberinfoDTO memberinfo = svc.IDCheck(checkID);
 		
-		if(memberinfo.size() > 0) {
-			String member_pw = memberinfo.get(0).getMember_pw();
-			String member_name = memberinfo.get(0).getMember_name();
+		if(memberinfo != null) {
+			String member_pw = memberinfo.getMember_pw();
+			String member_name = memberinfo.getMember_name();
 			
 			if(checkPW.equals(member_pw) && member_pw != null) {
 				//있는 아이디 && 동일한 비밀번호

@@ -14,7 +14,6 @@ public class BoardModifyProService {
 		DAO dao = new DAO();
 		DAO.getinstance();
 		int i = dao.board_update(article);
-		System.out.println("svc:"+i);
 		if(i > 0 ) {
 			suc = true;
 		}

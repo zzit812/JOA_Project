@@ -23,7 +23,7 @@ public class CommentUpdateAction implements dbAction{
 		String bc_date = request.getParameter("bc_date");
 		String bc_text = request.getParameter("bc_text");
 		
-		System.out.println(board_no+", "+member_id+", "+bc_date+", "+bc_text);
+		//System.out.println(board_no+", "+member_id+", "+bc_date+", "+bc_text);
 		
 		dto.setMember_id(member_id);
 		dto.setBc_date(bc_date);
@@ -37,9 +37,7 @@ public class CommentUpdateAction implements dbAction{
 			forward.setPath("boardReadPage.bo?board_num="+board_no); 
 		}else {
 			System.out.println("½ÇÆÐ");
-		}
-		
-		
+		}	
 		
 		return forward;
 	}

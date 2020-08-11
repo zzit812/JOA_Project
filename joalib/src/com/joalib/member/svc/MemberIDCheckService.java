@@ -8,10 +8,10 @@ import com.joalib.DAO.memberinfoDAO;
 
 public class MemberIDCheckService {
 	
-	public List<memberinfoDTO> IDCheck (String checkID) throws Exception {
+	public memberinfoDTO IDCheck (String checkID) throws Exception {
 		
 		memberinfoDAO dao = new memberinfoDAO();
-		List<memberinfoDTO> memberinfo = dao.memberIDCheck(checkID);
+		memberinfoDTO memberinfo = dao.memberIDCheck(checkID);
 		
 		return memberinfo;
 	}

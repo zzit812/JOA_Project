@@ -34,7 +34,6 @@ public class BoardModifyProAction implements dbAction {
 		//svc연결
 		BoardModifyProService boardModifyProService = new BoardModifyProService();		
 		boolean s = boardModifyProService.modifyArticle(article);
-		System.out.println("act:"+s);
 		if(s) {
 			//성공
 			forward = new ActionForward();

@@ -52,6 +52,12 @@ public class MemberinfoContr extends javax.servlet.http.HttpServlet{
 				forward=action.execute(request, response);
 			}catch(Exception e){
 				e.printStackTrace(); }
+		}else if (command.equals("/memberDelete.mem")) {
+			action = new MemberDeleteAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
 		}
 		
 	

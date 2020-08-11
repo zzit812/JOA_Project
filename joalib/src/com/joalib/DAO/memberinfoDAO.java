@@ -43,7 +43,6 @@ public class memberinfoDAO {
 	public int memberInsert (memberinfoDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();		
 		int i = sqlsession.insert("memberInsert", dto);
-		System.out.println("a123456789");
 		sqlsession.commit();
 		sqlsession.close();
 		
@@ -51,9 +50,9 @@ public class memberinfoDAO {
 	}
 	
 	//id 체크하고 pw,name값은 받아옴
-	public List<memberinfoDTO> memberIDCheck(String checkID) {
+	public memberinfoDTO memberIDCheck(String checkID) {
 		SqlSession sqlsession = sqlfactory.openSession();		
-		List<memberinfoDTO> memberinfo = sqlsession.selectList("memberLoginCheck", checkID);
+		memberinfoDTO memberinfo = sqlsession.selectOne("memberLoginCheck", checkID);
 		sqlsession.commit();
 		sqlsession.close();
 		
@@ -64,6 +63,23 @@ public class memberinfoDAO {
 	public int pointInsert(String member_id) {
 		SqlSession sqlsession = sqlfactory.openSession();		
 		int i = sqlsession.insert("newMemberPointInsert", member_id);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}
+	//회원탈퇴
+	public int memberDel (String member_id) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		//회원 정보가 남겨져 있는 모든것들을 지우세요
+		sqlsession.delete("memberDeleteBoardcomment", member_id);
+		//System.out.println("댓글 완료");
+		sqlsession.delete("memberDeleteBoard", member_id);
+		//System.out.println("자유게시판 완료");
+		sqlsession.delete("memberDeletePoint", member_id);
+		//System.out.println("포인트 완료");
+		int i = sqlsession.delete("memberDelete", member_id);
+		//System.out.println("dao: "+i);
 		sqlsession.commit();
 		sqlsession.close();
 		

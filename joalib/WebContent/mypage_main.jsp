@@ -134,7 +134,7 @@
 					<li><a href="">나의 서재</a></li>
 					<li><a href="">서비스 이용 내역</a></li>
 					<li><a href="">내가 쓴 글</a></li>
-					<li><a href="">정보수정</a></li>
+					<li><a href="mypage_memberDelete.jsp">정보수정</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -219,7 +219,7 @@
 								}
 								out.print("<tr><td>");
 								out.print(pulma+"</td><td>");
-								out.print(list.get(i).getPoint()+"</td><td>");
+								out.print(list.get(i).getPoint()+"</td><td>");    
 								out.print(list.get(i).getPoint_reason()+"</td><td>");
 								out.print(list.get(i).getUpdate_date().substring(0,10)+"</td></tr>");
 							}

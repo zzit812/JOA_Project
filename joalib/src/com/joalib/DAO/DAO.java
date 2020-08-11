@@ -94,7 +94,6 @@ public class DAO {
 	public void hitUp(int board_no) {		//조회수 증가
 		SqlSession sqlsession = sqlfactory.openSession();
 		sqlsession.update("board_hitUp", board_no);
-		System.out.println(" *SQL실행완료* ");
 		sqlsession.commit();
 		sqlsession.close();
 		
