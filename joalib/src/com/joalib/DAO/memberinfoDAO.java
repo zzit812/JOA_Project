@@ -67,6 +67,23 @@ public class memberinfoDAO {
 		
 		return i;
 	}
+	//회원탈퇴
+	public int memberDel (String member_id) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		//회원 정보가 남겨져 있는 모든것들을 지우세요
+		sqlsession.delete("memberDeleteBoardcomment", member_id);
+		System.out.println("댓글 완료");
+		sqlsession.delete("memberDeleteBoard", member_id);
+		System.out.println("자유게시판 완료");
+		sqlsession.delete("memberDeletePoint", member_id);
+		System.out.println("포인트 완료");
+		int i = sqlsession.delete("memberDelete", member_id);
+		System.out.println("dao: "+i);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}
 	
 	
 	

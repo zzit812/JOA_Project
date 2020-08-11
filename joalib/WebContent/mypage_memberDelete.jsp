@@ -22,18 +22,7 @@
 		/*background-color: #e8e8e8; */
 		min-height: 800px;
 	}
-	
-	#popup{
-		background-color: #00BCD4;
-	    width: 400px;
-	    height: 200px;
-	    position: absolute;
-	    z-index: 10;
-	    top: 50%;
-	    left: 50%;	    
-	}
-	
-	
+
 
 </style>
 </head>
@@ -130,30 +119,47 @@
 		</div>
 
 		<div id="cont_size">
-			<form action="" name="pwCheck" method="">
+			<form action="" name="pwCheck" method="post">
 			<h2>비밀번호 확인</h2>
-			<input type="password" /><input type="button" value="확인" onClick="<%
-				memberinfoDAO dao = new memberinfoDAO();
-				memberinfoDTO member = dao.memberIDCheck(member_id);
-					if(member.getMember_pw().equals(member_id)){}
-			%>"/>
 			
-			<div id="popup" >
-				<h2>정말로 탈퇴하시겠습니까?</h2>
-				<input type="submit" neme="delYes" value="Y" /> <input type="button" neme="delNo" value="N" />
-			</div>
+			<input type="password" name="pwCheck" onkeypress="enter_test();" /><input type="button" value="확인" name="pwCheckBtn"  onClick="
+				<%
+					memberinfoDAO dao = new memberinfoDAO();
+					memberinfoDTO member = dao.memberIDCheck(member_id);
+					String member_pw = member.getMember_pw();
+				%>
+				if(document.querySelector('input[name=pwCheck]').value == '<%= member_pw %>'){
+					samePW();
+				}else{
+					alert('잘못된 비밀번호입니다. 다시 입력해주세요.'); 
+					document.querySelector('input[name=pwCheck]').value = ''; 
+					document.querySelector('input[name=pwCheck]').focus();
+				}
+			"/>
+			<script>
+			//enter 눌렀을때 반응
+			    function enter_test() {
+			        if ( window.event.keyCode == 13 ) {
+			            var checkBtn =document.querySelector('input[name=pwCheckBtn]'); // 변수에 엘리먼트 저장
+			            checkBtn.click();			            
+			        }
+			    }			
+				function samePW(){
+			    	var result = confirm("정말로 탈퇴하시겠습니까?\n*포인트는 모두 소멸됩니다*");	//예-t 아니오-f
+			    	if(result){
+			    		//탈퇴하기
+			    		alert('탈퇴되었습니다. 다음 기회에 봐요!');
+			    		location.replace('memberDelete.mem');
+			    	}else{
+			    		//탈퇴 안하기
+			    		location.href = "mypage_main.jsp";
+			    	}
+				}			
+			</script>
 			</form>
 			
 		</div>
-		</section>
-		<script>
-			$(function(){
-				$('#popup').hide();
-			})
-		</script>
-
-
-		
+		</section>		
 
 	 <footer>
 		<div id="foot_size">

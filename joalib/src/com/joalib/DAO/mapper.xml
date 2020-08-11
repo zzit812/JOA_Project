@@ -14,6 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select member_pw,member_name from joalib.memberinfo where member_id = #{checkID};
 	</select>
 	
+	
+	
 	<insert id="newMemberPointInsert" parameterType="String" >
 		insert into joalib.point values (#{member_id}, 0 , now() ,'회원가입', 0, '*');
 	</insert>
@@ -104,6 +106,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="boardCommnetPointCharge" parameterType="String">
 		insert into joalib.point values (#{member_id}, 30, now(), '댓글(자유게시판)', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)+30), '+');
 	</insert>
+	
+	
+	<delete id="memberDelete" parameterType="String">
+		delete from joalib.memberinfo where member_id = #{member_id};
+	</delete>
+	<delete id="memberDeletePoint" parameterType="String">
+		delete from joalib.point where member_id = #{member_id};
+	</delete>
+	<delete id="memberDeleteBoard" parameterType="String">
+		delete from joalib.board where member_id = #{member_id};
+	</delete>
+	<delete id="memberDeleteBoardcomment" parameterType="String">
+		delete from joalib.board_comment where member_id = #{member_id};
+	</delete>
 	
 	
 	
