@@ -9,8 +9,9 @@ import org.apache.catalina.Session;
 
 import com.joalib.DTO.ActionForward;
 import com.joalib.DTO.FavoriteDTO;
-import com.joalib.bookinfo.action.Action;
+
 import com.joalib.favorite.svc.BookFavoriteServise;
+import com.joalib.loan.action.Action;
 
 public class BookFavoriteAction implements Action  {
 
