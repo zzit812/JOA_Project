@@ -38,7 +38,7 @@ public class BookInfoAddAction implements Action {
 		bookBean.setBook_title(multi.getParameter("book_title"));
 		bookBean.setPub_date(multi.getParameter("pub_date"));
 		bookBean.setBook_story(multi.getParameter("book_story"));
-		bookBean.setCategoty(multi.getParameter("categoty"));
+		bookBean.setCategory(multi.getParameter("category"));
 		
 		bookBean.setBook_img(
 		multi.getOriginalFileName((String)multi.getFileNames().nextElement()));

@@ -108,13 +108,13 @@
 	<section>
 		<div id="book_box">
 			<div id="img_box">
-				<span id="category"><%=bookinfo.getCategory() %></span>
+				<span id="category">  </span>
 				<img id="book_img" src="img/book/<%=bookinfo.getBook_img()%>">
 				<div id="button">
 				
 				<form action="">
-					<input type="button" id="favorite_add" value="관심도서" onclick="Login()">
-					<input type="button" id="loan" value="대출하기" onclick="Login()">
+					<input type="button" id="favorite_add" value="관심도서" onclick="location.href='bookFavoriteAction.fl?isbn=<%=bookinfo.getIsbn()%>'">
+					<input type="button" id="loan" value="대출하기" onclick="location.href='bookLoanAction.fl?isbn=<%=bookinfo.getIsbn()%>'">
 
 				</form>
 
@@ -131,6 +131,7 @@
 				<div><b>상세정보</b></div>
 				<div>
 					<%=bookinfo.getBook_story()%>
+			
 				</div>
 				
 				
@@ -139,23 +140,6 @@
 		
 	</section>
 	
-	 <script type="text/javascript">
-	function Login(){
-		<%
-				if ( member_id != null) {
-					//로그인이 되어있음
-					out.print("location.href= 'bookInfoDetail.bk");
-				}else{
-					//로그인이 안됨
-					out.print("alert('로그인 후 이용가능합니다.'); location.href='userLogin.html'");
-				}
-		%>
-		 
-				
-			}
-	</script>
-
-			
 			
 	<footer>
 		<div id="footer_size">

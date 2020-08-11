@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <title></title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/aaa_booksearch.css">
+<link rel="stylesheet" type="text/css" href="css/booksearch.css">
 <link rel="stylesheet" type="text/css" href="css/lib_top.css">
 <<link rel="stylesheet" type="text/css" href="css/search.css">
 <link
@@ -238,7 +238,8 @@
 				<div class="content">
 					<h2 class="title"></h2>
 					<!-- 요기아래 버튼들은 제트인덱스로 훗날 만들것임.. -->
-					<span class="btn">관심도서</span> <span class="loan">대출하기</span>
+					<span class="favorite">관심도서</span>
+					<span class="loan">대출하기</span>
 				</div>
 			</div>
 			</a>

@@ -8,15 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.joalib.DTO.ActionForward;
-import com.joalib.DTO.BookInfoDTO;
-import com.joalib.bookinfo.action.Action;
-import com.joalib.bookinfo.action.BookInfoAddAction;
+import com.joalib.loan.action.Action;
+import com.joalib.loan.action.BookLoanAction;
 import com.joalib.bookinfo.action.BookInfoDetailAction;
 import com.joalib.favorite.action.BookFavoriteAction;
 
 
-@WebServlet("*.bk") 
-public class BookInfoContr extends javax.servlet.http.HttpServlet{
+@WebServlet("*.fl") 
+public class BookFavoriteLoanContr extends javax.servlet.http.HttpServlet{
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -28,24 +27,26 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 		ActionForward forward=null;
 		Action action=null;
 
-		 if(command.equals("/bookInfoAdd.bk")){
-			 //화긴
-			 action = new BookInfoAddAction();
+		 if(command.equals("/bookFavoriteAction.fl")){
+			  //화긴
+			action = (Action) new BookFavoriteAction();
 				try{
 					forward=action.execute(request, response);
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-		  }else if(command.equals("/bookInfoDetail.bk")){
-				 //화긴
-			action = new BookInfoDetailAction();
+		  }else if(command.equals("/bookLoanAction.fl")){
+
+			action = new BookLoanAction();
 				try{
 					forward=action.execute(request, response);
 				}catch(Exception e){
 					e.printStackTrace();
 				}
 		  }
-
+		
+			
+				
 				
 		 if(forward != null) {
 				if(forward.isRedirect()) {
