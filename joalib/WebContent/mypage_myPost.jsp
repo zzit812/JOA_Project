@@ -283,7 +283,7 @@
 									+dto.getBoard_no()+"</td><td><a href='boardReadPage.bo?board_num="
 									+dto.getBoard_no()+"'>"
 									+dto.getBoard_title()+"</a></td><td>"
-									+dto.getBoard_date()+"</td><td>"
+									+dto.getBoard_date().substring(0, 10)+"</td><td>"
 									+dto.getBoard_hit()+"</td></tr>");  								
 								}
 								out.print("</table>"); 

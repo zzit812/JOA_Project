@@ -14,6 +14,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select member_pw,member_name from joalib.memberinfo where member_id = #{checkID};
 	</select>
 	
+	<select id="memberinfoSelectAll" parameterType="String" resultType="com.joalib.DTO.memberinfoDTO">
+		select * from joalib.memberinfo where member_id = #{member_id}
+	</select>
+	
+	<update id="memberinfoChange" parameterType="com.joalib.DTO.memberinfoDTO">
+		update joalib.memberinfo set member_name = #{member_name}, member_tel = #{member_tel}, member_birth = #{member_birth}, member_email = #{member_email}, member_adress = #{member_adress} where member_id = #{member_id};
+	</update>
+	
 	
 	
 	<insert id="newMemberPointInsert" parameterType="String" >
@@ -41,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>	
 	
 	<insert id="board_add" parameterType ="com.joalib.DTO.BoardDTO" >
-		INSERT INTO joalib.board(board_title, board_text, board_date, member_id, board_hit) VALUES ( #{board_title}, #{board_text}, #{board_date},#{member_id},0);
+		INSERT INTO joalib.board(board_title, board_text, board_date, member_id, board_hit) VALUES ( #{board_title}, #{board_text}, now() ,#{member_id},0);
 	</insert>	
 	
 	<select id="board_all" resultType="com.joalib.DTO.BoardDTO">

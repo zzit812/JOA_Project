@@ -131,12 +131,13 @@
 				if(document.querySelector('input[name=pwCheck]').value == '<%= member_pw %>'){
 					samePW();
 				}else{
+				
 					alert('잘못된 비밀번호입니다. 다시 입력해주세요.'); 
 					document.querySelector('input[name=pwCheck]').value = ''; 
 					document.querySelector('input[name=pwCheck]').focus();
 				}
 			"/>
-			<script>
+			<script type="text/javascript">
 			//enter 눌렀을때 반응
 			    function enter_test() {
 			        if ( window.event.keyCode == 13 ) {
@@ -152,7 +153,7 @@
 			    		location.replace('memberDelete.mem');
 			    	}else{
 			    		//탈퇴 안하기
-			    		location.href = "mypage_main.jsp";
+			    		window.location.replace('mypage_memberinfoChange.jsp');
 			    	}
 				}			
 			</script>

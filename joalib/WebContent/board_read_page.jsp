@@ -304,7 +304,7 @@
 					    <div id="memberinfo">
 							<div class="member_character" ><img  src="img/character/character1.png"></div>
 							<p><%out.print(article.getMember_id());%></p>
-							<p><%out.print(article.getBoard_date());%></p>  
+							<p><%out.print(article.getBoard_date().substring(0, 19));%></p>  
 						</div>							                  
 						<div id="board_text"><%out.print(article.getBoard_text());%></div>   
 						
@@ -328,7 +328,7 @@
 										<div class="member_character" ><img  src="img/character/character1.png"></div> <!-- 이미지 -->
 										<h5><%= list.get(i).getMember_id() %></h5><h5><%= list.get(i).getBc_date() %></h5>
 										<% if(list.get(i).getMember_id().equals(member_id)){ %>
-											<a href="commentDelete.bo?board_no=<%= list.get(i).getBoard_no() %>&member_id=<%= list.get(i).getMember_id() %>&bc_date=<%= list.get(i).getBc_date()%>">삭제</a>
+											<a href="commentDelete.bo?board_no=<%= list.get(i).getBoard_no() %>&member_id=<%= list.get(i).getMember_id() %>&bc_date=<%= list.get(i).getBc_date().substring(0, 19)%>">삭제</a>
 											<a href="javacsript:void(0);" onclick="">수정</a>
 										<% } %>
 										

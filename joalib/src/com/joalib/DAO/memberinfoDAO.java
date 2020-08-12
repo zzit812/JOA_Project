@@ -23,6 +23,7 @@ public class memberinfoDAO {
 	
 	public static memberinfoDAO getinstance() {
 		if (instance == null) {	// >DAO 객체 만든적 있어?
+			System.out.println("instance : null이다.");
 			synchronized (memberinfoDAO.class) {
 				instance = new memberinfoDAO();		}
 		}
@@ -73,13 +74,29 @@ public class memberinfoDAO {
 		SqlSession sqlsession = sqlfactory.openSession();
 		//회원 정보가 남겨져 있는 모든것들을 지우세요
 		sqlsession.delete("memberDeleteBoardcomment", member_id);
-		//System.out.println("댓글 완료");
 		sqlsession.delete("memberDeleteBoard", member_id);
-		//System.out.println("자유게시판 완료");
 		sqlsession.delete("memberDeletePoint", member_id);
-		//System.out.println("포인트 완료");
 		int i = sqlsession.delete("memberDelete", member_id);
-		//System.out.println("dao: "+i);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}
+	
+	//회원 정보 셀렉
+	public memberinfoDTO memberinfoSelectAll(String member_id) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		memberinfoDTO dto = sqlsession.selectOne("memberinfoSelectAll", member_id);		
+		sqlsession.commit();
+		sqlsession.close();
+	
+		return dto;
+	}
+	
+	//회원정보 수정
+	public int memberinfoChange(memberinfoDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.update("memberinfoChange", dto);
 		sqlsession.commit();
 		sqlsession.close();
 		

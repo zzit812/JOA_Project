@@ -53,12 +53,25 @@
 
 <body>
 <%
+
 	String member_id = (String)session.getAttribute("member_id"); 
+	
+	String changedStr = "false";
+	if(request.getParameter("changed") != null){
+		changedStr = request.getParameter("changed");
+		if(changedStr.equals("true")){ %>
+			<script type="text/javascript">
+			alert("수정되었습니다.");
+			</script>
+		<%}
+	}
+	
+
 	if(member_id == null){%>
 		<script type="text/javascript">
 		alert("로그인 후 이용해주세요");
 		location.href="userLogin.html";
-		</script>	
+		</script>
 	<%}else{%>
 <header>
 
@@ -74,7 +87,7 @@
 			<div class="clearF"></div>
 			<!--탑메뉴-->
 			<nav id="topMenuBorder">
-				<ul id="top_menu">
+				<ul id="top_menu">  
 
 					<li><a href="book_search.html">자료검색</a>
 						<ul class ="sub_menu">
@@ -113,7 +126,7 @@
 							<li><a href="">서비스 이용 내역</a></li>
 							<li><a href="mypage_myPost.jsp">내가 쓴 글</a></li>
 							<li><a href="">포인트</a></li>
-							<li><a href="">정보 수정/ 탈퇴</a></li>
+							<li><a href="mypage_memberinfoChange.jsp">정보 수정/ 탈퇴</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -134,7 +147,7 @@
 					<li><a href="">나의 서재</a></li>
 					<li><a href="">서비스 이용 내역</a></li>
 					<li><a href="">내가 쓴 글</a></li>
-					<li><a href="mypage_memberDelete.jsp">정보수정</a></li>
+					<li><a href="mypage_memberinfoChange.jsp">정보수정</a></li>
 				</ul>
 			</nav>
 		</div>
