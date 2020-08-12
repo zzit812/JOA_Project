@@ -104,44 +104,48 @@
 			<div id="search_title">도서검색</div>
 			<div id="search_box">
 				<!--검색어-->
+				<form method="get" action="book_search.sc">
 				<div id="hbz-searchbox" action="/search" method="get">
-					<select id="select_search">
+					<select id="select_search" name="select_search">
 						<option name="all">전체</option>
 						<option>도서명</option>
 						<option>저자</option>
 						<option>출판사</option>
 					</select> <input type="text" id="hbz-input" name="q" placeholder="Search..." />
-					<input type="hidden" name="max-results" value="8" /> <input
-						id="hbz-submit" type="submit" value="Search" />
+					<input type="hidden" name="max-results" value="8" />
+					<input id="hbz-submit" type="submit" value="Search" />
 				</div>
-
-
 			</div>
 
 			<div id="category_box">
 				<!--카테고리검색-->
 				<ul>
-					<li><input type="checkbox" id="all"><label for="all">총류</label></li>
-					<li><input type="checkbox" id="religion"><label
-						for="religion">종교</label></li>
-					<li><input type="checkbox" id="history"><label
-						for="history">역사·지리·관광</label></li>
-					<li><input type="checkbox" id="social_science"><label
-						for="social_science">사회과학</label></li>
-					<li><input type="checkbox" id="philosophy"><label
-						for="philosophy">철학·심리학·윤리학</label></li>
-					<li><input type="checkbox" id="descriptive_science"><label
-						for="descriptive_science">기술과학</label></li>
-					<li><input type="checkbox" id="art"><label for="art">예술</label></li>
-					<li><input type="checkbox" id="pure_science"><label
+					<li><input type="checkbox" id="all" name="check" value="총류"><label for="all">총류</label></li>
+					<li><input type="checkbox" id="religion" name="check" value="종교">
+					<label for="religion">종교</label></li>
+					<li><input type="checkbox" id="history" name="check" value="역사·지리·관광">
+					<label for="history">역사·지리·관광</label></li>
+					<li><input type="checkbox" id="social_science" name="check" value="">
+					<label for="social_science">사회과학</label></li>
+					<li><input type="checkbox" id="philosophy" name="check" value="">
+					<label for="philosophy">철학·심리학·윤리학</label></li>
+					<li><input type="checkbox" id="descriptive_science" name="check" value="">
+					<label for="descriptive_science">기술과학</label></li>
+					<li><input type="checkbox" id="art" name="check" value=""><label for="art">예술</label></li>
+					<li><input type="checkbox" id="pure_science" name="check" value=""><label
 						for="pure_science">순수과학</label></li>
-					<li><input type="checkbox" id="literature"><label
+					<li><input type="checkbox" id="literature" name="check" value=""><label
 						for="literature">문학</label></li>
-					<li><input type="checkbox" id="language"><label
+					<li><input type="checkbox" id="language" name="check" value=""><label
 						for="language">어학</label></li>
 				</ul>
 				<!-- 검색바에 맞춰서 정렬할 것임 -->
 			</div>
+			</form>
+			
+			
+			
+			
 		</div>
 		<div style="text-align: center;">
 		<a href="BookInfoAdd.jsp">임시,관리자 도서추가</a>
