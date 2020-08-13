@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.joalib.DTO.ActionForward;
 import com.joalib.book.search.action.Action;
 import com.joalib.book.search.action.BookSearchAction;
+import com.joalib.book.search.action.BookSearchAllAction;
 
 
 
@@ -27,7 +28,13 @@ public class BookSearchContr extends javax.servlet.http.HttpServlet{
 		ActionForward forward=null;
 		Action action = null;
 		
-		if(command.equals("/book_search.sc")) {
+		if(command.equals("/book_search_all.sc")) {
+			action = new BookSearchAllAction(); //전체게시판 조회
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/book_search.sc")) {
 			//System.out.println("액션파트"); 확인
 			action = new BookSearchAction();
 			try{

@@ -135,7 +135,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from joalib.board_comment where member_id = #{member_id};
 	</delete>
 	<select id="book_search" resultType="com.joalib.DTO.BookInfoDTO" parameterType="com.joalib.DTO.SearchDTO">
-		select * from joalib.bookinfo where author like '#{text}';
+		select * from joalib.bookinfo where #{option} like CONCAT('%',#{text},'%');
 	</select>
 	
 	

@@ -10,13 +10,13 @@ public class MyBoardViewService{
     public ArrayList[] myBoardPost(String member_id) {
         DAO dao = new DAO();
         DAO.getinstance();
-        List list = dao.myBoardView(member_id);
-        int postCount = 10;
+        List list = dao.myBoardView(member_id); //내가 쓴 글정보
+        int postCount = 10; //글 10개씩 보이기
         int count = 0;
-        int pageTotalCount = list.size() / postCount;
+        int pageTotalCount = list.size() / postCount; //보여지는 페이지 수
         
         
-        if(list.size() % postCount != 0)
+        if(list.size() % postCount != 0)  //10개씩 나워서 나머지가 남으면,페이지수 한 장 추가
             pageTotalCount++;
         
         ArrayList totalPage[] = new ArrayList[pageTotalCount];

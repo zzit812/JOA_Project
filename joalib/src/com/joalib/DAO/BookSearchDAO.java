@@ -35,12 +35,23 @@ SqlSessionFactory sqlfactory;
 			e.printStackTrace();		
 			}		
 	}	
+	
+	public List<BookInfoDTO> select_book_all() {   //전체 결과
+		getinstance();
+		//화긴
+		SqlSession sqlsession = sqlfactory.openSession();
+		List <BookInfoDTO> list = sqlsession.selectList("book_info");
+
+		sqlsession.commit();
+		sqlsession.close();
+		return list;
+	}
 
 
 	public List<BookInfoDTO> BookSearch(SearchDTO sdto) {
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
-		System.out.println("DAO  1");
+		//System.out.println("DAO  1");
 		
 		List <BookInfoDTO> list = sqlsession.selectList("book_search",sdto);
 		
@@ -50,7 +61,7 @@ SqlSessionFactory sqlfactory;
 		
 		
 		
-		System.out.println("DAO  2");
+		//System.out.println("DAO  2");확인
 		
 		return list;
 	}

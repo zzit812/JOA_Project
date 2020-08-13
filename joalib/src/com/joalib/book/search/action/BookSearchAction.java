@@ -32,7 +32,7 @@ public class BookSearchAction implements Action {
 		//보류,,,,String [] check = request.getParameterValues("check"); //체크박스
 		//앞의 벨류에 값을 안줘서 'on'이 떴던 거였음. value값주는 거 잊지않기,,
 		
-		System.out.println("액션1");
+		//System.out.println("액션1");
 
 		sdto.setOption(option);
 		sdto.setText(text);
@@ -48,7 +48,7 @@ public class BookSearchAction implements Action {
 //			System.out.println(ch);
 //		} 확인
 		
-		System.out.println("액션2");
+		//System.out.println("액션2"); 확인
 		
 		
 		forward.setRedirect(true);

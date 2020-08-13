@@ -1,6 +1,4 @@
-<%@page import="com.joalib.book.search.svc.BookSearchAllService"%>
 <%@page import="com.joalib.DTO.BookInfoDTO"%>
-
 <%@page import="com.joalib.DAO.BookInfoDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,7 +6,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.joalib.board.action.dbAction"%>
 <%@ page import="com.joalib.DAO.DAO"%>
-
+<%@ page import="com.joalib.DTO.BoardDTO"%>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 
@@ -153,12 +151,112 @@
 		<a href="BookInfoAdd.jsp">임시,관리자 도서추가</a>
 		</div>
 		<br/>
-		<main class="page-content">
-		 <!-- 페이징 -->
-	  	
-	  	<%
-	  		
-	  	%> 
+		<main class="page-content"> <%
+		BookInfoDAO dao = new BookInfoDAO();
+							int sitePage =1 ;	//현재페이지 //초기 페이지 = 1
+			  				  if(request.getParameter("sitePage") != null){
+			  				  	sitePage = Integer.parseInt(request.getParameter("sitePage"));
+			  				  }//사이트페이지 널이면 위의 1로 다시 사이트페이지줌.
+			  				  
+			  				  session.setAttribute("bookSearchPageNum",sitePage);
+			  				 
+			  				  int countList = 12;	//한페이지당 보여지는 게시글 최대 갯수 
+			  				  int countPage = 10;	//한화면에 보여지는 페이지 최대 갯수
+			  				  int totalCount = dao.select_book_count();	//검색결과 자료 갯수			  	
+			  				  	
+			  				  int totalPage = totalCount / countList;	//페이지 갯수
+			  				  	
+			  				  if (totalCount % countList > 0) {
+			  				  	   //	'전체게시글 수 / 게시글 최대 갯수' 의 나머지가 0보다 크면 페이지갯수를 플러스한다.
+			  				  	totalPage++; }
+			  				
+			  				  if (totalPage < sitePage) {
+			  				  	sitePage = totalPage;  	} 
+			  				  
+			  				
+			  				  int startPage = ((sitePage - 1) / 10) * 10 + 1;	//보여지는 시작 페이지
+			  					
+			  				  int endPage = 1;	//보여지는 마지막 페이지
+			  				  if(totalPage < countPage){
+			  				  	endPage = totalPage  ;	//만약 총게시글 페이지가 최대갯수보다 작으면 endPage = totalPage;
+			  				  }else{
+			  				  	endPage = startPage + countPage - 1;
+			  				  	}
+								
+								
+	%>
+		<%
+	  				// 페이지당 게시물을 담는다.
+	  					  			// array 에 게시물을 담고, 배열에는 페이지를 담았다.	
+	  					  		
+	  					  			int count = 0; 
+									List<BookInfoDTO> list = dao.select_book_info();
+	  					  			ArrayList<BookInfoDTO> array;							//array 하나당 하나의 페이지 > ex) array(0).get > = 페이지의 첫번째 게시물
+	  					  			ArrayList[] pageList = new ArrayList[totalPage];	//전체 페이지를 관리하는 배열 > ex) pageList(0) = 첫번째 페이지
+	  					  			
+	  					  			   //게시물총수 한페이지당게시물수
+	  					  			if(totalCount % countList == 0 ){
+	  					  				//나눈값이 0이다.
+	  					  				for(int x = 0; x < totalPage; x++ ){
+	  					  					              //페이지 갯수
+	  					  					array = new ArrayList<BookInfoDTO>();
+	  					  					for(int y = 0 ; y < countList; y++){		  						
+	  				  					array.add(list.get(count));
+	  				  					//count 0에서 시작함. countList가 10이니까, 그만큼
+	  				  					count++;
+	  				  					//이게 계속올라가면서 페이지갯수까지 오르는거임
+	  					  					}
+	  					  					pageList[x] = array;
+	  					  					//x가 페이지갯수만큼 돔. array에 게시글 10개를 담아놈.
+	  					  					
+	  					  				}
+	  					  			}else{
+	  					  				//나눈값이 0이 아니다.
+	  					  				for(int x = 0; x < (totalPage-1); x++ ){
+	  					  					
+	  					  					
+	  					  					array = new ArrayList<BookInfoDTO>();
+	  					  					//마지막 페이지 전까지 어레이에 담는다.		  					
+	  					  					for(int y = 0 ; y < countList; y++){		  						
+	  				  					array.add(list.get(count));
+	  				  					count++;
+	  					  					}
+	  					  					pageList[x] = array;
+	  					  				}		  	
+	  					  				
+	  					  				array = new ArrayList<BookInfoDTO>();
+	  					  				for(int lastCount = count ; lastCount < totalCount ; lastCount++){		  					
+	  					  					array.add(list.get(lastCount));		  					
+	  					  				}
+	  					  				pageList[totalPage-1] = array;
+	  					  			}
+	  			%> <!-- 페이징 -->
+	  			
+	  				<%
+  for(int i=0; i<pageList[sitePage-1].size(); i++){
+	  		ArrayList<BookInfoDTO> dtoArray = pageList[sitePage-1];
+  %><div>
+			<a href='bookInfoDetail.bk?isbn=<%=dtoArray.get(i).getIsbn()%>'>
+			<div class="card"
+				style="background-image: url('img/book/<%=dtoArray.get(i).getBook_img() %>'); background-size: cover;">
+				<div class="content">
+					<h2 class="title"></h2>
+					<!-- 요기아래 버튼들은 제트인덱스로 훗날 만들것임.. -->
+					<span class="favorite">관심도서</span>
+					<span class="loan">대출하기</span>
+				</div>
+			</div>
+			</a>
+			<a href='bookInfoDetail.bk?isbn=<%=dtoArray.get(i).getIsbn()%>'>
+			<div class="bookinfo">
+				<p>도서명  <%= dtoArray.get(i).getBook_title()%></p>
+				<p>저자  <%=dtoArray.get(i).getAuthor()%></p>
+				<p>출판사  <%=dtoArray.get(i).getPublisher() %></p>
+			</div>
+			</a>
+		</div>
+
+		<%} %> 
 		
 		
 		
@@ -167,9 +265,14 @@
 	</section>
 	<!-- 다음페이지 이전페이지 아직 기능이 없음 추가해야대~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<div class="pagination">
-		
-		
-		
+			<a href="" class="prev"><i class="fa fa-angle-double-left"></i>
+				Prev</a>
+			<%		
+			  	for (int iCount = startPage; iCount <= endPage; iCount++) {
+			  	       out.print(" <a href='book_search.jsp?sitePage="+iCount+"' class='page-number'> "+iCount+ "</a>");	
+			  	}
+		  		%>
+			<a href="#" class="next">Next <i class="fa fa-angle-double-right"></i></i></a>
 		</div>
 	<footer>
 		<div id="footer_size">

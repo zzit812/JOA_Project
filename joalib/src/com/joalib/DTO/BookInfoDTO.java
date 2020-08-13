@@ -4,8 +4,17 @@ public class BookInfoDTO {
 	
 	String isbn,author,publisher,book_title,
 	pub_date,isbn_pluscode,book_img,book_story,category;
+	int pageTotalCount;
 
 
+
+	public int getPageTotalCount() {
+		return pageTotalCount;
+	}
+
+	public void setPageTotalCount(int pageTotalCount) {
+		this.pageTotalCount = pageTotalCount;
+	}
 
 	public String getCategory() {
 		return category;

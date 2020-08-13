@@ -267,7 +267,7 @@
 								boardPage = Integer.parseInt(request.getParameter("boardPage")) ;
 							}
 							MyBoardViewService svc = new MyBoardViewService();
-							ArrayList[] pageList = svc.myBoardPost(member_id);
+							ArrayList[] pageList = svc.myBoardPost(member_id); //페이지정보를 담아옴.
 							
 							
 							if(pageList.length < 1){

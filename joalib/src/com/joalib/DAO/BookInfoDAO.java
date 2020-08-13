@@ -53,16 +53,7 @@ public class BookInfoDAO {
 		sqlsession.close();
 		return total;
 	}
-	public List<BookInfoDTO> select_book_info() {   //검색결과 데이터
-		getinstance();
-		//화긴
-		SqlSession sqlsession = sqlfactory.openSession();
-		List <BookInfoDTO> list = sqlsession.selectList("book_info");
-
-		sqlsession.commit();
-		sqlsession.close();
-		return list;
-	}
+	
 
 	public BookInfoDTO book_info_detail(int isbn) {
 	
