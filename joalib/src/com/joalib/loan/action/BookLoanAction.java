@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import com.joalib.DTO.ActionForward;
 import com.joalib.DTO.LoanDTO;
-import com.joalib.favorite.svc.BookFavoriteServise;
 import com.joalib.loan.svc.BookLoanService;
 
 

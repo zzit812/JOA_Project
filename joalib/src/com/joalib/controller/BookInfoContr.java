@@ -12,8 +12,6 @@ import com.joalib.DTO.BookInfoDTO;
 import com.joalib.bookinfo.action.Action;
 import com.joalib.bookinfo.action.BookInfoAddAction;
 import com.joalib.bookinfo.action.BookInfoDetailAction;
-import com.joalib.favorite.action.BookFavoriteAction;
-
 
 @WebServlet("*.bk") 
 public class BookInfoContr extends javax.servlet.http.HttpServlet{
