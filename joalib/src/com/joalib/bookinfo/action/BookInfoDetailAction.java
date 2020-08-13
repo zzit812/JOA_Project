@@ -24,7 +24,7 @@ public class BookInfoDetailAction implements Action {
 		BookInfoDetailService bookInfoDetailService = new BookInfoDetailService();
 		BookInfoDTO article = bookInfoDetailService.getArticle(isbn);
 				
-		request.setAttribute("bookinfoD", article);
+		request.setAttribute("bookinfo", article);
 		
 		//확인. article.get어쩌구 가능 
 		//System.out.println("*article* : "+ article.getBook_img());

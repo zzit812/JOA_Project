@@ -99,8 +99,7 @@
 
 	
 	<%	
-			BookInfoDTO bookinfo = (BookInfoDTO)request.getAttribute("bookinfoD");
-		
+			BookInfoDTO bookinfo = (BookInfoDTO)request.getAttribute("bookinfo");
 		
 	%>
 

@@ -28,7 +28,7 @@ public class BookSearchContr extends javax.servlet.http.HttpServlet{
 		Action action = null;
 		
 		if(command.equals("/book_search.sc")) {
-			//회원가입
+			//System.out.println("액션파트"); 확인
 			action = new BookSearchAction();
 			try{
 				forward=action.execute(request, response);

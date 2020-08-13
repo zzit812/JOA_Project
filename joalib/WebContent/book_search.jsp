@@ -125,18 +125,18 @@
 					<label for="religion">종교</label></li>
 					<li><input type="checkbox" id="history" name="check" value="역사·지리·관광">
 					<label for="history">역사·지리·관광</label></li>
-					<li><input type="checkbox" id="social_science" name="check" value="">
+					<li><input type="checkbox" id="social_science" name="check" value="사회과학">
 					<label for="social_science">사회과학</label></li>
-					<li><input type="checkbox" id="philosophy" name="check" value="">
+					<li><input type="checkbox" id="philosophy" name="check" value="철학·심리학·윤리학">
 					<label for="philosophy">철학·심리학·윤리학</label></li>
-					<li><input type="checkbox" id="descriptive_science" name="check" value="">
+					<li><input type="checkbox" id="descriptive_science" name="check" value="기술과학">
 					<label for="descriptive_science">기술과학</label></li>
-					<li><input type="checkbox" id="art" name="check" value=""><label for="art">예술</label></li>
-					<li><input type="checkbox" id="pure_science" name="check" value=""><label
+					<li><input type="checkbox" id="art" name="check" value="예술"><label for="art">예술</label></li>
+					<li><input type="checkbox" id="pure_science" name="check" value="순수과학"><label
 						for="pure_science">순수과학</label></li>
-					<li><input type="checkbox" id="literature" name="check" value=""><label
+					<li><input type="checkbox" id="literature" name="check" value="문학"><label
 						for="literature">문학</label></li>
-					<li><input type="checkbox" id="language" name="check" value=""><label
+					<li><input type="checkbox" id="language" name="check" value="어학"><label
 						for="language">어학</label></li>
 				</ul>
 				<!-- 검색바에 맞춰서 정렬할 것임 -->
