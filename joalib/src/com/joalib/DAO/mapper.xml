@@ -20,9 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="memberinfoChange" parameterType="com.joalib.DTO.memberinfoDTO">
 		update joalib.memberinfo set member_name = #{member_name}, member_tel = #{member_tel}, member_birth = #{member_birth}, member_email = #{member_email}, member_adress = #{member_adress} where member_id = #{member_id};
-	</update>
-	
-	
+	</update>	
 	
 	<insert id="newMemberPointInsert" parameterType="String" >
 		insert into joalib.point values (#{member_id}, 0 , now() ,'회원가입', 0, '*');
@@ -121,6 +119,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="loan" parameterType="com.joalib.DTO.LoanDTO">
 		insert into joalib.loan_book (member_id,loan_book,loan_date,return_duedate,loan_condition) values (#{member_id},#{loan_book},now(),#{return_duedate},#{loan_condition});
 	</insert>
+	
+	<insert id="faultPostInsert" parameterType="com.joalib.DTO.FaultDTO">
+		INSERT INTO joalib.fault (`fault_title`, `fault_text`, `fault_date`, `fault_attach`, `member_id`) VALUES ( #{fault_title}, #{fault_text}, now(), #{fault_attach},  #{member_id});
+	</insert>
+	
+	<select id="faultPostRead" parameterType="int" resultType="com.joalib.DTO.FaultDTO">
+		select * from joalib.fault where fault_no = #{fault_no};
+	</select>
+	
+	<select id="faultListView" resultType="com.joalib.DTO.FaultDTO">
+		select * from joalib.fault order by fault_no desc;
+	</select>
 	
 	<delete id="memberDelete" parameterType="String">
 		delete from joalib.memberinfo where member_id = #{member_id};

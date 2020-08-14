@@ -8,8 +8,7 @@ import java.util.List;
 
 public class MyBoardViewService{
     public ArrayList[] myBoardPost(String member_id) {
-        DAO dao = new DAO();
-        DAO.getinstance();
+        DAO dao = DAO.getinstance();
         List list = dao.myBoardView(member_id); //내가 쓴 글정보
         int postCount = 10; //글 10개씩 보이기
         int count = 0;
@@ -19,21 +18,22 @@ public class MyBoardViewService{
         if(list.size() % postCount != 0)  //10개씩 나워서 나머지가 남으면,페이지수 한 장 추가
             pageTotalCount++;
         
-        ArrayList totalPage[] = new ArrayList[pageTotalCount];
+        ArrayList[] totalPage = new ArrayList[pageTotalCount];
         
         for(int i = 0; i < pageTotalCount; i++)  {
             ArrayList page = new ArrayList();
-            for(int j = 0; j < postCount; j++) {
+            
+            for(int j = 0; j < postCount; j++) {            	
                 page.add((BoardDTO)list.get(count));
-                if(count == list.size() - 1)
-                    break;
+                if(count == (list.size()-1)) {
+                    break;}
                 count++;
             }
-
-            if(page == null)
+            if(page == null) {
                 System.out.println("NULL error");
-            else
-                totalPage[i] = page;
+            }else {
+                totalPage[i] = page;	
+            }
         }
 
         return totalPage;

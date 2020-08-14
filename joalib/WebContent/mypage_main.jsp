@@ -81,7 +81,7 @@
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
-					<li>HOME</li> | <li><a href="memberLogout.mem">로그아웃</a></li> | <li>포인트충전</li>
+					<li><a href="home.jsp">HOME</a></li> | <li><a href="memberLogout.mem">로그아웃</a></li> | <li>포인트충전</li>
 				</ul>
 			</nav>
 			<div class="clearF"></div>
@@ -116,7 +116,7 @@
 							<li><a href="">공지사항</a></li>
 							<li><a href="">질문과 답변</a></li>
 							<li><a href="board.jsp">자유게시판</a></li>
-							<li><a href="">불량도서 신고</a></li>
+							<li><a href="Fault_list.jsp">불량도서 신고</a></li>
 							<li><a href="">중고도서 나눔</a></li>
 						</ul>
 					</li>
