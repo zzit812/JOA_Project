@@ -56,10 +56,9 @@ public class FaultWriteAction implements Action {
 		
 		FaultWriteService svc = new FaultWriteService();
 		if(svc.faultWrite(dto)) {
-			System.out.println("¹¹°¡ ¹®Á¦Áö");
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("Fault_list.jsp");
+			forward.setPath("boardPointCharge.po");
 		}		
 		
 		return forward;

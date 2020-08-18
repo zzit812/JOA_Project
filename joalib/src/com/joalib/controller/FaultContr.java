@@ -30,14 +30,19 @@ public class FaultContr extends javax.servlet.http.HttpServlet{
 				forward=action.execute(request, response);
 			}catch(Exception e){
 				e.printStackTrace(); }
-		}
-		
-		
-		
-		
-		
-		
-		
+		}else if(command.equals("/faultDelete.fa")) {
+			action = new FaultDeleteAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/faultUpdate.fa")) {
+			action = new FaultUpdateAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}	
 		
 		if(forward != null){		
 			if(forward.isRedirect()){

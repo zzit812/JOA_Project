@@ -1,25 +1,25 @@
-<%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@page import="com.joalib.fault.svc.*" %>
-<%@page import="com.joalib.DAO.*" %>
-<%@page import="com.joalib.DTO.*" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
+<%@ page import="com.joalib.DAO.FaultDAO" %>
+<%@ page import="com.joalib.DTO.FaultDTO" %>
+<%@ page import="com.joalib.fault.action.*" %>
+<%@ page import="java.util.List" %>
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>자유게시판</title>
+  <meta charset="UTF-8">
+	<title>Document</title>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- 캘린더 -->
 	
 	<link rel="stylesheet" type="text/css" href="css/lib_top.css">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-	
+
 	<style>
-		.commentCount{
+	.commentCount{
 			display: inline;
 		    margin: 0 0 0 20px;
 		    font-weight: 300;
@@ -30,8 +30,7 @@
 			float: left;
 			width: 75%;
 			font-size: 15px;
-			margin-top: 50px;	
-			height: 650px;		
+			margin-top: 50px;
 		}
 		
 		#sidemenu_size{ 
@@ -78,75 +77,52 @@
 			margin:0px;
 		}
 		
-		/*                                   */
+	/*								*/
+		#write_box {
+			margin: 10px auto 50px auto;
+  			width: 970px;
+			padding: 1.5em;
+			border: 1px solid rgb(221 221 221);
+			border-radius: 1em;
+		}
+		#board_text {
+			position: relative;
+			top: 20px;
+		}
+		.button {
+			text-align: center;
+			margin-top: 10px;
+		}
+		textarea {
+		    margin: 0px;
+	  	 	height: 220px;
+	    	width: 963px;
+		}	
 		
-		#board_con {
-			margin: 0px 10px 0 10px;
-			padding-bottom: 30px;
-    		border-bottom: 1px solid #e6e6e6;
+		#faultImg {
+			height: 20px;
 		}
-		#board_con > ul {
-			padding: 3px 6px;
-			border-bottom: 1px solid #e6e6e6;
-			border-top: 1px solid #e6e6e6;
+		
+		#fault_title {
+			display: block;
+		    margin: 5px 0;
+		    width: 50%;
+		    padding: 5px;
 		}
-		#board_con > ul > li{
-			display: inline-block;
-			border-right: 1px solid #e6e6e6;
-			text-align: center;
+		#fault_text{
+		    margin: 0px;
+		    min-height: 220px;
+		    width: 98%;
+		    padding: 5px;
 		}
-		#board_con > ul >li:nth-child(1),#board_con > ul >li:nth-child(3), #board_con > ul >li:nth-child(4){	/*게시번호*/
-			width: 18%;
-		}
-		#board_con > ul >li:nth-child(4){
-			/*마지막 : 회원인가?*/
-			border-right: none;
-		}
-		#board_con > ul >li:nth-child(2) {	/*제목*/
-			width: 45%;
-		}
-		/**/
-		#board_con >div> ul{
-			margin : 10px 0;
-		}
-		#board_con >div> ul > li{
-			display: inline-block;
-			text-align: left;
-			text-align: center;
-		}
-		#board_con > div>ul >li:nth-child(1),#board_con >div> ul >li:nth-child(3),#board_con >div> ul >li:nth-child(4) {	/*게시번호*/
-			width: 18%;
-		}
-		#board_con > div>ul >li:nth-child(1){
-			opacity: 50%;
-		}
-		#board_con >div> ul >li:nth-child(2) {	/*제목*/
-			width: 43.5%;
-			padding-left: 8px;
-			text-align: left;
-		}
-		#board_con >div {
-			margin : 0 0 30px 0;
-		}
-		#pageNumber{
-			text-align: center;
-    		margin: 20px;
-		}
-		#pageNumber > a{
-			font-size : 17px;
-			padding: 0 5px;    
-			font-weight: 400;						
-		}
+		
+		
+		
 	</style>
-	
-	
 </head>
-<body>
-	
+		
+ <body>
 	 <header>
-	 <%
-	 	String idCheckImpart = null;
-	 %>
 		 <div id="top_size">
 		 	<!--로고-->
 			<img id="logo" src="img/icon_lib.png">
@@ -156,14 +132,13 @@
 					<li><a href='home.jsp'>HOME</a></li> | <li>
 					<%
 						String member_id = null;
-						String changeResult = null;
-						
 						member_id = (String)session.getAttribute("member_id");
 						if ( member_id != null) {
 							out.print("<a href='memberLogout.mem'>로그아웃</a>");
 						}else{
 							out.print("<a href='userJoinRule.html'>회원가입</a></li> | <li><a href='userLogin.html'>로그인</a>");
 						}
+						
 						
 					%>
 					</li> | <li><a>포인트충전</a></li>
@@ -173,7 +148,7 @@
 			<!--탑메뉴-->
 			<nav id="topMenuBorder">
 				<ul id="top_menu">
-					<li><a href="book_search.jsp">자료검색</a>
+					<li><a href="book_search.html">자료검색</a>
 						<ul class ="sub_menu">
 							<li><a href="book_search.html">도서 검색</a></li>
 							<li><a href="">분야별 도서 조회</a></li>
@@ -238,77 +213,34 @@
 				</div>
 			</div>
 		</div>
-
-		<div id="cont_size">
-		  	<h1>불량도서 신고</h1>
-		  	<div id="board_con">
 		
-	  		<form>
-		  		<input type="button" value="글쓰기" id="write_button" onclick="
-		  		<%
-		  		if(member_id != null){
-		  			 out.print("location.href='Fault_write.jsp'");
-		  		}else{
-		  			out.print("alert('로그인 후 이용가능합니다'); location.href='userLogin.html'");
-		  		}
-		  		%>"/>
-			</form>	
-		  	
-		  		<ul>
-		  			<li>게시번호</li><li>제목</li><li>회원</li><li>글쓴날짜</li>
-		  		</ul>
-		  		<div>
-		  		<%
-				int page_num = 1;
-				if(request.getParameter("page_num") != null){
-					page_num = Integer.parseInt(request.getParameter("page_num"));
-				}
-				FaultListViewService svc = new FaultListViewService();
-				ArrayList<FaultDTO>[] totalPage = svc.faultList();	
-				ArrayList<FaultDTO> list = totalPage[page_num-1];
-				
-				for(int i = 0 ; i < list.size(); i++){	%>
-					<ul id="faultList">
-						<li><%= list.get(i).getFault_no() %></li>
-						<li><a href="Fault_read.jsp?fault_no=<%= list.get(i).getFault_no() %>&page_num=<%= page_num %>"><%= list.get(i).getFault_title() %></a></li>
-						<li><%= list.get(i).getFault_date().substring(0, 10) %></li>
-						<li><%= list.get(i).getMember_id() %></li>
-					</ul>
-				<% }	%>
-		  		</div>		  		
-		  	</div>
-		  	<div id="pageNumber">
-		  	<%
-		  		for(int i = 0 ; i < totalPage.length; i++){	%>
-		  		<a href="Fault_list.jsp?page_num=<%= (i+1) %>"><%= (i+1)%></a>
-		  	<%	}  	%>
+        <div id="cont_size">
 
-		  	</div>
-		</div>
-		
-	 </section>
-
-	 <footer>
+            <h1>불량도서 신고</h1>
+            <%
+				int fault_no = Integer.parseInt(request.getParameter("fault_no"));
+				FaultDAO dao = FaultDAO.getinstance();
+				FaultDTO dto = dao.faultPageRead(fault_no);	
+			%>
+            <div id="cont_1_size">				
+				<div id="write_box">                        
+				<form action='faultUpdate.fa' name="faultUpdate" method="post">
+					<input type="hidden" name="fault_no" value="<%= fault_no%>"  />
+					<input type="text" name="fault_title" id="fault_title" value="<%= dto.getFault_title()%>"/>
+					<textarea id="fault_text" name="fault_text"><%= dto.getFault_text()%></textarea>
+					<input class="button" type="submit" onClick ="alert('수정되었습니다');" value = "등록" />
+					<a href="javascript:history.go(-1)"><input type="button" value="뒤로"/></a>
+				</form>
+            	</div>            	                  
+            </div>
+        </div>
+        </section>
+        <footer>
 		<div id="foot_size">
 			(변경) Library | 04524 서울특별시 중구 세종대로 110 | 전화번호: 02)120, 2133-0300~1
 			이용시간: 화~금 09:00~19:00 / 토,일 09:00~17:00 /월요일,공휴일 휴관
 		</div>
 	 </footer><!-- Favorite -->
-	 <script type="text/javascript">
-	 
-			function newPostBtn(){
-				<% 
-			  	request.setCharacterEncoding("UTF-8");
-				if ( member_id != null) {
-					//로그인이 되어있음
-					out.print("location.href='board_write.jsp'");
-				}else{
-					//로그인이 안됨
-					out.print("alert('로그인 후 이용가능합니다.');location.href='userLogin.html'");
-				}
-		  		%>
-				
-			}
-		</script>
-</body>
-</html>
+        </body>
+        </html>
+        

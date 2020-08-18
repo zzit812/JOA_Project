@@ -113,6 +113,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into joalib.point values (#{member_id}, 30, now(), '댓글(자유게시판)', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)+30), '+');
 	</insert>
 	
+	<insert id="faultPointCharge" parameterType="String">
+		insert into joalib.point values (#{member_id}, 1000, now(), '불량도서 신고', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)+1000), '+');
+	</insert>
+	
 	<insert id="favarite_book" parameterType="String">
 		insert into joalib.favorite_book values (#{member_id},#{isbn});
 	</insert>
@@ -131,6 +135,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="faultListView" resultType="com.joalib.DTO.FaultDTO">
 		select * from joalib.fault order by fault_no desc;
 	</select>
+	<update id="faultChange" parameterType="com.joalib.DTO.FaultDTO">
+		UPDATE joalib.fault SET fault_title = #{fault_title}, fault_text = #{fault_text} WHERE fault_no = #{fault_no};
+	</update>	
+	
+	<delete id="faultPostDelete" parameterType="String">
+		delete from joalib.fault where fault_no = #{fault_no};
+	</delete>
 	
 	<delete id="memberDelete" parameterType="String">
 		delete from joalib.memberinfo where member_id = #{member_id};
@@ -144,6 +155,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="memberDeleteBoardcomment" parameterType="String">
 		delete from joalib.board_comment where member_id = #{member_id};
 	</delete>
+	<delete id="memberDeleteFault" parameterType="String">
+		delete from joalib.fault where member_id = #{member_id};
+	</delete>
+	
+	
 	<select id="book_search" resultType="com.joalib.DTO.BookInfoDTO" parameterType="com.joalib.DTO.SearchDTO">
 		select * from joalib.bookinfo where #{option} like CONCAT('%',#{text},'%');
 	</select>

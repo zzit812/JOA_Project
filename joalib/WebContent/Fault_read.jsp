@@ -88,9 +88,8 @@
 		}
 		#fault_text > img{
 			text-align: center;
-		    margin: auto;
+		    margin: 20px 0;
 		    display: block;
-		    margin: 10px auto 30px auto;
 		    width: 450px;
 		}
 		
@@ -107,7 +106,7 @@
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
-					<li><a>HOME</a></li> | <li>
+					<li><a href='home.jsp'>HOME</a></li> | <li>
 					<%
 						String member_id = null;
 									member_id = (String)session.getAttribute("member_id");
@@ -124,7 +123,7 @@
 			<!--탑메뉴-->
 			<nav id="topMenuBorder">
 				<ul id="top_menu">
-					<li><a href="book_search.html">자료검색</a>
+					<li><a href="book_search.jsp">자료검색</a>
 						<ul class ="sub_menu">
 							<li><a href="book_search.html">도서 검색</a></li>
 							<li><a href="">분야별 도서 조회</a></li>
@@ -151,7 +150,7 @@
 							<li><a href="">공지사항</a></li>
 							<li><a href="">질문과 답변</a></li>
 							<li><a href="board.jsp">자유게시판</a></li>
-							<li><a href="">불량도서 신고</a></li>
+							<li><a href="Fault_list.jsp">불량도서 신고</a></li>
 							<li><a href="">중고도서 나눔</a></li>
 						</ul>
 					</li>
@@ -213,9 +212,11 @@
 						</div>							                  
 						<div id="fault_text">
 						<img src="<%= request.getContextPath() +"/faultImage/"+dto.getFault_attach() %>" />
-						<%= dto.getFault_text() %></div>   
+						<pre><%= dto.getFault_text() %>	</pre>
+						</div>   
 						
-						<form name="btns" method="post" action="commentWrite.bo?board_no=">
+						
+						<form name="btns" method="post" >
 					</div>					
 					         
 						<div class="button">	<!-- 버튼 -->
@@ -229,7 +230,7 @@
 							if ( member_id != null && member_id.equals(dto.getMember_id())) { 
 								request.setAttribute("article", dto.getMember_id());							
 						%>
-						<input type='button'  value = '수정' onClick="location.href=''"/>
+						<input type='button'  value = '수정' onClick="location.href='Fault_update.jsp?fault_no=<%= dto.getFault_no()%>'"/>
 						<input type='button'  value = '삭제' onClick="removeCheck()"/>
 						<% }%>							
 						</div>
@@ -248,12 +249,13 @@
         <script type="text/javascript">
     
        		function removeCheck() {
-        	 	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
-        	 		location.href=''        	 	
+        	 	if (confirm("정말 삭제하시겠습니까") == true){    //확인
+        	 		alert("삭제되었습니다");
+        	 		location.href='faultDelete.fa?fault_no=<%= dto.getFault_no()%>'        	 	
         	 	}else{  
         	    	 return false;
         	 	}
-        	}
+        	} 
         </script>
         </html>
         

@@ -10,7 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-
+<script type="text/javascript">
+	$(function(){
+		$( document ).ready( function() {
+			$('body').css('display', 'none');
+			$('body').fadeIn(500);
+			$('body').css('display', 'block');
+		});
+	});	
+</script>
 <style>
 	* {
 		font-family: 'Noto Sans KR', sans-serif;
@@ -20,7 +28,7 @@
 	body {
 		width: 1400px;
 		margin: 25px auto;
-		background-color: #F2F2F2;
+		background-color: #F2F2F2;		
 	}
 	#logo {
 		height: 150px;
@@ -267,6 +275,7 @@ http://design.samsung.com/kr/index.html
 https://www.hancomm.co.kr/index.do
 -->
 
+
 <header>
 	<img id="logo" src="img/icon_lib_7.png" />
 	<nav>
@@ -339,6 +348,7 @@ https://www.hancomm.co.kr/index.do
 				
 				<script type="text/javascript">
 					$(function(){
+												
 						$('#top_menu > li').hover(function(){
 							$(this).children('.menuHoverEvent').css("width","140px"),
 							$('#top_menu').css('boxShadow','0px 15px 10px rgba(0,0,0,3%)'),

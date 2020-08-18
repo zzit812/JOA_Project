@@ -81,7 +81,7 @@
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
-					<li><a href="home.jsp">HOME</a></li> | <li><a href="memberLogout.mem">로그아웃</a></li> | <li>포인트충전</li>
+					<li><a href='home.jsp'>HOME</a></li> | <li><a href="memberLogout.mem">로그아웃</a></li> | <li>포인트충전</li>
 				</ul>
 			</nav>
 			<div class="clearF"></div>

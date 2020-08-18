@@ -23,7 +23,7 @@ public class FaultDAO {
 	//static이 반드시! 붙어야한다. 정적 변수
 	public static FaultDAO getinstance() {
 		if (instance == null) {	// >DAO 객체 만든적 있어?
-			synchronized (DAO.class) {
+			synchronized (FaultDAO.class) {
 				instance = new FaultDAO();
 			}
 		}
@@ -65,6 +65,22 @@ public class FaultDAO {
 		sqlsession.close();	
 		
 		return dto;
+	}
+	
+	public int faultDelete(String fault_no) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.delete("faultPostDelete", fault_no);
+		sqlsession.commit();
+		sqlsession.close();	
+		return i;
+	}
+	
+	public int faultUpdate(FaultDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.update("faultChange", dto);
+		sqlsession.commit();
+		sqlsession.close();	
+		return i;
 	}
 
 }

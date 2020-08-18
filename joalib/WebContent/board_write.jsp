@@ -60,7 +60,7 @@
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
-					<li><a>HOME</a></li> | <li>
+					<li><a href='home.jsp'>HOME</a></li> | <li>
 					<%	
 					
 					//
@@ -114,7 +114,7 @@
 							<li><a href="">공지사항</a></li>
 							<li><a href="">질문과 답변</a></li>
 							<li><a href="board.jsp">자유게시판</a></li>
-							<li><a href="">불량도서 신고</a></li>
+							<li><a href="Fault_list.jsp">불량도서 신고</a></li>
 							<li><a href="">중고도서 나눔</a></li>
 						</ul>
 					</li>

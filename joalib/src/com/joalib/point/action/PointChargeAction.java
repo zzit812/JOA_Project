@@ -45,19 +45,25 @@ public class PointChargeAction implements Action {
 			}else {
 				System.out.println("fail");
 			}
-		}else if(referer.contains("boardReadPage.bo")) {
-			
+		}else if(referer.contains("boardReadPage.bo")) {			
 			int board_no = Integer.parseInt(request.getParameter("board_no"));
 			if(svc.chargeBoardCommnetWrite(member_id)) {	
-				System.out.println("여기가 문제일까?");
 				//success
 				forward = new ActionForward();
 				forward.setRedirect(true);
 				forward.setPath("boardReadPage.bo?board_num="+board_no);
 			}else {
 				System.out.println("fail");
-			}
-			
+			}			
+		}else if(referer.contains("Fault_write.jsp")) {
+			if(svc.chargeFaultWrite(member_id)) {	
+				//success
+				forward = new ActionForward();
+				forward.setRedirect(true);
+				forward.setPath("Fault_list.jsp");
+			}else {
+				System.out.println("fail");
+			}			
 		}
 		
 		

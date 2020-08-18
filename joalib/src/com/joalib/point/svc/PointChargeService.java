@@ -31,6 +31,19 @@ public class PointChargeService {
 		return isSuccess;
 	}
 	
+	//불량도서 포인트
+		public boolean chargeFaultWrite(String member_id) {
+			boolean isSuccess = false;
+			
+			PointDAO dao = PointDAO.getinstance();	
+			int i = dao.faultPointCharge(member_id);		
+			if(i > 0) {
+				isSuccess = true;		
+			}					
+			
+			return isSuccess;
+		}
+	
 	
 	//테스트용 메서드 //이후에 삭제할거임
 	public boolean chargeTemp(String member_id) {

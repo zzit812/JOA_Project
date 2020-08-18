@@ -47,7 +47,7 @@
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
-					<li>HOME</li> | <li><a href="memberLogout.mem">로그아웃</a></li> | <li>포인트충전</li>
+					<li><a href='home.jsp'>HOME</a></li> | <li><a href="memberLogout.mem">로그아웃</a></li> | <li>포인트충전</li>
 				</ul>
 			</nav>
 			<div class="clearF"></div>
@@ -82,7 +82,7 @@
 							<li><a href="">공지사항</a></li>
 							<li><a href="">질문과 답변</a></li>
 							<li><a href="board.jsp">자유게시판</a></li>
-							<li><a href="">불량도서 신고</a></li>
+							<li><a href="Fault_list.jsp">불량도서 신고</a></li>
 							<li><a href="">중고도서 나눔</a></li>
 						</ul>
 					</li>
@@ -147,10 +147,10 @@
 			    }			
 				function samePW(){
 			    	var result = confirm("정말로 탈퇴하시겠습니까?\n*포인트는 모두 소멸됩니다*");	//예-t 아니오-f
-			    	if(result){
+			    	if(result  == true){
 			    		//탈퇴하기
 			    		alert('탈퇴되었습니다. 다음 기회에 봐요!');
-			    		location.replace('memberDelete.mem');
+			    		window.location.replace('memberDelete.mem');
 			    	}else{
 			    		//탈퇴 안하기
 			    		window.location.replace('mypage_memberinfoChange.jsp');

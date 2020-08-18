@@ -23,7 +23,6 @@ public class memberinfoDAO {
 	
 	public static memberinfoDAO getinstance() {
 		if (instance == null) {	// >DAO 객체 만든적 있어?
-			System.out.println("instance : null이다.");
 			synchronized (memberinfoDAO.class) {
 				instance = new memberinfoDAO();		}
 		}
@@ -73,9 +72,12 @@ public class memberinfoDAO {
 	public int memberDel (String member_id) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		//회원 정보가 남겨져 있는 모든것들을 지우세요
+		sqlsession.delete("memberDeleteFault", member_id);
 		sqlsession.delete("memberDeleteBoardcomment", member_id);
 		sqlsession.delete("memberDeleteBoard", member_id);
 		sqlsession.delete("memberDeletePoint", member_id);
+		
+		System.out.println("dao1");
 		int i = sqlsession.delete("memberDelete", member_id);
 		sqlsession.commit();
 		sqlsession.close();

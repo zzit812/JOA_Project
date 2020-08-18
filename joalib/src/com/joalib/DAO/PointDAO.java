@@ -87,6 +87,15 @@ SqlSessionFactory sqlfactory;
 		return i;
 	}
 	
+	//포인트 충전(불량도서 신고 포인트 + 1000)
+		public int faultPointCharge(String member_id) {
+			SqlSession sqlsession = sqlfactory.openSession();
+			int i = sqlsession.insert("faultPointCharge",member_id);
+			sqlsession.commit();
+			sqlsession.close();
+			
+			return i;
+		}
 	
 	
 	
