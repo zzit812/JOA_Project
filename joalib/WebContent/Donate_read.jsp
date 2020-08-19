@@ -2,9 +2,8 @@
 	pageEncoding="utf-8"%>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
-<%@ page import="com.joalib.DAO.DAO" %>
-<%@ page import="com.joalib.DTO.BoardDTO" %>
-<%@ page import="com.joalib.board.action.dbAction" %>
+<%@ page import="com.joalib.DAO.DonateDAO" %>
+<%@ page import="com.joalib.DTO.*" %>
 <%@ page import="java.util.List" %>
 
 
@@ -18,38 +17,85 @@
 	<link rel="stylesheet" type="text/css" href="css/lib_top.css">
 	<link rel="stylesheet" type="text/css" href="css/board_base.css">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
+	
 	<style>
+		#cont_size{
+			height: auto;
+		}
+				
 		#write_box {
 			margin: 0 auto;
   			width: 970px;
-			height: 325px;
-			padding: 1.5em;
+			min-height: 350px;
+			padding: 20px 30px 60px 30px;
 			border: 1px solid rgb(221 221 221);
 			border-radius: 1em;
 		}
-		#member_character{
-			
+		#write_box > h2 {
+		    border-bottom: 1px solid #00000030;
+		    margin: 5px;
+		    font-size: 22px;
+		    font-weight: 500;
+		    padding-bottom: 5px;
+		    padding-left: 10px;
 		}
-		#member_id {
-			font-size: 15px;
-			font-weight: bold;
+		.member_character{
+			width: 40px;
+		    height: 40px;
+		    overflow: hidden;
+		    float: left;
+		    margin:0 10px 0 5px;
+		    border-radius: 80%;
 		}
-		#board_text {
-			position: relative;
-			top: 20px;
+		.member_character > img {
+			width:40px;
+		}
+		#memberinfo {
+			float: left;
+    		width: 80%;
+		}
+		#memberinfo > p {
+			margin: 0;
+		}
+		#memberinfo  p:nth-child(2) {		   
+		    font-size: 16px;
+		    font-weight: 400;
+		    opacity: 80%;
+		    margin: 0;
+		    /* display: inline; */
+		    float: left;
+		    display: contents;
+		}
+		#memberinfo  p:nth-child(3){
+			 font-size: 12px;
+			 opacity: 50%;
+		}
+		
+		#fault_text {
+			clear: both;
+		    min-height: 180px;
+		    width: 93%;
+		    padding: 20px 30px;
+		    border: 1px solid #00000030;
+		    box-shadow: 0px 15px 10px rgba(0,0,0,7%);
+		    display: inline-block;
+		    margin-top: 10px;
 		}
 		.button {
-			text-align: center;
-			margin-top: 10px;
+			margin: 22px 0;
+		    float: right;
+		    margin-right: 30px;
 		}
-		textarea {
-	    margin: 0px;
-  	 	height: 220px;
-    	width: 963px;
-		}	
+		#fault_text > img{
+			text-align: center;
+		    margin: 20px 0;
+		    display: block;
+		    width: 450px;
+		}
+		
 		
 	</style>
+	
 </head>
 		
  <body>
@@ -77,7 +123,7 @@
 			<!--탑메뉴-->
 			<nav id="topMenuBorder">
 				<ul id="top_menu">
-					<li><a href="book_search.html">자료검색</a>
+					<li><a href="book_search.jsp">자료검색</a>
 						<ul class ="sub_menu">
 							<li><a href="book_search.html">도서 검색</a></li>
 							<li><a href="">분야별 도서 조회</a></li>
@@ -143,23 +189,56 @@
 			</div>
 		</div>
 		
-        <div id="cont_size">
-
-            <h1>자유게시판</h1>
-            <div id="cont_1_size">				
-				<div id="write_box">                        
-				<form action='boardModifyPro.bo' name="boardUpdatePro" method="post">
-				<%BoardDTO article = (BoardDTO) request.getAttribute("article");	%>
-					<input type="hidden" name="board_no" value="<%= article.getBoard_no() %>" />
-					<input type="text" name="board_title" value="<%= article.getBoard_title() %>" />
-					<textarea id="board_text" name="board_write" ><%= article.getBoard_text() %></textarea>
-					<input class="button" type="submit" value = "등록" />
-					<a href="javascript:history.go(-1)"><input type="button" value="뒤로"/></a>
-				</form>
-            	</div>            	                  
-            </div>
-        </div>
+			<div id="cont_size">
+			    <h1>중고도서 나눔</h1>
+			    <div id="cont_1_size">
+	
+				<%
+				int page_num = 1;
+				if(request.getParameter("page_num") != null){
+					page_num = Integer.parseInt(request.getParameter("page_num"));
+				}
+				int donate_no = Integer.parseInt(request.getParameter("donate_no"));
+				DonateDAO dao = DonateDAO.getinstance();
+				DonateDTO dto = dao.donatePostOneRead(donate_no);
+				%>
+					<div id="write_box">   
+						<!-- 게시글 내용 -->                     
+					    <h2><%= dto.getDonate_title() %></h2>
+					    <div id="memberinfo">
+							<div class="member_character" ><img  src="img/character/character1.png"></div>
+							<p><%= dto.getMember_id() %></p>
+							<p><%= dto.getDonate_date() %></p>  
+						</div>							                  
+						<div id="fault_text">
+						<img src="<%= request.getContextPath() +"/donateImage/"+dto.getDonate_attach() %>" />
+						<pre><%= dto.getDonate_text() %>	</pre>
+						</div>   
+						
+						
+						<form name="btns" method="post" >
+					</div>					
+					         
+						<div class="button">	<!-- 버튼 -->
+						<% int sitePage = 1;
+							if(session.getAttribute("boardPageNum") != null){								
+								sitePage = (Integer) session.getAttribute("boardPageNum");
+							}
+						%>
+						<input type="button" value = "목록" onClick="location.href='Donate_list.jsp?page_num=<%= page_num%>'"/>
+						<%	
+							if ( member_id != null && member_id.equals(dto.getMember_id())) { 
+								request.setAttribute("article", dto.getMember_id());							
+						%>
+						<input type='button'  value = '수정' onClick="location.href=''"/>
+						<input type='button'  value = '삭제' onClick="removeCheck()"/>
+						<% }%>							
+						</div>
+					</form>
+				</div>
+			</div>
         </section>
+        
         <footer>
 		<div id="foot_size">
 			(변경) Library | 04524 서울특별시 중구 세종대로 110 | 전화번호: 02)120, 2133-0300~1
@@ -167,5 +246,18 @@
 		</div>
 	 </footer><!-- Favorite -->
         </body>
+        <script type="text/javascript">
+    
+       		function removeCheck() {
+        	 	if (confirm("정말 삭제하시겠습니까") == true){    //확인
+        	 		alert("삭제되었습니다");
+        	 		location.href='donatePostDelete.don?donate_no=<%= dto.getDonate_no()%>'
+        	 	}else{  
+        	    	 return false;
+        	 	}
+        	} 
+        </script>
         </html>
+        
+
         

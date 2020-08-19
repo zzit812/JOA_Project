@@ -143,6 +143,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from joalib.fault where fault_no = #{fault_no};
 	</delete>
 	
+	<insert id="donatePostInsert" parameterType="com.joalib.DTO.DonateDTO">
+		INSERT INTO joalib.donate (`donate_title`, `donate_text`, `donate_date`, `donate_attach`, `member_id`, `donate_condition`) VALUES ( #{donate_title}, #{donate_text} , now(), #{donate_attach}, #{member_id}, '거래중');
+	</insert>
+	<select id="donatePostList" resultType="com.joalib.DTO.DonateDTO">
+		select donate_title, donate_date, member_id, donate_condition, donate_no from joalib.donate order by donate_no desc;
+	</select>
+	<select id="donatePostOneList" parameterType="int" resultType="com.joalib.DTO.DonateDTO">
+		select * from joalib.donate where donate_no = #{donate_no};
+	</select>
+	<delete id="donatePostDelete">
+		delete from joalib.donate where donate_no = #{donate_no};
+	</delete>
+	
 	<delete id="memberDelete" parameterType="String">
 		delete from joalib.memberinfo where member_id = #{member_id};
 	</delete>

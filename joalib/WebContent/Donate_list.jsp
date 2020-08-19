@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@page import="com.joalib.fault.svc.*" %>
+<%@ page import="com.joalib.donate.svc.*"%>
 <%@page import="com.joalib.DAO.*" %>
 <%@page import="com.joalib.DTO.*" %>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
@@ -23,7 +23,6 @@
 			display: inline;
 		    margin: 0 0 0 20px;
 		    font-weight: 300;
-		    font-size: 13px;
 		    opacity: 75%;
 		}		
 		#cont_size{	
@@ -95,15 +94,17 @@
 			border-right: 1px solid #e6e6e6;
 			text-align: center;
 		}
-		#board_con > ul >li:nth-child(1),#board_con > ul >li:nth-child(3), #board_con > ul >li:nth-child(4){	/*게시번호*/
-			width: 18%;
+		#board_con > ul >li:nth-child(1),#board_con > ul >li:nth-child(3), #board_con > ul >li:nth-child(4), #board_con > ul >li:nth-child(5),
+		#board_con > div>ul >li:nth-child(1),#board_con >div> ul >li:nth-child(3),#board_con >div> ul >li:nth-child(4),#board_con >div> ul >li:nth-child(5)
+		{	/*게시번호*/
+			width: 14%;
 		}
-		#board_con > ul >li:nth-child(4){
+		#board_con > ul >li:nth-child(5){
 			/*마지막 : 회원인가?*/
 			border-right: none;
 		}
 		#board_con > ul >li:nth-child(2) {	/*제목*/
-			width: 45%;
+			width: 43%;
 		}
 		/**/
 		#board_con >div> ul{
@@ -114,14 +115,11 @@
 			text-align: left;
 			text-align: center;
 		}
-		#board_con > div>ul >li:nth-child(1),#board_con >div> ul >li:nth-child(3),#board_con >div> ul >li:nth-child(4) {	/*게시번호*/
-			width: 18%;
-		}
 		#board_con > div>ul >li:nth-child(1){
 			opacity: 50%;
 		}
 		#board_con >div> ul >li:nth-child(2) {	/*제목*/
-			width: 43.5%;
+			width: 41.5%;
 			padding-left: 8px;
 			text-align: left;
 		}
@@ -240,22 +238,21 @@
 		</div>
 
 		<div id="cont_size">
-		  	<h1>불량도서 신고</h1>
+		  	<h1>중고도서 나눔</h1>
 		  	<div id="board_con">
 		
 	  		<form>
 		  		<input type="button" value="글쓰기" id="write_button" onclick="
 		  		<%
 		  		if(member_id != null){
-		  			 out.print("location.href='Fault_write.jsp'");
+		  			 out.print("location.href='Donate_write.jsp'");
 		  		}else{
 		  			out.print("alert('로그인 후 이용가능합니다'); location.href='userLogin.html'");
 		  		}
 		  		%>"/>
 			</form>	
-		  	
 		  		<ul>
-		  			<li>게시번호</li><li>제목</li><li>회원</li><li>글쓴날짜</li>
+		  			<li>게시번호</li><li>제목</li><li>회원</li><li>글쓴날짜</li><li>상태</li>
 		  		</ul>
 		  		<div>
 		  		<%
@@ -263,16 +260,17 @@
 				if(request.getParameter("page_num") != null){
 					page_num = Integer.parseInt(request.getParameter("page_num"));
 				}
-				FaultListViewService svc = new FaultListViewService();
-				ArrayList<FaultDTO>[] totalPage = svc.faultList();	
-				ArrayList<FaultDTO> list = totalPage[page_num-1];
+				DonatePostListService svc = new DonatePostListService();
+				ArrayList<DonateDTO>[] totalPage = svc.donatePostListPaging();	
+				ArrayList<DonateDTO> list = totalPage[page_num-1];
 				
 				for(int i = 0 ; i < list.size(); i++){	%>
-					<ul id="faultList">
-						<li><%= list.get(i).getFault_no() %></li>
-						<li><a href="Fault_read.jsp?fault_no=<%= list.get(i).getFault_no() %>&page_num=<%= page_num %>"><%= list.get(i).getFault_title() %></a></li>
-						<li><%= list.get(i).getFault_date().substring(0, 10) %></li>
+					<ul class="donateList">
+						<li><%= list.get(i).getDonate_no() %></li>
+						<li><a href="Donate_read.jsp?donate_no=<%= list.get(i).getDonate_no() %>&page_num=<%= page_num %>"><%= list.get(i).getDonate_title() %></a></li>
+						<li><%= list.get(i).getDonate_date().substring(0, 10) %></li>
 						<li><%= list.get(i).getMember_id() %></li>
+						<li><%= list.get(i).getDonate_condition() %></li>
 					</ul>
 				<% }	%>
 		  		</div>		  		
@@ -280,7 +278,7 @@
 		  	<div id="pageNumber">
 		  	<%
 		  		for(int i = 0 ; i < totalPage.length; i++){	%>
-		  		<a href="Fault_list.jsp?page_num=<%= (i+1) %>"><%= (i+1)%></a>
+		  		<a href="Donate_list.jsp?page_num=<%= (i+1) %>"><%= (i+1)%></a>
 		  	<%	}  	%>
 
 		  	</div>

@@ -23,7 +23,6 @@
 		#write_box {
 			margin: 0 auto;
   			width: 970px;
-			height: 325px;
 			padding: 1.5em;
 			border: 1px solid rgb(221 221 221);
 			border-radius: 1em;
@@ -41,13 +40,28 @@
 		}
 		.button {
 			text-align: center;
-			margin-top: 10px;
+			display: block;
+    		margin: 10px auto 0 auto;
 		}
-		textarea {
-	    margin: 0px;
-  	 	height: 220px;
-    	width: 963px;
-		}	
+		#donate_text {
+		    margin: 0px;
+		    min-height: 220px;
+		    width: 98%;
+		    padding: 5px;
+		}
+		
+		
+		#donate_title{
+			display: block;
+		    margin: 5px 0;
+		    width: 50%;
+		    padding: 5px;	
+		}		
+		#donate_attach{
+		    margin-bottom: 5px;
+		    width: 50%;
+		}
+		
 		
 	</style>
 </head>
@@ -82,12 +96,7 @@
 			<!--탑메뉴-->
 			<nav id="topMenuBorder">
 				<ul id="top_menu">
-
 					<li><a href="book_search.jsp">자료검색</a>
-
-
-					<li><a href="book_search.html">자료검색</a>
-
 						<ul class ="sub_menu">
 							<li><a href="book_search.html">도서 검색</a></li>
 							<li><a href="">분야별 도서 조회</a></li>
@@ -154,23 +163,32 @@
 		</div>
 		
         <div id="cont_size">
-            <h1>자유게시판</h1>
+            <h1>중고 도서 나눔</h1>
             <div id="cont_1_size">				
 				<div id="write_box">                        
-				<form action='boardWritePro.bo' name='gg'><!-- 여기 수정ㅇㅇㅇㅇㅇㅇㅇㅇㅇ -->
-					<input type="text" name="board_title" placeholder='제목을 입력하세요.' />
-					<textarea id="board_text" name="board_write" placeholder='내용을 입력하세요.' ></textarea>
+				<form action="donatePostWrite.don" method="post" enctype="multipart/form-data" name="donateWriteForm" onsubmit="return writeClick();" >
+				
+					<input type="text" id="donate_title" name="donate_title" placeholder="제목을 입력하세요." />
+					<input type="file" id="donate_attach" name="donate_attach" required="required" />					
+					<textarea id="donate_text" name="donate_text" >
+도서명 : 
+출판사 : 
+상태 : </textarea>
 					<input type="hidden" name="member_id" value='<%=member_id %>'/>
-					
-					
-					
-					<input class="button" type="submit" value = "등록" />
-					
-					
+					<input class="button" type="submit" value = "등록" />					
 				</form>
-				
 				<script type="text/javascript">
-				
+					var fault_title = document.querySelector('#donate_title');
+					var fault_text = document.querySelector('#donate_text');
+					
+					function writeClick(){
+						if(fault_title.value.length < 1 || fault_text.value.length < 17 ){
+							alert("빈칸을 입력해주세요!");
+							return false;
+						}else{							
+							return true;
+						}
+					}
 				</script>
             	</div>                   
             </div>
@@ -184,4 +202,3 @@
 	 </footer><!-- Favorite -->
         </body>
         </html>
-        

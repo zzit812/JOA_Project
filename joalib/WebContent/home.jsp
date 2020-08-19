@@ -12,8 +12,8 @@
 
 <script type="text/javascript">
 	$(function(){
-		$( document ).ready( function() {
-			$('body').css('display', 'none');
+		$('body').css('display', 'none');
+		$( document ).ready( function() {			
 			$('body').fadeIn(500);
 			$('body').css('display', 'block');
 		});
@@ -313,7 +313,7 @@ https://www.hancomm.co.kr/index.do
 							<li><a href="">질문과 답변</a></li>
 							<li><a href="board.jsp">자유게시판</a></li>
 							<li><a href="Fault_list.jsp">불량도서 신고</a></li>
-							<li><a href="">중고도서 나눔</a></li>
+							<li><a href="Donate_list.jsp">중고도서 나눔</a></li>
 						</ul>
 					</li>
 					

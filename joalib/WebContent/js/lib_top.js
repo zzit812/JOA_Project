@@ -1,4 +1,10 @@
 	$(function(){
+		$('body').css('display', 'none');
+		$( document ).ready( function() {			
+			$('body').fadeIn(500);
+			$('body').css('display', 'block');
+		});
+		
 	 	//상단 메뉴 스크립트
 	 	//상단 메뉴바에 마우스를 올리면 생기는 이벤트
  		//각 목록이 보임
@@ -30,9 +36,5 @@
 	 		})
 	 		});
 	
-		$( document ).ready( function() {
-			$('body').css('display', 'none');
-			$('body').fadeIn(500);
-			$('body').css('display', 'block');
-		});
+		
 	});	
