@@ -32,9 +32,9 @@
 			ResultSet rs = stmt.executeQuery(sql);
       
       //////////////////////////////////////// 있을때
-			if (rs.next()) {
+		if (rs.next()) {
         out.println("사용중인 아이디입니다.");
-			}else{
+	  }else{
         out.println("사용 가능한 아이디입니다.");
       }
      } finally {

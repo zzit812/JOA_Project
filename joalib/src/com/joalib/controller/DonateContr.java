@@ -36,6 +36,48 @@ public class DonateContr extends javax.servlet.http.HttpServlet{
 				forward=action.execute(request, response);
 			}catch(Exception e){
 				e.printStackTrace(); }
+		}else if(command.equals("/donatePostUpdate.don")) {
+			action = new DonatePostUpdateAction();
+			try{ 
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/donateCommentAdd.don")) {
+			action = new CommnetAddAction();
+			try{ 
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/donateCommentDel.don")) {
+			action = new CommentDeleteAction();
+			try{ 
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/commentUpdate.don")) {
+			action = new CommnetUpdateAction();
+			try{ 
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/smallCommentAdd.don")) {
+			action = new SmallCommentAddAction();
+			try{ 
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/smallCommentDel.don")) {
+			action = new SmallCommentDelAction();
+			try{ 
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/smallCommentChange.don")) {
+			action = new SmallCommentChangeAction();
+			try{ 
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
 		}
 		
 		

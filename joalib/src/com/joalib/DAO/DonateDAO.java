@@ -10,6 +10,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.joalib.DTO.DonateDTO;
+import com.joalib.DTO.Donate_CommentDTO;
+import com.joalib.DTO.Donate_Small_CommentDTO;
 
 public class DonateDAO {
 	
@@ -70,7 +72,81 @@ SqlSessionFactory sqlfactory;
 	
 	public int donateDel(int donate_no) {
 		SqlSession sqlsession = sqlfactory.openSession();
-		int i = sqlsession.delete("donatePostDelete", donate_no);
+		sqlsession.delete("donatePostDelete1", donate_no);
+		sqlsession.delete("donatePostDelete2", donate_no);
+		int i = sqlsession.delete("donatePostDelete3", donate_no);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i ;
+	}
+	public int donateUpdate(DonateDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i =sqlsession.update("donatePostUpdate", dto);
+		sqlsession.commit();
+		sqlsession.close();
+		return i;
+	}
+	
+	public int donateCommentAdd(Donate_CommentDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.insert("donateCommentAdd", dto);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}	
+	public List<Donate_CommentDTO> donateCommentList(int donate_no) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		List<Donate_CommentDTO> list = sqlsession.selectList("donateCommentList",donate_no);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return list;
+	}	
+	public int donateCommentUpdate(Donate_CommentDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.update("donateCommnetUpdate", dto);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}
+	public int doanteCommentDel(int donate_comment_no) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i =sqlsession.delete("donateCommentDelete", donate_comment_no);		
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}
+	public int donateSmallCommentAdd(Donate_Small_CommentDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.insert("donateSmallCommentAdd", dto);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}
+	public List<Donate_Small_CommentDTO> donateSmallCommentList(int donate_comment_no){
+		SqlSession sqlsession = sqlfactory.openSession();
+		List<Donate_Small_CommentDTO> dto = sqlsession.selectList("donateSmallCommentList", donate_comment_no);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return dto;
+	}
+	public int donateSmallCommentDelete(Donate_Small_CommentDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.delete("donateSmallCommentDelete", dto);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}
+	public int donateSmallCommentChange(Donate_Small_CommentDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.update("donateSmallCommentChange", dto);
 		sqlsession.commit();
 		sqlsession.close();
 		

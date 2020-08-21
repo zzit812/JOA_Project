@@ -152,9 +152,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="donatePostOneList" parameterType="int" resultType="com.joalib.DTO.DonateDTO">
 		select * from joalib.donate where donate_no = #{donate_no};
 	</select>
-	<delete id="donatePostDelete">
-		delete from joalib.donate where donate_no = #{donate_no};
+	
+	<delete id="donatePostDelete1" parameterType = "int">
+		delete from joalib.donate_small_comment where donate_comment_no in(select donate_comment_no from joalib.donate_comment where donate_no = #{donate_no});
+	</delete><delete id="donatePostDelete2" parameterType = "int">
+		delete from joalib.donate_comment where donate_no = #{donate_no};
+	</delete><delete id="donatePostDelete3" parameterType = "int">
+		delete from joalib.donate where donate_no = #{donate_no};		
 	</delete>
+	
+	<update id="donatePostUpdate" parameterType="com.joalib.DTO.DonateDTO">
+		update joalib.donate SET donate_title = #{donate_title}, donate_text  = #{donate_text} where donate_no = #{donate_no};
+	</update>
+	
+	<insert id="donateCommentAdd" parameterType="com.joalib.DTO.Donate_CommentDTO">
+		INSERT INTO joalib.donate_comment (`donate_no`, `member_id`, `dc_text`, `dc_date`) VALUES (#{donate_no}, #{member_id}, #{dc_text} , now());
+	</insert>
+	<select id="donateCommentList" parameterType="int" resultType="com.joalib.DTO.Donate_CommentDTO">
+		select * from joalib.donate_comment where donate_no = #{donate_no};
+	</select>
+	<update id="donateCommnetUpdate" parameterType="com.joalib.DTO.Donate_CommentDTO">
+		UPDATE joalib.donate_comment SET dc_text = #{dc_text} WHERE donate_comment_no = #{donate_comment_no};
+	</update>
+	
+	<delete id="donateCommentDelete" parameterType="int">
+		delete from joalib.donate_comment where donate_comment_no = #{donate_comment_no};
+	</delete>	
+	<insert id="donateSmallCommentAdd" parameterType="com.joalib.DTO.Donate_Small_CommentDTO">
+		insert into joalib.donate_small_comment (`member_id`, `dc_s_text`, `dc_s_date`, `donate_comment_no`) VALUES (#{member_id}, #{dc_s_text},now(), #{donate_comment_no});
+	</insert>
+	<select id="donateSmallCommentList" parameterType="int" resultType="com.joalib.DTO.Donate_Small_CommentDTO">
+		select * from joalib.donate_small_comment where donate_comment_no = #{donate_comment_no};
+	</select>
+	<delete id="donateSmallCommentDelete" parameterType="com.joalib.DTO.Donate_Small_CommentDTO">
+		delete from joalib.donate_small_comment where member_id = #{member_id} and dc_s_date = #{dc_s_date};
+	</delete>
+	<update id="donateSmallCommentChange" parameterType="com.joalib.DTO.Donate_Small_CommentDTO">
+		update joalib.donate_small_comment set dc_s_text = #{dc_s_text} where member_id = #{member_id} and dc_s_date = #{dc_s_date};
+	</update>
 	
 	<delete id="memberDelete" parameterType="String">
 		delete from joalib.memberinfo where member_id = #{member_id};
