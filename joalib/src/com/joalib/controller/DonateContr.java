@@ -78,6 +78,12 @@ public class DonateContr extends javax.servlet.http.HttpServlet{
 				forward=action.execute(request, response);
 			}catch(Exception e){
 				e.printStackTrace(); }
+		}else if(command.equals("/donateDealChange.don")) {
+			action = new DonateDealChangeAction();
+			try{ 
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
 		}
 		
 		
@@ -86,7 +92,7 @@ public class DonateContr extends javax.servlet.http.HttpServlet{
 		
 		if(forward != null){		
 			if(forward.isRedirect()){
-				response.sendRedirect(forward.getPath());	//¹ÝÈ¯ÇÏ´Â forward°ªÀÌ ÀÖÀ¸¸é, 'forward.getPath()'À¸·Î ÀÌµ¿ÇÑ´Ù.
+				response.sendRedirect(forward.getPath());	//ï¿½ï¿½È¯ï¿½Ï´ï¿½ forwardï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 'forward.getPath()'ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ñ´ï¿½.
 			}else{
 				RequestDispatcher dispatcher=
 						request.getRequestDispatcher(forward.getPath());

@@ -209,9 +209,11 @@
 							<div class="member_character" ><img  src="img/character/character1.png"></div>
 							<p><%= dto.getMember_id() %></p>
 							<p><%= dto.getFault_date() %></p>  
-						</div>							                  
+						</div>					
+								                   
 						<div id="fault_text">
-						<img src="<%= request.getContextPath() +"/faultImage/"+dto.getFault_attach() %>" />
+						<img src="<%= request.getContextPath() +"/faultImage/"+dto.getFault_attach() %>"/>
+						
 						<pre><%= dto.getFault_text() %>	</pre>
 						</div>   
 						

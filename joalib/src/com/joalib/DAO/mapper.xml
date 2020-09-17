@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="SqlData">
 	
 	<insert id="memberInsert" parameterType = "com.joalib.DTO.memberinfoDTO" >
@@ -70,8 +69,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE joalib.board SET board_hit = (board_hit+1) WHERE board_no = #{board_num};
 	</update>
 	
-	<delete id="board_del" parameterType="com.joalib.DTO.BoardDTO">
+	<delete id="board_del" parameterType="int">
 		delete from joalib.board where board_no = #{board_no};
+	</delete>
+	<delete id="board_del2" parameterType="int">
+		delete from joalib.board_comment where board_no = #{board_no};
 	</delete>
 
 	<insert id="boardComment_add" parameterType="com.joalib.DTO.Board_CommentDTO">
@@ -142,6 +144,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="faultPostDelete" parameterType="String">
 		delete from joalib.fault where fault_no = #{fault_no};
 	</delete>
+	<select id="myFaultPostView" parameterType="String" resultType="com.joalib.DTO.FaultDTO">
+		select fault_no,fault_title,fault_date from joalib.fault where member_id = #{member_id};
+	</select>
 	
 	<insert id="donatePostInsert" parameterType="com.joalib.DTO.DonateDTO">
 		INSERT INTO joalib.donate (`donate_title`, `donate_text`, `donate_date`, `donate_attach`, `member_id`, `donate_condition`) VALUES ( #{donate_title}, #{donate_text} , now(), #{donate_attach}, #{member_id}, '거래중');
@@ -152,7 +157,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="donatePostOneList" parameterType="int" resultType="com.joalib.DTO.DonateDTO">
 		select * from joalib.donate where donate_no = #{donate_no};
 	</select>
-	
+	<update id="donateDealChange" parameterType="int">
+		UPDATE joalib.donate SET donate_condition = '거래완료' WHERE donate_no = #{donate_no};
+	</update>	
 	<delete id="donatePostDelete1" parameterType = "int">
 		delete from joalib.donate_small_comment where donate_comment_no in(select donate_comment_no from joalib.donate_comment where donate_no = #{donate_no});
 	</delete><delete id="donatePostDelete2" parameterType = "int">
@@ -160,10 +167,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete><delete id="donatePostDelete3" parameterType = "int">
 		delete from joalib.donate where donate_no = #{donate_no};		
 	</delete>
-	
 	<update id="donatePostUpdate" parameterType="com.joalib.DTO.DonateDTO">
 		update joalib.donate SET donate_title = #{donate_title}, donate_text  = #{donate_text} where donate_no = #{donate_no};
 	</update>
+	<select id="myDonatePost" parameterType="String" resultType="com.joalib.DTO.DonateDTO">
+		select donate_no, donate_title,donate_date,donate_condition from joalib.donate where member_id = #{member_id};
+	</select>
 	
 	<insert id="donateCommentAdd" parameterType="com.joalib.DTO.Donate_CommentDTO">
 		INSERT INTO joalib.donate_comment (`donate_no`, `member_id`, `dc_text`, `dc_date`) VALUES (#{donate_no}, #{member_id}, #{dc_text} , now());
@@ -206,6 +215,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="memberDeleteFault" parameterType="String">
 		delete from joalib.fault where member_id = #{member_id};
 	</delete>
+	
+	<select id="noticeListSelect" resultType="com.joalib.DTO.NoticeDTO">
+		select notice_no, notice_title, notice_date from joalib.notice;
+	</select>
+	<select id="noticePostDetail" parameterType="int" resultType="com.joalib.DTO.NoticeDTO">
+		select * from joalib.notice where notice_no = #{notice_no}
+	</select>
 	
 	
 	<select id="book_search" resultType="com.joalib.DTO.BookInfoDTO" parameterType="com.joalib.DTO.SearchDTO">

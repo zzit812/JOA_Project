@@ -18,10 +18,10 @@ public class FaultWriteAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		ActionForward forward=null;		
-		ServletContext context = request.getServletContext();	//ÀÌÀü ÆäÀÌÁöÀÇ servletContext¸¦ ¹Þ¾Æ¿À°í,		
+		ServletContext context = request.getServletContext();	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ servletContextï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½,		
 		
 		String uploadPath = request.getRealPath("faultImage");		
-		int size = 10*1024*1024;	//¿ë·® ¾öÃ»³­ ´ë¿ë·®Àº ¼­¹ö°¡ ÅºÅºÇØ¾ßÇÑ´Ù. 10*1024*1024 : 10¸Þ°¡
+		int size = 10*1024*1024;	//ï¿½ë·® ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ë·®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ÅºÅºï¿½Ø¾ï¿½ï¿½Ñ´ï¿½. 10*1024*1024 : 10ï¿½Þ°ï¿½
 		String filename="";
 		String origfilename="";		
 		String fault_title="";
@@ -30,15 +30,15 @@ public class FaultWriteAction implements Action {
 		
 		try{
 			MultipartRequest multi = new MultipartRequest(request,uploadPath,size,"UTF-8",new DefaultFileRenamePolicy());
-			Enumeration files=multi.getFileNames();	//fileÀÇ ÀÌ¸§À» °¡Á®¿Ã°Å¾ß.
+			Enumeration files=multi.getFileNames();	//fileï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ã°Å¾ï¿½.
 			
-			//Á¤º¸°ª ¹Þ¾Æ¿À±â
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 			fault_title = multi.getParameter("fault_title");
 			fault_text = multi.getParameter("fault_text");
 			member_id = multi.getParameter("member_id");			
 			
 			String file1 =(String)files.nextElement();	
-			filename=multi.getFilesystemName(file1);	//ÀÌ°ÍÀÌ DB¿¡ µé¾î°¥ ÆÄÀÏ ÀÌ¸§
+			filename=multi.getFilesystemName(file1);	//ï¿½Ì°ï¿½ï¿½ï¿½ DBï¿½ï¿½ ï¿½ï¿½î°¥ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
 			origfilename= multi.getOriginalFileName(file1);
 			
 		}catch(Exception e){
@@ -47,15 +47,17 @@ public class FaultWriteAction implements Action {
 		
 		//System.out.println("fault_title: "+fault_title+"/ fault_text: "+fault_text+"/ member_id: "+member_id+"/ filename: "+filename);
 		
-		//DTO ÀúÀå
+		//DTO ï¿½ï¿½ï¿½ï¿½
 		FaultDTO dto = new FaultDTO();
 		dto.setFault_title(fault_title);
 		dto.setFault_text(fault_text);
 		dto.setMember_id(member_id);
 		dto.setFault_attach(filename);
+		System.out.println("Action: "+uploadPath+filename);
 		
 		FaultWriteService svc = new FaultWriteService();
 		if(svc.faultWrite(dto)) {
+			
 			forward = new ActionForward();
 			forward.setRedirect(true);
 			forward.setPath("boardPointCharge.po");

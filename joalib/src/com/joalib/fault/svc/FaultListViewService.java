@@ -20,7 +20,7 @@ public class FaultListViewService {
         if(list.size() % postCount != 0) {
             pageTotalCount++;	}
         
-		 ArrayList[] totalPage = new ArrayList[pageTotalCount];
+        ArrayList<FaultDTO>[] totalPage = new ArrayList[pageTotalCount];
 		        
 		 	for(int i = 0; i < pageTotalCount; i++)  {
 	            ArrayList<FaultDTO> page = new ArrayList<FaultDTO>();
@@ -37,7 +37,7 @@ public class FaultListViewService {
 	                totalPage[i] = page;
 	            }
 		   }
-		 	//나온건 모든 페이지(안의 게시글들)가 담겨있는 배열 totalPage;
+		 
 		 	
         
         return totalPage;

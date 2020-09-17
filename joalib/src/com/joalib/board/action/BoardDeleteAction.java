@@ -14,9 +14,11 @@ public class BoardDeleteAction implements dbAction {
 		// TODO Auto-generated method stub
 		ActionForward forward = null;
 		ServletContext context = request.getServletContext();
+		
 		int board_no=Integer.parseInt(request.getParameter("board_num"));
+		
 		BoardDeleteService boardDetailService = new BoardDeleteService();
-		boardDetailService.removeArticle(board_no);
+		boolean isSuccess = boardDetailService.removeArticle(board_no);
 		
 		forward = new ActionForward();
 		forward.setRedirect(true);

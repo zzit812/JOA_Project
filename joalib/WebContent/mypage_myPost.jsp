@@ -3,6 +3,8 @@
 <%@ page import="com.joalib.DAO.*" %>
 <%@ page import="com.joalib.DTO.*" %>
 <%@ page import="com.joalib.board.svc.MyBoardViewService" %>
+<%@ page import="com.joalib.fault.svc.myFaultPostViewService" %>
+<%@ page import="com.joalib.donate.svc.myDonatePostSelectService" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 
@@ -261,22 +263,22 @@
 					<div class="tab_container">
 						<!-- #tab1 -->
 					  <div id="tab1" class="tab_content">
-						<%
+					<%
 							int boardPage = 1;
 							if(request.getParameter("boardPage") != null){
 								boardPage = Integer.parseInt(request.getParameter("boardPage")) ;
 							}
 							MyBoardViewService svc = new MyBoardViewService();
-							ArrayList[] pageList = svc.myBoardPost(member_id); //페이지정보를 담아옴.
+							ArrayList[] boardPageList = svc.myBoardPost(member_id); //페이지정보를 담아옴.
 							
 							
-							if(pageList.length < 1){
+							if(boardPageList.length < 1){
 								out.print("<h1>작성하신 게시물이 없습니다</h1>");
 							}else{
 								out.print("<table border='0' id='table1' cellspacing='0'><tr><td>게시글번호</td><td>제목</td><td>날짜</td><td>조회수</td></tr></table>");
 								out.print("<table border='0'>");
-								for(int j = 0 ; j < pageList[(boardPage)-1].size(); j++){
-									BoardDTO dto = (BoardDTO) pageList[(boardPage)-1].get(j);	//게시물 하나
+								for(int j = 0 ; j < boardPageList[(boardPage)-1].size(); j++){
+									BoardDTO dto = (BoardDTO) boardPageList[(boardPage)-1].get(j);	//게시물 하나
 									//
 									int board_num = dto.getBoard_no();
 									out.print("<tr><td>"
@@ -288,7 +290,7 @@
 								}
 								out.print("</table>"); 
 								out.print("<div id='pageNumber'>");
-								for(int i = 0; i < (pageList.length); i++){
+								for(int i = 0; i < (boardPageList.length); i++){
 									if((i+1) == boardPage){
 										out.print("<a href='mypage_myPost.jsp?boardPage="+(i+1)+"' style='color: #009688; font-weight: 700;'>"+(i+1)+"</a>");
 									}else{
@@ -298,15 +300,86 @@
 								}
 								out.print(" </div>");
 							}
-						%>		  						
+						%>							
 					</div>
 					  <!-- #tab2 -->
 					  <div id="tab2" class="tab_content">
-					  	<h1>불량도서 준비중 </h1>
+					  	<!-- <h1>불량도서 준비중 </h1> -->
+						<%
+							int faultPage = 1;
+							if(request.getParameter("faultPage") != null){
+								faultPage = Integer.parseInt(request.getParameter("faultPage")) ;
+							}
+							myFaultPostViewService svcF = new myFaultPostViewService();
+							ArrayList<FaultDTO>[] faultPageList = svcF.myFaultPostView(member_id); //페이지정보를 담아옴.
+							
+							
+							if(faultPageList.length < 1){
+								out.print("<h1>작성하신 게시물이 없습니다</h1>");
+							}else{
+								out.print("<table border='0' id='table2' cellspacing='0'><tr><td>게시글번호</td><td>제목</td><td>날짜</td></tr></table>");
+								out.print("<table border='0'>");
+								for(int j = 0 ; j < faultPageList[(faultPage)-1].size(); j++){
+									FaultDTO dtoF = (FaultDTO) faultPageList[(faultPage)-1].get(j);	//게시물 하나
+									
+									out.print("<tr><td>"
+									+dtoF.getFault_no()+"</td><td><a href='Fault_read.jsp?fault_no="+dtoF.getFault_no()+"'>"
+									+dtoF.getFault_title()+"</a></td><td>"
+									+dtoF.getFault_date().substring(0,10)+"</td></tr>");  								
+								}
+								out.print("</table>"); 
+								out.print("<div id='pageNumber'>");
+								for(int i = 0; i < (faultPageList.length); i++){
+									if((i+1) == faultPage){
+										out.print("<a href='mypage_myPost.jsp?boardPage="+(i+1)+"' style='color: #009688; font-weight: 700;'>"+(i+1)+"</a>");
+									}else{
+										out.print("<a href='mypage_myPost.jsp?boardPage="+(i+1)+"'>"+(i+1)+"</a>");
+									}
+									
+								}
+								out.print(" </div>");
+							}
+						%>
 					  </div>
 					  <!-- #tab3 -->
 					  <div id="tab3" class="tab_content">
-					  	<h1>중고도서 준비중</h1>
+					  	<!-- <h1>중고도서 준비중</h1> -->
+					  	<%
+							int donatePage = 1;
+							if(request.getParameter("donatePage") != null){
+								donatePage = Integer.parseInt(request.getParameter("donatePage")) ;
+							}
+							myDonatePostSelectService svcD = new myDonatePostSelectService();
+							ArrayList<DonateDTO>[] donatePageList = svcD.myDonatePostSvc(member_id); //페이지정보를 담아옴.
+							
+							
+							if(donatePageList.length < 1){
+								out.print("<h1>작성하신 게시물이 없습니다</h1>");
+							}else{
+								out.print("<table border='0' id='table2' cellspacing='0'><tr><td>게시글번호</td><td>제목</td><td>날짜</td><td>상태</td></tr></table>");
+								out.print("<table border='0'>");
+								for(int j = 0 ; j < donatePageList[(donatePage)-1].size(); j++){
+									DonateDTO dtoD = (DonateDTO) donatePageList[(donatePage)-1].get(j);	//게시물 하나
+									
+									out.print("<tr><td>"
+									+dtoD.getDonate_no()+"</td><td><a href='Fault_read.jsp?fault_no="+dtoD.getDonate_no()+"'>"
+									+dtoD.getDonate_title()+"</a></td><td>"
+									+dtoD.getDonate_date().substring(0,10)+"</td><td>"
+									+dtoD.getDonate_condition()+"</td></tr>");  								
+								}
+								out.print("</table>"); 
+								out.print("<div id='pageNumber'>");
+								for(int i = 0; i < (donatePageList.length); i++){
+									if((i+1) == donatePage){
+										out.print("<a href='mypage_myPost.jsp?boardPage="+(i+1)+"' style='color: #009688; font-weight: 700;'>"+(i+1)+"</a>");
+									}else{
+										out.print("<a href='mypage_myPost.jsp?boardPage="+(i+1)+"'>"+(i+1)+"</a>");
+									}
+									
+								}
+								out.print(" </div>");
+							}
+						%>
 					  </div>
 			</div>
 			

@@ -14,10 +14,9 @@ public class CommentUpdateAction implements dbAction{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		ActionForward forward=null;		
-		ServletContext context = request.getServletContext();	//ÀÌÀü ÆäÀÌÁöÀÇ servletContext¸¦ ¹Þ¾Æ¿À°í,
-		
+		ServletContext context = request.getServletContext();	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ servletContextï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½,
 		Board_CommentDTO dto = new Board_CommentDTO();		
-		//Á¤º¸¹Þ¾Æ¿À°í, set
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½, set
 		String board_no = request.getParameter("board_no");
 		String member_id = request.getParameter("member_id");
 		String bc_date = request.getParameter("bc_date");
@@ -29,15 +28,9 @@ public class CommentUpdateAction implements dbAction{
 		dto.setBc_date(bc_date);
 		dto.setBc_text(bc_text);		
 		
-		CommentUpdateService svc = new CommentUpdateService();		
+		CommentUpdateService svc = new CommentUpdateService();
+		svc.commentUpdate(dto);
 		
-		if(svc.commentUpdate(dto)) {
-			forward = new ActionForward();
-			forward.setRedirect(true);
-			forward.setPath("boardReadPage.bo?board_num="+board_no); 
-		}else {
-			System.out.println("½ÇÆÐ");
-		}	
 		
 		return forward;
 	}

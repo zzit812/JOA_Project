@@ -16,13 +16,13 @@ public class FaultDAO {
 	
 	SqlSessionFactory sqlfactory;
 	
-	////////////////////// ½ÌÅ¬ÅæÆÐÅÏ //////////////////////
+	////////////////////// ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ //////////////////////
 	
 	private static FaultDAO instance;
 	
-	//staticÀÌ ¹Ýµå½Ã! ºÙ¾î¾ßÇÑ´Ù. Á¤Àû º¯¼ö
+	//staticï¿½ï¿½ ï¿½Ýµï¿½ï¿½! ï¿½Ù¾ï¿½ï¿½ï¿½Ñ´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public static FaultDAO getinstance() {
-		if (instance == null) {	// >DAO °´Ã¼ ¸¸µçÀû ÀÖ¾î?
+		if (instance == null) {	// >DAO ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½?
 			synchronized (FaultDAO.class) {
 				instance = new FaultDAO();
 			}
@@ -32,8 +32,8 @@ public class FaultDAO {
 	
 	public FaultDAO(){	
 		try {
-			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml ¿¬°á
-			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batis¸¦ Áõ¸íÇÏ´Â ¾ÆÀÌ.				
+			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml ï¿½ï¿½ï¿½ï¿½
+			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batisï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½.				
 		} catch (IOException e) {
 			e.printStackTrace();		
 			}		
@@ -81,6 +81,15 @@ public class FaultDAO {
 		sqlsession.commit();
 		sqlsession.close();	
 		return i;
+	}
+	
+	public List<FaultDTO> myFaultPostViewSelect(String member_id) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		List<FaultDTO> myList = sqlsession.selectList("myFaultPostView", member_id);
+		sqlsession.commit();
+		sqlsession.close();	
+		
+		return myList;
 	}
 
 }

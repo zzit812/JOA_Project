@@ -25,13 +25,13 @@ public class DAO {
 	
 	SqlSessionFactory sqlfactory;
 	
-	////////////////////// ½ÌÅ¬ÅæÆĞÅÏ //////////////////////
+	////////////////////// ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ //////////////////////
 	
 	private static DAO instance;
 	
-	//staticÀÌ ¹İµå½Ã! ºÙ¾î¾ßÇÑ´Ù. Á¤Àû º¯¼ö
+	//staticï¿½ï¿½ ï¿½İµï¿½ï¿½! ï¿½Ù¾ï¿½ï¿½ï¿½Ñ´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public static DAO getinstance() {
-		if (instance == null) {	// >DAO °´Ã¼ ¸¸µçÀû ÀÖ¾î?
+		if (instance == null) {	// >DAO ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½?
 			synchronized (DAO.class) {
 				instance = new DAO();
 			}
@@ -41,8 +41,8 @@ public class DAO {
 	
 	public DAO(){	
 		try {
-			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml ¿¬°á
-			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batis¸¦ Áõ¸íÇÏ´Â ¾ÆÀÌ.				
+			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml ï¿½ï¿½ï¿½ï¿½
+			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batisï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½.				
 		} catch (IOException e) {
 			e.printStackTrace();		
 			}		
@@ -50,7 +50,7 @@ public class DAO {
 	
 	////////////////////////////////////////////////////////////////
 	//board
-	public List<BoardDTO> select_board_all() {	//ÀüÃ¼¸¦ »Ì¾Æ¿ÀÀÚ
+	public List<BoardDTO> select_board_all() {	//ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ì¾Æ¿ï¿½ï¿½ï¿½
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
 		List <BoardDTO> list = sqlsession.selectList("board_all");
@@ -59,7 +59,7 @@ public class DAO {
 		return list;
 	}
 	
-	public int select_board_total() {	//ÃÑ°Ô½Ã¹° °¹¼ö
+	public int select_board_total() {	//ï¿½Ñ°Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
 		int total = sqlsession.selectOne("board_count");
@@ -68,11 +68,13 @@ public class DAO {
 		return total;
 	}
 	
-	public void hitUp(int board_no) {		//Á¶È¸¼ö Áõ°¡
+	public int hitUp(int board_no) {
 		SqlSession sqlsession = sqlfactory.openSession();
-		sqlsession.update("board_hitUp", board_no);
+		int i = sqlsession.update("board_hitUp", board_no);
 		sqlsession.commit();
 		sqlsession.close();		
+		System.out.println("ì¡°íšŒìˆ˜ ì¦ê°€ :DAO");
+		return i;
 	}	
 	public BoardDTO read_details(int board_no) {
 		SqlSession sqlsession = sqlfactory.openSession();
@@ -93,12 +95,14 @@ public class DAO {
 	}
 
 	
-	public void board_del(int board_no) {
+	public int board_del(int board_no) {
 		SqlSession sqlsession = sqlfactory.openSession();
-		BoardDTO board_dto = new BoardDTO();
-		sqlsession.delete("board_del", board_no);
+		sqlsession.delete("board_del2", board_no);
+		int i = sqlsession.delete("board_del", board_no);
 		sqlsession.commit();
 		sqlsession.close();
+		
+		return i;
 	}
 	
 	public int board_update(BoardDTO article) {
@@ -110,7 +114,7 @@ public class DAO {
 		return i;
 	}
 	
-	//ÀÚÀ¯°Ô½ÃÆÇ ´ñ±Û Ãß°¡
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	public int boardCommnetAdd(Board_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		int i  = sqlsession.insert("boardComment_add", dto) ;
@@ -120,7 +124,7 @@ public class DAO {
 		return i;
 	}
 	
-	//ÀÚÀ¯°Ô½ÃÆÇ ´ñ±Û ¸®½ºÆ®
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<Board_CommentDTO> boardCommentList(int board_no) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		List<Board_CommentDTO> list  = sqlsession.selectList("boardComment_list", board_no) ;
@@ -130,7 +134,7 @@ public class DAO {
 		return list;
 	}
 	
-	//ÀÚÀ¯°Ô½ÃÆÇ ´ñ±Û »èÁ¦
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int boardCommentDel(Board_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		int i = sqlsession.delete("boardComment_delete", dto);
@@ -140,7 +144,7 @@ public class DAO {
 		return i;
 	}
 	
-	//ÀÚÀ¯°Ô½ÃÆÇ ´ñ±Û ¼öÁ¤
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int boardCommentUpdate(Board_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		int i = sqlsession.update("boardComment_update", dto);
@@ -152,7 +156,7 @@ public class DAO {
 	
 	
 	
-	//³»°¡ ¾´ ±Û º¸±â
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<BoardDTO> myBoardView (String member_id) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		List<BoardDTO> list = sqlsession.selectList("myBoardView",member_id);
@@ -162,7 +166,7 @@ public class DAO {
 		return list;
 	}
 	
-	//°Ô½Ã¹°´ç ´ñ±Û °¹¼ö
+	//ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int CommnetCount(int board_no){
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();

@@ -27,7 +27,7 @@ public class BoardContr extends javax.servlet.http.HttpServlet{
 		ActionForward forward=null;
 		dbAction action=null;
 		
-		if(command.equals("/boardWritePro.bo")){ //±Û¾²±â µ¥ÀÌÅÍÀÔ·Â ÈÄ ¿Ï·á¹öÆ° ´­·¶À» ¶§,
+		if(command.equals("/boardWritePro.bo")){ //ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô·ï¿½ ï¿½ï¿½ ï¿½Ï·ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½,
 			action  = new BoardWriteProAction();
 			try {
 				forward=action.execute(request, response );				
@@ -83,11 +83,18 @@ public class BoardContr extends javax.servlet.http.HttpServlet{
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+		}else if(command.equals("/boardHitUp.bo")) {
+			action = new BoardPostHitupAction();
+			try{
+				forward=action.execute(request, response);				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		
 		if(forward != null){		
 			if(forward.isRedirect()){
-				response.sendRedirect(forward.getPath());	//¹ÝÈ¯ÇÏ´Â forward°ªÀÌ ÀÖÀ¸¸é, 'forward.getPath()'À¸·Î ÀÌµ¿ÇÑ´Ù.
+				response.sendRedirect(forward.getPath());	//ï¿½ï¿½È¯ï¿½Ï´ï¿½ forwardï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 'forward.getPath()'ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ñ´ï¿½.
 			}else{
 				RequestDispatcher dispatcher= request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);

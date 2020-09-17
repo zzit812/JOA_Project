@@ -140,7 +140,7 @@
 		  		<div>
 			  		<%
 			  			DAO dao = new DAO();
-			  			  		
+			  			
 	  				  	int sitePage =1 ;	//현재페이지 //초기 페이지 = 1
 	  				  	if(request.getParameter("sitePage") != null){
 	  				  		sitePage = Integer.parseInt(request.getParameter("sitePage"));
@@ -218,28 +218,27 @@
 		  		
 		  			<%
 		  			for(int i = 0 ; i < pageList[sitePage-1].size() ; i++){
-			  				ArrayList<BoardDTO> dtoArray = pageList[sitePage-1];
-		  			%>
+			  				ArrayList<BoardDTO> dtoArray = pageList[sitePage-1];%>
 		  			<ul>
 			  			<li><%=dtoArray.get(i).getBoard_no()%></li>
 			  			<li>
-				  			<a  href='boardReadPage.bo?board_num=<%=dtoArray.get(i).getBoard_no() %>' onClick=" <% dao.hitUp(dtoArray.get(i).getBoard_no()); %> " >
-				  			<%=dtoArray.get(i).getBoard_title() %>
+				  			<a  href="boardHitUp.bo?board_no=<%=dtoArray.get(i).getBoard_no() %>"  >
+				  			<%= dtoArray.get(i).getBoard_title() %>
 				  			<% 
 				  			int commentCount = dao.CommnetCount(dtoArray.get(i).getBoard_no());
 				  			if( commentCount > 0){
-				  				out.print("<p class='commentCount'> ["+commentCount+"] </p>");
-				  			}
-				  			out.print("</a>");
-				  			%>
+				  				out.print("<p class='commentCount'> ["+commentCount+"] </p>");}%>
+				  			</a>
 			  			</li>
 			  			<li><%=dtoArray.get(i).getMember_id() %></li>
 			  			<li><%= dtoArray.get(i).getBoard_date().substring(0, 10)%></li>
 			  			<li><%=dtoArray.get(i).getBoard_hit()%></li>
 		  			</ul>
 		  			<%} %>
+		  			<!-- board-read : hitup.bo > board_read.bo -->
 
 		  		</div>
+		  		
 		  		
 		  		
 		  	</div>

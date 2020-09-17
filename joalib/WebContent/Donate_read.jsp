@@ -270,7 +270,14 @@
 			margin-left: 20px;
 	    	width: 55px;
 		}
+		#donate_text  img {
+			width: 70%;
+		}
 		
+		input[name=dealChange]{
+			margin: 22px 0;
+		    margin-right: 30px;
+		}
 		
 		
 		
@@ -390,9 +397,9 @@
 							<p><%= dto.getMember_id() %></p>
 							<p><%= dto.getDonate_date() %></p>  
 						</div>							                  
-						<div id="fault_text">
-						<img src="<%= request.getContextPath() +"/donateImage/"+dto.getDonate_attach() %>" />
-						<pre><%= dto.getDonate_text() %>	</pre>
+						<div id="donate_text">
+							<img src="<%= request.getContextPath() +"/donateImage/"+dto.getDonate_attach() %>" />
+							<pre><%= dto.getDonate_text() %>	</pre>
 						</div>   
 						
 						
@@ -400,6 +407,7 @@
 					</div>
 					<!-- 댓글 -->
 					<form name="btns" method="post" action="donateCommentAdd.don?donate_no=<%= dto.getDonate_no() %>" 	><!-- 댓글쓰기 --> 
+						
 						<h2>Comment</h2>
 						<div id="donate_comment_add">
 							<div class="member_character" ><img  src="img/character/character1.png"></div>
@@ -543,7 +551,9 @@
 									})
 								})
 							</script>
-						
+						<%if(member_id != null && member_id.equals(dto.getMember_id())){%>
+							<input type='button' name="dealChange" value = '거래완료' onClick="location.href='donateDealChange.don?donate_no=<%= donate_no%>'"/>	
+						<%}%>
 						<div class="button">	<!-- 버튼 -->
 						<% int sitePage = 1;
 							if(session.getAttribute("boardPageNum") != null){								
@@ -555,8 +565,10 @@
 							if ( member_id != null && member_id.equals(dto.getMember_id())) { 
 								request.setAttribute("article", dto.getMember_id());							
 						%>
+						
 						<input type='button'  value = '수정' onClick="location.href='Donate_update.jsp?donate_no=<%= donate_no%>'"/>
 						<input type='button'  value = '삭제' onClick="removeCheck()"/>
+						
 						<% }%>							
 						</div>
 					</form>
@@ -580,7 +592,8 @@
         	 	}else{  
         	    	 return false;
         	 	}
-        	}
+       		}
+        	
        		
         </script>
         </html>

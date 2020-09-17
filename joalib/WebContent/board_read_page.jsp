@@ -212,12 +212,12 @@
 					<li><a href='home.jsp'>HOME</a></li> | <li>
 					<%
 						String member_id = null;
-									member_id = (String)session.getAttribute("member_id");
-									if ( member_id != null) {
-										out.print("<a href='memberLogout.mem'>로그아웃</a>");
-									}else{
-										out.print("<a href='userJoinRule.html'>회원가입</a></li> | <li><a href='userLogin.html'>로그인</a>");
-									}
+						member_id = (String)session.getAttribute("member_id");
+						if ( member_id != null) {
+							out.print("<a href='memberLogout.mem'>로그아웃</a>");
+						}else{
+							out.print("<a href='userJoinRule.html'>회원가입</a></li> | <li><a href='userLogin.html'>로그인</a>");
+						}
 					%>
 					</li> | <li><a>포인트충전</a></li>
 				</ul>
@@ -324,17 +324,40 @@
 							if(list.size() > 0){
 								for(int i = 0; i < list.size(); i++){
 							%>
-									<div class="boardComments">
-										<div class="member_character" ><img  src="img/character/character1.png"></div> <!-- 이미지 -->
-										<h5><%= list.get(i).getMember_id() %></h5><h5><%= list.get(i).getBc_date() %></h5>
-										<% if(list.get(i).getMember_id().equals(member_id)){ %>
-											<a href="commentDelete.bo?board_no=<%= list.get(i).getBoard_no() %>&member_id=<%= list.get(i).getMember_id() %>&bc_date=<%= list.get(i).getBc_date().substring(0, 19)%>">삭제</a>
-											<a href="javacsript:void(0);" onclick="">수정</a>
-										<% } %>
-										
-										<p><%= list.get(i).getBc_text() %></p>
-										<input type='text' class="changeText" name="changeText<%= i %>" value="<%= list.get(i).getBc_text() %>" />
-										<input type='button' name='changeBtn' value="수정" class='changeBtn'  onClick="location.href='commentUpdate.bo?board_no=<%= list.get(i).getBoard_no() %>&member_id=<%= list.get(i).getMember_id() %>&bc_date=<%= list.get(i).getBc_date()%>&bc_text='+ document.querySelector('input[name=changeText<%= i %>]').value; " />
+							<div class="boardComments">
+								<div class="member_character" ><img  src="img/character/character1.png"></div> <!-- 이미지 -->
+								<h5><%= list.get(i).getMember_id() %></h5><h5><%= list.get(i).getBc_date() %></h5>
+								<% if(list.get(i).getMember_id().equals(member_id)){ %>
+									<a href="commentDelete.bo?board_no=<%= list.get(i).getBoard_no() %>&member_id=<%= list.get(i).getMember_id() %>&bc_date=<%= list.get(i).getBc_date().substring(0, 19)%>">삭제</a>
+									<a href="javacsript:void(0);" onclick="" id="change">수정</a>
+									
+									<script type="text/javascript">
+										function commentChangeBtn(commentNo, member_id, bc_date, board_no){
+											var commnet = "changeText"+commentNo;	// ex : changeText0 ...
+											var bc_text = document.querySelector('input[name='+commnet+']').value;	//수정한 텍스트
+											//console.log(commnet_text+", "+comment_data+", "+boardNo);
+											$.ajax({
+												type : 'POST',
+												url: 'commentUpdate.bo',	//접근 문서
+												data: {'member_id':member_id, 'bc_date':bc_date , 'bc_text': bc_text, 'board_no': board_no },	//{String key:value} >이 값을 넘겨주겠습니다. > 리턴타입이라고 생각하면 된다.
+												dataType : "json",	//접근 문서의 종류, 어떤 타입으로 보여줄거냐	//html, text, 		
+												success: $(function(){	//성공을 하면 처리해야하는 작업
+													var p = $('input[name='+commnet+']').parent().children('p');	
+													p.show();
+													p.text(bc_text);
+													$('input[name='+commnet+']').parent().children(".changeText").hide();
+													$('input[name='+commnet+']').parent().children("input[name=changeBtn]").hide();
+													$('input[name='+commnet+']').parent().children('a:nth-child(5)').text('수정');
+													
+												})					
+											});
+										}
+									</script>
+								<% } %>
+								
+								<p><%= list.get(i).getBc_text() %></p>
+								<input type='text' class="changeText" name="changeText<%= i %>" value="<%= list.get(i).getBc_text() %>" />
+								<input type='button' name='changeBtn' value="수정" class='changeBtn'  onClick="commentChangeBtn(<%= i %>,'<%= member_id %>','<%= list.get(i).getBc_date() %>',<%= article.getBoard_no() %>)" />
 									</div>
 							<%} 
 							}
@@ -360,7 +383,8 @@
 											$(this).parent().children(".changeText").hide();
 											$(this).parent().children("input[name=changeBtn]").hide();
 											$(this).text('수정');
-										}																			
+										}
+										
 									})															
 								})
 							</script>
