@@ -3,6 +3,7 @@
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@ page import="com.joalib.DAO.DAO" %>
+<%@ page import="com.joalib.DAO.DonateDAO" %>
 <%@ page import="com.joalib.DTO.*" %>
 <%@ page import="com.joalib.board.action.dbAction" %>
 <%@ page import="com.joalib.board.svc.CommentListService" %>
@@ -155,7 +156,7 @@
 		    border-left: solid 1px gray;
     		padding-left: 8px;
 		}
-		.boardComments > a:nth-child(4), .boardComments > a:nth-child(5){
+		.boardComments > a:nth-child(4), .boardComments > a:nth-child(5), .boardComments > a:nth-child(6){
 			float: right;
 		    opacity: 80%;
 		    font-size: 13px;
@@ -195,6 +196,108 @@
 		    padding: 5px 0;
 		    font-weight: 500;
 		}
+		
+		
+		
+		<!-- -->
+		.board_small_comment_list > h6{
+			/*댓글 날짜*/
+			display: inline-block;
+		    margin: 0 0 0 20px;
+		    font-weight: 400;
+		    opacity: 60%;
+		    font-size: 12px;
+		    border-left: solid 1px gray;
+    		padding-left: 8px;
+		}
+		
+		.board_small_comment_list a:nth-child(2),.board_small_comment_list a:nth-child(3){
+			float: right;
+		    opacity: 70%;
+		    font-size: 13px;
+		    margin-right: 7px;
+		    margin-top: -2px;
+			
+		}
+		
+		.board_small_comment{
+		    display: flex;
+		    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+		}
+		.board_small_comment > div{
+		    float: left;
+		    display: block;
+		    width: 95%;
+		    /* margin: 5px 0 10px 0; */
+		    /* margin: 2px 0 0 auto; */
+		    padding: 5px 0 10px 0;
+		    /* border-bottom: 1px solid; */
+		}
+		.board_small_comment > div > input[type=text]{
+			min-height: 30px;
+		    width: 85%;
+		    border: 1px solid #00000030;		    
+		    margin: 5px 0;
+		}
+		.board_small_comment > div > h5 {
+			margin: 0;
+		    font-size: 13px;
+		    font-weight: 400;
+		    opacity: 90%;
+		    padding-left : 5px;
+		}
+		.board_small_comment > h5 {
+			float: left;
+		    width: 5%;
+		    text-align: center;
+		    font-size: 15px;
+		    opacity: 35%;
+		}
+		.board_small_comment > div > input[type=button]{
+		    clear: both;
+		    margin: 5px 10px;
+		    width: 11%;
+		    padding: 5px 0;
+		}
+		.board_small_comment_list {
+			width: 95%;
+		    margin: 13px 0 15px auto;
+		    padding: 5px 0 0 0;
+		    /* box-shadow: -5px 5px 10px rgba(0,0,0,5%); */
+		     border-radius: 10px; 
+		    /* background-color: #5f9ea014; */
+		    border: 1px solid #dcdcdc73;
+		}
+		.board_small_comment_list > h5, .board_small_comment_list > h6 {
+			padding: 2px 10px;
+		    float: left;
+		    margin: 0px;
+		}
+		.board_small_comment_list > p, .board_small_comment_list > input[type=text] {
+		    clear: both;
+		    display: block;
+		    margin: 7px 2px;
+		    padding: 2px 5px;
+		    font-size: 13px;
+		    font-weight: 300;
+		    width: 80%;
+		    border: none;
+		    display: inline-block;
+		    background-color: #ffffff00;		    
+		}
+		.board_small_comment_list > input[name=sc_changeBtn]{
+			margin-left: 20px;
+	    	width: 55px;
+		}
+		#donate_text  img {
+			width: 70%;
+		}
+		
+		input[name=dealChange]{
+			margin: 22px 0;
+		    margin-right: 30px;
+		}
+		
 		
 		
 	</style>
@@ -323,52 +426,123 @@
 							List<Board_CommentDTO> list = svc.commentList(article.getBoard_no());
 							if(list.size() > 0){
 								for(int i = 0; i < list.size(); i++){
+									int board_comment_no = list.get(i).getBoard_comment_no();
 							%>
-							<div class="boardComments">
+							<div class="boardComments" id=<%= board_comment_no%>>
 								<div class="member_character" ><img  src="img/character/character1.png"></div> <!-- 이미지 -->
 								<h5><%= list.get(i).getMember_id() %></h5><h5><%= list.get(i).getBc_date() %></h5>
 								<% if(list.get(i).getMember_id().equals(member_id)){ %>
-									<a href="commentDelete.bo?board_no=<%= list.get(i).getBoard_no() %>&member_id=<%= list.get(i).getMember_id() %>&bc_date=<%= list.get(i).getBc_date().substring(0, 19)%>">삭제</a>
-									<a href="javacsript:void(0);" onclick="" id="change">수정</a>
-									
-									<script type="text/javascript">
-										function commentChangeBtn(commentNo, member_id, bc_date, board_no){
-											var commnet = "changeText"+commentNo;	// ex : changeText0 ...
-											var bc_text = document.querySelector('input[name='+commnet+']').value;	//수정한 텍스트
-											//console.log(commnet_text+", "+comment_data+", "+boardNo);
-											$.ajax({
-												type : 'POST',
-												url: 'commentUpdate.bo',	//접근 문서
-												data: {'member_id':member_id, 'bc_date':bc_date , 'bc_text': bc_text, 'board_no': board_no },	//{String key:value} >이 값을 넘겨주겠습니다. > 리턴타입이라고 생각하면 된다.
-												dataType : "json",	//접근 문서의 종류, 어떤 타입으로 보여줄거냐	//html, text, 		
-												success: $(function(){	//성공을 하면 처리해야하는 작업
-													var p = $('input[name='+commnet+']').parent().children('p');	
-													p.show();
-													p.text(bc_text);
-													$('input[name='+commnet+']').parent().children(".changeText").hide();
-													$('input[name='+commnet+']').parent().children("input[name=changeBtn]").hide();
-													$('input[name='+commnet+']').parent().children('a:nth-child(5)').text('수정');
-													
-												})					
-											});
-										}
-									</script>
+									<a href="javascript:void(0);">삭제</a>
+									<a href="javascript:void(0);" onclick="" id="change">수정</a>
+									<a href="javascript:void(0);" onclick="" class="s_comments">답글</a>
 								<% } %>
-								
 								<p><%= list.get(i).getBc_text() %></p>
+								<input type="hidden" name="commentNum" value="<%= board_comment_no%>" />
 								<input type='text' class="changeText" name="changeText<%= i %>" value="<%= list.get(i).getBc_text() %>" />
 								<input type='button' name='changeBtn' value="수정" class='changeBtn'  onClick="commentChangeBtn(<%= i %>,'<%= member_id %>','<%= list.get(i).getBc_date() %>',<%= article.getBoard_no() %>)" />
+							
+								<!-- 답글 -->
+								<div class="board_small_comment">
+									<h5>└</h5>
+									<div>
+										<h5><%= member_id %></h5>
+										<input type='text' class="" name="smallComment<%= i %>" />
+										<input type="button" name="" value="확인" onClick="location.href='smallCommentAdd.bo?member_id=<%= member_id %>&board_comment_no=<%= list.get(i).getBoard_comment_no() %>&board_no=<%= list.get(i).getBoard_no() %>&bc_s_text='+ document.querySelector('input[name=smallComment<%= i %>]').value;" />
 									</div>
+								</div>
+								<!-- 답글 리스트 -->
+								<%
+								DAO dao = DAO.getinstance();
+								List<Board_Small_CommentDTO> sc_dto = dao.boardSmallCommentList(board_comment_no);
+								if( sc_dto.size() > 0){
+									for(int j = 0 ; j < sc_dto.size(); j++){
+										String scNum = sc_dto.get(j).getBoard_comment_no()+"_"+ j;  %>
+										<div class="board_small_comment_list" id="<%= scNum%>">
+											<h5><%= sc_dto.get(j).getMember_id()%></h5>
+											<% if (sc_dto.get(j).getMember_id().equals(member_id)) {%>
+												<a href="javascript:void(0);" onClick="">삭제</a><a href=" javascript:void(0); ">수정</a>
+											<%} else{	out.print("<a></a><a></a>");	}%>
+											
+											<h6><%= sc_dto.get(j).getBc_s_date().substring(0, 19) %></h6>
+											<input type="text" name="sc_value" value="<%= sc_dto.get(j).getBc_s_text() %>" disabled="disabled" />
+											<input type="hidden" name="scNum" value="<%= scNum%>" />
+											<input type="hidden" name="bc_s_date" value="<%= sc_dto.get(j).getBc_s_date()%>" />
+											<input type="button" name="sc_changeBtn" value="수정" />
+										</div>
+								<%	}
+								}
+								
+								%>
+								
+								
+							</div>
+							
 							<%} 
 							}
 							%>
 							
 							<script type="text/javascript">
+							
+								function commentChangeBtn(commentNo, member_id, bc_date, board_no){
+									var commnet = "changeText"+commentNo;	// ex : changeText0 ...
+									var bc_text = document.querySelector('input[name='+commnet+']').value;	//수정한 텍스트
+									//console.log(commnet_text+", "+comment_data+", "+boardNo);
+									$.ajax({
+										type : 'POST',
+										url: 'commentUpdate.bo',	//접근 문서
+										data: {'member_id':member_id, 'bc_date':bc_date , 'bc_text': bc_text, 'board_no': board_no },	//{String key:value} >이 값을 넘겨주겠습니다. > 리턴타입이라고 생각하면 된다.
+										dataType : "json",	//접근 문서의 종류, 어떤 타입으로 보여줄거냐	//html, text, 		
+										success: $(function(){	//성공을 하면 처리해야하는 작업
+											var p = $('input[name='+commnet+']').parent().children('p');	
+											p.show();
+											p.text(bc_text);
+											$('input[name='+commnet+']').parent().children(".changeText").hide();
+											$('input[name='+commnet+']').parent().children("input[name=changeBtn]").hide();
+											$('input[name='+commnet+']').parent().children('a:nth-child(5)').text('수정');
+											
+										})					
+									});
+								}
+							
 								$(function(){
-									var chlickCount = 1;
+									//
+									$('.boardComments > a:nth-child(4)').on('click', function(){
+										var member_id = $(this).parent().children('h5:nth-child(2)').text();
+										var bc_date = $(this).parent().children('h5:nth-child(3)').text();
+										var commentNum = $(this).parent().children('input[name=commentNum]').val();
+										var result = confirm("댓글을 삭제하시겠습니까?");
+										if(result){
+											//alert(commentNum);
+											$.ajax({
+												type : 'POST',
+												url: 'commentDelete.bo',	//접근 문서
+												data: {'member_id':member_id, 'bc_date':bc_date, 'board_comment_no':commentNum },	//{String key:value} >이 값을 넘겨주겠습니다. > 리턴타입이라고 생각하면 된다.
+												dataType : "json",	//접근 문서의 종류, 어떤 타입으로 보여줄거냐	//html, text, 		
+												success: $(function(data){
+													$('#'+commentNum).html(data);
+													$('#'+commentNum).remove();
+													return false;
+												})
+											});
+										}
+									})
+									
+									//a태그 '답글' 눌렀을때
+									$(".board_small_comment").hide();
+									$('.s_comments').on('click', function(){
+										var change = $(this).text();
+										if(change == '답글'){	
+											$(this).parent().children(".board_small_comment").show();
+											$(this).text('취소');	
+										}else{									
+											$(this).parent().children(".board_small_comment").hide();
+											$(this).text('답글');
+										}																			
+									})
+									
 									$(".changeText").hide();
 									$("input[name=changeBtn]").hide();		
-									//a태그 수정 눌렀을때
+									//a태그 '수정' 눌렀을때
 									$('.boardComments > a:nth-child(5)').on('click', function(){
 										var change = $(this).text();
 										if(change == '수정'){
@@ -385,7 +559,73 @@
 											$(this).text('수정');
 										}
 										
-									})															
+									})	
+									//
+									var sc_value = null ;
+									$(".board_small_comment_list > input[name=sc_changeBtn]").hide();
+									$('.board_small_comment_list > a:nth-child(3)').on('click', function(){
+										var change = $(this).text();										
+										if(change == '수정'){
+											sc_value = $(this).parent().children("input[name=sc_value]").val();
+											$(this).parent().children(".board_small_comment_list > input[name=sc_changeBtn]").show();
+											$(this).parent().children("input[name=sc_value]").attr("disabled", false); //활성화
+											$(this).parent().children("input[name=sc_value]").focus();
+											$(this).parent().children("input[name=sc_value]").css('border','1px solid #00000030');
+											$(this).text('취소');		//텍스트는 취소로 바뀜 
+											//
+											$(this).parent().children("input[name=sc_changeBtn]").on('click', function(){
+												//버튼 누르면
+												var member_id = $(this).parent().children('h5').text();
+												var bc_s_date = $(this).parent().children('input[name=bc_s_date]').val();
+												var bc_s_text = $(this).parent().children('input[name=sc_value]').val();												
+												$.ajax({
+													type : 'POST',
+													url: 'smallCommentChange.bo',	//접근 문서
+													data: {'member_id':member_id, 'bc_s_date':bc_s_date , 'bc_s_text': bc_s_text },	//{String key:value} >이 값을 넘겨주겠습니다. > 리턴타입이라고 생각하면 된다.
+													dataType : "json",	//접근 문서의 종류, 어떤 타입으로 보여줄거냐	//html, text, 		
+													success: function(){	//성공을 하면 처리해야하는 작업
+														sc_value = bc_s_text.value;	
+													}							
+												});
+												$(this).parent().children("input[name=sc_value]").css('border','none');
+												$(this).parent().children("input[name=sc_value]").attr("disabled", true); //비활성화
+												$(this).parent().children(".board_small_comment_list a:nth-child(3)").text('수정');
+												$(this).hide();
+												//버튼을 누르면~ 끝
+											})		
+										}else{
+											$(this).parent().children("input[name=sc_value]").val(sc_value);
+											$(this).parent().children("input[name=sc_value]").attr("disabled", true); //비활성화
+											$(this).parent().children("input[name=sc_value]").css('border','none');
+											//
+											$(this).parent().children("input[name=sc_changeBtn]").hide();
+											//
+											$(this).text('수정');
+										}
+									})
+									
+									//
+									$('.board_small_comment_list > a:nth-child(2)').on('click', function(){
+										var result = confirm("답글을 정말로 삭제할까요??");
+										if(result){
+											/* alert("ok"); */
+											var member_id = $(this).parent().children('h5').text();
+											var bc_s_date = $(this).parent().children('input[name=bc_s_date]').val();
+											var scNum = $(this).parent().children('input[name=scNum]').val();
+											$.ajax({
+												type : 'POST',
+												url: 'smallCommentDel.bo',	//접근 문서
+												data: {'member_id':member_id, 'bc_s_date':bc_s_date },	//{String key:value} >이 값을 넘겨주겠습니다. > 리턴타입이라고 생각하면 된다.
+												dataType : "json",	//접근 문서의 종류, 어떤 타입으로 보여줄거냐	//html, text, 		
+												success: $(function(data){
+													$('#'+scNum).html(data);
+													$('#'+scNum).remove();
+													return false;
+												})
+											});
+										}
+									})
+									
 								})
 							</script>
 						</div>

@@ -77,7 +77,7 @@
 	</delete>
 
 	<insert id="boardComment_add" parameterType="com.joalib.DTO.Board_CommentDTO">
-		INSERT INTO joalib.board_comment VALUES ( #{board_no}, #{member_id}, #{bc_text},now() );
+		INSERT INTO joalib.board_comment (`board_no`, `member_id`, `bc_text`, `bc_date`) VALUES ( #{board_no}, #{member_id}, #{bc_text}, now() );
 	</insert>
 	
 	<select id="boardComment_list" parameterType="int" resultType="com.joalib.DTO.Board_CommentDTO">
@@ -99,9 +99,13 @@
 		select * from joalib.bookinfo where isbn= #{isbn};
 	</select>
 	
-	<delete id="boardComment_delete" parameterType="com.joalib.DTO.BoardDTO">
+	<delete id="boardComment_delete1" parameterType="com.joalib.DTO.BoardDTO">
 		delete from joalib.board_comment where member_id = #{member_id} and bc_date = #{bc_date};
 	</delete>
+	<delete id="boardComment_delete2" parameterType="com.joalib.DTO.BoardDTO">
+		delete FROM joalib.board_small_comment where board_comment_no = #{board_comment_no};
+	</delete>
+	
 	
 	<update id="boardComment_update" parameterType="com.joalib.DTO.BoardDTO">
 		UPDATE joalib.board_comment set bc_text = #{bc_text} where member_id = #{member_id} and bc_date = #{bc_date};
@@ -187,18 +191,22 @@
 	<delete id="donateCommentDelete" parameterType="int">
 		delete from joalib.donate_comment where donate_comment_no = #{donate_comment_no};
 	</delete>	
-	<insert id="donateSmallCommentAdd" parameterType="com.joalib.DTO.Donate_Small_CommentDTO">
-		insert into joalib.donate_small_comment (`member_id`, `dc_s_text`, `dc_s_date`, `donate_comment_no`) VALUES (#{member_id}, #{dc_s_text},now(), #{donate_comment_no});
+	
+	
+	<insert id="boardSmallCommentAdd" parameterType="com.joalib.DTO.Board_Small_CommentDTO">
+		insert into joalib.board_small_comment (`member_id`, `bc_s_text`, `bc_s_date`, `board_comment_no`) VALUES (#{member_id}, #{bc_s_text}, now(), #{board_comment_no});
 	</insert>
-	<select id="donateSmallCommentList" parameterType="int" resultType="com.joalib.DTO.Donate_Small_CommentDTO">
-		select * from joalib.donate_small_comment where donate_comment_no = #{donate_comment_no};
+	<select id="boardSmallCommentList" parameterType="int" resultType="com.joalib.DTO.Board_Small_CommentDTO">
+		select * from joalib.board_small_comment where board_comment_no = #{board_comment_no};
 	</select>
-	<delete id="donateSmallCommentDelete" parameterType="com.joalib.DTO.Donate_Small_CommentDTO">
-		delete from joalib.donate_small_comment where member_id = #{member_id} and dc_s_date = #{dc_s_date};
+	<delete id="boardSmallCommentDelete" parameterType="com.joalib.DTO.Board_Small_CommentDTO">
+		delete from joalib.board_small_comment where member_id = #{member_id} and bc_s_date = #{bc_s_date};
 	</delete>
-	<update id="donateSmallCommentChange" parameterType="com.joalib.DTO.Donate_Small_CommentDTO">
-		update joalib.donate_small_comment set dc_s_text = #{dc_s_text} where member_id = #{member_id} and dc_s_date = #{dc_s_date};
+	<update id="boardSmallCommentChange" parameterType="com.joalib.DTO.Board_Small_CommentDTO">
+		update joalib.board_small_comment set bc_s_text = #{bc_s_text} where member_id = #{member_id} and bc_s_date = #{bc_s_date};
 	</update>
+	
+	
 	
 	<delete id="memberDelete" parameterType="String">
 		delete from joalib.memberinfo where member_id = #{member_id};

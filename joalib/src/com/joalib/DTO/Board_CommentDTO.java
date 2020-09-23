@@ -5,6 +5,7 @@ public class Board_CommentDTO {
 	String member_id;
 	String bc_text;
 	String bc_date;
+	int board_comment_no;
 	
 	
 	public String getBoard_no() {
@@ -30,6 +31,12 @@ public class Board_CommentDTO {
 	}
 	public void setBc_date(String bc_date) {
 		this.bc_date = bc_date;
+	}
+	public int getBoard_comment_no() {
+		return board_comment_no;
+	}
+	public void setBoard_comment_no(int board_comment_no) {
+		this.board_comment_no = board_comment_no;
 	}
 	
 	

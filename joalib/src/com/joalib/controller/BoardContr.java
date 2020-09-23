@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.joalib.DAO.DAO;
 import com.joalib.DTO.ActionForward;
-import com.joalib.board.action.dbAction;
-
 import com.joalib.board.action.*;
 
 
@@ -85,6 +83,27 @@ public class BoardContr extends javax.servlet.http.HttpServlet{
 			}
 		}else if(command.equals("/boardHitUp.bo")) {
 			action = new BoardPostHitupAction();
+			try{
+				forward=action.execute(request, response);				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/smallCommentChange.bo")) {
+			action = new SmallCommentChangeAction();
+			try{
+				forward=action.execute(request, response);				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/smallCommentAdd.bo")) {
+			action = new SmallCommentAddAction();
+			try{
+				forward=action.execute(request, response);				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/smallCommentDel.bo")) {
+			action = new SmallCommentDelAction();
 			try{
 				forward=action.execute(request, response);				
 			}catch(Exception e){

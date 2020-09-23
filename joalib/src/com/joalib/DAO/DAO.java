@@ -17,6 +17,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.joalib.DTO.BoardDTO;
 import com.joalib.DTO.Board_CommentDTO;
+import com.joalib.DTO.Board_Small_CommentDTO;
+import com.joalib.DTO.Donate_Small_CommentDTO;
 import com.joalib.DTO.memberinfoDTO;
 
 import com.joalib.DTO.BoardDTO;
@@ -137,7 +139,8 @@ public class DAO {
 	//�����Խ��� ��� ����
 	public int boardCommentDel(Board_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
-		int i = sqlsession.delete("boardComment_delete", dto);
+		sqlsession.delete("boardComment_delete2", dto);
+		int i = sqlsession.delete("boardComment_delete1", dto);
 		sqlsession.commit();
 		sqlsession.close();
 		
@@ -176,6 +179,44 @@ public class DAO {
 		
 		return count;
 	}
+	
+///
+	public int boardSmallCommentAdd(Board_Small_CommentDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.insert("boardSmallCommentAdd", dto);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}
+	public List<Board_Small_CommentDTO> boardSmallCommentList(int donate_comment_no){
+		SqlSession sqlsession = sqlfactory.openSession();
+		List<Board_Small_CommentDTO> dto = sqlsession.selectList("boardSmallCommentList", donate_comment_no);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return dto;
+	}
+	public int boardSmallCommentDelete(Board_Small_CommentDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		System.out.println("접근 성공");
+		int i = sqlsession.delete("boardSmallCommentDelete", dto);
+		System.out.println("연결 성공");
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+	}
+	public int boardSmallCommentChange(Board_Small_CommentDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.update("boardSmallCommentChange", dto);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i ;
+	}
+	
+	
 
 
 
