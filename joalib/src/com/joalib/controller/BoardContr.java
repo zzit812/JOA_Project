@@ -109,6 +109,20 @@ public class BoardContr extends javax.servlet.http.HttpServlet{
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+		}else if(command.equals("/commentAlarmAdd.bo")) {
+			action = new CommentAlramAddAction();
+			try{
+				forward=action.execute(request, response);				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/smallCommentAlarmAdd.bo")) {
+			action = new SamllCommentAlarmAction();
+			try{
+				forward=action.execute(request, response);				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		
 		if(forward != null){		

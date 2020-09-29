@@ -4,32 +4,31 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.joalib.DAO.DonateDAO;
 import com.joalib.DTO.ActionForward;
-import com.joalib.DTO.Donate_CommentDTO;
-import com.joalib.donate.svc.CommnetAddService;
+import com.joalib.DTO.Donate_ApplicationDTO;
 
-public class CommnetAddAction implements Action {
+public class DonateApplicationAddAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		ActionForward forward=null;		
-		ServletContext context = request.getServletContext();	//이전 페이지의 servletContext를 받아오고,		
+		ServletContext context = request.getServletContext();
 		
-		//정보 받고 set DTO
 		int donate_no = Integer.parseInt(request.getParameter("donate_no"));
-		String member_id = request.getParameter("member_id");
-		String dc_text = request.getParameter("dc_text");
+		String donate_application_member = request.getParameter("donateApplicationMember");
+		String donate_writer = request.getParameter("donateWriter");
 		
-		Donate_CommentDTO dto = new Donate_CommentDTO();
+		Donate_ApplicationDTO dto = new Donate_ApplicationDTO();
 		dto.setDonate_no(donate_no);
-		dto.setMember_id(member_id);
-		dto.setDc_text(dc_text);
+		dto.setDonate_application_member(donate_application_member);
+		dto.setDonate_writer(donate_writer);
 		
-		CommnetAddService svc = new CommnetAddService();
-		boolean isSuccess = svc.donateCommentAdd(dto);
+		DonateDAO dao = DonateDAO.getinstance();
+		int i = dao.DonateApplicationAdd(dto);
 		
-		if(isSuccess) {
+		if(i > 0) {
 			forward = new ActionForward();
 			forward.setRedirect(true);
 			forward.setPath("Donate_read.jsp?donate_no="+donate_no);
@@ -38,5 +37,7 @@ public class CommnetAddAction implements Action {
 		
 		return forward;
 	}
+	
+	
 
 }

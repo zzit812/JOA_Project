@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.joalib.member.svc.AlarmMemberViewService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.joalib.DTO.member_alarmDTO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -262,6 +265,78 @@
 	
 /*========================================================*/
 
+	#memAlarm{
+		background-color: #f2f2f2;
+	    width: 75%;
+	    margin: auto;
+	}
+	#memAlarm > a {
+	    display: block;
+	}
+	#memAlarm > .checkAlarm {
+	    opacity: 35%;
+	}
+	/*========팝업========*/
+	#donateDonePopMask{
+		z-index: 4;
+		position: fixed;
+		width: 100%;
+		height: 1000px;
+		top: 0px;
+		left: 0px;
+		display: none; 
+		background-color:#000;
+		opacity: 0.8;
+	}
+	#donateDonePop{
+		z-index: 5;
+		top: 200px;
+		position: absolute;
+	    background: #f5f5f5;
+	    width: 500px;
+	    height: 150px;
+	    display: none;
+	    border-radius: 5px;
+        padding: 20px 30px;
+	}
+	#donateDonePop > h1{
+		margin: 5px 0;
+	    font-weight: 300;
+	    opacity: 90%;
+	    font-size: 30px;
+	    border-bottom: solid 1px #00000025;
+	}
+	#donateDonePop > h1 > a{
+		float: right;
+	}
+	#donateDonePop > h5 {
+		margin: 0;
+	    font-weight: 300;
+	    opacity: 75%;
+	    font-size: 16px;
+	    clear: both;
+	}
+	#donateDonePop > a{
+	    margin-left: 10px;
+	    font-size: 13px;
+	    font-weight: 500;
+	    color: #e05e01;
+	    opacity: 85%;
+	}
+	#okDonateBtn{
+		margin: 10px auto;
+	    width: 15%;
+	    padding: 3px;
+	    text-align: center;
+	    background: #e05e01;
+	    border-radius: 15px;
+	    font-size: 20px;
+	    
+	    font-weight: 300;
+	}
+	#okDonateBtn > a{
+		color: aliceblue;
+	}
 
 	  
 </style>
@@ -346,8 +421,82 @@ https://www.hancomm.co.kr/index.do
 				<div id="menuWindow"> <!-- <img src="img/topMenuImg.png" /> --> </div>
 				
 				
-				<script type="text/javascript">
+				
+			</nav>
+	</header> 
+	<section>
+	
+	
+	
+	<div id="donateDonePopMask"></div>
+	<div id="donateDonePop">
+		<h1>도서 나눔 확정<a href="javascript:void(0);">X</a></h1>
+		<h5>도서 나눔 신청이 수락되었습니다. 확정하시겠습니까?</h5>
+		<a href="#">게시물 가기>></a>
+		<div id="okDonateBtn"><a  href="javascript:void(0);">확정</a></div>
+	</div>
+	<div id="memAlarm">
+				알림<br>
+				<%
+				AlarmMemberViewService svc = new AlarmMemberViewService();
+				List<member_alarmDTO> list = svc.memberAlarmView(member_id);
+				String[] categoryAlarm;
+				String[] ectAlarm;
+				
+				for(int i = 0 ; i < list.size(); i++){
+					categoryAlarm = list.get(i).getAlarm_category().split("_");
+					ectAlarm = list.get(i).getAlarm_etc().split("/"); %>
+					<%
+					if(list.get(i).getAlarm_check() == 0){
+						if(categoryAlarm[0].equals("board")){
+							//자유게시판 알림
+							if(categoryAlarm[1].equals("comment")){
+								out.print("<a href='memberAlram.mem?alarm_date="+list.get(i).getAlarm_date()+"&board_no="+list.get(i).getAlarm_etc()+"'> 회원님의 게시물에 "+ectAlarm[1]+"님이 댓글을 남겼습니다.</a>");
+							}else if(categoryAlarm[1].equals("smallcomment")){
+								out.print("<a href='#'> 회원님의 게시물에 "+ectAlarm[1]+"님이 답글을 남겼습니다.</a>");
+							}
+						}else if(categoryAlarm[0].equals("donate")){
+							//도서 나눔 알림
+							if(categoryAlarm[1].equals("message")){%>
+								<a class="donateMessage" href="javascript:void(0);" onClick="donateMessage('<%=member_id %>','<%= list.get(i).getAlarm_category()%>','<%= list.get(i).getAlarm_etc()%>');">신청하신 도서 나눔 게시글에서 회원님의 거래를 수락했어요! 확정하러 갈까요?</a>
+							<%}else if(categoryAlarm[1].equals("application")){
+								out.print("<a href='memberAlram.mem?alarm_date="+list.get(i).getAlarm_date()+"&donate_no="+list.get(i).getAlarm_etc()+"'>회원님의 도서 나눔 게시글에 "+ectAlarm[1]+"님이 신청 했어요!</a>");
+							}
+						}
+					}else{
+						if(categoryAlarm[0].equals("board")){
+							if(categoryAlarm[1].equals("comment")){
+								out.print("<a class='checkAlarm' href='boardHitUp.bo?board_no="+ectAlarm[0]+"'> 회원님의 게시물에 "+ectAlarm[1]+"님이 댓글을 남겼습니다.</a>");
+							}else if(categoryAlarm[1].equals("smallcomment")){
+								out.print("<a href='#'> 회원님의 게시물에 "+ectAlarm[1]+"님이 답글을 남겼습니다.</a>");
+							}
+						}else if(categoryAlarm[0].equals("donate")){
+							if(categoryAlarm[1].equals("message")){%>
+								<a class='checkAlarm' href="Donate_read.jsp?donate_no=<%= list.get(i).getAlarm_etc() %>&page_num=1">거래가 완료된 게시글입니다.</a>
+							<%}else if(categoryAlarm[1].equals("application")){
+								out.print("<a class='checkAlarm' href='Donate_read.jsp?donate_no="+ectAlarm[0]+"&page_num=1'>회원님의 도서 나눔 게시글에 "+ectAlarm[1]+"님이 신청 했어요!</a>");
+							}
+						}
+					}
+				}%>
+			</div>
+			
+			<script type="text/javascript">
+					var position;
+					var member_id;
+					var donate_no;
+					var donate_category;
+					
+					function donateMessage(memberid,donatecategory, donateno){
+						member_id = memberid ;
+						donate_no = donateno;
+						donate_category = donatecategory;
+					}
+					
 					$(function(){
+						$(window).scroll(function() {
+				            position = $(window).scrollTop();
+				        });
 												
 						$('#top_menu > li').hover(function(){
 							$(this).children('.menuHoverEvent').css("width","140px"),
@@ -370,12 +519,53 @@ https://www.hancomm.co.kr/index.do
 							//$(this).children('a').css("fontWeight","300"),
 							$(this).children('.rightMenuHoverEvent').css("backgroundColor","#dcdcdc")
 						})
-					})
-
+						
+						//도서 나눔 확정 팝업
+						$(".donateMessage").on("click",function(){
+							var clickThis = $(this)
+							clickThis.attr("id","thisMessage");
+							//open
+							$("#donateDonePopMask").css("display","block");
+							$("#donateDonePop").css("display","block"); 
+							$("body").css("overflow","hidden");//body 스크롤바 생성
+							$("#donateDonePop").css({
+								"top": ( position+200 )+"px",
+							    "left": (($(window).width()-$("#donateDonePop").outerWidth())/2+$(window).scrollLeft())+"px"	
+							});
+							
+							// 게시물가기
+							$("#donateDonePop > a").attr("href","Donate_read.jsp?donate_no="+donate_no+"&page_num=1");
+							//'X' 눌렀을때
+							$("#donateDonePop > h1 > a").on("click", function(){
+								$("#donateDonePopMask").css("display","none");
+					            $("#donateDonePop").css("display","none"); 
+					            $("body").css("overflow","auto");//body 스크롤바 생성
+					            clickThis.removeAttr("id","thisMessage");
+							});
+							//확정 버튼 눌렀을때
+							$('#okDonateBtn').on("click", function(){
+								$.ajax({
+									type : 'POST',
+									url: 'donateMessageChecked.don',	//접근 문서
+									data: {'member_id':member_id, 'donate_no': donate_no, 'donate_category': donate_category },	//{String key:value} >이 값을 넘겨주겠습니다. > 리턴타입이라고 생각하면 된다.
+									dataType : "json",	 		
+									success: $(function(data){
+										$("#donateDonePopMask").css("display","none");
+							            $("#donateDonePop").css("display","none"); 
+							            $("body").css("overflow","auto");
+							            //$("#memAlarm > #thisMessage").load(window.location.href+" #thisMessage");
+							            //$('#thisMessage').html(data);
+							            var url = "<a class='checkAlarm' href='Donate_read.jsp?donate_no="+donate_no+"&page_num=1'>거래가 완료된 게시글입니다.</a>";
+							            $("#thisMessage").after(url);
+							            $("#thisMessage").remove();
+									})				
+								});
+							});
+						})
+					});
 				</script>
-			</nav>
-	</header> 
-	<section>
+			
+			
 		<!-- 배너 -->
 		<div id="Point_1">
 			<div id="str"></div>
@@ -408,14 +598,13 @@ https://www.hancomm.co.kr/index.do
 		 		 <!-- <h1>Search Book</h1> -->
 		 		 
 	 		 </div>
+	 		 
+			
+			
+			
 		</div>
 		</div>
 		<!--Waves end-->
-		
-		
-		
-		
-		
 		
 	</section>
 	<footer></footer>

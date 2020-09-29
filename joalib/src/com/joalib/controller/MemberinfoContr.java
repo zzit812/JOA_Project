@@ -25,21 +25,21 @@ public class MemberinfoContr extends javax.servlet.http.HttpServlet{
 		Action action = null;
 		
 		if(command.equals("/memberInsert.mem")) {
-			//È¸¿ø°¡ÀÔ
+			//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			action = new MemberInsertAction();
 			try{
 				forward=action.execute(request, response);
 			}catch(Exception e){
 				e.printStackTrace(); }
 		}else if(command.equals("/IDCheck.mem")) {
-			//·Î±×ÀÎ
+			//ï¿½Î±ï¿½ï¿½ï¿½
 			action = new MemberIDCheck();
 			try{
 				forward=action.execute(request, response);
 			}catch(Exception e){
 				e.printStackTrace(); }
 		}else if(command.equals("/memberLogout.mem")) {
-			//·Î±×¾Æ¿ô
+			//ï¿½Î±×¾Æ¿ï¿½
 			HttpSession session = request.getSession(false);
 			session.invalidate();
 			//
@@ -59,7 +59,15 @@ public class MemberinfoContr extends javax.servlet.http.HttpServlet{
 			}catch(Exception e){
 				e.printStackTrace(); }
 		}else if (command.equals("/memberinfoChange.mem")) {
-			action = new MeberinfoChangeAction();	//Á¤º¸¼öÁ¤
+			action = new MeberinfoChangeAction();	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			try{
+				forward=action.execute(request, response);
+				
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}
+		else if (command.equals("/memberAlram.mem")) {
+			action = new AlarmMemberAction();	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			try{
 				forward=action.execute(request, response);
 				
@@ -71,7 +79,7 @@ public class MemberinfoContr extends javax.servlet.http.HttpServlet{
 	
 		if(forward != null){		
 				if(forward.isRedirect()){
-					response.sendRedirect(forward.getPath());	//¹ÝÈ¯ÇÏ´Â forward°ªÀÌ ÀÖÀ¸¸é, 'forward.getPath()'À¸·Î ÀÌµ¿ÇÑ´Ù.
+					response.sendRedirect(forward.getPath());	//ï¿½ï¿½È¯ï¿½Ï´ï¿½ forwardï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 'forward.getPath()'ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ñ´ï¿½.
 				}else{
 					RequestDispatcher dispatcher=
 							request.getRequestDispatcher(forward.getPath());

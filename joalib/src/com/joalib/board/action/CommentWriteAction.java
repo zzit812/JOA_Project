@@ -16,15 +16,17 @@ public class CommentWriteAction implements dbAction {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward=null;		
-		ServletContext context = request.getServletContext();	//ÀÌÀü ÆäÀÌÁöÀÇ servletContext¸¦ ¹Ş¾Æ¿À°í,
-		//Á¤º¸ °¡Á®¿À±â
-		
+		ServletContext context = request.getServletContext();	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ servletContextï¿½ï¿½ ï¿½Ş¾Æ¿ï¿½ï¿½ï¿½,
 		
 		HttpSession session = request.getSession();
 		Board_CommentDTO dto = new Board_CommentDTO();
+		
 		String board_no = request.getParameter("board_no");
 		dto.setBoard_no(board_no);
 		String member_id = (String)session.getAttribute("member_id");
+		String boardWriter = request.getParameter("boardWriter");
+		
+		
 		if(member_id != null) {
 			dto.setMember_id(member_id);
 			dto.setBc_text(request.getParameter("boardComment"));
@@ -33,8 +35,9 @@ public class CommentWriteAction implements dbAction {
 			
 			if(svc.commentAdd(dto)) {
 				forward = new ActionForward();
-				forward.setRedirect(true);			
-				forward.setPath("boardPointCharge.po?member_id="+member_id+"&board_no="+board_no);				
+				forward.setRedirect(true);
+				forward.setPath("commentAlarmAdd.bo?member_id="+member_id+"&board_no="+board_no+"&boardWriter="+boardWriter);
+				//forward.setPath("boardPointCharge.po?member_id="+member_id+"&board_no="+board_no);				
 			}
 			else {
 				System.out.println("fail");
@@ -43,7 +46,7 @@ public class CommentWriteAction implements dbAction {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('·Î±×ÀÎ ÈÄ ÀÌ¿ëÇØÁÖ¼¼¿ä')");
+			out.println("alert('ë¡œê·¸ì¸ í›„ ì´ìš©í•´ì£¼ì„¸ìš”')");
 			out.println("history.back();");
 			out.println("</script>");
 		}

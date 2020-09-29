@@ -9,8 +9,15 @@ public class DonateDTO {
 	String donate_attach;
 	String member_id;
 	String donate_condition;
+	String donate_buyer;
 	
 	
+	public String getDonate_buyer() {
+		return donate_buyer;
+	}
+	public void setDonate_buyer(String donate_buyer) {
+		this.donate_buyer = donate_buyer;
+	}
 	public int getDonate_no() {
 		return donate_no;
 	}

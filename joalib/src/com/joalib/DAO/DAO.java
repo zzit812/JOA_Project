@@ -18,7 +18,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.joalib.DTO.BoardDTO;
 import com.joalib.DTO.Board_CommentDTO;
 import com.joalib.DTO.Board_Small_CommentDTO;
-import com.joalib.DTO.Donate_Small_CommentDTO;
+import com.joalib.DTO.member_alarmDTO;
 import com.joalib.DTO.memberinfoDTO;
 
 import com.joalib.DTO.BoardDTO;
@@ -214,6 +214,20 @@ public class DAO {
 		sqlsession.close();
 		
 		return i ;
+	}
+	
+	public int commentAlarmAdd(member_alarmDTO dto, String sort) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = 0;
+		//
+		if(sort.equals("boardComment")) {
+			i = sqlsession.insert("boardCommentAlarmAdd", dto);
+		}else if(sort.equals("boardSmallComment")) {
+			i = sqlsession.insert("boardSmallCommentAlarmAdd", dto);
+		}
+		sqlsession.commit();
+		sqlsession.close();
+		return i;
 	}
 	
 	

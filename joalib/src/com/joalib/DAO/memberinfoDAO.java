@@ -12,17 +12,18 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.joalib.DAO.DAO;
 import com.joalib.DTO.Board_CommentDTO;
+import com.joalib.DTO.member_alarmDTO;
 import com.joalib.DTO.memberinfoDTO;
 
 public class memberinfoDAO {
 	
 	SqlSessionFactory sqlfactory;
 	
-	//½Ì±ÛÅæ ÆÐÅÏ
+	//ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	private static memberinfoDAO instance;	
 	
 	public static memberinfoDAO getinstance() {
-		if (instance == null) {	// >DAO °´Ã¼ ¸¸µçÀû ÀÖ¾î?
+		if (instance == null) {	// >DAO ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½?
 			synchronized (memberinfoDAO.class) {
 				instance = new memberinfoDAO();		}
 		}
@@ -31,11 +32,11 @@ public class memberinfoDAO {
 	
 	public memberinfoDAO(){	
 		try {
-			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml ¿¬°á
-			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batis¸¦ Áõ¸íÇÏ´Â ¾ÆÀÌ.				
+			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml ï¿½ï¿½ï¿½ï¿½
+			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batisï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½.				
 		} catch (IOException e) {
 			e.printStackTrace();		
-			}		
+		}		
 	}
 	//	
 	
@@ -49,7 +50,7 @@ public class memberinfoDAO {
 		return i;
 	}
 	
-	//id Ã¼Å©ÇÏ°í pw,name°ªÀº ¹Þ¾Æ¿È
+	//id Ã¼Å©ï¿½Ï°ï¿½ pw,nameï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½
 	public memberinfoDTO memberIDCheck(String checkID) {
 		SqlSession sqlsession = sqlfactory.openSession();		
 		memberinfoDTO memberinfo = sqlsession.selectOne("memberLoginCheck", checkID);
@@ -59,7 +60,7 @@ public class memberinfoDAO {
 		return memberinfo;
 	}
 	
-	//È¸¿ø°¡ÀÔ½Ã pointÃß°¡
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ pointï¿½ß°ï¿½
 	public int pointInsert(String member_id) {
 		SqlSession sqlsession = sqlfactory.openSession();		
 		int i = sqlsession.insert("newMemberPointInsert", member_id);
@@ -68,10 +69,10 @@ public class memberinfoDAO {
 		
 		return i;
 	}
-	//È¸¿øÅ»Åð
+	//È¸ï¿½ï¿½Å»ï¿½ï¿½
 	public int memberDel (String member_id) {
 		SqlSession sqlsession = sqlfactory.openSession();
-		//È¸¿ø Á¤º¸°¡ ³²°ÜÁ® ÀÖ´Â ¸ðµç°ÍµéÀ» Áö¿ì¼¼¿ä
+		//È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì¼¼ï¿½ï¿½
 		sqlsession.delete("memberDeleteFault", member_id);
 		sqlsession.delete("memberDeleteBoardcomment", member_id);
 		sqlsession.delete("memberDeleteBoard", member_id);
@@ -85,7 +86,7 @@ public class memberinfoDAO {
 		return i;
 	}
 	
-	//È¸¿ø Á¤º¸ ¼¿·º
+	//È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public memberinfoDTO memberinfoSelectAll(String member_id) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		memberinfoDTO dto = sqlsession.selectOne("memberinfoSelectAll", member_id);		
@@ -95,13 +96,33 @@ public class memberinfoDAO {
 		return dto;
 	}
 	
-	//È¸¿øÁ¤º¸ ¼öÁ¤
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int memberinfoChange(memberinfoDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		int i = sqlsession.update("memberinfoChange", dto);
 		sqlsession.commit();
 		sqlsession.close();
 		
+		return i;
+	}
+	
+	////////////////////// ì•Œë¦¼ ///////////////////////
+	
+	public List<member_alarmDTO> memberAlarmView(String member_id) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		List<member_alarmDTO> list = sqlsession.selectList("memberAlarmView", member_id);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return list;
+	}
+	
+	public int boardCommentAlarmCheck(member_alarmDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.update("alarmCheckChange", dto );
+		//System.out.println("DAO ì‹¤í–‰ ì™„ë£Œ");
+		sqlsession.commit();
+		sqlsession.close();
 		return i;
 	}
 	

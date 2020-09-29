@@ -42,44 +42,32 @@ public class DonateContr extends javax.servlet.http.HttpServlet{
 				forward=action.execute(request, response);
 			}catch(Exception e){
 				e.printStackTrace(); }
-		}else if(command.equals("/donateCommentAdd.don")) {
-			action = new CommnetAddAction();
-			try{ 
-				forward=action.execute(request, response);
-			}catch(Exception e){
-				e.printStackTrace(); }
-		}else if(command.equals("/donateCommentDel.don")) {
-			action = new CommentDeleteAction();
-			try{ 
-				forward=action.execute(request, response);
-			}catch(Exception e){
-				e.printStackTrace(); }
-		}else if(command.equals("/commentUpdate.don")) {
-			action = new CommnetUpdateAction();
-			try{ 
-				forward=action.execute(request, response);
-			}catch(Exception e){
-				e.printStackTrace(); }
-		}else if(command.equals("/smallCommentAdd.don")) {
-			action = new SmallCommentAddAction();
-			try{ 
-				forward=action.execute(request, response);
-			}catch(Exception e){
-				e.printStackTrace(); }
-		}else if(command.equals("/smallCommentDel.don")) {
-			action = new SmallCommentDelAction();
-			try{ 
-				forward=action.execute(request, response);
-			}catch(Exception e){
-				e.printStackTrace(); }
-		}else if(command.equals("/smallCommentChange.don")) {
-			action = new SmallCommentChangeAction();
-			try{ 
-				forward=action.execute(request, response);
-			}catch(Exception e){
-				e.printStackTrace(); }
 		}else if(command.equals("/donateDealChange.don")) {
 			action = new DonateDealChangeAction();
+			try{ 
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/donateApplicationAdd.don")) {
+			action = new DonateApplicationAddAction();
+			try{ 
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/donateApplicationDel.don")) {
+			action = new DonateApplicationDelAction();
+			try{ 
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/donateMessageAlarm.don")) {
+			action = new DonateMessageAlarmAction();
+			try{ 
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace(); }
+		}else if(command.equals("/donateMessageChecked.don")) {
+			action = new DonateMessageCheckedAction();
 			try{ 
 				forward=action.execute(request, response);
 			}catch(Exception e){

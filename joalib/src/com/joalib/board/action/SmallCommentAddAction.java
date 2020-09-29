@@ -19,6 +19,8 @@ public class SmallCommentAddAction implements dbAction {
 		int board_no = Integer.parseInt(request.getParameter("board_no"));
 		String member_id = request.getParameter("member_id");
 		String bc_s_text = request.getParameter("bc_s_text");
+		String boardCommentWriter = request.getParameter("boardCommentWriter");
+		//System.out.println("댓쓴이: "+boardCommentWriter+", 대댓쓴이: "+member_id);
 		
 		Board_Small_CommentDTO dto = new Board_Small_CommentDTO();
 		dto.setBoard_comment_no(board_comment_no);
@@ -31,7 +33,7 @@ public class SmallCommentAddAction implements dbAction {
 		if(isSuccess) {
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("boardReadPage.bo?board_num="+board_no);
+			forward.setPath("smallCommentAlarmAdd.bo?commentWriter="+boardCommentWriter+"&smallCommentWriter="+member_id+"&boardCommentNo="+board_comment_no);
 		}
 		
 		

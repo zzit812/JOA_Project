@@ -416,7 +416,8 @@
 						<h2>Comment</h2>
 						<div id="board_comment_add">
 							<div class="member_character" ><img  src="img/character/character1.png"></div>
-							<input type="text" name ="boardComment" /><%  %>
+							<input type="text" name ="boardComment" />
+							<input type="hidden" name="boardWriter" value="<%= article.getMember_id()%>" />
 							<input type="submit" value="Comment"/>
 						</div>
 						<!-- 댓글 list -->
@@ -432,10 +433,11 @@
 								<div class="member_character" ><img  src="img/character/character1.png"></div> <!-- 이미지 -->
 								<h5><%= list.get(i).getMember_id() %></h5><h5><%= list.get(i).getBc_date() %></h5>
 								<% if(list.get(i).getMember_id().equals(member_id)){ %>
-									<a href="javascript:void(0);">삭제</a>
-									<a href="javascript:void(0);" onclick="" id="change">수정</a>
-									<a href="javascript:void(0);" onclick="" class="s_comments">답글</a>
+									<a href="javascript:void(0);" onclick="" id="change" class="commentChangeBtn">수정</a>
+									<a href="javascript:void(0);" class= "commentDelBtn">삭제</a>
+									
 								<% } %>
+								<a href="javascript:void(0);" onclick="" class="s_comments">답글</a>
 								<p><%= list.get(i).getBc_text() %></p>
 								<input type="hidden" name="commentNum" value="<%= board_comment_no%>" />
 								<input type='text' class="changeText" name="changeText<%= i %>" value="<%= list.get(i).getBc_text() %>" />
@@ -447,7 +449,7 @@
 									<div>
 										<h5><%= member_id %></h5>
 										<input type='text' class="" name="smallComment<%= i %>" />
-										<input type="button" name="" value="확인" onClick="location.href='smallCommentAdd.bo?member_id=<%= member_id %>&board_comment_no=<%= list.get(i).getBoard_comment_no() %>&board_no=<%= list.get(i).getBoard_no() %>&bc_s_text='+ document.querySelector('input[name=smallComment<%= i %>]').value;" />
+										<input type="button" name="" value="확인" onClick="location.href='smallCommentAdd.bo?boardCommentWriter=<%= list.get(i).getMember_id() %>&member_id=<%= member_id %>&board_comment_no=<%= list.get(i).getBoard_comment_no() %>&board_no=<%= list.get(i).getBoard_no() %>&bc_s_text='+ document.querySelector('input[name=smallComment<%= i %>]').value;" />
 									</div>
 								</div>
 								<!-- 답글 리스트 -->
@@ -482,7 +484,7 @@
 							%>
 							
 							<script type="text/javascript">
-							
+								//댓글 수정
 								function commentChangeBtn(commentNo, member_id, bc_date, board_no){
 									var commnet = "changeText"+commentNo;	// ex : changeText0 ...
 									var bc_text = document.querySelector('input[name='+commnet+']').value;	//수정한 텍스트
@@ -505,12 +507,12 @@
 								}
 							
 								$(function(){
-									//
-									$('.boardComments > a:nth-child(4)').on('click', function(){
+									//댓글 삭제
+									$('.commentDelBtn').on('click', function(){
 										var member_id = $(this).parent().children('h5:nth-child(2)').text();
 										var bc_date = $(this).parent().children('h5:nth-child(3)').text();
 										var commentNum = $(this).parent().children('input[name=commentNum]').val();
-										var result = confirm("댓글을 삭제하시겠습니까?");
+										var result = confirm("답글까지 전부 삭제 삭제됩니다. 정말로 삭제하시겠습니까?");
 										if(result){
 											//alert(commentNum);
 											$.ajax({
@@ -527,7 +529,7 @@
 										}
 									})
 									
-									//a태그 '답글' 눌렀을때
+									//댓글 > '답글' 눌렀을때
 									$(".board_small_comment").hide();
 									$('.s_comments').on('click', function(){
 										var change = $(this).text();
@@ -542,7 +544,7 @@
 									
 									$(".changeText").hide();
 									$("input[name=changeBtn]").hide();		
-									//a태그 '수정' 눌렀을때
+									//댓글 > '수정' 눌렀을때
 									$('.boardComments > a:nth-child(5)').on('click', function(){
 										var change = $(this).text();
 										if(change == '수정'){
@@ -560,7 +562,7 @@
 										}
 										
 									})	
-									//
+									// 대댓글 수정
 									var sc_value = null ;
 									$(".board_small_comment_list > input[name=sc_changeBtn]").hide();
 									$('.board_small_comment_list > a:nth-child(3)').on('click', function(){
@@ -604,7 +606,7 @@
 										}
 									})
 									
-									//
+									//	대댓글 삭제
 									$('.board_small_comment_list > a:nth-child(2)').on('click', function(){
 										var result = confirm("답글을 정말로 삭제할까요??");
 										if(result){

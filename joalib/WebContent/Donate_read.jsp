@@ -278,6 +278,57 @@
 			margin: 22px 0;
 		    margin-right: 30px;
 		}
+		#donePopBtn{
+			top: 0px;
+			position: absolute;
+		    background: #f5f5f5;
+		    width: 500px;
+		    height: 150px;
+		    display: none;
+		    border-radius: 5px;
+	        padding: 20px 30px;
+		}
+		#donePopBtn > h1 {
+		    margin: 5px 0;
+		    font-weight: 200;
+		    border-bottom: solid 1px #00000025;
+		    opacity: 90%;
+		    font-size: 30px;
+		}
+		#donePopBtn > h1 > a{
+			float: right;
+		    margin-right: 5px;
+		    font-weight: 400;
+	        font-size: 20px;
+		}
+		#donePopBtn > p{
+		    font-weight: 300;
+		    opacity: 70%;
+		    margin: 0;
+		}
+		#donePopBtn > div {
+			margin: 20px 0;
+		}
+		#donePopBtn > div > select {
+		    height: 33px;
+		    width: 75%;
+		    padding-left: 5px;
+		}
+		#donePopBtn > div > input[type=button] {
+		    height: 33px;
+		    margin: 0 10px;
+		    width: 20%;
+		}
+		#donePopMask{
+			position: fixed;
+			width: 100%;
+			height: 1000px;
+			top: 0px;
+			left: 0px;
+			display: none; 
+			background-color:#000;
+			opacity: 0.8;
+		}
 		
 		
 		
@@ -381,6 +432,7 @@
 			    <div id="cont_1_size">
 	
 				<%
+				
 				int page_num = 1;
 				if(request.getParameter("page_num") != null){
 					page_num = Integer.parseInt(request.getParameter("page_num"));
@@ -388,6 +440,8 @@
 				int donate_no = Integer.parseInt(request.getParameter("donate_no"));
 				DonateDAO dao = DonateDAO.getinstance();
 				DonateDTO dto = dao.donatePostOneRead(donate_no);
+				
+				
 				%>
 					<div id="write_box">   
 						<!-- 게시글 내용 -->                     
@@ -405,155 +459,121 @@
 						
 						
 					</div>
-					<!-- 댓글 -->
-					<form name="btns" method="post" action="donateCommentAdd.don?donate_no=<%= dto.getDonate_no() %>" 	><!-- 댓글쓰기 --> 
+					<!-- 거래 신청 버튼 -->
+					<form name="btns" method="post">
 						
-						<h2>Comment</h2>
-						<div id="donate_comment_add">
-							<div class="member_character" ><img  src="img/character/character1.png"></div>
-							<input type="text" name ="dc_text" />
-							<input type="hidden" name="member_id" value="<%= member_id %>" />
-							<input type="submit" value="Comment"/>
-						</div>
-						<div id="donateComment_List">
-							<%
-							List<Donate_CommentDTO> list = dao.donateCommentList(donate_no);	//댓글
-							
-							if(list.size() > 0){
-								for(int i = 0; i < list.size(); i++){
-									int donate_comment_no = list.get(i).getDonate_comment_no();
-									List<Donate_Small_CommentDTO> sc_dto = dao.donateSmallCommentList(donate_comment_no);	//대댓글
-							%>
-									<div class="donateComments">
-										<div class="member_character" ><img  src="img/character/character1.png"></div> <!-- 이미지 -->
-										<h5><%= list.get(i).getMember_id() %></h5>
-										<h5><%= list.get(i).getDc_date().substring(0,19) %></h5>
-										<% if(list.get(i).getMember_id().equals(member_id)){ %>
-											<a href="donateCommentDel.don?donate_no=<%= donate_no%>&donate_comment_no=<%= donate_comment_no%>" onclick="<%if(sc_dto.size() > 0){//대댓글이 있으면 %>	alert('답글이 있으면 삭제 할 수 없습니다.'); return false;	<%}else{%>alert('삭제되었습니다.');<%}%>">삭제</a>
-											<a href="javacsript:void(0);" onclick="">수정</a>											
-										<% } if(member_id != null){%>
-										<a href="javacsript:void(0);" class="s_comments">답글</a><%}%>
-										<p><%= list.get(i).getDc_text() %></p>
-										<input type='text' class="changeText" name="changeText<%= i %>" value="<%= list.get(i).getDc_text() %>" />
-										<input type='button' name='changeBtn' value="수정" class='changeBtn'  onClick="location.href='commentUpdate.don?donate_commnet_no=<%= list.get(i).getDonate_comment_no()%>&donate_no=<%= list.get(i).getDonate_no()%>&dc_text='+ document.querySelector('input[name=changeText<%= i %>]').value;" />
-										
-										<!-- 답글 -->
-										<div class="donate_small_comment">
-											<h5>└</h5>
-											<div>
-												<h5><%= member_id %></h5>
-												<input type='text' class="" name="smallComment<%= i %>" />
-												<input type="button" name="" value="확인" onClick="location.href='smallCommentAdd.don?donate_no=<%= donate_no %>&donate_comment_no=<%= donate_comment_no%>&member_id=<%= member_id %>&dc_s_text='+ document.querySelector('input[name=smallComment<%= i %>]').value;" />
-											</div>
-										</div>
-										<!-- 답글 list -->
-										<%										
-										if( sc_dto.size() > 0){
-											for(int j = 0 ; j < sc_dto.size(); j++){ %>
-												<div class="donate_small_comment_list">
-													<h5><%= sc_dto.get(j).getMember_id()%></h5>
-													<% if (sc_dto.get(j).getMember_id().equals(member_id)) {%>
-														<a href="smallCommentDel.don?member_id=<%= sc_dto.get(j).getMember_id() %>&dc_s_date=<%= sc_dto.get(j).getDc_s_date()%>&donate_no=<%= donate_no %>">삭제</a><a href="javacsript:void(0);">수정</a>
-													<%} else{	out.print("<a></a><a></a>");	}%>
-													
-													<h6><%= sc_dto.get(j).getDc_s_date().substring(0, 19) %></h6>
-													<input type="text" name="sc_value" value="<%= sc_dto.get(j).getDc_s_text() %>" disabled="disabled" />
-													<input type="hidden" name="member_id" value="<%= sc_dto.get(j).getMember_id() %>" />
-													<input type="hidden" name="dc_s_date" value="<%= sc_dto.get(j).getDc_s_date()%>" />
-													<input type="button" name="sc_changeBtn" value="수정" />
-												</div>
-										<%	}
-										}%>
-										
-																		
-									</div>
-							<% } } %>
-						</div>
+						
+						<% if(dto.getDonate_condition().equals("거래중")){	%>
+							<h2>Application</h2>
+							<div id="donateApplicationBtn">
+								<input type="hidden" name="donateApplicationMember" value="<%= member_id %>" />
+								<input type="hidden" name="donateWriter" value="<%= dto.getMember_id() %>" />
+								<input type="hidden" name="donate_no" value="<%= dto.getDonate_no() %>" />
+								<%if(member_id != null && !member_id.equals(dto.getMember_id())){%>
+									<input type="button" name="donateApplicationBtn" value="<%if( dao.DonateApllcationSelect(member_id, donate_no) > 0){	out.print("취소");	}else{	out.print("신청");	} %>"/>
+								<%} %>
+							</div>
+							<div id="donateApplicationCount">	<!-- 도서나눔 신청한 사람 수 -->
+								<% int count;
+								count = dao.DonateApplicationCount(donate_no); 
+								out.print("<h3>"+count+"</h3>");%>
+							</div>
+							<%if(member_id != null && member_id.equals(dto.getMember_id())){
+								out.print("<input type='button' name='dealChange' value = '거래완료' />");		
+							}
+						}else{
+							out.print("<h2>나눔 완료된 게시물입니다.</h2>");
+						}%>
+						
 						<script type="text/javascript">
-								$(function(){
-									var chlickCount = 1;
-									$(".changeText").hide();
-									$("input[name=changeBtn]").hide();
-									$(".donate_small_comment").hide();
-									$(".donate_small_comment_list > input[name=sc_changeBtn]").hide();
-									
-									//a태그 수정 눌렀을때
-									$('.donateComments > a:nth-child(5)').on('click', function(){
-										var change = $(this).text();
-										if(change == '수정'){
-											//console.log('수정이다');
-											$(this).parent().children('p').hide();										
-											$(this).parent().children(".changeText").show();
-											$(this).parent().children("input[name=changeBtn]").show();
-											$(this).text('취소');											
-										}else{
-											//console.log('수정 아니다');
-											$(this).parent().children('p').show();										
-											$(this).parent().children(".changeText").hide();
-											$(this).parent().children("input[name=changeBtn]").hide();
-											$(this).text('수정');
-										}																			
-									})
-									
-									//a태그 답글 눌렀을때
-									$('.s_comments').on('click', function(){
-										var change = $(this).text();
-										if(change == '답글'){	
-											$(this).parent().children(".donate_small_comment").show();
-											$(this).text('취소');											
-										}else{									
-											$(this).parent().children(".donate_small_comment").hide();
-											$(this).text('답글');
-										}																			
-									})
-									
-									var sc_value = null ;
-									$('.donate_small_comment_list a:nth-child(3)').on('click', function(){
-										//console.log("aaa");
-										var change = $(this).text();										
-										if(change == '수정'){	
-											sc_value = $(this).parent().children("input[name=sc_value]").val();
-											$(this).parent().children("input[name=sc_value]").attr("disabled", false); //활성화
-											$(this).parent().children("input[name=sc_value]").focus();
-											$(this).parent().children("input[name=sc_value]").css('border','1px solid #00000030');
-											$(this).parent().children("input[name=sc_changeBtn]").show();	//버튼 보여줌								
-											$(this).text('취소');		//텍스트는 취소로 바뀜 
-											//
-											$(this).parent().children("input[name=sc_changeBtn]").on('click', function(){
-												//버튼 누르면
-												var member_id = document.querySelector('input[name=member_id]');
-												var dc_s_date = document.querySelector('input[name=dc_s_date]');
-												var dc_s_text = document.querySelector('input[name=sc_value]');												
-												$.ajax({
-													type : 'POST',
-													url: 'smallCommentChange.don',	//접근 문서
-													data: {'member_id':member_id.value, 'dc_s_date':dc_s_date.value , 'dc_s_text': dc_s_text.value },	//{String key:value} >이 값을 넘겨주겠습니다. > 리턴타입이라고 생각하면 된다.
-													dataType : "json",	//접근 문서의 종류, 어떤 타입으로 보여줄거냐	//html, text, 		
-													success: function(){	//성공을 하면 처리해야하는 작업
-														sc_value = dc_s_text.value;	
-													}							
-												});
-												$(this).parent().children("input[name=sc_value]").css('border','none');
-												$(this).parent().children("input[name=sc_value]").attr("disabled", true); //비활성화
-												$(this).parent().children(".donate_small_comment_list a:nth-child(3)").text('수정');
-												$(this).hide();
-												//버튼을 누르면~ 끝
-											})											
-										}else{
-											$(this).parent().children("input[name=sc_value]").val(sc_value);
-											$(this).parent().children("input[name=sc_value]").attr("disabled", true); //비활성화
-											$(this).parent().children("input[name=sc_value]").css('border','none');
-											//
-											$(this).parent().children("input[name=sc_changeBtn]").hide();
-											//
-											$(this).text('수정');
-										}
-									})
-								})
-							</script>
-						<%if(member_id != null && member_id.equals(dto.getMember_id())){%>
-							<input type='button' name="dealChange" value = '거래완료' onClick="location.href='donateDealChange.don?donate_no=<%= donate_no%>'"/>	
-						<%}%>
+						$(function(){
+							//==============도서 나눔 신청 버튼
+							var ApplicationBtn = $('input[name=donateApplicationBtn]').val();
+							
+							$('input[name=donateApplicationBtn]').on('click', function(){
+								//데이터 가져오기
+								var donate_application_member = $('input[name=donateApplicationMember]').val();
+								var donate_writer = $('input[name=donateWriter]').val();
+								var donate_no = $('input[name=donate_no]').val();
+								if(ApplicationBtn == '신청'){
+									$.ajax({
+										type : 'POST',
+										url: 'donateApplicationAdd.don',	//접근 문서
+										data: {'donateApplicationMember':donate_application_member, 'donateWriter':donate_writer , 'donate_no': donate_no },	//{String key:value} >이 값을 넘겨주겠습니다. > 리턴타입이라고 생각하면 된다.
+										dataType : "json",	//접근 문서의 종류, 어떤 타입으로 보여줄거냐	//html, text, 		
+										success: $(function(){
+											alert("접수 되었습니다.");
+											$('input[name=donateApplicationBtn]').val('취소');
+											ApplicationBtn = $('input[name=donateApplicationBtn]').val();
+											$("#donateApplicationCount").load(window.location.href+" #donateApplicationCount > h3");
+											
+										})					
+									});
+								}else if(ApplicationBtn == '취소'){
+									$.ajax({
+										type : 'POST',
+										url: 'donateApplicationDel.don',	//접근 문서
+										data: {'donateApplicationMember':donate_application_member, 'donate_no': donate_no },	//{String key:value} >이 값을 넘겨주겠습니다. > 리턴타입이라고 생각하면 된다.
+										dataType : "json",	//접근 문서의 종류, 어떤 타입으로 보여줄거냐	//html, text, 		
+										success: $(function(){	//성공을 하면 처리해야하는 작업
+											alert("취소 되었습니다.");
+											$('input[name=donateApplicationBtn]').val('신청');
+											ApplicationBtn = $('input[name=donateApplicationBtn]').val();
+											$("#donateApplicationCount").load(window.location.href+" #donateApplicationCount > h3");
+											//alert(ApplicationBtn);
+										})					
+									});
+								}
+							})
+							// ========================팝업 스크립트
+							var position;
+							$(window).scroll(function() {
+								position = $(window).scrollTop(); 
+								console.log(position);
+							});
+							//
+							$("input[name=dealChange]").on("click", function(){
+								$("#donePopMask").css("display","block");
+						        $("#donePopBtn").css("display","block");
+						        $("body").css("overflow","hidden");//body 스크롤바 없애기
+						        $("#donePopBtn").css({
+					                "top": ( position+200 )+"px",
+					                "left": (($(window).width()-$("#donePopBtn").outerWidth())/2+$(window).scrollLeft())+"px"	
+								}); 
+							})
+							$("#donePopBtn > h1 > a").on("click", function(){
+								//alert(">0<");
+								$("#donePopMask").css("display","none");
+					            $("#donePopBtn").css("display","none"); 
+					            $("body").css("overflow","auto");//body 스크롤바 생성
+							})
+							$("#popMemSelectBtn").on("click", function(){
+								var optionSelected = $("#applicationPopSelect option:selected").val();
+								var donate_no = $('input[name=donate_no]').val();
+								if(optionSelected != 0){
+									//알람이 가게하는
+									$.ajax({
+										type : 'POST',
+										url: 'donateMessageAlarm.don',	//접근 문서
+										data: {'receiver':optionSelected, 'donate_no': donate_no },	//{String key:value} >이 값을 넘겨주겠습니다. > 리턴타입이라고 생각하면 된다.
+										dataType : "json",	//접근 문서의 종류, 어떤 타입으로 보여줄거냐	//html, text, 		
+										success: $(function(){	//성공을 하면 처리해야하는 작업
+											alert("쪽지를 보냈습니다!");
+											$("#donePopMask").css("display","none");
+								            $("#donePopBtn").css("display","none"); 
+								            $("body").css("overflow","auto");
+										})					
+									});
+								}else{	//회원 선택하지 않았을 시
+									alert("회원을 선택해주세요");
+								}
+								
+							})
+						})
+							
+						</script>
+						
+						
 						<div class="button">	<!-- 버튼 -->
 						<% int sitePage = 1;
 							if(session.getAttribute("boardPageNum") != null){								
@@ -571,6 +591,25 @@
 						
 						<% }%>							
 						</div>
+						
+						<div id="donePopMask">
+						</div>
+						<div id="donePopBtn">
+							<h1>회원 선택<a href="javascript:void(0);" onClick="">X</a></h1>
+							<p>도서 나눔을 할 회원을 선택해 주세요 </p>
+							<% List<String> memberList= dao.DonateApplicationMemberList(donate_no); %>
+							<div>
+								<select id="applicationPopSelect" name="applicationPopSelect">
+									<option value="0" selected="selected">Choice</option>
+									<%for(int i = 0; i < memberList.size(); i++){	
+										out.print("<option value='"+memberList.get(i)+"'>"+memberList.get(i)+"</option>");
+									}%>
+								</select>
+								<input type="button" id="popMemSelectBtn" value="OKOK">
+							</div>
+						</div>
+						
+						
 					</form>
 				</div>
 			</div>
@@ -584,7 +623,7 @@
 	 </footer><!-- Favorite -->
         </body>
         <script type="text/javascript">
-    
+        
        		function removeCheck() {
         	 	if (confirm("정말 삭제하시겠습니까") == true){    //확인
         	 		alert("삭제되었습니다");
@@ -593,7 +632,6 @@
         	    	 return false;
         	 	}
        		}
-        	
        		
         </script>
         </html>
