@@ -34,8 +34,8 @@ public class BookSearchAction2 implements Action {
 		String check = request.getParameter("check");
 		
 		
-//		System.out.println("옵션: " + option);
-//		System.out.println("검색단어: "+text);
+//		System.out.println("�샃�뀡: " + option);
+//		System.out.println("寃��깋�떒�뼱: "+text);
 //		System.out.println("check: "+check);
 //		
 		if(option.equals("도서명")) {
@@ -63,7 +63,7 @@ public class BookSearchAction2 implements Action {
 		
 		BookSearchDBService bookSearchDBService = new BookSearchDBService();
 		List<String> book_search = bookSearchDBService.dbsearch(sdto);
-		request.setAttribute("book_search_db", book_search); ///////////JSP 페이지로 보내기
+		request.setAttribute("book_search_db", book_search); ///////////JSP �럹�씠吏�濡� 蹂대궡湲�
 		
 		request.setAttribute("searchBook", parse_listArr );
 		request.setAttribute("search_info", sdto);
