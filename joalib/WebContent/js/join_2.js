@@ -23,6 +23,7 @@
 					checkhide[0].style.opacity = '55%';
 					// checkMesseage.style.display = 'block';
 					$('#idCheck').text("");
+					
 					$.ajax({
 						url: 'join_Id_db.jsp',	//접근 문서
 						data: {'id':member_id.value},	//{String key:value} >이 값을 넘겨주겠습니다. > 리턴타입이라고 생각하면 된다.
@@ -32,6 +33,7 @@
 							sameBtnCheck = 1;
 						}								
 					});
+					
 				}
 		  	})
 		  })		

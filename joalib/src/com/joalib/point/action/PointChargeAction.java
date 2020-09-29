@@ -25,7 +25,7 @@ public class PointChargeAction implements Action {
 		
 		PointChargeService svc = new PointChargeService();
 		
-		if(referer.contains("board_write.jsp")) {
+		if(referer.contains("board_write.jsp")) {	//자유게시판
 			//이전 url중에서 board_wite.jsp가 포함되어 있다면,
 			if(svc.chargeBoardWrite(member_id)) {
 				//success
@@ -35,7 +35,7 @@ public class PointChargeAction implements Action {
 			}else {
 				System.out.println("board_fail");
 			}			
-		}else if(referer.contains("mypage_main.jsp")) {
+		}else if(referer.contains("mypage_main.jsp")) {	//테스트
 			//이전 url중에서 가 포함되어 있다면,
 			if(svc.chargeTemp(member_id)) {
 				//success
@@ -45,17 +45,27 @@ public class PointChargeAction implements Action {
 			}else {
 				System.out.println("fail");
 			}
-		}else if(referer.contains("boardReadPage.bo")) {			
+		}else if(referer.contains("boardReadPage.bo")) {		//자유게시판 댓글		
 			int board_no = Integer.parseInt(request.getParameter("board_no"));
 			if(svc.chargeBoardCommnetWrite(member_id)) {	
 				//success
 				forward = new ActionForward();
 				forward.setRedirect(true);
+				System.out.println("url: "+referer);
 				forward.setPath("boardReadPage.bo?board_num="+board_no);
 			}else {
 				System.out.println("fail");
 			}			
-		}else if(referer.contains("Fault_write.jsp")) {
+		}else if(referer.contains("Fault_write.jsp")) {	//불량도서 신고
+			if(svc.chargeFaultWrite(member_id)) {	
+				//success
+				forward = new ActionForward();
+				forward.setRedirect(true);
+				forward.setPath("Fault_list.jsp");
+			}else {
+				System.out.println("fail");
+			}			
+		}else if(referer.contains("Donate_read.jsp")) {	//중고도서 나눔 게시판 : 거래 완료시 지급
 			if(svc.chargeFaultWrite(member_id)) {	
 				//success
 				forward = new ActionForward();

@@ -600,7 +600,7 @@
 							<% List<String> memberList= dao.DonateApplicationMemberList(donate_no); %>
 							<div>
 								<select id="applicationPopSelect" name="applicationPopSelect">
-									<option value="0" selected="selected">Choice</option>
+									<option value="0" selected="selected">선택하세요</option>
 									<%for(int i = 0; i < memberList.size(); i++){	
 										out.print("<option value='"+memberList.get(i)+"'>"+memberList.get(i)+"</option>");
 									}%>

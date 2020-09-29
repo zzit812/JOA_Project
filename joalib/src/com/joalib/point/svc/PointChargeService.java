@@ -32,6 +32,19 @@ public class PointChargeService {
 	}
 	
 	//불량도서 포인트
+	public boolean chargeFaultWrite(String member_id) {
+		boolean isSuccess = false;
+		
+		PointDAO dao = PointDAO.getinstance();	
+		int i = dao.faultPointCharge(member_id);		
+		if(i > 0) {
+			isSuccess = true;		
+		}					
+		
+		return isSuccess;
+	}
+	
+	//중고도서 나눔 포인트
 		public boolean chargeFaultWrite(String member_id) {
 			boolean isSuccess = false;
 			
