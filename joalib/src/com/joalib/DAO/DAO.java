@@ -27,13 +27,13 @@ public class DAO {
 	
 	SqlSessionFactory sqlfactory;
 	
-	////////////////////// 占쏙옙클占쏙옙占쏙옙占쏙옙 //////////////////////
+	////////////////////// �뜝�룞�삕�겢�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 //////////////////////
 	
 	private static DAO instance;
 	
-	//static占쏙옙 占쌥듸옙占�! 占쌕억옙占쏙옙磯占�. 占쏙옙占쏙옙 占쏙옙占쏙옙
+	//static�뜝�룞�삕 �뜝�뙠�벝�삕�뜝占�! �뜝�뙐�뼲�삕�뜝�룞�삕髥��뜝占�. �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 	public static DAO getinstance() {
-		if (instance == null) {	// >DAO 占쏙옙체 占쏙옙占쏙옙占쏙옙 占쌍억옙?
+		if (instance == null) {	// >DAO �뜝�룞�삕泥� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�뙇�뼲�삕?
 			synchronized (DAO.class) {
 				instance = new DAO();
 			}
@@ -43,8 +43,8 @@ public class DAO {
 	
 	public DAO(){	
 		try {
-			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml 占쏙옙占쏙옙
-			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batis占쏙옙 占쏙옙占쏙옙占싹댐옙 占쏙옙占쏙옙.				
+			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml �뜝�룞�삕�뜝�룞�삕
+			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batis�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떦�뙋�삕 �뜝�룞�삕�뜝�룞�삕.				
 		} catch (IOException e) {
 			e.printStackTrace();		
 			}		
@@ -52,7 +52,7 @@ public class DAO {
 	
 	////////////////////////////////////////////////////////////////
 	//board
-	public List<BoardDTO> select_board_all() {	//占쏙옙체占쏙옙 占싱아울옙占쏙옙
+	public List<BoardDTO> select_board_all() {	//�뜝�룞�삕泥닷뜝�룞�삕 �뜝�떛�븘�슱�삕�뜝�룞�삕
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
 		List <BoardDTO> list = sqlsession.selectList("board_all");
@@ -61,7 +61,7 @@ public class DAO {
 		return list;
 	}
 	
-	public int select_board_total() {	//占싼게시뱄옙 占쏙옙占쏙옙
+	public int select_board_total() {	//�뜝�떬寃뚯떆諭꾩삕 �뜝�룞�삕�뜝�룞�삕
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
 		int total = sqlsession.selectOne("board_count");
@@ -75,7 +75,7 @@ public class DAO {
 		int i = sqlsession.update("board_hitUp", board_no);
 		sqlsession.commit();
 		sqlsession.close();		
-		System.out.println("議고쉶�닔 利앷� :DAO");
+		System.out.println("鈺곌퀬�돳占쎈땾 筌앹빓占� :DAO");
 		return i;
 	}	
 	public BoardDTO read_details(int board_no) {
@@ -116,7 +116,7 @@ public class DAO {
 		return i;
 	}
 	
-	//占쏙옙占쏙옙占쌉쏙옙占쏙옙 占쏙옙占� 占쌩곤옙
+	//�뜝�룞�삕�뜝�룞�삕�뜝�뙃�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝占� �뜝�뙥怨ㅼ삕
 	public int boardCommnetAdd(Board_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		int i  = sqlsession.insert("boardComment_add", dto) ;
@@ -126,7 +126,7 @@ public class DAO {
 		return i;
 	}
 	
-	//占쏙옙占쏙옙占쌉쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙트
+	//�뜝�룞�삕�뜝�룞�삕�뜝�뙃�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�듃
 	public List<Board_CommentDTO> boardCommentList(int board_no) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		List<Board_CommentDTO> list  = sqlsession.selectList("boardComment_list", board_no) ;
@@ -136,7 +136,7 @@ public class DAO {
 		return list;
 	}
 	
-	//占쏙옙占쏙옙占쌉쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙
+	//�뜝�룞�삕�뜝�룞�삕�뜝�뙃�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕
 	public int boardCommentDel(Board_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		sqlsession.delete("boardComment_delete2", dto);
@@ -147,7 +147,7 @@ public class DAO {
 		return i;
 	}
 	
-	//占쏙옙占쏙옙占쌉쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙
+	//�뜝�룞�삕�뜝�룞�삕�뜝�뙃�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕
 	public int boardCommentUpdate(Board_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		int i = sqlsession.update("boardComment_update", dto);
@@ -159,7 +159,7 @@ public class DAO {
 	
 	
 	
-	//占쏙옙占쏙옙 占쏙옙 占쏙옙 占쏙옙占쏙옙
+	//�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕 �뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 	public List<BoardDTO> myBoardView (String member_id) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		List<BoardDTO> list = sqlsession.selectList("myBoardView",member_id);
@@ -169,7 +169,7 @@ public class DAO {
 		return list;
 	}
 	
-	//占쌉시뱄옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙
+	//�뜝�뙃�떆諭꾩삕�뜝�룞�삕 �뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕
 	public int CommnetCount(int board_no){
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
@@ -199,9 +199,9 @@ public class DAO {
 	}
 	public int boardSmallCommentDelete(Board_Small_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
-		System.out.println("�젒洹� �꽦怨�");
+		System.out.println("占쎌젔域뱄옙 占쎄쉐�⑨옙");
 		int i = sqlsession.delete("boardSmallCommentDelete", dto);
-		System.out.println("�뿰寃� �꽦怨�");
+		System.out.println("占쎈염野껓옙 占쎄쉐�⑨옙");
 		sqlsession.commit();
 		sqlsession.close();
 		
@@ -229,14 +229,7 @@ public class DAO {
 		sqlsession.close();
 		return i;
 	}
-	public List<String> select_book(SearchDTO sdto) {
-		SqlSession sqlsession = sqlfactory.openSession();
-		List<String> book_search = sqlsession.selectList("book_search", sdto);
-		sqlsession.commit();
-		sqlsession.close();
-		
-		return book_search;
-	}
+
 	
 	
 

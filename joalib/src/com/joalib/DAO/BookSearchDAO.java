@@ -65,5 +65,13 @@ SqlSessionFactory sqlfactory;
 		
 		return list;
 	}
+	public List<String> select_book(SearchDTO sdto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		List<String> book_search = sqlsession.selectList("book_search", sdto);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return book_search;
+	}
 	
 }
