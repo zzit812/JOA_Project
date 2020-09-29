@@ -67,8 +67,8 @@
 					<li><a href="place.jsp">이용안내</a>
 						<ul>
 							<li><a href="place.jsp">오시는 길</a></li>
-							<li><a href="book_guide">도서 이용안내</a></li>
-							<li><a href="">포인트 이용안내</a></li>
+							<li><a href="book_guide.jsp">도서 이용안내</a></li>
+							<li><a href="point_guide.jsp">포인트 이용안내</a></li>
 
 						</ul></li>
 					<li><a href="#">커뮤니티</a>
