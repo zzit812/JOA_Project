@@ -453,7 +453,7 @@ https://www.hancomm.co.kr/index.do
 							if(categoryAlarm[1].equals("comment")){
 								out.print("<a href='memberAlram.mem?alarm_date="+list.get(i).getAlarm_date()+"&board_no="+list.get(i).getAlarm_etc()+"'> 회원님의 게시물에 "+ectAlarm[1]+"님이 댓글을 남겼습니다.</a>");
 							}else if(categoryAlarm[1].equals("smallcomment")){
-								out.print("<a href='#'> 회원님의 게시물에 "+ectAlarm[1]+"님이 답글을 남겼습니다.</a>");
+								out.print("<a href='memberAlram.mem?alarm_date="+list.get(i).getAlarm_date()+"&boardComment_no="+list.get(i).getAlarm_etc()+"'> 회원님의 게시물에 "+ectAlarm[1]+"님이 답글을 남겼습니다.</a>");
 							}
 						}else if(categoryAlarm[0].equals("donate")){
 							//도서 나눔 알림
@@ -468,7 +468,7 @@ https://www.hancomm.co.kr/index.do
 							if(categoryAlarm[1].equals("comment")){
 								out.print("<a class='checkAlarm' href='boardHitUp.bo?board_no="+ectAlarm[0]+"'> 회원님의 게시물에 "+ectAlarm[1]+"님이 댓글을 남겼습니다.</a>");
 							}else if(categoryAlarm[1].equals("smallcomment")){
-								out.print("<a href='#'> 회원님의 게시물에 "+ectAlarm[1]+"님이 답글을 남겼습니다.</a>");
+								out.print("<a class='checkAlarm' href='boardHitUp.bo?board_no="+ectAlarm[2]+"> 회원님의 게시물에 "+ectAlarm[1]+"님이 답글을 남겼습니다.</a>");
 							}
 						}else if(categoryAlarm[0].equals("donate")){
 							if(categoryAlarm[1].equals("message")){%>

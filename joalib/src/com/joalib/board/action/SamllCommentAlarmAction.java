@@ -20,10 +20,10 @@ public class SamllCommentAlarmAction implements dbAction{
 		String sc_writer = request.getParameter("smallCommentWriter");
 		String board_no = request.getParameter("board_no");
 		int commentNo = Integer.parseInt(request.getParameter("boardCommentNo"));
-		
+		System.out.println("alarmAction: "+board_no);
 		member_alarmDTO dto = new member_alarmDTO();
 		dto.setMember_id(member_id);
-		dto.setAlarm_etc(commentNo+"/"+sc_writer);
+		dto.setAlarm_etc(commentNo+"/"+sc_writer+"/"+board_no);
 		System.out.println("Action: "+dto.getAlarm_etc());
 		
 		DAO dao = DAO.getinstance();

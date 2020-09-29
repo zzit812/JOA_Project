@@ -33,7 +33,8 @@ public class SmallCommentAddAction implements dbAction {
 		if(isSuccess) {
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("smallCommentAlarmAdd.bo?commentWriter="+boardCommentWriter+"&smallCommentWriter="+member_id+"&boardCommentNo="+board_comment_no);
+			System.out.println("addAction: "+board_comment_no);
+			forward.setPath("smallCommentAlarmAdd.bo?commentWriter="+boardCommentWriter+"&smallCommentWriter="+member_id+"&boardCommentNo="+board_comment_no+"&board_no="+board_no);
 		}
 		
 		

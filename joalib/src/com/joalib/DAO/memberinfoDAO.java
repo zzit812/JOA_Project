@@ -117,7 +117,7 @@ public class memberinfoDAO {
 		return list;
 	}
 	
-	public int boardCommentAlarmCheck(member_alarmDTO dto) {
+	public int AlarmCheck(member_alarmDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		int i = sqlsession.update("alarmCheckChange", dto );
 		//System.out.println("DAO 실행 완료");
