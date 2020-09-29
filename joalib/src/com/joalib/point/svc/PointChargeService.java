@@ -45,7 +45,7 @@ public class PointChargeService {
 	}
 	
 	//중고도서 나눔 포인트
-		public boolean chargeFaultWrite(String member_id) {
+		public boolean chargeDonate(String member_id) {
 			boolean isSuccess = false;
 			
 			PointDAO dao = PointDAO.getinstance();	
