@@ -7,10 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jaolib.book.manager.action.BookInfoAddAction;
 import com.joalib.DTO.ActionForward;
 import com.joalib.DTO.BookInfoDTO;
 import com.joalib.bookinfo.action.Action;
-import com.joalib.bookinfo.action.BookInfoAddAction;
 import com.joalib.bookinfo.action.BookInfoDetailAction;
 
 @WebServlet("*.bk") 
@@ -26,16 +26,16 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 		ActionForward forward=null;
 		Action action=null;
 
-		 if(command.equals("/bookInfoAdd.bk")){  //Ã¥Á¤º¸Ãß°¡ÇÏ±â
-			 //È­±ä
+		 if(command.equals("/bookInfoAdd.bk")){  //Ã¥ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½ï¿½Ï±ï¿½
+			 //È­ï¿½ï¿½
 			 action = new BookInfoAddAction();
 				try{
 					forward=action.execute(request, response);
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-		  }else if(command.equals("/bookInfoDetail.bk")){   //Ã¥»ó¼¼ÆäÀÌÁö
-				 //È­±ä
+		  }else if(command.equals("/bookInfoDetail.bk")){   //Ã¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				 //È­ï¿½ï¿½
 			action = new BookInfoDetailAction();
 				try{
 					forward=action.execute(request, response);
@@ -47,14 +47,14 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 				
 		 if(forward != null) {
 				if(forward.isRedirect()) {
-					//boolean°ªÀÓ Æ®·çÀÎ°æ¿ì¿¡ ½ÇÇà
+					//booleanï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½Î°ï¿½ì¿¡ ï¿½ï¿½ï¿½ï¿½
 					response.sendRedirect(forward.getPath());
 				}else{
 					RequestDispatcher dispatcher=
 							request.getRequestDispatcher(forward.getPath());
-					//RequestDispatcher¶ó´Â Å¬·¡½º´Â ÇöÀç request¿¡ ´ã±ä Á¤º¸¸¦ ÀúÀåÇÏ°í ÀÖ´Ù°¡
-					//±× ´ÙÀ½ ÆäÀÌÁö ±× ´ÙÀ½ÆäÀÌÁö¿¡µµ ÇØ´ç Á¤º¸¸¦ º¼ ¼ö ÀÖ°Ô °è¼Ó ÀúÀåÇÏ´Â °Í
-					//ÇÑ¸¶µð·Î ÆÄ¶ó¹ÌÅÍÁ¤º¸ À¯Áö¸¦ À§ÇØ »ç¿ëÇÑ´Ù.
+					//RequestDispatcherï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ requestï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ö´Ù°ï¿½
+					//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½
+					//ï¿½Ñ¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 					dispatcher.forward(request, response);
 				
 				}

@@ -253,10 +253,6 @@
 	</select>
 	
 	
-	<select id="book_search" resultType="com.joalib.DTO.BookInfoDTO" parameterType="com.joalib.DTO.SearchDTO">
-		select * from joalib.bookinfo where #{option} like CONCAT('%',#{text},'%');
-	</select>
-	
 	
 	<insert id="boardCommentAlarmAdd" parameterType="com.joalib.DTO.member_alarmDTO">
 		INSERT INTO joalib.member_alarm (`member_id`, `alarm_date`, `alarm_category`, `alarm_etc`, `alarm_check`) VALUES (#{member_id}, now(), 'board_comment', #{alarm_etc}, 0);
@@ -270,6 +266,14 @@
 	<update id="alarmCheckChange" parameterType="com.joalib.DTO.member_alarmDTO">
 		update joalib.member_alarm set alarm_check = 1 where alarm_category = #{alarm_category} and alarm_date = #{alarm_date} and alarm_etc = #{alarm_etc};
 	</update>
+	
+	
+	<select id="book_search" resultType="com.joalib.DTO.BookInfoDTO" parameterType="com.joalib.DTO.SearchDTO">
+		select * from joalib.bookinfo where #{option} like CONCAT('%',#{text},'%');
+	</select>
+	<insert id="book_wish_add" parameterType="com.joalib.DTO.BookWishDTO">
+		insert into joalib.wish_book VALUES ( default, #{member_id}, #{wish_title} , #{wish_publisher}, #{wish_author}, #{wish_isbn});
+	</insert>
 	
 	
 	

@@ -1,3 +1,4 @@
+<%@page import="com.joalib.DTO.SearchDTO"%>
 <%@page import="com.joalib.booksearch.action.BookSearchAction2"%>
 <%@page import="com.joalib.DTO.BookInfoDTO"%>
 <%@page import="com.joalib.DAO.BookInfoDAO"%>
@@ -10,7 +11,8 @@
 
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
-
+<%@page import="org.json.simple.JSONObject" %>
+<%@page import="org.json.simple.JSONArray" %>
 
 <!DOCTYPE html>
 <html>
@@ -31,11 +33,12 @@
 
 
 <body>
-
-
-
-
 	<header>
+	
+	
+
+	
+	
 		<div id="top_size">
 			<!--로고-->
 			<img id="logo" src="img/icon_lib.png">
@@ -69,9 +72,8 @@
 							<li><a href="book_new.jsp">신착 도서</a></li>
 							<li><a href="book_best.jsp">베스트 셀러</a></li>
 							<li><a href="book_recommend.jsp">추천 도서</a></li>
-							<li><a href="book_wish.jsp">희망 도서</a></li>
-						</ul>
-						</li>
+							<li><a href="">희망 도서</a></li>
+						</ul></li>
 					<li><a href="#">이용안내</a>
 						<ul>
 							<li><a href="">시설안내</a></li>
@@ -97,26 +99,28 @@
 							<li><a href="">정보 수정/ 탈퇴</a></li>
 						</ul></li>
 				</ul>
-				<div id="window_menu">
+				<d iv id="window_menu">
 		</div>
 		</nav>
 		</div>
-		
 		<script src="js/lib_top.js"></script>
 		<script src="js/search.js"></script>
 	</header>
 
 
 
-	<section>
+	<section id="book_search_size">
 		<div class="search">
+		
+		
+		  
 			<div id="search_title">도서검색</div>
 			<div id="search_box">
 				<!--검색어-->
 				
 			
-					 
-				<div id="hbz-searchbox">    <!-- sc -->
+		
+				<div id="hbz-searchbox">
 				<form action="book_search.bs" method="get">
 					<select id="select_search" name="select_search">
 						<option>전체</option>
@@ -175,8 +179,8 @@
 						
 				</ul>
 				</form>
-				<!-- 검색바에 맞춰서 정렬할 것임 -->
 			</div>
+			
 		
 			
 			
@@ -188,10 +192,88 @@
 		</div>
 		<br/> -->
 		
+		<% SearchDTO dto =  (SearchDTO)request.getAttribute("search_info");
+		  
+		  		dto.getOption();
+		  		String text = dto.getText();
+		  		String option = dto.getOption();
+		  		
+		  %>
+		  
+		  <div id="search_text">"<%=text %>" 검색 결과</div>
+		<main id="book_show">
+
+
+
+
+	  	<%
+	  	JSONArray parse_listArr = (JSONArray)request.getAttribute("searchBook");
+		JSONObject books = null;
+
+		
+		  for(int i=0; i< parse_listArr.size() ; i++){
+				books = (JSONObject)parse_listArr.get(i);
+				String title= (String)books.get("title");
+				String author = (String)books.get("author");
+				String publisher = (String)books.get("publisher");
+				String book_img = (String)books.get("coverLargeUrl");
+				String isbn = (String)books.get("isbn");
+		%>
+		
+		<div class="box">
+		  <a href="bookInfoDetail.bk?isbn=<%=isbn%>">
+		  <img src="<%=book_img %>" class="card" src="<%=book_img %>"></a>
+		    <div class="content">
+		      <h2 class="title"></h2>
+		      <span class="favorite">관심도서</span>
+		      <span class="loan">대출가능</span>
+		    </div>
+		    
+		    <div class="simple_info">
+		  	<span><b>도서명</b></span>&nbsp; <span><%=title %></span></br>
+		  	<span><b>저자명</b></span>&nbsp; <span><%=author%></span></br>
+		  	<span><b>출판사</b></span>&nbsp; <span><%=publisher %></span>
+		  </div>
+		  </div>
+
+		
+	
+
+		  <%} %>
+		  
+		  
+		  <!-- 여기서 다시 페이지 번호  옵션, 검색어  봰야됨 -->
+		  <div id="my_pagind">
+		  	<ul id="paging"> 
+		  		<li><a href="#">◀</a></li>
+			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=1">1</a></li>
+			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=2">2</a></li>
+			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=3">3</a></li>  
+			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=4">4</a></li>  
+			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=5">5</a></li>  
+			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=6">6</a></li>  
+			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=7">7</a></li>  
+			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=8">8</a></li>  
+			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=9">9</a></li>  
+			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=10">10</a></li>
+			    <li><a href="#">▶</a></li>
+			</ul>
+		  </div>
+
+		  
+		  
+		  
+		  
 		
 	</section>
+	</main>
 	<!-- 다음페이지 이전페이지 아직 기능이 없음 추가해야대~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<div class="pagination">
+		
+		
+		
+	
+		
 		
 		
 		

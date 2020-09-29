@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.joalib.DTO.BoardDTO;
 import com.joalib.DTO.BookInfoDTO;
+import com.joalib.DTO.BookWishDTO;
 
 public class BookInfoDAO {
 
@@ -19,7 +20,7 @@ public class BookInfoDAO {
 	private static BookInfoDAO instance;
 	
 	public static BookInfoDAO getinstance() {
-		if (instance == null) {	// >DAO °´Ã¼ ¸¸µçÀû ÀÖ¾î?
+		if (instance == null) {	// >DAO ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½?
 			synchronized (DAO.class) {
 				instance = new BookInfoDAO();		}
 	}
@@ -28,8 +29,8 @@ public class BookInfoDAO {
 	
 	public BookInfoDAO(){	
 		try {
-			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml ¿¬°á
-			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batis¸¦ Áõ¸íÇÏ´Â ¾ÆÀÌ.				
+			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml ï¿½ï¿½ï¿½ï¿½
+			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batisï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½.				
 		} catch (IOException e) {
 			e.printStackTrace();		
 			}		
@@ -43,12 +44,12 @@ public class BookInfoDAO {
 		
 		return i;
 	}
-	public int select_book_count() {  //°Ë»ö°á°ú ÀüÃ¼ ÀÚ·á¼ö
+	public int select_book_count() {  //ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ú·ï¿½ï¿½
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
-		//¿À´Â°Å È­±ä
+		//ï¿½ï¿½ï¿½Â°ï¿½ È­ï¿½ï¿½
 		int total = sqlsession.selectOne("book_search_count");
-		//È­±ä
+		//È­ï¿½ï¿½
 		sqlsession.commit();
 		sqlsession.close();
 		return total;
@@ -67,6 +68,18 @@ public class BookInfoDAO {
 		
 		return dto;
 	}
+
+	public List<BookInfoDTO> book_info() {
+		getinstance();
+		SqlSession sqlsession = sqlfactory.openSession();
+		List<BookInfoDTO> book = sqlsession.selectList("book_info");
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return book;
+		
+	}
+
 	
 	
 	

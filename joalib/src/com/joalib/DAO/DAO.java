@@ -27,13 +27,13 @@ public class DAO {
 	
 	SqlSessionFactory sqlfactory;
 	
-	////////////////////// ��Ŭ������ //////////////////////
+	////////////////////// 占쏙옙클占쏙옙占쏙옙占쏙옙 //////////////////////
 	
 	private static DAO instance;
 	
-	//static�� �ݵ��! �پ���Ѵ�. ���� ����
+	//static占쏙옙 占쌥듸옙占�! 占쌕억옙占쏙옙磯占�. 占쏙옙占쏙옙 占쏙옙占쏙옙
 	public static DAO getinstance() {
-		if (instance == null) {	// >DAO ��ü ������ �־�?
+		if (instance == null) {	// >DAO 占쏙옙체 占쏙옙占쏙옙占쏙옙 占쌍억옙?
 			synchronized (DAO.class) {
 				instance = new DAO();
 			}
@@ -43,8 +43,8 @@ public class DAO {
 	
 	public DAO(){	
 		try {
-			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml ����
-			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batis�� �����ϴ� ����.				
+			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml 占쏙옙占쏙옙
+			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batis占쏙옙 占쏙옙占쏙옙占싹댐옙 占쏙옙占쏙옙.				
 		} catch (IOException e) {
 			e.printStackTrace();		
 			}		
@@ -52,7 +52,7 @@ public class DAO {
 	
 	////////////////////////////////////////////////////////////////
 	//board
-	public List<BoardDTO> select_board_all() {	//��ü�� �̾ƿ���
+	public List<BoardDTO> select_board_all() {	//占쏙옙체占쏙옙 占싱아울옙占쏙옙
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
 		List <BoardDTO> list = sqlsession.selectList("board_all");
@@ -61,7 +61,7 @@ public class DAO {
 		return list;
 	}
 	
-	public int select_board_total() {	//�ѰԽù� ����
+	public int select_board_total() {	//占싼게시뱄옙 占쏙옙占쏙옙
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
 		int total = sqlsession.selectOne("board_count");
@@ -75,7 +75,7 @@ public class DAO {
 		int i = sqlsession.update("board_hitUp", board_no);
 		sqlsession.commit();
 		sqlsession.close();		
-		System.out.println("조회수 증가 :DAO");
+		System.out.println("議고쉶�닔 利앷� :DAO");
 		return i;
 	}	
 	public BoardDTO read_details(int board_no) {
@@ -116,7 +116,7 @@ public class DAO {
 		return i;
 	}
 	
-	//�����Խ��� ��� �߰�
+	//占쏙옙占쏙옙占쌉쏙옙占쏙옙 占쏙옙占� 占쌩곤옙
 	public int boardCommnetAdd(Board_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		int i  = sqlsession.insert("boardComment_add", dto) ;
@@ -126,7 +126,7 @@ public class DAO {
 		return i;
 	}
 	
-	//�����Խ��� ��� ����Ʈ
+	//占쏙옙占쏙옙占쌉쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙트
 	public List<Board_CommentDTO> boardCommentList(int board_no) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		List<Board_CommentDTO> list  = sqlsession.selectList("boardComment_list", board_no) ;
@@ -136,7 +136,7 @@ public class DAO {
 		return list;
 	}
 	
-	//�����Խ��� ��� ����
+	//占쏙옙占쏙옙占쌉쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙
 	public int boardCommentDel(Board_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		sqlsession.delete("boardComment_delete2", dto);
@@ -147,7 +147,7 @@ public class DAO {
 		return i;
 	}
 	
-	//�����Խ��� ��� ����
+	//占쏙옙占쏙옙占쌉쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙
 	public int boardCommentUpdate(Board_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		int i = sqlsession.update("boardComment_update", dto);
@@ -159,7 +159,7 @@ public class DAO {
 	
 	
 	
-	//���� �� �� ����
+	//占쏙옙占쏙옙 占쏙옙 占쏙옙 占쏙옙占쏙옙
 	public List<BoardDTO> myBoardView (String member_id) {
 		SqlSession sqlsession = sqlfactory.openSession();
 		List<BoardDTO> list = sqlsession.selectList("myBoardView",member_id);
@@ -169,7 +169,7 @@ public class DAO {
 		return list;
 	}
 	
-	//�Խù��� ��� ����
+	//占쌉시뱄옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙
 	public int CommnetCount(int board_no){
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
@@ -199,9 +199,9 @@ public class DAO {
 	}
 	public int boardSmallCommentDelete(Board_Small_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
-		System.out.println("접근 성공");
+		System.out.println("�젒洹� �꽦怨�");
 		int i = sqlsession.delete("boardSmallCommentDelete", dto);
-		System.out.println("연결 성공");
+		System.out.println("�뿰寃� �꽦怨�");
 		sqlsession.commit();
 		sqlsession.close();
 		
@@ -228,6 +228,14 @@ public class DAO {
 		sqlsession.commit();
 		sqlsession.close();
 		return i;
+	}
+	public List<String> select_book(SearchDTO sdto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		List<String> book_search = sqlsession.selectList("book_search", sdto);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return book_search;
 	}
 	
 	
