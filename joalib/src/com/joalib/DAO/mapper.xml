@@ -208,12 +208,12 @@
 	<update id="donateMessageChecked" parameterType="com.joalib.DTO.member_alarmDTO">
 		update joalib.member_alarm set alarm_check = 1 where alarm_category = #{alarm_category} and alarm_etc = #{alarm_etc};
 	</update>
-	
 	<update id="donateConditionChange" parameterType="com.joalib.DTO.member_alarmDTO">
 		update joalib.donate set donate_condition = '거래완료', donate_buyer = #{member_id} where donate_no = #{alarm_etc};
 	</update>
-	
-	
+	<insert id="donateCompletePoint" parameterType="String" >
+		insert into joalib.point values (#{member_id}, 5000, now(), '도서나눔', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)+5000), '+');
+	</insert>
 	<insert id="boardSmallCommentAdd" parameterType="com.joalib.DTO.Board_Small_CommentDTO">
 		insert into joalib.board_small_comment (`member_id`, `bc_s_text`, `bc_s_date`, `board_comment_no`) VALUES (#{member_id}, #{bc_s_text}, now(), #{board_comment_no});
 	</insert>

@@ -96,6 +96,16 @@ SqlSessionFactory sqlfactory;
 			
 			return i;
 		}
+		
+	//포인트 충전(중고도서 나눔 포인트 + 5000)
+		public int donatePointCharge(String member_id) {
+			SqlSession sqlsession = sqlfactory.openSession();
+			int i = sqlsession.insert("donateCompletePoint",member_id);
+			sqlsession.commit();
+			sqlsession.close();
+			
+			return i;
+		}
 	
 	
 	
