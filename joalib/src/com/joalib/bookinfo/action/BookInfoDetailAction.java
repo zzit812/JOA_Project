@@ -1,41 +1,49 @@
 package com.joalib.bookinfo.action;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.joalib.DTO.ActionForward;
-import com.joalib.DTO.BookInfoDTO;
+import com.joalib.DTO.SearchDTO;
 import com.joalib.bookinfo.svc.BookInfoDetailService;
+import com.joalib.booksearch.svc.BookSearchService;
 
 public class BookInfoDetailAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ActionForward forward=null;
+		SearchDTO sdto = new SearchDTO();
 		
-		ActionForward forward=null;		
-		ServletContext context = request.getServletContext();	//이전 페이지의 servletContext를 받아오고,
+		JSONArray parse_listArr = null;
+		JSONObject book = null;
 		
-		int isbn = Integer.parseInt(request.getParameter("isbn"));
+		ServletContext context = request.getServletContext();
 		
-		//확인.값도 잘가져옴
-		
+		String text = request.getParameter("isbn"); 
+	
 		BookInfoDetailService bookInfoDetailService = new BookInfoDetailService();
-		BookInfoDTO article = bookInfoDetailService.getArticle(isbn);
-				
-		request.setAttribute("bookinfo", article);
+		parse_listArr = bookInfoDetailService.detail(text);
 		
-		//확인. article.get어쩌구 가능 
-		//System.out.println("*article* : "+ article.getBook_img());
-		//System.out.println((BookInfoDTO)request.getAttribute("article"));
 		
+		
+		request.setAttribute("searchBook", parse_listArr );
+
 		
 		forward = new ActionForward();
-		//forward.setRedirect(true);
-		forward.setPath("BookInfoDetail.jsp");
+		forward.setPath("BookInfoDetail.jsp"); 
 		
 		return forward;
+		
+	
 	}
+	
+
 
 }
