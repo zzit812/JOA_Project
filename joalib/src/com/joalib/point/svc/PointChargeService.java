@@ -49,7 +49,7 @@ public class PointChargeService {
 			boolean isSuccess = false;
 			
 			PointDAO dao = PointDAO.getinstance();	
-			int i = dao.faultPointCharge(member_id);		
+			int i = dao.donatePointCharge(member_id);		
 			if(i > 0) {
 				isSuccess = true;		
 			}					

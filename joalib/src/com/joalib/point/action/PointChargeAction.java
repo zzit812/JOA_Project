@@ -21,7 +21,7 @@ public class PointChargeAction implements Action {
 		
 		
 		String referer = (String)request.getHeader("REFERER");	//이전페이지 url
-		
+		System.out.println("PointAction: "+referer);
 		
 		PointChargeService svc = new PointChargeService();
 		
@@ -66,7 +66,7 @@ public class PointChargeAction implements Action {
 				System.out.println("fail");
 			}			
 		}else if(referer.contains("Donate_read.jsp")) {	//중고도서 나눔 게시판 : 거래 완료시 지급
-			if(svc.chargeFaultWrite(member_id)) {	
+			if(svc.chargeDonate(member_id)) {	
 				//success
 				forward = new ActionForward();
 				forward.setRedirect(true);

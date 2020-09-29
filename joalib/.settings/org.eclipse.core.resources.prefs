@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//WebContent/css/booksearch.css=UTF-8
 encoding//WebContent/css/lib_mypage_main.css=UTF-8
 encoding//src/com/joalib/DAO/DAO.java=UTF-8
+encoding//src/com/joalib/DAO/DonateDAO.java=UTF-8
 encoding//src/com/joalib/bookground/svc/BookBestService.java=UTF-8
 encoding//src/com/joalib/bookground/svc/BookNewService.java=UTF-8
 encoding//src/com/joalib/bookground/svc/BookRecommendService.java=UTF-8
