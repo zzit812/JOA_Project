@@ -102,8 +102,8 @@
 
 	
    <%
-	  	JSONArray parse_listArr = (JSONArray)request.getAttribute("searchBook");
-		JSONObject books = null;
+ 	JSONArray parse_listArr = (JSONArray)request.getAttribute("searchBook");
+	JSONObject books = null;
 
 		
 		  for(int i=0; i< parse_listArr.size() ; i++){

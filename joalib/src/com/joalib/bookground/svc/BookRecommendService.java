@@ -44,8 +44,8 @@ public class BookRecommendService {
             
            // JSONArray parse_listArr = (JSONArray)obj.get("item");
             parse_listArr = (JSONArray)obj.get("item");
-            //여기에 검색 정보가 다 담겨있음
-            //   [{"mileageRate":"6","discountRate":"10",....}] 이런식으로
+            //�뿬湲곗뿉 寃��깋 �젙蹂닿� �떎 �떞寃⑥엳�쓬
+            //   [{"mileageRate":"6","discountRate":"10",....}] �씠�윴�떇�쑝濡�
             
             
           
@@ -85,7 +85,7 @@ public class BookRecommendService {
         } catch (Exception e) {
             e.printStackTrace();
         } return parse_listArr;
-        //book 대신 
+        //book ���떊 
 		
 		
 		

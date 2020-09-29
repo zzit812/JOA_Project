@@ -26,16 +26,16 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 		ActionForward forward=null;
 		Action action=null;
 
-		 if(command.equals("/bookInfoAdd.bk")){  //å�����߰��ϱ�
-			 //ȭ��
+		 if(command.equals("/bookInfoAdd.bk")){  //책占쏙옙占쏙옙占쌩곤옙占싹깍옙
+			 //화占쏙옙
 			 action = new BookInfoAddAction();
 				try{
 					forward=action.execute(request, response);
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-		  }else if(command.equals("/bookInfoDetail.bk")){   //å��������
-				 //ȭ��
+		  }else if(command.equals("/bookInfoDetail.bk")){   //책占쏙옙占쏙옙占쏙옙占쏙옙
+				 //화占쏙옙
 			action = new BookInfoDetailAction();
 				try{
 					forward=action.execute(request, response);
@@ -47,14 +47,14 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 				
 		 if(forward != null) {
 				if(forward.isRedirect()) {
-					//boolean���� Ʈ���ΰ�쿡 ����
+					//boolean占쏙옙占쏙옙 트占쏙옙占싸곤옙荑� 占쏙옙占쏙옙
 					response.sendRedirect(forward.getPath());
 				}else{
 					RequestDispatcher dispatcher=
 							request.getRequestDispatcher(forward.getPath());
-					//RequestDispatcher��� Ŭ������ ���� request�� ��� ������ �����ϰ� �ִٰ�
-					//�� ���� ������ �� �������������� �ش� ������ �� �� �ְ� ��� �����ϴ� ��
-					//�Ѹ���� �Ķ�������� ������ ���� ����Ѵ�.
+					//RequestDispatcher占쏙옙占� 클占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 request占쏙옙 占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占싹곤옙 占쌍다곤옙
+					//占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쌔댐옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙 占쌍곤옙 占쏙옙占� 占쏙옙占쏙옙占싹댐옙 占쏙옙
+					//占싼몌옙占쏙옙占� 占식띰옙占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙磯占�.
 					dispatcher.forward(request, response);
 				
 				}

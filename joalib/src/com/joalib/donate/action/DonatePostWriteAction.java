@@ -28,6 +28,7 @@ public class DonatePostWriteAction implements Action{
 		String donate_text="";
 		String member_id="";		
 		
+		
 		try{
 			MultipartRequest multi = new MultipartRequest(request,uploadPath,size,"UTF-8",new DefaultFileRenamePolicy());
 			Enumeration files=multi.getFileNames();	//file의 이름을 가져올거야.
@@ -55,6 +56,7 @@ public class DonatePostWriteAction implements Action{
 		boolean isSuccess = svc.postWrite(dto);
 		
 		if(isSuccess) {
+			System.out.println("aaa");
 			forward = new ActionForward();
 			forward.setRedirect(true);
 			forward.setPath("Donate_list.jsp");
