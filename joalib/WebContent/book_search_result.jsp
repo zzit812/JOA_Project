@@ -191,7 +191,8 @@
 		</div>
 		<br/> -->
 		
-		<% SearchDTO dto =  (SearchDTO)request.getAttribute("search_info");
+		<%
+			SearchDTO dto =  (SearchDTO)request.getAttribute("search_info");
 		  
 		  		dto.getOption();
 		  		String text = dto.getText();
@@ -233,7 +234,7 @@
 		  	<span><b>저자명</b></span>&nbsp; <span><%=author%></span></br>
 		  	<span><b>출판사</b></span>&nbsp; <span><%=publisher %></span>
 		  </div>
-		  </div>
+		 </div>
 
 		
 	

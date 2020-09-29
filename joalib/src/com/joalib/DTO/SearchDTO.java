@@ -2,6 +2,12 @@ package com.joalib.DTO;
 
 public class SearchDTO {
 	String option,text,page;
+	
+	
+	String isbn, author, publisher,book_title,pub_date,category,book_img,book_story,check;
+	
+	
+	
 	public String getPage() {
 		return page;
 	}
@@ -10,7 +16,7 @@ public class SearchDTO {
 		this.page = page;
 	}
 
-	String isbn, author, publisher,book_title,pub_date,category,book_img,book_story,check;
+	
 	
 	
 
