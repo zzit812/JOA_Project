@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jaolib.book.manager.action.BookInfoAddAction;
+//import com.jaolib.book.manager.action.BookInfoAddAction;
 import com.joalib.DTO.ActionForward;
 import com.joalib.DTO.BookInfoDTO;
 import com.joalib.bookinfo.action.Action;
@@ -28,7 +28,7 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 
 		 if(command.equals("/bookInfoAdd.bk")){  //책占쏙옙占쏙옙占쌩곤옙占싹깍옙
 			 //화占쏙옙
-			 action = new BookInfoAddAction();
+			// action = new BookInfoAddAction(); ///////////////////북정보 관리자 페이지
 				try{
 					forward=action.execute(request, response);
 				}catch(Exception e){

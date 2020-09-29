@@ -85,7 +85,7 @@ public class BookBestService {
         } catch (Exception e) {
             e.printStackTrace();
         } return parse_listArr;
-        //book ���떊 
+
 		
 		
 		

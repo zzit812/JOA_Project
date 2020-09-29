@@ -49,7 +49,7 @@ SqlSessionFactory sqlfactory;
 
 
 	public List<BookInfoDTO> BookSearch(SearchDTO sdto) {
-		getinstance();
+		
 		SqlSession sqlsession = sqlfactory.openSession();
 		//System.out.println("DAO  1");
 		
@@ -65,9 +65,10 @@ SqlSessionFactory sqlfactory;
 		
 		return list;
 	}
-	public List<String> select_book(SearchDTO sdto) {
+	public List<SearchDTO> select_book(SearchDTO sdto) {
+		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
-		List<String> book_search = sqlsession.selectList("book_search", sdto);
+		List<SearchDTO> book_search = sqlsession.selectList("book_search", sdto);
 		sqlsession.commit();
 		sqlsession.close();
 		

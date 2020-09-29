@@ -2,11 +2,10 @@
 <%@page import="com.joalib.DTO.BookInfoDTO"%>
 <%@page import="com.joalib.DAO.BookInfoDAO"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.joalib.board.action.dbAction"%>
-<%@ page import="com.joalib.DAO.DAO"%>
+
 
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
@@ -174,10 +173,10 @@
 						for="128">여행</label></li>
 						
 				</ul>
-				</form>
+				
 				<!-- 검색바에 맞춰서 정렬할 것임 -->
 			</div>
-		
+		</form>
 			
 			
 		</div>

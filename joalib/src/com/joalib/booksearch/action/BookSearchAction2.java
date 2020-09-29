@@ -62,7 +62,7 @@ public class BookSearchAction2 implements Action {
 		parse_listArr = bookSearchService.search(sdto);
 		
 		BookSearchDBService bookSearchDBService = new BookSearchDBService();
-		List<String> book_search = bookSearchDBService.dbsearch(sdto);
+		List<SearchDTO> book_search = bookSearchDBService.dbsearch(sdto);
 		request.setAttribute("book_search_db", book_search); ///////////JSP �럹�씠吏�濡� 蹂대궡湲�
 		
 		request.setAttribute("searchBook", parse_listArr );
