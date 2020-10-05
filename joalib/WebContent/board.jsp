@@ -61,36 +61,32 @@
 			<nav id="topMenuBorder">
 				<ul id="top_menu">
 					<li><a href="book_search.jsp">자료검색</a>
-						<ul class ="sub_menu">
-							<li><a href="book_search.html">도서 검색</a></li>
-							<li><a href="">분야별 도서 조회</a></li>
-						</ul>
-					</li>
-					<li><a href="#">도서마당</a>
+						<ul class="sub_menu">
+							<li><a href="book_search.jsp">도서 검색</a></li>
+						</ul></li>
+					<li><a href="book_new.jsp">도서마당</a>
 						<ul>
-							<li><a href="">신착 도서</a></li>
-							<li><a href="">베스트 셀러</a></li>
-							<li><a href="">희망도서</a></li>
+							<li><a href="book_new.jsp">신착 도서</a></li>
+							<li><a href="book_best.jsp">베스트 셀러</a></li>
+							<li><a href="book_recommend.jsp">추천 도서</a></li>
+							<li><a href="book_wish.jsp">희망 도서</a></li>
 						</ul>
-					</li>
-					<li><a href="#">이용안내</a>
+						</li>
+					<li><a href="place.jsp">이용안내</a>
 						<ul>
-							<li><a href="">시설안내</a></li>
-							<li><a href="">자료 현황</a></li>
-							<li><a href="">포인트</a></li>
-							<li><a href="">도서 대여</a></li>
-							<li><a href="">도서 예약</a></li>
-						</ul>
-					</li>				
+							<li><a href="place.jsp">오시는 길</a></li>
+							<li><a href="book_guide.jsp">도서 이용안내</a></li>
+							<li><a href="">포인트 이용안내</a></li>
+
+						</ul></li>
 					<li><a href="#">커뮤니티</a>
 						<ul>
 							<li><a href="">공지사항</a></li>
 							<li><a href="">질문과 답변</a></li>
 							<li><a href="board.jsp">자유게시판</a></li>
 							<li><a href="Fault_list.jsp">불량도서 신고</a></li>
-							<li><a href="Donate_list.jsp">중고도서 나눔</a></li>
-						</ul>
-					</li>
+							<li><a href="">중고도서 나눔</a></li>
+						</ul></li>
 					<li><a href="mypage_main.jsp">나의서재</a>
 						<ul>
 							<li><a href="mypage_main.jsp">나의 서재</a></li>
@@ -98,11 +94,11 @@
 							<li><a href="">내가 쓴 글</a></li>
 							<li><a href="">포인트</a></li>
 							<li><a href="">정보 수정/ 탈퇴</a></li>
-						</ul>
-					</li>
+						</ul></li>
 				</ul>
-				<div id="window_menu"></div>
-			</nav>
+				<d iv id="window_menu">
+		</div>
+		</nav>
 		 </div>
 		 <script src="js/lib_top.js"></script>
 		 <div id="title"><p>커뮤니티</p></div>
