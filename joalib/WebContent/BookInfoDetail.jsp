@@ -106,7 +106,7 @@
 	JSONObject books = null;
 
 		
-		  for(int i=0; i< parse_listArr.size() ; i++){
+		  for(int i=0; i< 1 ; i++){
 				books = (JSONObject)parse_listArr.get(i);
 				String title= (String)books.get("title");
 				String author = (String)books.get("author");

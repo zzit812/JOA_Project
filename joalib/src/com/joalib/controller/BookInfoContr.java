@@ -12,6 +12,7 @@ import com.joalib.DTO.ActionForward;
 import com.joalib.DTO.BookInfoDTO;
 import com.joalib.bookinfo.action.Action;
 import com.joalib.bookinfo.action.BookInfoDetailAction;
+import com.joalib.bookinfo.action.BookInfoDetailDBAction;
 
 @WebServlet("*.bk") 
 public class BookInfoContr extends javax.servlet.http.HttpServlet{
@@ -37,6 +38,14 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 		  }else if(command.equals("/bookInfoDetail.bk")){   //책占쏙옙占쏙옙占쏙옙占쏙옙
 				 //화占쏙옙
 			action = new BookInfoDetailAction();
+				try{
+					forward=action.execute(request, response);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+		  }else if(command.equals("/bookInfoDetailDB.bk")){ 
+				//System.out.println("여기는 컨트롤 입니다");
+			action = new BookInfoDetailDBAction();
 				try{
 					forward=action.execute(request, response);
 				}catch(Exception e){

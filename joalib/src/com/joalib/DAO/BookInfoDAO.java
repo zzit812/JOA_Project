@@ -20,7 +20,7 @@ public class BookInfoDAO {
 	private static BookInfoDAO instance;
 	
 	public static BookInfoDAO getinstance() {
-		if (instance == null) {	// >DAO ��ü ������ �־�?
+		if (instance == null) {	// >DAO 占쏙옙체 占쏙옙占쏙옙占쏙옙 占쌍억옙?
 			synchronized (DAO.class) {
 				instance = new BookInfoDAO();		}
 	}
@@ -29,8 +29,8 @@ public class BookInfoDAO {
 	
 	public BookInfoDAO(){	
 		try {
-			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml ����
-			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batis�� �����ϴ� ����.				
+			Reader reader = Resources.getResourceAsReader("com/joalib/DAO/mybatis_test-config.xml");		//xml 占쏙옙占쏙옙
+			sqlfactory = new SqlSessionFactoryBuilder().build(reader);	//batis占쏙옙 占쏙옙占쏙옙占싹댐옙 占쏙옙占쏙옙.				
 		} catch (IOException e) {
 			e.printStackTrace();		
 			}		
@@ -44,30 +44,30 @@ public class BookInfoDAO {
 		
 		return i;
 	}
-	public int select_book_count() {  //�˻���� ��ü �ڷ��
+	public int select_book_count() {  //占싯삼옙占쏙옙占� 占쏙옙체 占쌘뤄옙占�
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
-		//���°� ȭ��
+		//占쏙옙占승곤옙 화占쏙옙
 		int total = sqlsession.selectOne("book_search_count");
-		//ȭ��
+		//화占쏙옙
 		sqlsession.commit();
 		sqlsession.close();
 		return total;
 	}
 	
 
-	public BookInfoDTO book_info_detail(int isbn) {
-	
-		// TODO Auto-generated method stub
-		getinstance();
-		SqlSession sqlsession = sqlfactory.openSession();
-		BookInfoDTO dto = new BookInfoDTO();
-		dto = sqlsession.selectOne("book_info_detail", isbn);
-		sqlsession.commit();
-		sqlsession.close();
-		
-		return dto;
-	}
+//	public BookInfoDTO book_info_detail(int isbn) {
+//	
+//		// TODO Auto-generated method stub
+//		getinstance();
+//		SqlSession sqlsession = sqlfactory.openSession();
+//		BookInfoDTO dto = new BookInfoDTO();
+//		dto = sqlsession.selectOne("book_info_detail", isbn);
+//		sqlsession.commit();
+//		sqlsession.close();
+//		
+//		return dto;
+//	}
 
 	public List<BookInfoDTO> book_info() {
 		getinstance();
@@ -79,6 +79,20 @@ public class BookInfoDAO {
 		return book;
 		
 	}
+
+	public BookInfoDTO book_infoDB(String isbn) {
+		getinstance();
+		System.out.println("여긴왔냐");
+		SqlSession sqlsession = sqlfactory.openSession();
+		BookInfoDTO bookDB = (BookInfoDTO) sqlsession.selectOne("book_infoDB", isbn);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return bookDB;
+		
+	}
+
+
 
 	
 	

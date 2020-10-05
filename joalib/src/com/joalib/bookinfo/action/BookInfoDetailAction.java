@@ -31,8 +31,7 @@ public class BookInfoDetailAction implements Action {
 		BookInfoDetailService bookInfoDetailService = new BookInfoDetailService();
 		parse_listArr = bookInfoDetailService.detail(text);
 		
-		
-		
+	
 		request.setAttribute("searchBook", parse_listArr );
 
 		

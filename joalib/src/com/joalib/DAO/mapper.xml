@@ -267,13 +267,16 @@
 		update joalib.member_alarm set alarm_check = 1 where alarm_category = #{alarm_category} and alarm_date = #{alarm_date} and alarm_etc = #{alarm_etc};
 	</update>
 	
-	
-	<select id="book_search" resultType="com.joalib.DTO.BookInfoDTO" parameterType="com.joalib.DTO.SearchDTO">
-		select * from joalib.bookinfo where #{option} like CONCAT('%',#{text},'%');
+	<select id="book_search" resultType="com.joalib.DTO.SearchDTO" parameterType="com.joalib.DTO.SearchDTO">
+		select * from joalib.bookinfo where book_title like CONCAT('%',#{text},'%')
 	</select>
 	<insert id="book_wish_add" parameterType="com.joalib.DTO.BookWishDTO">
 		insert into joalib.wish_book VALUES ( default, #{member_id}, #{wish_title} , #{wish_publisher}, #{wish_author}, #{wish_isbn});
 	</insert>
+	<select id="book_infoDB" resultType="com.joalib.DTO.BookInfoDTO" parameterType="String">
+		select * from joalib.bookinfo where isbn = #{isbn};
+	</select>
+	
 	
 	
 	

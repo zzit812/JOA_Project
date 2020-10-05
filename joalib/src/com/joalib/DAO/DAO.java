@@ -18,6 +18,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.joalib.DTO.BoardDTO;
 import com.joalib.DTO.Board_CommentDTO;
 import com.joalib.DTO.Board_Small_CommentDTO;
+import com.joalib.DTO.SearchDTO;
 import com.joalib.DTO.member_alarmDTO;
 import com.joalib.DTO.memberinfoDTO;
 
@@ -229,6 +230,7 @@ public class DAO {
 		sqlsession.close();
 		return i;
 	}
+
 
 	
 	

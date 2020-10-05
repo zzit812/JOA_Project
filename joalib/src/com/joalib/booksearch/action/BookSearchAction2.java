@@ -20,8 +20,6 @@ public class BookSearchAction2 implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward=null;
 		
-		List<SearchDTO> list = null;
-		
 		JSONArray parse_listArr = null;
 		JSONObject book = null;
 		
@@ -39,7 +37,7 @@ public class BookSearchAction2 implements Action {
 //		System.out.println("check: "+check);
 //		
 		if(option.equals("도서명")) {
-			option = "title";
+			option = "book_title";
 		}else if(option.equals("저자")){
 			option = "author";
 		}else if(option.equals("출판사")){
@@ -63,10 +61,10 @@ public class BookSearchAction2 implements Action {
 		
 		BookSearchDBService bookSearchDBService = new BookSearchDBService();
 		List<SearchDTO> book_search = bookSearchDBService.dbsearch(sdto);
-		request.setAttribute("book_search_db", book_search); ///////////JSP �럹�씠吏�濡� 蹂대궡湲�
+		request.setAttribute("book_search_db", book_search); ///////////JSP 占쎈읂占쎌뵠筌욑옙嚥∽옙 癰귣�沅→묾占�
 		
 		request.setAttribute("searchBook", parse_listArr );
-		request.setAttribute("search_info", sdto);
+		request.setAttribute("searchBookDB", book_search);
 		
 
 		

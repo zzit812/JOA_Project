@@ -64,22 +64,23 @@
 				<ul id="top_menu">
 					<li><a href="book_search.jsp">자료검색</a>
 						<ul class="sub_menu">
-							<li><a href="book_search.jsp">도서 검색</a></li>
+							<li><a href="">도서 검색</a></li>
+							<li><a href="">분야별 도서 조회</a></li>
 						</ul></li>
 					<li><a href="book_new.jsp">도서마당</a>
 						<ul>
 							<li><a href="book_new.jsp">신착 도서</a></li>
 							<li><a href="book_best.jsp">베스트 셀러</a></li>
 							<li><a href="book_recommend.jsp">추천 도서</a></li>
-							<li><a href="book_wish.jsp">희망 도서</a></li>
-						</ul>
-						</li>
-					<li><a href="place.jsp">이용안내</a>
+							<li><a href="">희망 도서</a></li>
+						</ul></li>
+					<li><a href="#">이용안내</a>
 						<ul>
-							<li><a href="place.jsp">오시는 길</a></li>
-							<li><a href="book_guide.jsp">도서 이용안내</a></li>
-							<li><a href="point_guide.jsp">포인트 이용안내</a></li>
-
+							<li><a href="">시설안내</a></li>
+							<li><a href="">자료 현황</a></li>
+							<li><a href="">포인트</a></li>
+							<li><a href="">도서 대여</a></li>
+							<li><a href="">도서 예약</a></li>
 						</ul></li>
 					<li><a href="#">커뮤니티</a>
 						<ul>
@@ -191,19 +192,29 @@
 		</div>
 		<br/> -->
 		
-		<%
-			SearchDTO dto =  (SearchDTO)request.getAttribute("search_info");
-		  
-		  		dto.getOption();
-		  		String text = dto.getText();
-		  		String option = dto.getOption();
-		  		
-		  %>
-		  
-		  <div id="search_text">"<%=text %>" 검색 결과</div>
+		
 		<main id="book_show">
 
-
+		<%
+		List<SearchDTO> DB_list = (List<SearchDTO>)request.getAttribute("searchBookDB");
+		for (int i = 0; i < DB_list.size() ; i ++) { %>
+		<div class="box">
+		  <a href="bookInfoDetailDB.bk?isbn=<%=DB_list.get(i).getIsbn() %>">
+		  <img  class="card" src="img/book/<%=DB_list.get(i).getBook_img() %>"></a>
+		    <div class="content">
+		      <h2 class="title"></h2>
+		      <span class="favorite">관심도서</span>
+		      <span class="loan">대출가능</span>
+		    </div>
+		    
+		    <div class="simple_info">
+		  	<span><b>도서명</b></span>&nbsp; <span><%=DB_list.get(i).getBook_title() %></span></br>
+		  	<span><b>저자명</b></span>&nbsp; <span><%=DB_list.get(i).getAuthor()%></span></br>
+		  	<span><b>출판사</b></span>&nbsp; <span><%=DB_list.get(i).getPublisher() %></span>
+		  </div>
+		</div>
+		
+		<% } %>
 
 
 	  	<%
@@ -222,7 +233,7 @@
 		
 		<div class="box">
 		  <a href="bookInfoDetail.bk?isbn=<%=isbn%>">
-		  <img src="<%=book_img %>" class="card" src="<%=book_img %>"></a>
+		  <img  class="card" src="<%=book_img %>"></a>
 		    <div class="content">
 		      <h2 class="title"></h2>
 		      <span class="favorite">관심도서</span>
@@ -234,7 +245,7 @@
 		  	<span><b>저자명</b></span>&nbsp; <span><%=author%></span></br>
 		  	<span><b>출판사</b></span>&nbsp; <span><%=publisher %></span>
 		  </div>
-		 </div>
+		</div>
 
 		
 	
@@ -243,22 +254,7 @@
 		  
 		  
 		  <!-- 여기서 다시 페이지 번호  옵션, 검색어  봰야됨 -->
-		  <div id="my_pagind">
-		  	<ul id="paging"> 
-		  		<li><a href="#">◀</a></li>
-			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=1">1</a></li>
-			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=2">2</a></li>
-			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=3">3</a></li>  
-			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=4">4</a></li>  
-			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=5">5</a></li>  
-			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=6">6</a></li>  
-			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=7">7</a></li>  
-			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=8">8</a></li>  
-			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=9">9</a></li>  
-			    <li><a href="book_search.bs?select_search=<%=option%>&what=<%=text%>&page=10">10</a></li>
-			    <li><a href="#">▶</a></li>
-			</ul>
-		  </div>
+	
 
 		  
 		  
