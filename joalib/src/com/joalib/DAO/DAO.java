@@ -74,8 +74,7 @@ public class DAO {
 		SqlSession sqlsession = sqlfactory.openSession();
 		int i = sqlsession.update("board_hitUp", board_no);
 		sqlsession.commit();
-		sqlsession.close();		
-		System.out.println("鈺곌퀬�돳占쎈땾 筌앹빓占� :DAO");
+		sqlsession.close();	
 		return i;
 	}	
 	public BoardDTO read_details(int board_no) {
@@ -99,8 +98,9 @@ public class DAO {
 	
 	public int board_del(int board_no) {
 		SqlSession sqlsession = sqlfactory.openSession();
-		sqlsession.delete("board_del2", board_no);
-		int i = sqlsession.delete("board_del", board_no);
+		sqlsession.delete("board_del3", board_no);	//답글삭제
+		sqlsession.delete("board_del2", board_no);	//댓글삭제
+		int i = sqlsession.delete("board_del", board_no);	//게시글 삭제
 		sqlsession.commit();
 		sqlsession.close();
 		
@@ -136,11 +136,11 @@ public class DAO {
 		return list;
 	}
 	
-	//�뜝�룞�삕�뜝�룞�삕�뜝�뙃�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕
+	//댓글 삭제 함수
 	public int boardCommentDel(Board_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
-		sqlsession.delete("boardComment_delete2", dto);
-		int i = sqlsession.delete("boardComment_delete1", dto);
+		sqlsession.delete("boardComment_delete2", dto);	//답글 삭제
+		int i = sqlsession.delete("boardComment_delete1", dto);	//댓글 삭제
 		sqlsession.commit();
 		sqlsession.close();
 		
@@ -199,9 +199,10 @@ public class DAO {
 	}
 	public int boardSmallCommentDelete(Board_Small_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
-		System.out.println("占쎌젔域뱄옙 占쎄쉐�⑨옙");
 		int i = sqlsession.delete("boardSmallCommentDelete", dto);
-		System.out.println("占쎈염野껓옙 占쎄쉐�⑨옙");
+		if(i > 0) {
+			sqlsession.delete("boardSmallCommentAlarmDelete", dto);
+		}
 		sqlsession.commit();
 		sqlsession.close();
 		

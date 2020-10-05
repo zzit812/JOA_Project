@@ -75,13 +75,16 @@
 	<delete id="board_del2" parameterType="int">
 		delete from joalib.board_comment where board_no = #{board_no};
 	</delete>
+	<delete id="board_del3" parameterType="int">
+		delete from joalib.board_small_comment where board_comment_no in(select board_comment_no from joalib.board_comment where board_no = #{board_no});
+	</delete>
 
 	<insert id="boardComment_add" parameterType="com.joalib.DTO.Board_CommentDTO">
 		INSERT INTO joalib.board_comment (`board_no`, `member_id`, `bc_text`, `bc_date`) VALUES ( #{board_no}, #{member_id}, #{bc_text}, now() );
 	</insert>
 	
 	<select id="boardComment_list" parameterType="int" resultType="com.joalib.DTO.Board_CommentDTO">
-		select * from joalib.board_comment where board_no = #{board_no} ;
+		select * from joalib.board_comment where board_no = #{board_no} order by bc_date desc ;
 	</select>
 	
 	<insert id="book_info_add" parameterType="com.joalib.DTO.BookInfoDTO">
@@ -99,26 +102,21 @@
 		select * from joalib.bookinfo where isbn= #{isbn};
 	</select>
 	
-	<delete id="boardComment_delete1" parameterType="com.joalib.DTO.BoardDTO">
+	<delete id="boardComment_delete1" parameterType="com.joalib.DTO.Board_CommentDTO">
 		delete from joalib.board_comment where member_id = #{member_id} and bc_date = #{bc_date};
 	</delete>
-	<delete id="boardComment_delete2" parameterType="com.joalib.DTO.BoardDTO">
+	<delete id="boardComment_delete2" parameterType="com.joalib.DTO.Board_CommentDTO">
 		delete FROM joalib.board_small_comment where board_comment_no = #{board_comment_no};
 	</delete>
-	
-	
 	<update id="boardComment_update" parameterType="com.joalib.DTO.BoardDTO">
 		UPDATE joalib.board_comment set bc_text = #{bc_text} where member_id = #{member_id} and bc_date = #{bc_date};
 	</update>
-	
 	<select id="boardCommentCount" parameterType="int" resultType="int">
 		select count(*) from joalib.board_comment where board_no = #{board_no};
 	</select>
-	
 	<insert id="boardCommnetPointCharge" parameterType="String">
 		insert into joalib.point values (#{member_id}, 30, now(), '댓글(자유게시판)', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)+30), '+');
 	</insert>
-	
 	<insert id="faultPointCharge" parameterType="String">
 		insert into joalib.point values (#{member_id}, 1000, now(), '불량도서 신고', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)+1000), '+');
 	</insert>
@@ -222,6 +220,9 @@
 	</select>
 	<delete id="boardSmallCommentDelete" parameterType="com.joalib.DTO.Board_Small_CommentDTO">
 		delete from joalib.board_small_comment where member_id = #{member_id} and bc_s_date = #{bc_s_date};
+	</delete>
+	<delete id="boardSmallCommentAlarmDelete" parameterType="com.joalib.DTO.Board_Small_CommentDTO">
+		delete from joalib.member_alarm where alarm_date = #{bc_s_date} and alarm_category = 'board_smallcomment' and alarm_etc like CONCAT('%',#{member_id},'%');
 	</delete>
 	<update id="boardSmallCommentChange" parameterType="com.joalib.DTO.Board_Small_CommentDTO">
 		update joalib.board_small_comment set bc_s_text = #{bc_s_text} where member_id = #{member_id} and bc_s_date = #{bc_s_date};

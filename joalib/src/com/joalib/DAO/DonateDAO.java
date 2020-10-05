@@ -157,15 +157,13 @@ SqlSessionFactory sqlfactory;
 		return i;
 	}
 	public int DonataeMessageChecked(member_alarmDTO dto) {
+		int i =0;
 		int donate_no = Integer.parseInt(dto.getAlarm_etc());
-		/*sqlsession.update("donateMessageChecked", dto);	//履쎌�瑜� 蹂대깉�뜕 紐⑤뱺 �쉶�썝�뱾�뿉寃뚯꽌 �븣由쇱쓣 �걫
-		i = sqlsession.update("donateConditionChange", dto);	//嫄곕옒以� > 嫄곕옒�셿猷� 濡� 蹂�寃쏀븯怨� donate_buyer�뿉 member_id瑜� 湲곗엯
-		System.out.println(donate_no);
-		i =*/
+		//
 		SqlSession sqlsession = sqlfactory.openSession();
-		int i = sqlsession.insert("donateCompletePoint", donate_no);
-		System.out.println(donate_no);
-		
+		i = sqlsession.update("donateMessageChecked", dto);	//(도서 나눔 받는 쪽 사람의)알림을 1로 바꿈
+		i = sqlsession.update("donateConditionChange", dto);	//게시글의 상태를 '거래완료'로 변경
+		i = sqlsession.insert("donateCompletePoint", donate_no);	//(도서 나눔을 하는 회원의)포인트 지급
 		sqlsession.commit();
 		sqlsession.close();
 		return i;

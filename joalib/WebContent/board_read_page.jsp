@@ -433,9 +433,8 @@
 								<div class="member_character" ><img  src="img/character/character1.png"></div> <!-- 이미지 -->
 								<h5><%= list.get(i).getMember_id() %></h5><h5><%= list.get(i).getBc_date() %></h5>
 								<% if(list.get(i).getMember_id().equals(member_id)){ %>
-									<a href="javascript:void(0);" onclick="" id="change" class="commentChangeBtn">수정</a>
 									<a href="javascript:void(0);" class= "commentDelBtn">삭제</a>
-									
+									<a href="javascript:void(0);" onclick="" id="change" class="commentChangeBtn">수정</a>
 								<% } %>
 								<a href="javascript:void(0);" onclick="" class="s_comments">답글</a>
 								<p><%= list.get(i).getBc_text() %></p>
