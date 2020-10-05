@@ -17,6 +17,7 @@
 	    font-family: 'Gothic A1', sans-serif;
 	    font-family: 'Roboto', sans-serif;
 	    padding: 0; margin: 0;
+	    letter-spacing: -1px;
 	}
 	body{
 	    background-color: #f9f9f9;
@@ -123,6 +124,7 @@
 	}
 	#MainMenu > ul > li > ul > li{    
 	    font-family: 'Gothic A1', sans-serif;
+	    letter-spacing: -3px;
 	    display: block;
 	    padding: 10px 0;
 	    opacity: 30%;
@@ -150,6 +152,7 @@
 	    transition: all 0.4s;
 	}
 	#searchBar > input[type=text]{
+	    letter-spacing: -2px;
 		float: left;
 	    width: 91%;
 	    height: 100%;
@@ -177,6 +180,7 @@
 	    border-radius: 10px;
 	}
 	#searchBar2 > input[type=text]{
+	    letter-spacing: -2px;
 		display: inline-block;
 	    height: 45px;
 	    width: 90%;
@@ -441,7 +445,7 @@
 	<section>
 		<!-- 검색바 -->
 		<article id="searchBar2">
-			<input type="text" placeholder="찾으시는 도서를 검색하세요! :-)"  />
+			<input type="text" placeholder="찾으시는 도서를 검색하세요!	:-)"  />
 			<input type="image" src="img/icon_search.png" alt="searchingBtn">
 		</article>
 	</section>
