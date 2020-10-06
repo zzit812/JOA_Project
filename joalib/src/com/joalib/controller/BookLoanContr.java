@@ -8,11 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.joalib.DTO.ActionForward;
-import com.joalib.bookfavorite.action.*;
+
+import com.joalib.loan.action.Action;
+import com.joalib.loan.action.BookLoanAction;
 
 
-@WebServlet("*.fav") 
-public class BookFavotite extends javax.servlet.http.HttpServlet{
+
+@WebServlet("*.loa") 
+public class BookLoanContr extends javax.servlet.http.HttpServlet{
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -22,19 +25,18 @@ public class BookFavotite extends javax.servlet.http.HttpServlet{
 		String command=RequestURI.substring(contextPath.length());
 		ActionForward forward=null;
 		Action action=null;
+		System.out.println(command);
 		
-		if(command.equals("/bookFavorite.fav")){ 
-			action  = new BookFavoriteAction();
+		if(command.equals("/bookLoan.loa")){ 
+			//System.out.println("이곳은 콘드롤요 ");
+			action  = new BookLoanAction();
+			
 			try {
 				forward=action.execute(request, response );				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
-		
 		
 		if(forward != null){		
 			if(forward.isRedirect()){

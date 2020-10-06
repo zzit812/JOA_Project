@@ -125,10 +125,19 @@
 				<img id="book_img" src="img/book/<%=book_img %>">
 				<div id="button">
 				
-				<form action="">
-					<input type="button" id="favorite_add" value="관심도서" onclick="location.href='bookFavoriteAction.fl?isbn=<%=isbn %>'">
-					<input type="button" id="loan" value="대출하기" onclick="location.href='bookLoanAction.fl?isbn=<%=isbn %>'">
-				</form>
+				<%
+					if (member_id==null){
+						out.print("로그인 후 대출 가능합니다.");
+					}else { %>
+						<form action="bookLoan.loa" name="loan" method="post" >
+							<input type="hidden" name="isbn" value="<%=isbn %>">
+							<input type="hidden" name="member_id" value="<%=member_id %>">
+							<input type="submit" value="대출하기">
+						</form>
+					<%}
+				%>
+				
+				
 
 				</div>
 			</div>

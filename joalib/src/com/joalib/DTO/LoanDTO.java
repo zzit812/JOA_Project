@@ -6,9 +6,17 @@ import java.text.SimpleDateFormat;
 
 public class LoanDTO {
 	
-	String member_id, loan_book,loan_condition,return_duedate;
+	String member_id, loan_book,loan_condition,return_duedate, return_date;
 
 
+
+	public String getReturn_date() {
+		return return_date;
+	}
+
+	public void setReturn_date(String return_date) {
+		this.return_date = return_date;
+	}
 
 	public String getReturn_duedate() {
 		return return_duedate;

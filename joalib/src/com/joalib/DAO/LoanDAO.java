@@ -17,12 +17,12 @@ public class LoanDAO {
 	
 SqlSessionFactory sqlfactory;
 	
-	private static FavoriteDAO instance;
+	private static LoanDAO instance;
 	
-	public static FavoriteDAO getinstance() {
+	public static LoanDAO getinstance() {
 		if (instance == null) {	// >DAO 객체 만든적 있어?
-			synchronized (memberinfoDAO.class) {
-				instance = new FavoriteDAO();		}
+			synchronized (LoanDAO.class) {
+				instance = new LoanDAO();		}
 		}
 		return instance;
 	}
@@ -37,11 +37,25 @@ SqlSessionFactory sqlfactory;
 	}
 	
 
+	
 	public void loan(LoanDTO dto) {
+		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
 		sqlsession.insert("loan",dto);
 		sqlsession.commit();
 		sqlsession.close();
+	}
+
+	public int loan_select(LoanDTO loanDTO) {
+		
+		getinstance();
+		SqlSession sqlsession = sqlfactory.openSession();
+		int i = sqlsession.selectOne("loan_select", loanDTO);
+		sqlsession.commit();
+		sqlsession.close();
+
+		return i;
+		
 	}
 	
 	
