@@ -17,7 +17,7 @@ public class BookInfoDetailDBAction implements Action {
 		ActionForward forward=null;
 		
 		String isbn = request.getParameter("isbn");
-		System.out.println("¾×¼ÇÀÇ " +isbn);
+	
 		
 		BookInfoDetailDBService bookInfoDetailDBService = new BookInfoDetailDBService();
 		BookInfoDTO bookDB = bookInfoDetailDBService.bookDB(isbn);

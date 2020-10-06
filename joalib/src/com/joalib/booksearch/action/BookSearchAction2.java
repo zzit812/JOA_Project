@@ -61,7 +61,7 @@ public class BookSearchAction2 implements Action {
 		
 		BookSearchDBService bookSearchDBService = new BookSearchDBService();
 		List<SearchDTO> book_search = bookSearchDBService.dbsearch(sdto);
-		request.setAttribute("book_search_db", book_search); ///////////JSP 占쎈읂占쎌뵠筌욑옙嚥∽옙 癰귣�沅→묾占�
+	
 		
 		request.setAttribute("searchBook", parse_listArr );
 		request.setAttribute("searchBookDB", book_search);

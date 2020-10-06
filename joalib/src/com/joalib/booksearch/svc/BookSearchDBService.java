@@ -16,8 +16,6 @@ public class BookSearchDBService {
 		BookSearchDAO dao = new BookSearchDAO();
 		List<SearchDTO> book_search = dao.select_book(sdto);
 		
-		System.out.println(book_search.get(0).getAuthor());
-		System.out.println(book_search.get(0).getBook_title());
 		
 		return book_search;
 	}

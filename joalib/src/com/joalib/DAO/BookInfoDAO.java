@@ -82,7 +82,7 @@ public class BookInfoDAO {
 
 	public BookInfoDTO book_infoDB(String isbn) {
 		getinstance();
-		System.out.println("여긴왔냐");
+
 		SqlSession sqlsession = sqlfactory.openSession();
 		BookInfoDTO bookDB = (BookInfoDTO) sqlsession.selectOne("book_infoDB", isbn);
 		sqlsession.commit();
