@@ -489,7 +489,7 @@ https://www.hancomm.co.kr/index.do
 					
 					function donateMessage(memberid,donatecategory, donateno){
 						member_id = memberid ;
-						donate_no = donateno;
+	 					donate_no = donateno;
 						donate_category = donatecategory;
 					}
 					
