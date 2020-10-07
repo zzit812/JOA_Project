@@ -38,7 +38,7 @@ SqlSessionFactory sqlfactory;
 	
 
 	
-	public void loan(LoanDTO dto) {
+	public void loan(LoanDTO dto) throws Exception{
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
 		sqlsession.insert("loan",dto);

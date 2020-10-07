@@ -25,7 +25,6 @@ public class BookLoanContr extends javax.servlet.http.HttpServlet{
 		String command=RequestURI.substring(contextPath.length());
 		ActionForward forward=null;
 		Action action=null;
-		System.out.println(command);
 		
 		if(command.equals("/bookLoan.loa")){ 
 			//System.out.println("이곳은 콘드롤요 ");

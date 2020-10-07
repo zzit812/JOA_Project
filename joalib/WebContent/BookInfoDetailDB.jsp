@@ -26,11 +26,19 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
+
+<script>
+	$(document).ready(function(){
+		<%
+			if(request.getAttribute("message") != null){
+				%>
+				alert('<%=request.getAttribute("message")%>');
+				<%
+			}
+		%>
+	});
+</script>
 </head>
-
-
-
-
 
 <body>
 	<header>

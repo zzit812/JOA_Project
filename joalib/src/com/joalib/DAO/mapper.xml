@@ -127,7 +127,7 @@
 		insert into joalib.favorite_book values (#{member_id},#{isbn});
 	</insert>
 	<insert id="loan" parameterType="com.joalib.DTO.LoanDTO">
-		insert into joalib.loan_book (member_id,loan_book,loan_date,return_duedate, loan_condition) values (#{member_id},#{loan_book},now(),now() ,'대출');
+		insert into joalib.loan_book (member_id,loan_book,loan_date,return_duedate, loan_condition) values (#{member_id},#{loan_book},now(),date_add(now(),INTERVAL 14 DAY) ,'대출');
 	</insert>
 	<select id="loan_select" parameterType="com.joalib.DTO.LoanDTO" resultType="int">
 		SELECT count(*) FROM joalib.loan_book;

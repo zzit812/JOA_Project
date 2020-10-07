@@ -5,10 +5,16 @@ import com.joalib.DTO.LoanDTO;
 
 public class BookLoanService {
 
-	public void loan(LoanDTO loanDTO) {
+	public boolean loan(LoanDTO loanDTO) {
 		LoanDAO dao = new LoanDAO();
-		dao.loan(loanDTO);
 		
+		try {
+			dao.loan(loanDTO);  //아이디와 	ISBN 동일할 시 넣음
+		}catch(Exception e) { 
+			return false;	
+		}
+		
+		return true;
 	}
 
 }
