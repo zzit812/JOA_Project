@@ -148,8 +148,7 @@
 				</div>
 			</div>
 			<div id="detail_box">
-				<a href="#" onclick="history.back();"><img id="back"
-					src="img/back.png"></a>
+				
 				<div id="detail">
 					<h2><%=title%></h2>
 					<div>
