@@ -132,10 +132,8 @@
 				<img id="book_img" src="<%=book_img %>">
 				<div id="button">
 				
-				<form action="">
-					<input type="button" id="favorite_add" value="관심도서" onclick="location.href='bookFavoriteAction.fl?isbn=<%=isbn %>'">
-					<input type="button" id="loan" value="대출하기" onclick="location.href='bookLoanAction.fl?isbn=<%=isbn %>'">
-				</form>
+				<!-- 이곳에 원래 대출하기 관심도서 가 있음 -->
+				대출가능한 도서가 아닙니다.
 
 				</div>
 			</div>
