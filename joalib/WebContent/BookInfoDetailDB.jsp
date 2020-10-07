@@ -27,18 +27,29 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
-<script>
-	$(document).ready(function(){
-		<%if (request.getAttribute("message") != null) {%>
-				alert('<%=request.getAttribute("message")%>
-	');
-<%}%>
-	});
-</script>
+	<!-- <script type="text/javascript">
+	
+		$(function(){
+			$(window).ready(function(){
+				
+			});
+		})
+		
+	</script> -->
+
+	
+
+
 </head>
 
 <body>
 	<header>
+	<%
+		if(request.getAttribute("message") != null){
+			String messageAlert = (String)request.getAttribute("message");
+			out.print("<script type='text/javascript'> alert('"+messageAlert+"');</script>");
+		}
+	%>
 		<div id="top_size">
 			<!--로고-->
 			<img id="logo" src="img/icon_lib.png">

@@ -25,6 +25,7 @@ public class BookLoanAction implements Action{
 		
 		BookLoanService bookLoanService = new BookLoanService();
 		boolean flag = bookLoanService.loan(loanDTO);
+		
 		String message = "";
 		if(flag)
 			message = "대출 성공";

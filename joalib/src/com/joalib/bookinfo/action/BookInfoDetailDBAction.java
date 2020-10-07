@@ -17,14 +17,18 @@ public class BookInfoDetailDBAction implements Action {
 		ActionForward forward=null;
 		
 		String isbn = request.getParameter("isbn");
-		String message = request.getParameter("message");
-	
+		String message = null;
+		
+		if(request.getParameter("message") != null) {
+			message = request.getParameter("message");
+			request.setAttribute("message", message);
+		}
 		
 		BookInfoDetailDBService bookInfoDetailDBService = new BookInfoDetailDBService();
 		BookInfoDTO bookDB = bookInfoDetailDBService.bookDB(isbn);
 		
 		request.setAttribute("bookDB", bookDB);
-		request.setAttribute("message", message);
+		
 		
 		forward = new ActionForward();
 		forward.setPath("BookInfoDetailDB.jsp");
