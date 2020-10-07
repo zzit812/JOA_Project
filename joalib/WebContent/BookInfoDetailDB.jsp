@@ -11,8 +11,8 @@
 <%@ page import="com.joalib.DTO.BoardDTO"%>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
-<%@page import="org.json.simple.JSONObject" %>
-<%@page import="org.json.simple.JSONArray" %>
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="org.json.simple.JSONArray"%>
 
 <!DOCTYPE html>
 <html>
@@ -29,13 +29,10 @@
 
 <script>
 	$(document).ready(function(){
-		<%
-			if(request.getAttribute("message") != null){
-				%>
-				alert('<%=request.getAttribute("message")%>');
-				<%
-			}
-		%>
+		<%if (request.getAttribute("message") != null) {%>
+				alert('<%=request.getAttribute("message")%>
+	');
+<%}%>
 	});
 </script>
 </head>
@@ -48,17 +45,19 @@
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
-					<li><a>HOME</a></li> | <li>
-					<%
-						String member_id = null;
-									member_id = (String)session.getAttribute("member_id");
-									if ( member_id != null) {
-										out.print("<a href='memberLogout.mem'>로그아웃</a>");
-									}else{
-										out.print("<a href='userJoinRule.html'>회원가입</a></li> | <li><a href='userLogin.html'>로그인</a>");
-									}
-					%>
-					</li> | <li><a>포인트충전</a></li>
+					<li><a>HOME</a></li> |
+					<li>
+						<%
+							String member_id = null;
+						member_id = (String) session.getAttribute("member_id");
+						if (member_id != null) {
+							out.print("<a href='memberLogout.mem'>로그아웃</a>");
+						} else {
+							out.print("<a href='userJoinRule.html'>회원가입</a></li> | <li><a href='userLogin.html'>로그인</a>");
+						}
+						%>
+					</li> |
+					<li><a>포인트충전</a></li>
 				</ul>
 			</nav>
 			<div class="clearF"></div>
@@ -75,8 +74,7 @@
 							<li><a href="book_best.jsp">베스트 셀러</a></li>
 							<li><a href="book_recommend.jsp">추천 도서</a></li>
 							<li><a href="book_wish.jsp">희망 도서</a></li>
-						</ul>
-						</li>
+						</ul></li>
 					<li><a href="place.jsp">이용안내</a>
 						<ul>
 							<li><a href="place.jsp">오시는 길</a></li>
@@ -101,84 +99,96 @@
 							<li><a href="">정보 수정/ 탈퇴</a></li>
 						</ul></li>
 				</ul>
-				<div id="window_menu">
-		</div>
-		</nav>
+				<div id="window_menu"></div>
+			</nav>
 		</div>
 		<script src="js/lib_top.js"></script>
 	</header>
 
-	
-   <%
- 	BookInfoDTO bookInfoDB = (BookInfoDTO)request.getAttribute("bookDB");
 
-				String title = bookInfoDB.getBook_title();
-				String author = bookInfoDB.getAuthor();
-				String book_img = bookInfoDB.getBook_img();
-				String isbn = bookInfoDB.getIsbn();
-				String pubDate = bookInfoDB.getPub_date();
-				String description = bookInfoDB.getBook_story();
-				String publisher = bookInfoDB.getPublisher();
-		  
-		  %>
+	<%
+		BookInfoDTO bookInfoDB = (BookInfoDTO) request.getAttribute("bookDB");
 
+	String title = bookInfoDB.getBook_title();
+	String author = bookInfoDB.getAuthor();
+	String book_img = bookInfoDB.getBook_img();
+	String isbn = bookInfoDB.getIsbn();
+	String pubDate = bookInfoDB.getPub_date();
+	String description = bookInfoDB.getBook_story();
+	String publisher = bookInfoDB.getPublisher();
+	%>
 
 
 
-	
+
+
 	<section>
 		<div id="book_box">
 			<div id="img_box">
-				<span id="category">    </span>
-				<img id="book_img" src="img/book/<%=book_img %>">
+				<span id="category"> </span> <img id="book_img"
+					src="img/book/<%=book_img%>">
 				<div id="button">
-				
-				<%
-					if (member_id==null){
+
+					<%
+						if (member_id == null) {
 						out.print("로그인 후 대출 가능합니다.");
-					}else { %>
-						<form action="bookLoan.loa" name="loan" method="post" >
-							<input type="hidden" name="isbn" value="<%=isbn %>">
-							<input type="hidden" name="member_id" value="<%=member_id %>">
-							<input type="submit" value="대출하기">
-						</form>
-					<%}
-				%>
-				
-				
+					} else {
+					%>
+					<form action="bookLoan.loa" name="loan" method="post">
+						<input type="hidden" name="isbn" value="<%=isbn%>"> <input
+							type="hidden" name="member_id" value="<%=member_id%>"> <input
+							type="submit" value="대출하기">
+					</form>
+					<%
+						}
+					%>
+
+
 
 				</div>
 			</div>
 			<div id="detail_box">
-				<a href="#" onclick="history.back();"><img id="back" src="img/back.png"></a>
+				<a href="#" onclick="history.back();"><img id="back"
+					src="img/back.png"></a>
 				<div id="detail">
-				<h2><%=title %></h2>
-				<div><b>저자사항</b>   <%=author%></div>
-				<div><b>출판사</b>   <%=publisher %> </div>
-				<div><b>출판년도</b> <%=pubDate %>   </div>
-				<div><b>표준번호</b>   ISBN:   <%=isbn %>   </div>
-				<div><b>상세정보</b></div>
-				<div>
-					<!-- 줄거리 집어넣기 -->
-					<%=description %>
+					<h2><%=title%></h2>
+					<div>
+						<b>저자사항</b>
+						<%=author%></div>
+					<div>
+						<b>출판사</b>
+						<%=publisher%>
+					</div>
+					<div>
+						<b>출판년도</b>
+						<%=pubDate%>
+					</div>
+					<div>
+						<b>표준번호</b> ISBN:
+						<%=isbn%>
+					</div>
+					<div>
+						<b>상세정보</b>
+					</div>
+					<div>
+						<!-- 줄거리 집어넣기 -->
+						<%=description%>
+					</div>
+
+
 				</div>
-				
-				
 			</div>
-		</div>
-	
-		
 	</section>
-	
-			
+
+
 	<footer>
 		<div id="footer_size">
 			(변경해야함) Library | 04524 서울특별시 중구 세종대로 110 | 전화번호: 02)120, 2133-0300~1<br>
 			이용시간: 화~금 09:00~19:00 / 토,일 09:00~17:00 /월요일,공휴일 휴관
 		</div>
 	</footer>
-	
-	
+
+
 
 
 

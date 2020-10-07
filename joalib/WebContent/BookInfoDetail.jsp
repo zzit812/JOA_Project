@@ -140,7 +140,7 @@
 			<div id="detail_box">
 				<a href="#" onclick="history.back();"><img id="back" src="img/back.png"></a>
 				<div id="detail">
-				<h2><%=title %></h2>
+				<h3><%=title %></h3>
 				<div><b>저자사항</b>   <%=author%></div>
 				<div><b>출판사</b>   <%=publisher %> </div>
 				<div><b>출판년도</b> <%=pubDate %>   </div>
