@@ -90,14 +90,7 @@
 	<insert id="book_info_add" parameterType="com.joalib.DTO.BookInfoDTO">
 		insert into joalib.bookinfo values(#{isbn},#{author},#{publisher},#{book_title},now(),#{isbn_pluscode},#{book_img},#{book_story},#{category});
 	</insert>
-	
-	<select id="book_search_count" resultType="int">
-		select count(*) from joalib.bookinfo;
-	</select>
-	
-	<select id="book_info" resultType="com.joalib.DTO.BookInfoDTO">
-		select * from joalib.bookinfo;
-	</select>
+
 	<select id="book_info_detail" resultType="com.joalib.DTO.BookInfoDTO" parameterType="int">
 		select * from joalib.bookinfo where isbn= #{isbn};
 	</select>

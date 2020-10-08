@@ -151,13 +151,10 @@
 							type="submit" value="대출하기"> <a
 							href="bookFavorite.fav?isbn=<%=isbn%>&member_id=<%=member_id%>"><input
 							type="button" value="관심도서"></a>
-
 					</form>
 					<%
 						}
 					%>
-
-
 
 				</div>
 			</div>
