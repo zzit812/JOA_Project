@@ -99,6 +99,7 @@ public class DAO {
 	
 	public int board_del(int board_no) {
 		SqlSession sqlsession = sqlfactory.openSession();
+		sqlsession.delete("board_del_alarm", board_no);
 		sqlsession.delete("board_del3", board_no);	//답글삭제
 		sqlsession.delete("board_del2", board_no);	//댓글삭제
 		int i = sqlsession.delete("board_del", board_no);	//게시글 삭제
@@ -232,7 +233,7 @@ public class DAO {
 		return i;
 	}
 
-
+ 
 	
 	
 

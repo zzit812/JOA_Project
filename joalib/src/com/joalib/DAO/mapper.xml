@@ -69,6 +69,9 @@
 		UPDATE joalib.board SET board_hit = (board_hit+1) WHERE board_no = #{board_num};
 	</update>
 	
+	<delete id="board_del_alarm" parameterType="int">
+		delete from joalib.member_alarm where alarm_etc like CONCAT('%',#{board_no},'%');
+	</delete>
 	<delete id="board_del" parameterType="int">
 		delete from joalib.board where board_no = #{board_no};
 	</delete>
@@ -81,12 +84,10 @@
 
 	<insert id="boardComment_add" parameterType="com.joalib.DTO.Board_CommentDTO">
 		INSERT INTO joalib.board_comment (`board_no`, `member_id`, `bc_text`, `bc_date`) VALUES ( #{board_no}, #{member_id}, #{bc_text}, now() );
-	</insert>
-	
+	</insert>	
 	<select id="boardComment_list" parameterType="int" resultType="com.joalib.DTO.Board_CommentDTO">
 		select * from joalib.board_comment where board_no = #{board_no} order by bc_date desc ;
-	</select>
-	
+	</select>	
 	<insert id="book_info_add" parameterType="com.joalib.DTO.BookInfoDTO">
 		insert into joalib.bookinfo values(#{isbn},#{author},#{publisher},#{book_title},now(),#{isbn_pluscode},#{book_img},#{book_story},#{category});
 	</insert>
@@ -108,6 +109,7 @@
 	<delete id="boardComment_delete2" parameterType="com.joalib.DTO.Board_CommentDTO">
 		delete FROM joalib.board_small_comment where board_comment_no = #{board_comment_no};
 	</delete>
+	
 	<update id="boardComment_update" parameterType="com.joalib.DTO.BoardDTO">
 		UPDATE joalib.board_comment set bc_text = #{bc_text} where member_id = #{member_id} and bc_date = #{bc_date};
 	</update>
@@ -166,13 +168,16 @@
 	<update id="donateDealChange" parameterType="int">
 		UPDATE joalib.donate SET donate_condition = '거래완료' WHERE donate_no = #{donate_no};
 	</update>	
-	<delete id="donatePostDelete1" parameterType = "int">
-		delete from joalib.donate_small_comment where donate_comment_no in(select donate_comment_no from joalib.donate_comment where donate_no = #{donate_no});
-	</delete><delete id="donatePostDelete2" parameterType = "int">
-		delete from joalib.donate_comment where donate_no = #{donate_no};
-	</delete><delete id="donatePostDelete3" parameterType = "int">
-		delete from joalib.donate where donate_no = #{donate_no};		
+	<delete id="donatePostDelete" parameterType = "int">
+		delete from joalib.donate where donate_no = #{donate_no};	
 	</delete>
+	<delete id="donatePostDelete2" parameterType = "int">
+		delete from joalib.donate_application where donate_no = #{donate_no};
+	</delete>
+	<delete id="donatePostDelete3" parameterType = "int">
+		delete from joalib.member_alarm where alarm_category like CONCAT('donate','%') and alarm_etc like CONCAT(#{donate_no},'%');
+	</delete>
+	
 	<update id="donatePostUpdate" parameterType="com.joalib.DTO.DonateDTO">
 		update joalib.donate SET donate_title = #{donate_title}, donate_text  = #{donate_text} where donate_no = #{donate_no};
 	</update>
@@ -216,6 +221,7 @@
 	<insert id="donateCompletePoint" parameterType="int" >
 		insert into joalib.point values ((select member_id FROM joalib.donate where donate_no = #{donate_no}), 5000, now(), '중고 도서 나눔', ((select total_point from joalib.point as temp where member_id = (select member_id FROM joalib.donate where donate_no = #{donate_no}) order by update_date desc limit 1)+5000), '+');
 	</insert>
+	
 	<insert id="boardSmallCommentAdd" parameterType="com.joalib.DTO.Board_Small_CommentDTO">
 		insert into joalib.board_small_comment (`member_id`, `bc_s_text`, `bc_s_date`, `board_comment_no`) VALUES (#{member_id}, #{bc_s_text}, now(), #{board_comment_no});
 	</insert>

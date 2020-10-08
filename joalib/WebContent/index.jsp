@@ -512,7 +512,6 @@
 			$(this).children('div').css("opacity","0");
 		});
 		
-		
 		$('#MainMenu > ul > li').hover(function(){
 			$(this).children('a').css("opacity","75%"),
 			$(this).children('ul').css("height","250px");

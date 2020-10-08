@@ -587,7 +587,7 @@
 						%>
 						
 						<input type='button'  value = '수정' onClick="location.href='Donate_update.jsp?donate_no=<%= donate_no%>'"/>
-						<input type='button'  value = '삭제' onClick="removeCheck()"/>
+						<input type='button'  value = '삭제' onClick="removeCheck(<%= donate_no%>)"/>
 						
 						<% }%>							
 						</div>
@@ -624,10 +624,10 @@
         </body>
         <script type="text/javascript">
         
-       		function removeCheck() {
+       		function removeCheck(donateNo) {
         	 	if (confirm("정말 삭제하시겠습니까") == true){    //확인
-        	 		alert("삭제되었습니다");
-        	 		location.href='donatePostDelete.don?donate_no=<%= dto.getDonate_no()%>'
+        	 		alert(donateNo);
+        	 		location.replace('donatePostDelete.don?donate_no='+donateNo);
         	 	}else{  
         	    	 return false;
         	 	}

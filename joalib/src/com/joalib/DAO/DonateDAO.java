@@ -72,9 +72,10 @@ SqlSessionFactory sqlfactory;
 	
 	public int donateDel(int donate_no) {
 		SqlSession sqlsession = sqlfactory.openSession();
-		sqlsession.delete("donatePostDelete1", donate_no);
-		sqlsession.delete("donatePostDelete2", donate_no);
 		int i = sqlsession.delete("donatePostDelete3", donate_no);
+		i = sqlsession.delete("donatePostDelete2", donate_no);
+		i = sqlsession.delete("donatePostDelete", donate_no);
+		System.out.println("중고도서 나눔 삭제 : "+donate_no);
 		sqlsession.commit();
 		sqlsession.close();
 		

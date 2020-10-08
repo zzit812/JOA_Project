@@ -20,7 +20,9 @@
 <meta charset="UTF-8">
 <title></title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/lib_top.css">
+<link rel="stylesheet" type="text/css" href="css/lib_top.
+
+css">
 <link rel="stylesheet" type="text/css" href="css/BookInfoDetail.css">
 
 <link
@@ -56,7 +58,7 @@
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
-					<li><a>HOME</a></li> |
+					<li><a>HOME</a></li> |`
 					<li>
 						<%
 							String member_id = null;

@@ -1,6 +1,7 @@
 package com.joalib.board.action;
 
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ public class CommentWriteAction implements dbAction {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward=null;		
-		ServletContext context = request.getServletContext();	//���� �������� servletContext�� �޾ƿ���,
+		ServletContext context = request.getServletContext();	//占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 servletContext占쏙옙 占쌨아울옙占쏙옙,
 		
 		HttpSession session = request.getSession();
 		Board_CommentDTO dto = new Board_CommentDTO();
@@ -46,7 +47,7 @@ public class CommentWriteAction implements dbAction {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('로그인 후 이용해주세요')");
+			out.println("alert('濡쒓렇�씤 �썑 �씠�슜�빐二쇱꽭�슂')");
 			out.println("history.back();");
 			out.println("</script>");
 		}

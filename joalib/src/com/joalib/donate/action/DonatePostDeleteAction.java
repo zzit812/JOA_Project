@@ -17,6 +17,7 @@ public class DonatePostDeleteAction implements Action {
 		
 		
 		int donate_no = Integer.parseInt(request.getParameter("donate_no"));
+		 
 		
 		DonatePostDeleteService svc = new DonatePostDeleteService();
 		boolean isSuccess = svc.donatePostDel(donate_no);
