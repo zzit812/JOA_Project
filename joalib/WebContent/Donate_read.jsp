@@ -626,7 +626,7 @@
         
        		function removeCheck(donateNo) {
         	 	if (confirm("정말 삭제하시겠습니까") == true){    //확인
-        	 		alert(donateNo);
+        	 		alert("삭제되었습니다");
         	 		location.replace('donatePostDelete.don?donate_no='+donateNo);
         	 	}else{  
         	    	 return false;

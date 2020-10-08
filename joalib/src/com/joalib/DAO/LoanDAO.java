@@ -46,17 +46,17 @@ SqlSessionFactory sqlfactory;
 		sqlsession.close();
 	}
 
-	public int loan_select(LoanDTO loanDTO) {
-		
-		getinstance();
-		SqlSession sqlsession = sqlfactory.openSession();
-		int i = sqlsession.selectOne("loan_select", loanDTO);
-		sqlsession.commit();
-		sqlsession.close();
-
-		return i;
-		
-	}
+//	public int loan_select(LoanDTO loanDTO) {
+//		
+//		getinstance();
+//		SqlSession sqlsession = sqlfactory.openSession();
+//		int i = sqlsession.selectOne("loan_select", loanDTO);
+//		sqlsession.commit();
+//		sqlsession.close();
+//
+//		return i;
+//		
+//	}
 	
 	
 }

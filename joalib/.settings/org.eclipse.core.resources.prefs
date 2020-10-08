@@ -11,4 +11,5 @@ encoding//src/com/joalib/bookground/svc/BookNewService.java=UTF-8
 encoding//src/com/joalib/bookground/svc/BookRecommendService.java=UTF-8
 encoding//src/com/joalib/bookinfo/svc/BookInfoDetailService.java=UTF-8
 encoding//src/com/joalib/booksearch/action/BookSearchAction2.java=UTF-8
+encoding//src/com/joalib/booksearch/svc/BookSearchService.java=UTF-8
 encoding//src/com/joalib/controller/BookInfoContr.java=UTF-8

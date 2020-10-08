@@ -109,6 +109,12 @@
 	<delete id="boardComment_delete2" parameterType="com.joalib.DTO.Board_CommentDTO">
 		delete FROM joalib.board_small_comment where board_comment_no = #{board_comment_no};
 	</delete>
+	<delete id="boardComment_delete_alram1" parameterType="com.joalib.DTO.Board_CommentDTO">
+		delete from joalib.member_alarm where alarm_etc like CONCAT(#{board_comment_no}, "%");	
+	</delete><delete id="boardComment_delete_alram2" parameterType="com.joalib.DTO.Board_CommentDTO">
+		delete from joalib.member_alarm where alarm_category = "board_comment" and alarm_date = #{bc_date} and alarm_etc like CONCAT("%", #{member_id});
+	</delete>
+	
 	
 	<update id="boardComment_update" parameterType="com.joalib.DTO.BoardDTO">
 		UPDATE joalib.board_comment set bc_text = #{bc_text} where member_id = #{member_id} and bc_date = #{bc_date};

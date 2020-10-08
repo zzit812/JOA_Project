@@ -141,8 +141,14 @@ public class DAO {
 	//댓글 삭제 함수
 	public int boardCommentDel(Board_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
+		//댓글, 답글 삭제
 		sqlsession.delete("boardComment_delete2", dto);	//답글 삭제
 		int i = sqlsession.delete("boardComment_delete1", dto);	//댓글 삭제
+		if(i > 0) {
+			//알림 삭제
+			sqlsession.delete("boardComment_delete_alram2", dto);	//답글 알림 삭제
+			sqlsession.delete("boardComment_delete_alram1", dto);	//댓글 알림 삭제
+		}
 		sqlsession.commit();
 		sqlsession.close();
 		
