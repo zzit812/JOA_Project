@@ -35,9 +35,7 @@ SqlSessionFactory sqlfactory;
 			e.printStackTrace();		
 		}		
 	}
-	
-
-	
+		
 	public void loan(LoanDTO dto) throws Exception{
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
@@ -45,8 +43,4 @@ SqlSessionFactory sqlfactory;
 		sqlsession.commit();
 		sqlsession.close();
 	}
-
-
-	
-	
 }

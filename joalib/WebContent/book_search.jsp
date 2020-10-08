@@ -121,7 +121,11 @@
 						<option>저자</option>
 						<option>출판사</option>
 					</select>
+<<<<<<< HEAD
 					<!-- <input Type="hidden" name="page" value="1" /> -->
+=======
+					<!-- <input Type="hidden" name="page" value="1" /> -->
+>>>>>>> refs/remotes/origin/master
 					<input type="text" id="hbz-input" name="what" placeholder="검색어를 입력해주세요" />
 					<input id="hbz-submit" type="submit" value="Search" />
 					
