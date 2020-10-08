@@ -121,8 +121,8 @@
 		insert into joalib.point values (#{member_id}, 1000, now(), '불량도서 신고', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)+1000), '+');
 	</insert>
 	
-	<insert id="favarite_book" parameterType="String">
-		insert into joalib.favorite_book values (#{member_id},#{isbn});
+	<insert id="favorite_book" parameterType="com.joalib.DTO.FavoriteDTO">
+		insert into joalib.favorite_book values (   #{member_id}, #{isbn}  );
 	</insert>
 	<insert id="loan" parameterType="com.joalib.DTO.LoanDTO">
 		insert into joalib.loan_book (member_id,loan_book,loan_date,return_duedate, loan_condition) values (#{member_id},#{loan_book},now(),date_add(now(),INTERVAL 14 DAY) ,'대출');

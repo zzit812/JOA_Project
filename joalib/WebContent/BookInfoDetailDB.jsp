@@ -27,7 +27,7 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
-	<!-- <script type="text/javascript">
+<!-- <script type="text/javascript">
 	
 		$(function(){
 			$(window).ready(function(){
@@ -37,19 +37,19 @@
 		
 	</script> -->
 
-	
+
 
 
 </head>
 
 <body>
 	<header>
-	<%
-		if(request.getAttribute("message") != null){
-			String messageAlert = (String)request.getAttribute("message");
-			out.print("<script type='text/javascript'> alert('"+messageAlert+"');</script>");
+		<%
+			if (request.getAttribute("message") != null) {
+			String messageAlert = (String) request.getAttribute("message");
+			out.print("<script type='text/javascript'> alert('" + messageAlert + "');</script>");
 		}
-	%>
+		%>
 		<div id="top_size">
 			<!--로고-->
 			<img id="logo" src="img/icon_lib.png">
@@ -146,11 +146,12 @@
 					} else {
 					%>
 					<form action="bookLoan.loa" name="loan" method="post">
-						<input type="hidden" name="isbn" value="<%=isbn%>"> 
-						<input type="hidden" name="member_id" value="<%=member_id%>"> 
-							<input type="submit" value="대출하기">
-						<a href="bookFavitiet.fav?isbn=<%=isbn%>&member_id=<%=member_id%>"><input type="button" value="관심도서"></a>
-											
+						<input type="hidden" name="isbn" value="<%=isbn%>"> <input
+							type="hidden" name="member_id" value="<%=member_id%>"> <input
+							type="submit" value="대출하기"> <a
+							href="bookFavorite.fav?isbn=<%=isbn%>&member_id=<%=member_id%>"><input
+							type="button" value="관심도서"></a>
+
 					</form>
 					<%
 						}
@@ -161,7 +162,7 @@
 				</div>
 			</div>
 			<div id="detail_box">
-				
+
 				<div id="detail">
 					<h2><%=title%></h2>
 					<div>
