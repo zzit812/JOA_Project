@@ -12,7 +12,7 @@ import com.joalib.bookfavorite.action.*;
 
 
 @WebServlet("*.fav") 
-public class BookFavotite extends javax.servlet.http.HttpServlet{
+public class BookFavotiteContr extends javax.servlet.http.HttpServlet{
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		

@@ -9,6 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.joalib.DTO.LoanDTO;
+
 
 public class BookFavoriteDAO {
 
@@ -34,17 +36,15 @@ public class BookFavoriteDAO {
 	}	
 
 
-	public int select_book_count() {  
-		getinstance();
-		SqlSession sqlsession = sqlfactory.openSession();
-		int total = sqlsession.selectOne("book_search_count");
-		sqlsession.commit();
-		sqlsession.close();
-		return total;
-	}
 
-	public void favorite() {
-		// TODO Auto-generated method stub
+
+	public void favorite(LoanDTO loanDTO) {
+		
+			getinstance();
+			SqlSession sqlsession = sqlfactory.openSession();
+			sqlsession.insert("loan",loanDTO);
+			sqlsession.commit();
+			sqlsession.close();
 		
 	}
 	

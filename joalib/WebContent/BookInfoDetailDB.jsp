@@ -146,9 +146,11 @@
 					} else {
 					%>
 					<form action="bookLoan.loa" name="loan" method="post">
-						<input type="hidden" name="isbn" value="<%=isbn%>"> <input
-							type="hidden" name="member_id" value="<%=member_id%>"> <input
-							type="submit" value="대출하기">
+						<input type="hidden" name="isbn" value="<%=isbn%>"> 
+						<input type="hidden" name="member_id" value="<%=member_id%>"> 
+							<input type="submit" value="대출하기">
+						<a href="bookFavitiet.fav?isbn=<%=isbn%>&member_id=<%=member_id%>"><input type="button" value="관심도서"></a>
+											
 					</form>
 					<%
 						}

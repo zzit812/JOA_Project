@@ -28,7 +28,7 @@ public class BookSearchAction2 implements Action {
 		
 		String option = request.getParameter("select_search");
 		String text= request.getParameter("what");
-		String page = request.getParameter("page");
+		//String page = request.getParameter("page");
 		String check = request.getParameter("check");
 		
 		
@@ -52,7 +52,7 @@ public class BookSearchAction2 implements Action {
 			
 		sdto.setOption(option);
 		sdto.setText(text);
-		sdto.setPage(page);
+		//sdto.setPage(page);
 		sdto.setCheck(check);
 		
 		
@@ -69,7 +69,6 @@ public class BookSearchAction2 implements Action {
 
 		
 		forward = new ActionForward();
-		
 		forward.setPath("book_search_result.jsp"); 
 		
 		return forward;
