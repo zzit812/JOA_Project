@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-	<title>Document</title>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	
-	
-	<link rel="stylesheet" type="text/css" href="css/lib_top.css">
-	<link rel="stylesheet" type="text/css" href="css/lib_join_2.css">
-	<link rel="stylesheet" type="text/css" href="css/lib_join.css">
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Document</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="css/lib_top.css">
+<link rel="stylesheet" type="text/css" href="css/lib_join_2.css">
+<link rel="stylesheet" type="text/css" href="css/lib_join.css">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+	rel="stylesheet">
 
 </head>
 
- <body>
-	 <header>
-		 <div id="top_size">
-		 	<!--로고-->
+<body>
+	<header>
+		<div id="top_size">
+			<!--로고-->
 			<img id="logo" src="img/icon_lib.png">
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
-					<li><a href='home.jsp'>HOME</a></li> | <li><a href='userJoinRule.html'>회원가입</a></li> | <li><a href='userLogin.html'>로그인</a></li> | <li><a>포인트충전</a></li>
+					<li><a href='home.jsp'>HOME</a></li> |
+					<li><a href='userJoinRule.html'>회원가입</a></li> |
+					<li><a href='userLogin.html'>로그인</a></li> |
+					<li><a>포인트충전</a></li>
 				</ul>
 			</nav>
 			<div class="clearF"></div>
@@ -33,18 +39,16 @@
 					<li><a href="book_search.jsp">자료검색</a>
 					<li><a href="book_search.html">자료검색</a>
 
-						<ul class ="sub_menu">
+						<ul class="sub_menu">
 							<li><a href="book_search.html">도서 검색</a></li>
 							<li><a href="">분야별 도서 조회</a></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li><a href="#">도서마당</a>
 						<ul>
 							<li><a href="">신착 도서</a></li>
 							<li><a href="">베스트 셀러</a></li>
 							<li><a href="">희망도서</a></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li><a href="#">이용안내</a>
 						<ul>
 							<li><a href="">시설안내</a></li>
@@ -52,8 +56,7 @@
 							<li><a href="">포인트</a></li>
 							<li><a href="">도서 대여</a></li>
 							<li><a href="">도서 예약</a></li>
-						</ul>
-					</li>				
+						</ul></li>
 					<li><a href="#">커뮤니티</a>
 						<ul>
 							<li><a href="">공지사항</a></li>
@@ -61,8 +64,7 @@
 							<li><a href="board.jsp">자유게시판</a></li>
 							<li><a href="Fault_list.jsp">불량도서 신고</a></li>
 							<li><a href="Donate_list.jsp">중고도서 나눔</a></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li><a href="mypage_main.jsp">나의서재</a>
 						<ul>
 							<li><a href="mypage_main.jsp">나의 서재</a></li>
@@ -70,116 +72,150 @@
 							<li><a href="">내가 쓴 글</a></li>
 							<li><a href="">포인트</a></li>
 							<li><a href="">정보 수정/ 탈퇴</a></li>
-						</ul>
-					</li>
+						</ul></li>
 				</ul>
 				<div id="window_menu"></div>
 			</nav>
-		 </div>
-		 <script src="js/lib_top.js"></script>
-		 <div id="title"><p>회원가입</p></div><!-- (타이틀에이미지넣을거에용) -->
-	 </header>
+		</div>
+		<script src="js/lib_top.js"></script>
+		<div id="title">
+			<p>회원가입</p>
+		</div>
+		<!-- (타이틀에이미지넣을거에용) -->
+	</header>
 
-	 <section id="side_size"><!-- id="side_size" 이거 크기 설정한거니깐 삭제하면 안돼요 -->
-	 	<div id="sidemenu_size" >
-	 		<div id="sidemenuBlook">
-	 			<div>
-			 		<h3>약관 동의</h3>
-			 		<h3>회원 정보 입력</h3>
-			 		<h3>캐릭터</h3>
-			 		<h3>가입 완료!</h3>
-		 		</div>
-	 		</div>
+	<section id="side_size">
+		<!-- id="side_size" 이거 크기 설정한거니깐 삭제하면 안돼요 -->
+		<div id="sidemenu_size">
+			<div id="sidemenuBlook">
+				<div>
+					<h3>약관 동의</h3>
+					<h3>회원 정보 입력</h3>
+					<h3>캐릭터</h3>
+					<h3>가입 완료!</h3>
+				</div>
+			</div>
 		</div>
 		<div id="cont_size">
 
-		 	<form name="memberinfo" method="post" action="memberInsert.mem">
-		 		
-		 		<div id="join1">
-			 		<p>아이디</p> <input type="text" name="member_id"><input type="button" value="중복확인" name="member_id_check"><br>
-			 		<p class="checkhide">5-10자 이내로 입력해주세요.</p>
-			 		<div><p id="idCheck"></p></div>	 
-			 		<p>비밀번호</p> <input type="password" name="member_pw"><br>
-			 		<p class="checkhide">8-20자 이내로 입력해주세요.</p><br>
-			 		<p>비밀번호 확인</p> <input type="password" name="member_pw_check"><br>
-			 		<p id="samecheck">동일하지 않은 비밀번호 입니다.</p><br>
-			 		<p>이름</p> <input type="text" name="member_name"><br>
-			 		<p>전화번호</p> 
-			 		<select  name="member_tel1">
-			 			<option value="02">02</option>
-			 			<option value="031">031</option>
-			 			<option value="032">032</option>
-			 			<option value="010">010</option>
-			 			<option value="011">011</option>
-			 			<option value="012">012</option>
-			 			<option value="013">013</option>
-			 			<option value="014">014</option>
-			 			<option value="015">015</option></select>
-			 		 - <input type="text" name="member_tel2"> - 
-			 		<input type="text" name="member_tel3"><br>
-			 		<p>생년월일</p> <input type="date" id="member_birth" name="member_birth" value="2008-01-01" max="" min=""><br>
-			 		<p>E-mail</p> <input type="text" name="member_email_id">@<input type="text" name="member_email_adress">
-			 		<select  name="member_email_adress_select" onchange="emailAdress(memberinfo)">
-			 			<option value="">직접입력</option>
-			 			<option value="naver.com">naver.com</option>
-			 			<option value="hanmail.net">hanmail.net</option>
-			 			<option value="gmail.com">gmail.com</option>
-			 			<option value="nate.com">nate.com</option>
-			 		</select><br>
-			 		<p>주소</p> 
-			 		<div id = "adress">
-			 			<!-- member_adress : address + detailAddress -->
-			 			<!-- member_city : city -->
-				 		<input type="text" id="postcode" name="postcode" placeholder="우편번호" readonly="true">
-						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-						<input type="text" id="city" name="city" readonly="true">
-						<input type="text" id="address" name="address" placeholder="주소" readonly="true"><br>
-						<input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소">
+			<form name="memberinfo" method="post" action="memberInsert.mem">
+
+				<div id="join1">
+					<p>아이디</p>
+					<input type="text" name="member_id"><input type="button"
+						value="중복확인" name="member_id_check"><br>
+					<p class="checkhide">5-10자 이내로 입력해주세요.</p>
+					<div>
+						<p id="idCheck"></p>
 					</div>
-			 		<br>
-			 		<p>좋아하는 분야</p> 
-			 		<div id="favoite_select">
-				 		<label for="favoite_books"><input type="checkbox" name="favoite_books" value="컴퓨터과학">컴퓨터과학</label>
-				 		<label for="favoite_books"><input type="checkbox" name="favoite_books" value="철학/심리학/윤리학">철학/심리학/윤리학</label>
-				 		<label for="favoite_books"><input type="checkbox" name="favoite_books" value="종교">종교</label>
-				 		<label for="favoite_books"><input type="checkbox" name="favoite_books" value="사회과학">사회과학</label>
-				 		<label for="favoite_books"><input type="checkbox" name="favoite_books" value="자연과학">자연과학</label>
-				 		<label for="favoite_books"><input type="checkbox" name="favoite_books" value="기술과학">기술과학</label>
-				 		<label for="favoite_books"><input type="checkbox" name="favoite_books" value="예술">예술</label>
-				 		<label for="favoite_books"><input type="checkbox" name="favoite_books" value="어학">어학</label>
-				 		<label for="favoite_books"><input type="checkbox" name="favoite_books" value="문학">문학</label>
-				 		<label for="favoite_books"><input type="checkbox" name="favoite_books" value="역사/지리/관광">역사/지리/관광</label>
-				 		<label for="favoite_books"><input type="checkbox" name="favoite_books" value="관심없음">관심없음</label>
-			 		</div><br>
-			 		<div id="alarm">
-				 		<label for="alarm_bookin">희망도서 입고 안내<input type="checkbox" name="alarm_bookin" value="1"></label>
-				 		<label for="alarm_reply">댓글 알림<input type="checkbox" name="alarm_reply" value="1"></label><br>
-				 		<input type="button" name="next" value="next" onclick="nullCheck()">
-				 	</div>
+					<p>비밀번호</p>
+					<input type="password" name="member_pw"><br>
+					<p class="checkhide">8-20자 이내로 입력해주세요.</p>
+					<br>
+					<p>비밀번호 확인</p>
+					<input type="password" name="member_pw_check"><br>
+					<p id="samecheck">동일하지 않은 비밀번호 입니다.</p>
+					<br>
+					<p>이름</p>
+					<input type="text" name="member_name"><br>
+					<p>전화번호</p>
+					<select name="member_tel1">
+						<option value="02">02</option>
+						<option value="031">031</option>
+						<option value="032">032</option>
+						<option value="010">010</option>
+						<option value="011">011</option>
+						<option value="012">012</option>
+						<option value="013">013</option>
+						<option value="014">014</option>
+						<option value="015">015</option>
+					</select> - <input type="text" name="member_tel2"> - <input
+						type="text" name="member_tel3"><br>
+					<p>생년월일</p>
+					<input type="date" id="member_birth" name="member_birth"
+						value="2008-01-01" max="" min=""><br>
+					<p>E-mail</p>
+					<input type="text" name="member_email_id">@<input
+						type="text" name="member_email_adress"> <select
+						name="member_email_adress_select"
+						onchange="emailAdress(memberinfo)">
+						<option value="">직접입력</option>
+						<option value="naver.com">naver.com</option>
+						<option value="hanmail.net">hanmail.net</option>
+						<option value="gmail.com">gmail.com</option>
+						<option value="nate.com">nate.com</option>
+					</select><br>
+					<p>주소</p>
+					<div id="adress">
+						<!-- member_adress : address + detailAddress -->
+						<!-- member_city : city -->
+						<input type="text" id="postcode" name="postcode"
+							placeholder="우편번호" readonly="true"> <input type="button"
+							onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+						<input type="text" id="city" name="city" readonly="true">
+						<input type="text" id="address" name="address" placeholder="주소"
+							readonly="true"><br> <input type="text"
+							id="detailAddress" name="detailAddress" placeholder="상세주소">
+					</div>
+					<br>
+					<p>좋아하는 분야</p>
+					<div id="favoite_select">
+						<label for="favoite_books"><input type="checkbox"
+							name="favoite_books" value="컴퓨터과학">컴퓨터과학</label> <label
+							for="favoite_books"><input type="checkbox"
+							name="favoite_books" value="철학/심리학/윤리학">철학/심리학/윤리학</label> <label
+							for="favoite_books"><input type="checkbox"
+							name="favoite_books" value="종교">종교</label> <label
+							for="favoite_books"><input type="checkbox"
+							name="favoite_books" value="사회과학">사회과학</label> <label
+							for="favoite_books"><input type="checkbox"
+							name="favoite_books" value="자연과학">자연과학</label> <label
+							for="favoite_books"><input type="checkbox"
+							name="favoite_books" value="기술과학">기술과학</label> <label
+							for="favoite_books"><input type="checkbox"
+							name="favoite_books" value="예술">예술</label> <label
+							for="favoite_books"><input type="checkbox"
+							name="favoite_books" value="어학">어학</label> <label
+							for="favoite_books"><input type="checkbox"
+							name="favoite_books" value="문학">문학</label> <label
+							for="favoite_books"><input type="checkbox"
+							name="favoite_books" value="역사/지리/관광">역사/지리/관광</label> <label
+							for="favoite_books"><input type="checkbox"
+							name="favoite_books" value="관심없음">관심없음</label>
+					</div>
+					<br>
+					<div id="alarm">
+						<label for="alarm_bookin">희망도서 입고 안내<input type="checkbox"
+							name="alarm_bookin" value="1"></label> <label for="alarm_reply">댓글
+							알림<input type="checkbox" name="alarm_reply" value="1">
+						</label><br> <input type="button" name="next" value="next"
+							onclick="nullCheck()">
+					</div>
 				</div>
-			 	<div id="join2">
-			 		<input type="button" name="prev" value="prev">
-			 		<div class="character">
-			 			<img src="img/character/character1.png"/>
-			 			<label><input type="radio" name="member_character" value="1">캐릭터1</label>
-			 		</div>
-			 		<div class="character">
-			 			<img src="img/character/character1.png"/>
-			 			<label><input type="radio" name="member_character" value="2">캐릭터2</label>
-			 		</div>
-			 		
-		 			<input type="submit" value="회원가입">
-		 		</div>
-		 	</form>
-		 </div>
-		 <script src="js/join_2_kid.js"></script>
-	 </section>
+				<div id="join2">
+					<input type="button" name="prev" value="prev">
+					<div class="character">
+						<img src="img/character/character1.png" /> <label><input
+							type="radio" name="member_character" value="1">캐릭터1</label>
+					</div>
+					<div class="character">
+						<img src="img/character/character1.png" /> <label><input
+							type="radio" name="member_character" value="2">캐릭터2</label>
+					</div>
 
-	 <footer>
-			(변경해야함) Library | 04524 서울특별시 중구 세종대로 110 | 전화번호: 02)120, 2133-0300~1<br>
-			이용시간: 화~금 09:00~19:00 / 토,일 09:00~17:00 /월요일,공휴일 휴관
-	 </footer>
+					<input type="submit" value="회원가입">
+				</div>
+			</form>
+		</div>
+		<script src="js/join_2_kid.js"></script>
+	</section>
 
- 
+	<footer>
+		(변경해야함) Library | 04524 서울특별시 중구 세종대로 110 | 전화번호: 02)120, 2133-0300~1<br>
+		이용시간: 화~금 09:00~19:00 / 토,일 09:00~17:00 /월요일,공휴일 휴관
+	</footer>
 
-</body></html>
+
+
+</body>
+</html>

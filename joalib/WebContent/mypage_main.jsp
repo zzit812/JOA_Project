@@ -1,58 +1,65 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8	"
-    pageEncoding="UTF-8"%>
-<%@ page import="com.joalib.DAO.PointDAO" %>
-<%@ page import="com.joalib.DTO.PointDTO" %>
-<%@ page import="java.util.List" %>
+	pageEncoding="UTF-8"%>
+<%@ page import="com.joalib.DAO.PointDAO"%>
+<%@ page import="com.joalib.DTO.PointDTO"%>
+<%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- 캘린더 -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- 캘린더 -->
 
 <link rel="stylesheet" type="text/css" href="css/lib_mypage_main.css">
 <link rel="stylesheet" type="text/css" href="css/lib_top.css">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+	rel="stylesheet">
 <style type="text/css">
+#pointSelect {
+	text-align: center;
+	font-size: 13px;
+	display: inline;
+	margin: 10px 0 0 15px;
+}
 
-	#pointSelect{
-		text-align : center;
-		font-size: 13px;
-		display: inline;
-		margin: 10px 0 0 15px;
-	}
-	#pointSelect tr > td:nth-child(1){
-		color: #ff3635;
-	}
-	#pointSelect tr > td:nth-child(2){
-		font-weight: 400;
-    	font-size: 16px;
-	}
-	#pointSelect tr > td:nth-child(3){
-		WIDTH: 60%;
-		opacity: 85%;
-	}
-	#pointSelect tr > td:nth-child(4){
-		opacity: 85%;
-	}
-	#pointSelect tr > td {
-		padding: 0 10px;
-	}
-	
-	#cont_2_size >div> h5{
-		margin: 7px 0;
-	    font-size: 17px;
-	    font-weight: 400;
-	    opacity: 70%;
-	    border-bottom: solid 1px #80808057;
-	    padding-bottom: 5px;
-	}
+#pointSelect tr>td:nth-child(1) {
+	color: #ff3635;
+}
+
+#pointSelect tr>td:nth-child(2) {
+	font-weight: 400;
+	font-size: 16px;
+}
+
+#pointSelect tr>td:nth-child(3) {
+	WIDTH: 60%;
+	opacity: 85%;
+}
+
+#pointSelect tr>td:nth-child(4) {
+	opacity: 85%;
+}
+
+#pointSelect tr>td {
+	padding: 0 10px;
+}
+
+#cont_2_size>div>h5 {
+	margin: 7px 0;
+	font-size: 17px;
+	font-weight: 400;
+	opacity: 70%;
+	border-bottom: solid 1px #80808057;
+	padding-bottom: 5px;
+}
 </style>
 </head>
 
 <body>
-<%
+	<%
 
 	String member_id = (String)session.getAttribute("member_id"); 
 	
@@ -60,48 +67,48 @@
 	if(request.getParameter("changed") != null){
 		changedStr = request.getParameter("changed");
 		if(changedStr.equals("true")){ %>
-			<script type="text/javascript">
+	<script type="text/javascript">
 			alert("수정되었습니다.");
 			</script>
-		<%}
+	<%}
 	}
 	
 
 	if(member_id == null){%>
-		<script type="text/javascript">
+	<script type="text/javascript">
 		alert("로그인 후 이용해주세요");
 		location.href="userLogin.html";
 		</script>
 	<%}else{%>
-<header>
+	<header>
 
-		 <div id="top_size">
-		 	<!--로고-->
+		<div id="top_size">
+			<!--로고-->
 			<img id="logo" src="img/icon_lib.png">
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
-					<li><a href='home.jsp'>HOME</a></li> | <li><a href="memberLogout.mem">로그아웃</a></li> | <li>포인트충전</li>
+					<li><a href='home.jsp'>HOME</a></li> |
+					<li><a href="memberLogout.mem">로그아웃</a></li> |
+					<li>포인트충전</li>
 				</ul>
 			</nav>
 			<div class="clearF"></div>
 			<!--탑메뉴-->
 			<nav id="topMenuBorder">
-				<ul id="top_menu">  
+				<ul id="top_menu">
 
 					<li><a href="book_search.html">자료검색</a>
-						<ul class ="sub_menu">
+						<ul class="sub_menu">
 							<li><a href="">도서 검색</a></li>
 							<li><a href="">분야별 도서 조회</a></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li><a href="#">도서마당</a>
 						<ul>
 							<li><a href="">신착 도서</a></li>
 							<li><a href="">베스트 셀러</a></li>
 							<li><a href="">희망도서</a></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li><a href="#">이용안내</a>
 						<ul>
 							<li><a href="">시설안내</a></li>
@@ -109,8 +116,7 @@
 							<li><a href="">포인트</a></li>
 							<li><a href="">도서 대여</a></li>
 							<li><a href="">도서 예약</a></li>
-						</ul>
-					</li>				
+						</ul></li>
 					<li><a href="#">커뮤니티</a>
 						<ul>
 							<li><a href="">공지사항</a></li>
@@ -118,8 +124,7 @@
 							<li><a href="board.jsp">자유게시판</a></li>
 							<li><a href="Fault_list.jsp">불량도서 신고</a></li>
 							<li><a href="Donate_list.jsp">중고도서 나눔</a></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li><a href="mypage_main.jsp">나의서재</a>
 						<ul>
 							<li><a href="mypage_main.jsp">나의 서재</a></li>
@@ -127,23 +132,26 @@
 							<li><a href="mypage_myPost.jsp">내가 쓴 글</a></li>
 							<li><a href="">포인트</a></li>
 							<li><a href="mypage_memberinfoChange.jsp">정보 수정/ 탈퇴</a></li>
-						</ul>
-					</li>
+						</ul></li>
 				</ul>
 				<div id="window_menu"></div>
 			</nav>
-		 </div>
-		 <script src="js/lib_top.js"></script>
-		 <div id="title"><p>나의 서재</p></div>
-	 </header>
+		</div>
+		<script src="js/lib_top.js"></script>
+		<div id="title">
+			<p>나의 서재</p>
+		</div>
+	</header>
 
-	 <section id="side_size">
+	<section id="side_size">
 
-		<div id="sidemenu_size" >
-			<div id="profile_img"><img  src = "img/character/character1.png" /></div>
+		<div id="sidemenu_size">
+			<div id="profile_img">
+				<img src="img/character/character1.png" />
+			</div>
 			<h1><%= session.getAttribute("member_id") %></h1>
 			<nav>
-				<ul  id="sidmenu_box">
+				<ul id="sidmenu_box">
 					<li><a href="">나의 서재</a></li>
 					<li><a href="">서비스 이용 내역</a></li>
 					<li><a href="">내가 쓴 글</a></li>
@@ -152,20 +160,25 @@
 			</nav>
 		</div>
 
-		  <div id="cont_size">
-		  	<p class="menuTitle">대여/예약 도서 현황</p>
+		<div id="cont_size">
+			<p class="menuTitle">대여/예약 도서 현황</p>
 			<div id="cont_1_size">
-				<div id="cont1Calender"><!-- 달력 -->
+				<div id="cont1Calender">
+					<!-- 달력 -->
 					<div id="dateColorInfo">
-						<h1>●</h1><h2>today</h2>
-						<h1>●</h1><h2>대여 반납일</h2>
-						<h1>●</h1><h2>예약 예정일</h2>
+						<h1>●</h1>
+						<h2>today</h2>
+						<h1>●</h1>
+						<h2>대여 반납일</h2>
+						<h1>●</h1>
+						<h2>예약 예정일</h2>
 					</div>
 				</div>
 				<div id="cont1Book">
 					<div>
-						<p>대여 현황</p><a href="#" class="more">더보기></a>
-						
+						<p>대여 현황</p>
+						<a href="#" class="more">더보기></a>
+
 						<div class="bookList">
 							<p>도서명</p>
 							<p>저자</p>
@@ -174,15 +187,39 @@
 							<h1 id="noBookLoan">대출 중인 도서가 없습니다</h1>
 						</div>
 						<div id="bookLoanList">
-							<div><p><!-- 도서명 1 --></p><p><!-- 저자 --></p><p><!-- 도서번호 --></p><p><!-- 반납일 --></p></div>
-							<div><p></p><p></p><p></p><p></p></div>
-							<div><p></p><p></p><p></p><p></p></div>
+							<div>
+								<p>
+									<!-- 도서명 1 -->
+								</p>
+								<p>
+									<!-- 저자 -->
+								</p>
+								<p>
+									<!-- 도서번호 -->
+								</p>
+								<p>
+									<!-- 반납일 -->
+								</p>
+							</div>
+							<div>
+								<p></p>
+								<p></p>
+								<p></p>
+								<p></p>
+							</div>
+							<div>
+								<p></p>
+								<p></p>
+								<p></p>
+								<p></p>
+							</div>
 						</div>
-						
-						
+
+
 					</div>
 					<div style="border-top: 1.5px solid rgba(65, 65, 79, 10%)">
-						<p>예약 내역</p><a href="#" class="more">더보기></a>
+						<p>예약 내역</p>
+						<a href="#" class="more">더보기></a>
 						<div class="bookList">
 							<p>도서명</p>
 							<p>저자</p>
@@ -191,12 +228,35 @@
 							<h1 id="noBookReser">예약 중인 도서가 없습니다</h1>
 						</div>
 						<div id="bookReserList">
-							<div><p><!-- 도서명 --></p><p><!-- 저자 --></p><p><!-- 도서번호 --></p><p><!-- 반납예정일 --></p></div>
-							<div><p></p><p></p><p></p><p></p></div>
-							<div><p></p><p></p><p></p><p></p></div>
+							<div>
+								<p>
+									<!-- 도서명 -->
+								</p>
+								<p>
+									<!-- 저자 -->
+								</p>
+								<p>
+									<!-- 도서번호 -->
+								</p>
+								<p>
+									<!-- 반납예정일 -->
+								</p>
+							</div>
+							<div>
+								<p></p>
+								<p></p>
+								<p></p>
+								<p></p>
+							</div>
+							<div>
+								<p></p>
+								<p></p>
+								<p></p>
+								<p></p>
+							</div>
 						</div>
-						
-						
+
+
 					</div>
 				</div>
 			</div>
@@ -212,15 +272,17 @@
 						PointDAO dao = PointDAO.getinstance();
 						int pointNow = dao.memberPointNow(member_id);
 						%>
-						<p><%= pointNow %> P</p>
+						<p><%= pointNow %>
+							P
+						</p>
 						<a href="pointChargeTemp.po" id="coinCharge">충전하기</a>
 					</div>
 				</div>
-					<div>
-						<h5>포인트내역</h5>
-						<table border="0" id="pointSelect">
-							<!--  <tr><td>+/-</td><td>POINT</td><td>REASON</td><td>DATE</td></tr> -->
-							<% 								
+				<div>
+					<h5>포인트내역</h5>
+					<table border="0" id="pointSelect">
+						<!--  <tr><td>+/-</td><td>POINT</td><td>REASON</td><td>DATE</td></tr> -->
+						<% 								
 							List<PointDTO> list = dao.memberPointList(member_id);
 							for(int i = 0;  i < list.size(); i++){									
 								if( (i > 3) || (i == list.size()-1)){
@@ -237,9 +299,9 @@
 								out.print(list.get(i).getUpdate_date().substring(0,10)+"</td></tr>");
 							}
 							%>
-						</table>
-						</div>
+					</table>
 				</div>
+			</div>
 
 			<p class="menuTitle">관심도서</p>
 			<div id="cont_3_size">
@@ -247,55 +309,54 @@
 				<div id="cont_3_item">
 					<div class="cont_3_item_book">
 						<img src="img/mypage/noBook.png" />
-						<div>	
-							<img  class="heartbutton" src="img/mypage/heartIcon2.png" />
-						</div>					
-					</div>
-					<div class="cont_3_item_book">
-						<img src="img/mypage/noBook.png" />
 						<div>
-							<img  class="heartbutton" src="img/mypage/heartIcon2.png" />
+							<img class="heartbutton" src="img/mypage/heartIcon2.png" />
 						</div>
 					</div>
 					<div class="cont_3_item_book">
 						<img src="img/mypage/noBook.png" />
 						<div>
-							<img  class="heartbutton" src="img/mypage/heartIcon2.png" />
+							<img class="heartbutton" src="img/mypage/heartIcon2.png" />
 						</div>
 					</div>
 					<div class="cont_3_item_book">
 						<img src="img/mypage/noBook.png" />
 						<div>
-							<img  class="heartbutton" src="img/mypage/heartIcon2.png" />
+							<img class="heartbutton" src="img/mypage/heartIcon2.png" />
 						</div>
 					</div>
 					<div class="cont_3_item_book">
 						<img src="img/mypage/noBook.png" />
 						<div>
-							<img  class="heartbutton" src="img/mypage/heartIcon2.png" />
+							<img class="heartbutton" src="img/mypage/heartIcon2.png" />
+						</div>
+					</div>
+					<div class="cont_3_item_book">
+						<img src="img/mypage/noBook.png" />
+						<div>
+							<img class="heartbutton" src="img/mypage/heartIcon2.png" />
 						</div>
 					</div>
 					<!-- <div class="clearF"></div> -->
 				</div>
 			</div>
 
-		<p class="menuTitle">즐겨찾는 도서</p>
-		<div id="cont_4_size">
+			<p class="menuTitle">즐겨찾는 도서</p>
+			<div id="cont_4_size">
 
-			<div id="chartNoData">
-				<img src="img/mypage/errorIcon.png"></br>
-				분석하기 위한 데이터가 필요해요
+				<div id="chartNoData">
+					<img src="img/mypage/errorIcon.png"></br> 분석하기 위한 데이터가 필요해요
+				</div>
+
+				<div id="cont_4_data">
+					<div class="pie-chart1"></div>
+				</div>
+				<div id="cont_4_result">결과</div>
 			</div>
 
-			<div id="cont_4_data">
-				<div class="pie-chart1"></div>
-			</div>
-			<div id="cont_4_result">결과</div>
-		</div>
 
-
-		<!-- 스크립트 -->
-		<script type="text/javascript">
+			<!-- 스크립트 -->
+			<script type="text/javascript">
 
 			//사이드 메뉴 이벤트 스크립트
 
@@ -522,17 +583,18 @@
 			}
 
 		</script>
-	 </section>
+	</section>
 
-	 <footer>
+	<footer>
 		<div id="foot_size">
 			(변경) Library | 04524 서울특별시 중구 세종대로 110 | 전화번호: 02)120, 2133-0300~1</br>
 			이용시간: 화~금 09:00~19:00 / 토,일 09:00~17:00 /월요일,공휴일 휴관
 		</div>
-	 </footer><!-- Favorite -->
+	</footer>
+	<!-- Favorite -->
 
- 
-<% } %>
+
+	<% } %>
 </body>
 
 </html>

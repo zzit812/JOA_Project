@@ -1,53 +1,60 @@
 @charset "EUC-KR";
 
-
 #book_box {
 	border: 1px solid #EDEDED;
 	height: 600px;
 	margin: 0px;
 	float: left;
-	width:100%;
+	width: 100%;
 }
-#img_box{
+
+#img_box {
 	height: 600px;
 	width: 50%;
 	margin: 0px;
 	float: left;
 }
-#book_img{
+
+#book_img {
 	height: 445px;
-    position: relative;
-    top: 75px;
-    left: 160px;
+	position: relative;
+	top: 75px;
+	left: 160px;
 }
+
 #category {
-    position: relative;
-    top: -385px;
-    left: 284px;
+	position: relative;
+	top: -385px;
+	left: 284px;
 }
+
 #detail_box {
 	height: 600px;
 	width: 50%;
 	margin: 0px;
 	float: left;
 }
+
 #detail {
 	height: 300px;
-    width: 500px;
-    position: relative;
-   	top: 60px;
+	width: 500px;
+	position: relative;
+	top: 60px;
 }
-#detail> div {
+
+#detail>div {
 	margin-top: 5px;
 }
-#button{
-    position: relative;
-    top: 85px;
-    left: 222px;
+
+#button {
+	position: relative;
+	top: 85px;
+	left: 222px;
 }
+
 #back {
 	width: 25px;
-    position: relative;
-    top: 15px;
-    left: 658px;
+	position: relative;
+	top: 15px;
+	left: 658px;
 }

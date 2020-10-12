@@ -1,10 +1,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@page import="com.joalib.board.action.*" %>
-<%@page import="com.joalib.DAO.*" %>
-<%@page import="com.joalib.DTO.*" %>
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@page import="com.joalib.board.action.*"%>
+<%@page import="com.joalib.DAO.*"%>
+<%@page import="com.joalib.DTO.*"%>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 <!DOCTYPE html>
@@ -12,39 +12,43 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판</title>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- 캘린더 -->
-	
-	<link rel="stylesheet" type="text/css" href="css/lib_top.css">
-	<link rel="stylesheet" type="text/css" href="css/board_base.css">
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- 캘린더 -->
 
-	<style>
-		.commentCount{
-			display: inline;
-		    margin: 0 0 0 20px;
-		    font-weight: 300;
-		    font-size: 13px;
-		    opacity: 75%;
-		}
-	</style>
-	
-	
+<link rel="stylesheet" type="text/css" href="css/lib_top.css">
+<link rel="stylesheet" type="text/css" href="css/board_base.css">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+	rel="stylesheet">
+
+<style>
+.commentCount {
+	display: inline;
+	margin: 0 0 0 20px;
+	font-weight: 300;
+	font-size: 13px;
+	opacity: 75%;
+}
+</style>
+
+
 </head>
 <body>
-	
-	 <header>
-	 <%
+
+	<header>
+		<%
 	 	String idCheckImpart = null;
 	 %>
-		 <div id="top_size">
-		 	<!--로고-->
+		<div id="top_size">
+			<!--로고-->
 			<img id="logo" src="img/icon_lib.png">
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
-					<li><a href='home.jsp'>HOME</a></li> | <li>
-					<%
+					<li><a href='home.jsp'>HOME</a></li> |
+					<li>
+						<%
 						String member_id = null;
 									member_id = (String)session.getAttribute("member_id");
 									if ( member_id != null) {
@@ -53,7 +57,8 @@
 										out.print("<a href='userJoinRule.html'>회원가입</a></li> | <li><a href='userLogin.html'>로그인</a>");
 									}
 					%>
-					</li> | <li><a>포인트충전</a></li>
+					</li> |
+					<li><a>포인트충전</a></li>
 				</ul>
 			</nav>
 			<div class="clearF"></div>
@@ -70,8 +75,7 @@
 							<li><a href="book_best.jsp">베스트 셀러</a></li>
 							<li><a href="book_recommend.jsp">추천 도서</a></li>
 							<li><a href="book_wish.jsp">희망 도서</a></li>
-						</ul>
-						</li>
+						</ul></li>
 					<li><a href="place.jsp">이용안내</a>
 						<ul>
 							<li><a href="place.jsp">오시는 길</a></li>
@@ -99,42 +103,49 @@
 				<d iv id="window_menu">
 		</div>
 		</nav>
-		 </div>
-		 <script src="js/lib_top.js"></script>
-		 <div id="title"><p>커뮤니티</p></div>
-	 </header>
+		</div>
+		<script src="js/lib_top.js"></script>
+		<div id="title">
+			<p>커뮤니티</p>
+		</div>
+	</header>
 
-	 <section id="side_size">
+	<section id="side_size">
 
-		<div id="sidemenu_size" >
-			<div id = "sidmenu_box">
-			<div>
-				<h1>커뮤니티</h1>
-				<ul>
-					<li>공지사항</li>
-					<li>질문과 답변</li>
-					<li>자유게시판</li>
-					<li>불량도서 신고</li>
-					<li>중고도서 나눔</li>
-				</ul>
-				
+		<div id="sidemenu_size">
+			<div id="sidmenu_box">
+				<div>
+					<h1>커뮤니티</h1>
+					<ul>
+						<li>공지사항</li>
+						<li>질문과 답변</li>
+						<li>자유게시판</li>
+						<li>불량도서 신고</li>
+						<li>중고도서 나눔</li>
+					</ul>
+
 				</div>
 			</div>
 		</div>
 
 		<div id="cont_size">
-		  	<h1>자유게시판</h1>
-		  	<div id="board_con">
-		
-	  		<form>
-		  		<input type="button" value="글쓰기" id="write_button" onclick="newPostBtn()"/>
-			</form>	
-		  	
-		  		<ul>
-		  			<li>게시번호</li><li>제목</li><li>회원</li><li>글쓴날짜</li><li>조회수</li>
-		  		</ul>
-		  		<div>
-			  		<%
+			<h1>자유게시판</h1>
+			<div id="board_con">
+
+				<form>
+					<input type="button" value="글쓰기" id="write_button"
+						onclick="newPostBtn()" />
+				</form>
+
+				<ul>
+					<li>게시번호</li>
+					<li>제목</li>
+					<li>회원</li>
+					<li>글쓴날짜</li>
+					<li>조회수</li>
+				</ul>
+				<div>
+					<%
 			  			DAO dao = new DAO();
 			  			
 	  				  	int sitePage =1 ;	//현재페이지 //초기 페이지 = 1
@@ -164,8 +175,8 @@
 	  				  	}else{
 	  				  		endPage = startPage + countPage - 1;
 	  				  	}
-			  		%>				  	
-		  			<%
+			  		%>
+					<%
 		  				// 페이지당 게시물을 담는다.
 			  			// array 에 게시물을 담고, 배열에는 페이지를 담았다.	
 			  			
@@ -211,35 +222,33 @@
 			  				pageList[totalPage-1] = array;
 			  			}
 					%>
-		  		
-		  			<%
+
+					<%
 		  			for(int i = 0 ; i < pageList[sitePage-1].size() ; i++){
 			  				ArrayList<BoardDTO> dtoArray = pageList[sitePage-1];%>
-		  			<ul>
-			  			<li><%=dtoArray.get(i).getBoard_no()%></li>
-			  			<li>
-				  			<a  href="boardHitUp.bo?board_no=<%=dtoArray.get(i).getBoard_no() %>"  >
-				  			<%= dtoArray.get(i).getBoard_title() %>
-				  			<% 
+					<ul>
+						<li><%=dtoArray.get(i).getBoard_no()%></li>
+						<li><a
+							href="boardHitUp.bo?board_no=<%=dtoArray.get(i).getBoard_no() %>">
+								<%= dtoArray.get(i).getBoard_title() %> <% 
 				  			int commentCount = dao.CommnetCount(dtoArray.get(i).getBoard_no());
 				  			if( commentCount > 0){
 				  				out.print("<p class='commentCount'> ["+commentCount+"] </p>");}%>
-				  			</a>
-			  			</li>
-			  			<li><%=dtoArray.get(i).getMember_id() %></li>
-			  			<li><%= dtoArray.get(i).getBoard_date().substring(0, 10)%></li>
-			  			<li><%=dtoArray.get(i).getBoard_hit()%></li>
-		  			</ul>
-		  			<%} %>
-		  			<!-- board-read : hitup.bo > board_read.bo -->
+						</a></li>
+						<li><%=dtoArray.get(i).getMember_id() %></li>
+						<li><%= dtoArray.get(i).getBoard_date().substring(0, 10)%></li>
+						<li><%=dtoArray.get(i).getBoard_hit()%></li>
+					</ul>
+					<%} %>
+					<!-- board-read : hitup.bo > board_read.bo -->
 
-		  		</div>
-		  		
-		  		
-		  		
-		  	</div>
-		  	<div id="pageNumber">
-		  	<%		
+				</div>
+
+
+
+			</div>
+			<div id="pageNumber">
+				<%		
 			  	for (int iCount = startPage; iCount <= endPage; iCount++) {
 	
 			  	    if (iCount == sitePage) {
@@ -252,18 +261,18 @@
 			  	}
 		  	
 		  	%>
-		  	</div>
+			</div>
 		</div>
-		
-	 </section>
 
-	 <footer>
-		<div id="foot_size">
-			(변경) Library | 04524 서울특별시 중구 세종대로 110 | 전화번호: 02)120, 2133-0300~1
-			이용시간: 화~금 09:00~19:00 / 토,일 09:00~17:00 /월요일,공휴일 휴관
-		</div>
-	 </footer><!-- Favorite -->
-	 <script type="text/javascript">
+	</section>
+
+	<footer>
+		<div id="foot_size">(변경) Library | 04524 서울특별시 중구 세종대로 110 |
+			전화번호: 02)120, 2133-0300~1 이용시간: 화~금 09:00~19:00 / 토,일 09:00~17:00
+			/월요일,공휴일 휴관</div>
+	</footer>
+	<!-- Favorite -->
+	<script type="text/javascript">
 	 
 			function newPostBtn(){
 				<% 

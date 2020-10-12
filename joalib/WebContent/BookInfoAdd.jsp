@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>관리자용 도서추가 페이지</title>
 <style type="text/css">
-
 </style>
 </head>
 <body>
@@ -19,8 +18,8 @@
 			<table>
 				<tr>
 					<td class="td_left"><label for="isbn">isbn</label></td>
-					<td class="td_right"><input type="text" name="isbn"
-						id="isbn" required="required" /></td>
+					<td class="td_right"><input type="text" name="isbn" id="isbn"
+						required="required" /></td>
 				</tr>
 				<tr>
 					<td class="td_left"><label for="isbn_plus">isbn_plus</label></td>
@@ -37,7 +36,7 @@
 					<td class="td_right"><input name="author" type="text"
 						id="author" required="required" /></td>
 				</tr>
-				
+
 				<tr>
 					<td class="td_left"><label for="publisher">출판사</label></td>
 					<td class="td_right"><input name="publisher" type="text"
@@ -55,21 +54,24 @@
 				</tr>
 				<tr>
 					<td class="td_left"><label for="book_story">줄거리</label></td>
-					<td><textarea id="book_story" name="book_story"
-					cols="40" rows="12" required="required"></textarea></td>
+					<td><textarea id="book_story" name="book_story" cols="40"
+							rows="12" required="required"></textarea></td>
 				</tr>
 				<tr>
 					<td class="td_left"><label for=book_img>book_img</label></td>
-					<td class="td_right"><input name="book_img" type="file" id="book_img"
-					accept=".gif, .jpg, .png, .jpeg" id="BOARD_FILE" required="required" /></td>
+					<td class="td_right"><input name="book_img" type="file"
+						id="book_img" accept=".gif, .jpg, .png, .jpeg" id="BOARD_FILE"
+						required="required" /></td>
 				</tr>
 			</table>
-			<b>이미지 gif,jpg,png,jpeg만 허용</b>
-			<br/><br/><br/><br/>
-			
+			<b>이미지 gif,jpg,png,jpeg만 허용</b> <br />
+			<br />
+			<br />
+			<br />
+
 			<section id="commandCell">
-				<input type="submit" value="등록">&nbsp;&nbsp;
-				<input type="reset" value="다시쓰기" />
+				<input type="submit" value="등록">&nbsp;&nbsp; <input
+					type="reset" value="다시쓰기" />
 			</section>
 		</form>
 </body>

@@ -1,16 +1,17 @@
-<%@ page language="java" contentType="text/html; charset= UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "java.sql.*"%>
+<%@ page language="java" contentType="text/html; charset= UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*"%>
 <% request.setCharacterEncoding("UTF-8");%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
 </head>
 <body>
-    <%
+	<%
     request.setCharacterEncoding("UTF-8");
     //아이디 값을 받아온다.  
     String member_id = request.getParameter("id");
@@ -22,7 +23,7 @@
 
      try {
        Class.forName("com.mysql.jdbc.Driver");
-       conn = DriverManager.getConnection("Jdbc:mysql://localhost:3306/joalib","root","1234");
+       conn = DriverManager.getConnection("Jdbc:mysql://localhost:3306/joalib2020","joalib2020","joa2020!");
        if(conn == null)
          throw new Exception("데이터베이스에 연결할 수 없습니다.");
        stmt = conn.createStatement();

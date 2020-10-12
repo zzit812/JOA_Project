@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-	<title>Document</title>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src="js/join_1.js"></script>
-	
-	<link rel="stylesheet" type="text/css" href="css/lib_top.css">
-	<link rel="stylesheet" type="text/css" href="css/lib_join_1.css">
-	<link rel="stylesheet" type="text/css" href="css/lib_join.css">
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Document</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="js/join_1.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/lib_top.css">
+<link rel="stylesheet" type="text/css" href="css/lib_join_1.css">
+<link rel="stylesheet" type="text/css" href="css/lib_join.css">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+	rel="stylesheet">
 
 </head>
 
- <body>
-	 <header>
-		 <div id="top_size">
-		 	<!--로고-->
+<body>
+	<header>
+		<div id="top_size">
+			<!--로고-->
 			<img id="logo" src="img/icon_lib.png">
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
-					<li><a href='home.jsp'>HOME</a></li> | <li><a href='userJoinRule.html'>회원가입</a></li> | <li><a href='userLogin.html'>로그인</a></li> | <li><a>포인트충전</a></li>
+					<li><a href='home.jsp'>HOME</a></li> |
+					<li><a href='userJoinRule.html'>회원가입</a></li> |
+					<li><a href='userLogin.html'>로그인</a></li> |
+					<li><a>포인트충전</a></li>
 				</ul>
 			</nav>
 			<div class="clearF"></div>
@@ -29,22 +34,20 @@
 			<nav id="topMenuBorder">
 				<ul id="top_menu">
 					<li><a href="book_search.html">자료검색</a>
-						<ul class ="sub_menu">
+						<ul class="sub_menu">
 
 							<li><a href="book_search.jsp">도서 검색</a></li>
 
 							<li><a href="book_search.html">도서 검색</a></li>
 
 							<li><a href="">분야별 도서 조회</a></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li><a href="#">도서마당</a>
 						<ul>
 							<li><a href="">신착 도서</a></li>
 							<li><a href="">베스트 셀러</a></li>
 							<li><a href="">희망도서</a></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li><a href="#">이용안내</a>
 						<ul>
 							<li><a href="">시설안내</a></li>
@@ -52,8 +55,7 @@
 							<li><a href="">포인트</a></li>
 							<li><a href="">도서 대여</a></li>
 							<li><a href="">도서 예약</a></li>
-						</ul>
-					</li>				
+						</ul></li>
 					<li><a href="#">커뮤니티</a>
 						<ul>
 							<li><a href="">공지사항</a></li>
@@ -61,8 +63,7 @@
 							<li><a href="board.jsp">자유게시판</a></li>
 							<li><a href="Fault_list.jsp">불량도서 신고</a></li>
 							<li><a href="Donate_list.jsp">중고도서 나눔</a></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li><a href="mypage_main.jsp">나의서재</a>
 						<ul>
 							<li><a href="mypage_main.jsp">나의 서재</a></li>
@@ -70,33 +71,36 @@
 							<li><a href="">내가 쓴 글</a></li>
 							<li><a href="">포인트</a></li>
 							<li><a href="">정보 수정/ 탈퇴</a></li>
-						</ul>
-					</li>
+						</ul></li>
 				</ul>
 				<div id="window_menu"></div>
 			</nav>
-		 </div>
-		 <script src="js/lib_top.js"></script>
-		 <div id="title"><p>회원가입</p></div><!-- (타이틀에이미지넣을거에용) -->
-	 </header>
+		</div>
+		<script src="js/lib_top.js"></script>
+		<div id="title">
+			<p>회원가입</p>
+		</div>
+		<!-- (타이틀에이미지넣을거에용) -->
+	</header>
 
-	 <section id="side_size"><!-- id="side_size" 이거 크기 설정한거니깐 삭제하면 안돼요 -->
-	 	<div id="sidemenu_size" >
-	 		<div id="sidemenuBlook">
-	 			<div>
-			 		<h3>약관 동의</h3>
-			 		<h3>회원 정보 입력</h3>
-			 		<h3>캐릭터</h3>
-			 		<h3>가입 완료!</h3>
-		 		</div>
-	 		</div>
+	<section id="side_size">
+		<!-- id="side_size" 이거 크기 설정한거니깐 삭제하면 안돼요 -->
+		<div id="sidemenu_size">
+			<div id="sidemenuBlook">
+				<div>
+					<h3>약관 동의</h3>
+					<h3>회원 정보 입력</h3>
+					<h3>캐릭터</h3>
+					<h3>가입 완료!</h3>
+				</div>
+			</div>
 		</div>
 		<div id="cont_size">
-		 	<form name="memberinfo" >	
-		 		<div id="join">
-		 			<h1>약관동의</h1>
-		 			<div id="terms">
-		 				<pre>
+			<form name="memberinfo">
+				<div id="join">
+					<h1>약관동의</h1>
+					<div id="terms">
+						<pre>
 -------------------------------------------------------------------
 	이 사이트는 <b>포트폴리오용</b>으로 작업되었습니다.
 -------------------------------------------------------------------
@@ -280,23 +284,27 @@
 ① 서비스 이용으로 발생한 분쟁에 대해 원만한 해결을 위한 모든 노력에도 불구하고 소송이 제기되는 경우, 조아도서관 소재지를 관할하는 법원을 관할법원으로 합니다. 
 
 		 				</pre>
-		 			</div>
-		 			<label for="agreeTerms"><input type="checkbox" name="agreeTerms">약관에 동의합니다.</label>
-		 			
-		 		</div>	 
-		 		<div id="btn">
-	 				<input type="button" name="kidsJoin" value="14세 미만 어린이 회원" onclick="location.href='userJoin_kid.html'">
-	 				<input type="button" name="generalJoin" value="14세 이상 일반 회원" onclick="location.href='userJoin_general.html'">
-	 			</div>		
-	 	</form>
-		 </div>
-	 </section>
+					</div>
+					<label for="agreeTerms"><input type="checkbox"
+						name="agreeTerms">약관에 동의합니다.</label>
 
-	 <footer>
-			(변경해야함) Library | 04524 서울특별시 중구 세종대로 110 | 전화번호: 02)120, 2133-0300~1<br>
-			이용시간: 화~금 09:00~19:00 / 토,일 09:00~17:00 /월요일,공휴일 휴관
-	 </footer>
+				</div>
+				<div id="btn">
+					<input type="button" name="kidsJoin" value="14세 미만 어린이 회원"
+						onclick="location.href='userJoin_kid.html'"> <input
+						type="button" name="generalJoin" value="14세 이상 일반 회원"
+						onclick="location.href='userJoin_general.html'">
+				</div>
+			</form>
+		</div>
+	</section>
 
- 
+	<footer>
+		(변경해야함) Library | 04524 서울특별시 중구 세종대로 110 | 전화번호: 02)120, 2133-0300~1<br>
+		이용시간: 화~금 09:00~19:00 / 토,일 09:00~17:00 /월요일,공휴일 휴관
+	</footer>
 
-</body></html>
+
+
+</body>
+</html>

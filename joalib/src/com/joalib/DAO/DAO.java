@@ -140,8 +140,13 @@ public class DAO {
 	//댓글 삭제 함수
 	public int boardCommentDel(Board_CommentDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
-		sqlsession.delete("boardComment_delete2", dto);	//답글 삭제
-		int i = sqlsession.delete("boardComment_delete1", dto);	//댓글 삭제
+		
+		int i = sqlsession.delete("boardComment_delete2", dto);	//답글 삭제
+		if(i > 0) {
+			sqlsession.delete("boardCommentAlarm_delete2", dto);	}
+		i = sqlsession.delete("boardComment_delete1", dto);	//댓글 삭제
+		if(i > 0) {
+			sqlsession.delete("boardCommentAlarm_delete1", dto);	}
 		sqlsession.commit();
 		sqlsession.close();
 		
@@ -202,7 +207,7 @@ public class DAO {
 		SqlSession sqlsession = sqlfactory.openSession();
 		int i = sqlsession.delete("boardSmallCommentDelete", dto);
 		if(i > 0) {
-			sqlsession.delete("boardSmallCommentAlarmDelete", dto);
+			sqlsession.delete("boardSmallCommentAlarmDelete", dto);	//알람삭제
 		}
 		sqlsession.commit();
 		sqlsession.close();

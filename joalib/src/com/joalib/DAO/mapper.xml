@@ -3,280 +3,443 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	<mapper namespace="SqlData">
-	
-	<insert id="memberInsert" parameterType = "com.joalib.DTO.memberinfoDTO" >
-		INSERT INTO joalib.memberinfo VALUES ( #{member_id}, #{member_pw}, #{member_name}, #{member_tel}, #{member_birth} ,#{member_email} , #{member_city}, #{member_adress} , '1', #{member_character});
+<mapper namespace="SqlData">
+
+	<insert id="memberInsert"
+		parameterType="com.joalib.DTO.memberinfoDTO">
+		INSERT INTO
+		memberinfo VALUES ( #{member_id}, #{member_pw}, #{member_name},
+		#{member_tel}, #{member_birth} ,#{member_email} , #{member_city},
+		#{member_adress} , '1', #{member_character});
 	</insert>
-	
-	<select id="memberLoginCheck" parameterType = "String" resultType="com.joalib.DTO.memberinfoDTO" >
-		select member_pw,member_name from joalib.memberinfo where member_id = #{checkID};
+
+	<select id="memberLoginCheck" parameterType="String"
+		resultType="com.joalib.DTO.memberinfoDTO">
+		select member_pw,member_name
+		from memberinfo where member_id = #{checkID};
 	</select>
-	
-	<select id="memberinfoSelectAll" parameterType="String" resultType="com.joalib.DTO.memberinfoDTO">
-		select * from joalib.memberinfo where member_id = #{member_id}
+
+	<select id="memberinfoSelectAll" parameterType="String"
+		resultType="com.joalib.DTO.memberinfoDTO">
+		select * from memberinfo where member_id =
+		#{member_id}
 	</select>
-	
-	<update id="memberinfoChange" parameterType="com.joalib.DTO.memberinfoDTO">
-		update joalib.memberinfo set member_name = #{member_name}, member_tel = #{member_tel}, member_birth = #{member_birth}, member_email = #{member_email}, member_adress = #{member_adress} where member_id = #{member_id};
-	</update>	
-	
-	<insert id="newMemberPointInsert" parameterType="String" >
-		insert into joalib.point values (#{member_id}, 0 , now() ,'회원가입', 0, '*');
+
+	<update id="memberinfoChange"
+		parameterType="com.joalib.DTO.memberinfoDTO">
+		update memberinfo set member_name =
+		#{member_name}, member_tel = #{member_tel}, member_birth =
+		#{member_birth}, member_email = #{member_email}, member_adress =
+		#{member_adress} where member_id = #{member_id};
+	</update>
+
+	<insert id="newMemberPointInsert" parameterType="String">
+		insert
+		into point values (#{member_id}, 0 , now() ,'회원가입', 0, '*');
 	</insert>
-	
-	<select id="pointListSelect" parameterType="String" resultType="com.joalib.DTO.PointDTO">
-		select member_id,point,update_date,point_reason,total_point,UPandDOWN from joalib.point where member_id= #{member_id} order by update_date desc;		
+
+	<select id="pointListSelect" parameterType="String"
+		resultType="com.joalib.DTO.PointDTO">
+		select
+		member_id,point,update_date,point_reason,total_point,UPandDOWN from
+		point where member_id= #{member_id} order by update_date desc;
 	</select>
-	
-	<select id="pointNowSelect" parameterType="String" resultType="int">
-		select total_point from joalib.point where member_id = #{member_id}  order by update_date desc limit 1;
+
+	<select id="pointNowSelect" parameterType="String"
+		resultType="int">
+		select total_point from point where member_id =
+		#{member_id} order by update_date desc limit 1;
 	</select>
-	
+
 	<insert id="pointChargeTemp" parameterType="String">
-		insert into joalib.point values (#{member_id}, 1000, now(), '테스트 입니다', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)-1000), '-');
+		insert into
+		point values (#{member_id}, 1000, now(), '테스트 입니다', ((select
+		total_point from point as temp where member_id = #{member_id}
+		order by update_date desc limit 1)-1000), '-');
 	</insert>
-	
+
 	<insert id="boardPointCharge" parameterType="String">
-		insert into joalib.point values (#{member_id}, 100, now(), '게시글(자유게시판)', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)+100), '+');
+		insert into
+		point values (#{member_id}, 100, now(), '게시글(자유게시판)', ((select
+		total_point from point as temp where member_id = #{member_id}
+		order by update_date desc limit 1)+100), '+');
 	</insert>
-	
-	<select id="myBoardView" parameterType="String" resultType="com.joalib.DTO.BoardDTO">
-		 select * from joalib.board where member_id = #{member_id} order by board_no desc; 
-	</select>	
-	
-	<insert id="board_add" parameterType ="com.joalib.DTO.BoardDTO" >
-		INSERT INTO joalib.board(board_title, board_text, board_date, member_id, board_hit) VALUES ( #{board_title}, #{board_text}, now() ,#{member_id},0);
-	</insert>	
-	
+
+	<select id="myBoardView" parameterType="String"
+		resultType="com.joalib.DTO.BoardDTO">
+		select * from board where member_id = #{member_id} order by board_no
+		desc;
+	</select>
+
+	<insert id="board_add" parameterType="com.joalib.DTO.BoardDTO">
+		INSERT INTO board(board_title, board_text, board_date,
+		member_id, board_hit) VALUES ( #{board_title}, #{board_text}, now()
+		,#{member_id},0);
+	</insert>
+
 	<select id="board_all" resultType="com.joalib.DTO.BoardDTO">
-		SELECT * FROM joalib.board order by board_no desc;
+		SELECT * FROM board
+		order by board_no desc;
 	</select>
-	
+
 	<select id="board_count" resultType="int">
-		SELECT count(*) as board_count FROM joalib.board;
+		SELECT count(*) as
+		board_count FROM board;
 	</select>
-	
-	<select id="read_details" resultType="com.joalib.DTO.BoardDTO" parameterType="int">
-		select * from joalib.board where board_no= #{board_no};
+
+	<select id="read_details" resultType="com.joalib.DTO.BoardDTO"
+		parameterType="int">
+		select * from board where board_no= #{board_no};
 	</select>
-	
-	<update id="board_update" parameterType="com.joalib.DTO.BoardDTO">
-		UPDATE joalib.board SET board_title = #{board_title}, board_text = #{board_text} WHERE board_no = #{board_num};
+
+	<update id="board_update"
+		parameterType="com.joalib.DTO.BoardDTO">
+		UPDATE board SET board_title = #{board_title},
+		board_text = #{board_text} WHERE board_no = #{board_num};
 	</update>
-	
+
 	<update id="board_hitUp" parameterType="com.joalib.DTO.BoardDTO">
-		UPDATE joalib.board SET board_hit = (board_hit+1) WHERE board_no = #{board_num};
+		UPDATE board SET
+		board_hit = (board_hit+1) WHERE board_no = #{board_num};
 	</update>
-	
+
 	<delete id="board_del" parameterType="int">
-		delete from joalib.board where board_no = #{board_no};
+		delete from board where board_no = #{board_no};
 	</delete>
 	<delete id="board_del2" parameterType="int">
-		delete from joalib.board_comment where board_no = #{board_no};
+		delete from board_comment where board_no = #{board_no};
 	</delete>
 	<delete id="board_del3" parameterType="int">
-		delete from joalib.board_small_comment where board_comment_no in(select board_comment_no from joalib.board_comment where board_no = #{board_no});
+		delete from board_small_comment where board_comment_no in(select board_comment_no from board_comment where board_no = #{board_no});
 	</delete>
 
 	<insert id="boardComment_add" parameterType="com.joalib.DTO.Board_CommentDTO">
-		INSERT INTO joalib.board_comment (`board_no`, `member_id`, `bc_text`, `bc_date`) VALUES ( #{board_no}, #{member_id}, #{bc_text}, now() );
-	</insert>
-	
-	<select id="boardComment_list" parameterType="int" resultType="com.joalib.DTO.Board_CommentDTO">
-		select * from joalib.board_comment where board_no = #{board_no} order by bc_date desc ;
-	</select>
-	
-	<insert id="book_info_add" parameterType="com.joalib.DTO.BookInfoDTO">
-		insert into joalib.bookinfo values(#{isbn},#{author},#{publisher},#{book_title},now(),#{isbn_pluscode},#{book_img},#{book_story},#{category});
+		INSERT INTO board_comment (`board_no`, `member_id`, `bc_text`, `bc_date`) VALUES ( #{board_no}, #{member_id}, #{bc_text}, now() );
 	</insert>
 
-	<select id="book_info_detail" resultType="com.joalib.DTO.BookInfoDTO" parameterType="int">
-		select * from joalib.bookinfo where isbn= #{isbn};
+	<select id="boardComment_list" parameterType="int"
+		resultType="com.joalib.DTO.Board_CommentDTO">
+		select * from board_comment where board_no =
+		#{board_no} order by bc_date desc ;
 	</select>
-	
+
+	<insert id="book_info_add"
+		parameterType="com.joalib.DTO.BookInfoDTO">
+		insert into bookinfo
+		values(#{isbn},#{author},#{publisher},#{book_title},now(),#{isbn_pluscode},#{book_img},#{book_story},#{category});
+	</insert>
+
+	<select id="book_info_detail"
+		resultType="com.joalib.DTO.BookInfoDTO" parameterType="int">
+		select * from bookinfo where isbn= #{isbn};
+	</select>
+
 	<delete id="boardComment_delete1" parameterType="com.joalib.DTO.Board_CommentDTO">
-		delete from joalib.board_comment where member_id = #{member_id} and bc_date = #{bc_date};
+		delete from board_comment where member_id = #{member_id} and bc_date = #{bc_date};
+	</delete>
+	<delete id="boardCommentAlarm_delete1" parameterType="com.joalib.DTO.Board_CommentDTO">
+		delete from member_alarm where alarm_date = #{bc_date} and alarm_etc like CONCAT('%', #{member_id});
 	</delete>
 	<delete id="boardComment_delete2" parameterType="com.joalib.DTO.Board_CommentDTO">
-		delete FROM joalib.board_small_comment where board_comment_no = #{board_comment_no};
+		delete FROM board_small_comment where board_comment_no = #{board_comment_no};
 	</delete>
-	<update id="boardComment_update" parameterType="com.joalib.DTO.BoardDTO">
-		UPDATE joalib.board_comment set bc_text = #{bc_text} where member_id = #{member_id} and bc_date = #{bc_date};
+	<delete id="boardCommentAlarm_delete2" parameterType="com.joalib.DTO.Board_CommentDTO">
+		delete from joalib2020.member_alarm where alarm_etc like CONCAT(#{board_comment_no}, '%');
+	</delete>
+	
+	
+	<update id="boardComment_update"
+		parameterType="com.joalib.DTO.BoardDTO">
+		UPDATE board_comment set bc_text = #{bc_text}
+		where member_id = #{member_id} and bc_date = #{bc_date};
 	</update>
-	<select id="boardCommentCount" parameterType="int" resultType="int">
-		select count(*) from joalib.board_comment where board_no = #{board_no};
+	<select id="boardCommentCount" parameterType="int"
+		resultType="int">
+		select count(*) from board_comment where board_no =
+		#{board_no};
 	</select>
 	<insert id="boardCommnetPointCharge" parameterType="String">
-		insert into joalib.point values (#{member_id}, 30, now(), '댓글(자유게시판)', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)+30), '+');
+		insert into
+		point values (#{member_id}, 30, now(), '댓글(자유게시판)', ((select
+		total_point from point as temp where member_id = #{member_id}
+		order by update_date desc limit 1)+30), '+');
 	</insert>
 	<insert id="faultPointCharge" parameterType="String">
-		insert into joalib.point values (#{member_id}, 1000, now(), '불량도서 신고', ((select total_point from joalib.point as temp where member_id = #{member_id} order by update_date desc limit 1)+1000), '+');
+		insert into
+		point values (#{member_id}, 1000, now(), '불량도서 신고', ((select
+		total_point from point as temp where member_id = #{member_id}
+		order by update_date desc limit 1)+1000), '+');
 	</insert>
-	
-	<insert id="favorite_book" parameterType="com.joalib.DTO.FavoriteDTO">
-		insert into joalib.favorite_book values (   #{member_id}, #{isbn}  );
+
+	<insert id="favorite_book"
+		parameterType="com.joalib.DTO.FavoriteDTO">
+		insert into favorite_book values ( #{member_id},
+		#{isbn} );
 	</insert>
 	<insert id="loan" parameterType="com.joalib.DTO.LoanDTO">
-		insert into joalib.loan_book (member_id,loan_book,loan_date,return_duedate, loan_condition) values (#{member_id},#{loan_book},now(),date_add(now(),INTERVAL 14 DAY) ,'대출');
+		insert into loan_book
+		(member_id,loan_book,loan_date,return_duedate, loan_condition) values
+		(#{member_id},#{loan_book},now(),date_add(now(),INTERVAL 14 DAY)
+		,'대출');
 	</insert>
-	<select id="loan_select" parameterType="com.joalib.DTO.LoanDTO" resultType="int">
-		SELECT count(*) FROM joalib.loan_book;
+	<select id="loan_select" parameterType="com.joalib.DTO.LoanDTO"
+		resultType="int">
+		SELECT count(*) FROM loan_book;
 	</select>
-	
-	
-	<insert id="faultPostInsert" parameterType="com.joalib.DTO.FaultDTO">
-		INSERT INTO joalib.fault (`fault_title`, `fault_text`, `fault_date`, `fault_attach`, `member_id`) VALUES ( #{fault_title}, #{fault_text}, now(), #{fault_attach},  #{member_id});
+
+
+	<insert id="faultPostInsert"
+		parameterType="com.joalib.DTO.FaultDTO">
+		INSERT INTO fault (`fault_title`, `fault_text`,
+		`fault_date`, `fault_attach`, `member_id`) VALUES ( #{fault_title},
+		#{fault_text}, now(), #{fault_attach}, #{member_id});
 	</insert>
-	
-	<select id="faultPostRead" parameterType="int" resultType="com.joalib.DTO.FaultDTO">
-		select * from joalib.fault where fault_no = #{fault_no};
+
+	<select id="faultPostRead" parameterType="int"
+		resultType="com.joalib.DTO.FaultDTO">
+		select * from fault where fault_no = #{fault_no};
 	</select>
-	
+
 	<select id="faultListView" resultType="com.joalib.DTO.FaultDTO">
-		select * from joalib.fault order by fault_no desc;
+		select * from fault
+		order by fault_no desc;
 	</select>
 	<update id="faultChange" parameterType="com.joalib.DTO.FaultDTO">
-		UPDATE joalib.fault SET fault_title = #{fault_title}, fault_text = #{fault_text} WHERE fault_no = #{fault_no};
-	</update>	
-	
+		UPDATE fault SET
+		fault_title = #{fault_title}, fault_text = #{fault_text} WHERE
+		fault_no = #{fault_no};
+	</update>
+
 	<delete id="faultPostDelete" parameterType="String">
-		delete from joalib.fault where fault_no = #{fault_no};
+		delete from
+		fault where fault_no = #{fault_no};
 	</delete>
-	<select id="myFaultPostView" parameterType="String" resultType="com.joalib.DTO.FaultDTO">
-		select fault_no,fault_title,fault_date from joalib.fault where member_id = #{member_id};
+	<select id="myFaultPostView" parameterType="String"
+		resultType="com.joalib.DTO.FaultDTO">
+		select fault_no,fault_title,fault_date from fault
+		where member_id = #{member_id};
 	</select>
-	
-	<insert id="donatePostInsert" parameterType="com.joalib.DTO.DonateDTO">
-		INSERT INTO joalib.donate (`donate_title`, `donate_text`, `donate_date`, `donate_attach`, `member_id`, `donate_condition`) VALUES ( #{donate_title}, #{donate_text} , now(), #{donate_attach}, #{member_id}, '거래중');
+
+	<insert id="donatePostInsert"
+		parameterType="com.joalib.DTO.DonateDTO">
+		INSERT INTO donate (`donate_title`,
+		`donate_text`, `donate_date`, `donate_attach`, `member_id`,
+		`donate_condition`) VALUES ( #{donate_title}, #{donate_text} , now(),
+		#{donate_attach}, #{member_id}, '거래중');
 	</insert>
-	<select id="donatePostList" resultType="com.joalib.DTO.DonateDTO">
-		select donate_title, donate_date, member_id, donate_condition, donate_no from joalib.donate order by donate_no desc;
+	<select id="donatePostList"
+		resultType="com.joalib.DTO.DonateDTO">
+		select donate_title, donate_date, member_id,
+		donate_condition, donate_no from donate order by donate_no
+		desc;
 	</select>
-	<select id="donatePostOneList" parameterType="int" resultType="com.joalib.DTO.DonateDTO">
-		select * from joalib.donate where donate_no = #{donate_no};
+	<select id="donatePostOneList" parameterType="int"
+		resultType="com.joalib.DTO.DonateDTO">
+		select * from donate where donate_no = #{donate_no};
 	</select>
 	<update id="donateDealChange" parameterType="int">
-		UPDATE joalib.donate SET donate_condition = '거래완료' WHERE donate_no = #{donate_no};
-	</update>	
-	<delete id="donatePostDelete1" parameterType = "int">
-		delete from joalib.donate_small_comment where donate_comment_no in(select donate_comment_no from joalib.donate_comment where donate_no = #{donate_no});
-	</delete><delete id="donatePostDelete2" parameterType = "int">
-		delete from joalib.donate_comment where donate_no = #{donate_no};
-	</delete><delete id="donatePostDelete3" parameterType = "int">
-		delete from joalib.donate where donate_no = #{donate_no};		
-	</delete>
-	<update id="donatePostUpdate" parameterType="com.joalib.DTO.DonateDTO">
-		update joalib.donate SET donate_title = #{donate_title}, donate_text  = #{donate_text} where donate_no = #{donate_no};
+		UPDATE donate
+		SET donate_condition = '거래완료' WHERE donate_no = #{donate_no};
 	</update>
-	<select id="myDonatePost" parameterType="String" resultType="com.joalib.DTO.DonateDTO">
-		select donate_no, donate_title,donate_date,donate_condition from joalib.donate where member_id = #{member_id};
-	</select>
-	
-	<select id="donateApplicationSelect" parameterType="com.joalib.DTO.Donate_ApplicationDTO" resultType="int">
-		select count(*) from joalib.donate_application where donate_no = #{donate_no} and donate_application_member = #{donate_application_member};
-	</select>
-	<insert id="donateApplicationAdd" parameterType="com.joalib.DTO.Donate_ApplicationDTO">
-		INSERT INTO joalib.donate_application (`donate_no`, `donate_application_member`, `donate_writer`, `donate_application_date`) VALUES (#{donate_no}, #{donate_application_member} , #{donate_writer}, now());
-	</insert>
-	<insert id="donateApplicationAlarm" parameterType="com.joalib.DTO.Donate_ApplicationDTO">
-		INSERT INTO joalib.member_alarm VALUES (#{donate_writer}, now(), 'donate_application', CONCAT(#{donate_no},'/',#{donate_application_member}), 0);
-	</insert>
-	<delete id="donateApplicationAlarmDel" parameterType="com.joalib.DTO.Donate_ApplicationDTO">
-		delete from joalib.member_alarm where member_id = #{donate_application_member} and alarm_etc = #{donate_no} and alarm_category = 'donate_message'
+	<delete id="donatePostDelete1" parameterType="int">
+		delete from
+		donate_small_comment where donate_comment_no in(select
+		donate_comment_no from donate_comment where donate_no =
+		#{donate_no});
 	</delete>
-	<delete id="donateApplicationAlarmDel2" parameterType="com.joalib.DTO.Donate_ApplicationDTO">
-		delete from joalib.member_alarm where alarm_etc = CONCAT(#{donate_no},'/',#{donate_application_member}) and alarm_category = 'donate_application';
+	<delete id="donatePostDelete2" parameterType="int">
+		delete from
+		donate_comment where donate_no = #{donate_no};
 	</delete>
-	<delete id="donateApplicationDel" parameterType="com.joalib.DTO.Donate_ApplicationDTO">
-		delete from joalib.donate_application where donate_no = #{donate_no} and donate_application_member = #{donate_application_member};
+	<delete id="donatePostDelete3" parameterType="int">
+		delete from
+		donate where donate_no = #{donate_no};
 	</delete>
-	<select id="DonateApplicationCount" parameterType="int" resultType="int">
-		select count(*) from joalib.donate_application where donate_no = #{donate_no};
-	</select>
-	<select id="DonateApplicationMemberList" parameterType="int" resultType="String">
-		select donate_application_member from joalib.donate_application where donate_no = #{donate_no};  
-	</select>
-	<insert id="donateMessageAlarm" parameterType="com.joalib.DTO.Donate_ApplicationDTO">
-		INSERT INTO joalib.member_alarm (`member_id`, `alarm_date`, `alarm_category`, `alarm_etc`, `alarm_check`) VALUES (#{member_id}, now(), 'donate_message', #{alarm_etc}, 0);
-	</insert>
-	<update id="donateMessageChecked" parameterType="com.joalib.DTO.member_alarmDTO">
-		update joalib.member_alarm set alarm_check = 1 where alarm_category = #{alarm_category} and alarm_etc = #{alarm_etc};
+	<update id="donatePostUpdate"
+		parameterType="com.joalib.DTO.DonateDTO">
+		update donate SET donate_title = #{donate_title},
+		donate_text = #{donate_text} where donate_no = #{donate_no};
 	</update>
-	<update id="donateConditionChange" parameterType="com.joalib.DTO.member_alarmDTO">
-		update joalib.donate set donate_condition = '거래완료', donate_buyer = #{member_id} where donate_no = #{alarm_etc};
-	</update>
-	<insert id="donateCompletePoint" parameterType="int" >
-		insert into joalib.point values ((select member_id FROM joalib.donate where donate_no = #{donate_no}), 5000, now(), '중고 도서 나눔', ((select total_point from joalib.point as temp where member_id = (select member_id FROM joalib.donate where donate_no = #{donate_no}) order by update_date desc limit 1)+5000), '+');
-	</insert>
-	<insert id="boardSmallCommentAdd" parameterType="com.joalib.DTO.Board_Small_CommentDTO">
-		insert into joalib.board_small_comment (`member_id`, `bc_s_text`, `bc_s_date`, `board_comment_no`) VALUES (#{member_id}, #{bc_s_text}, now(), #{board_comment_no});
-	</insert>
-	<select id="boardSmallCommentList" parameterType="int" resultType="com.joalib.DTO.Board_Small_CommentDTO">
-		select * from joalib.board_small_comment where board_comment_no = #{board_comment_no};
+	<select id="myDonatePost" parameterType="String"
+		resultType="com.joalib.DTO.DonateDTO">
+		select donate_no, donate_title,donate_date,donate_condition
+		from donate where member_id = #{member_id};
 	</select>
-	<delete id="boardSmallCommentDelete" parameterType="com.joalib.DTO.Board_Small_CommentDTO">
-		delete from joalib.board_small_comment where member_id = #{member_id} and bc_s_date = #{bc_s_date};
+
+	<select id="donateApplicationSelect"
+		parameterType="com.joalib.DTO.Donate_ApplicationDTO" resultType="int">
+		select count(*) from donate_application where donate_no =
+		#{donate_no} and donate_application_member =
+		#{donate_application_member};
+	</select>
+	<insert id="donateApplicationAdd"
+		parameterType="com.joalib.DTO.Donate_ApplicationDTO">
+		INSERT INTO donate_application (`donate_no`,
+		`donate_application_member`, `donate_writer`,
+		`donate_application_date`) VALUES (#{donate_no},
+		#{donate_application_member} , #{donate_writer}, now());
+	</insert>
+	<insert id="donateApplicationAlarm"
+		parameterType="com.joalib.DTO.Donate_ApplicationDTO">
+		INSERT INTO member_alarm VALUES
+		(#{donate_writer}, now(), 'donate_application',
+		CONCAT(#{donate_no},'/',#{donate_application_member}), 0);
+	</insert>
+	<delete id="donateApplicationAlarmDel"
+		parameterType="com.joalib.DTO.Donate_ApplicationDTO">
+		delete from member_alarm where member_id =
+		#{donate_application_member} and alarm_etc = #{donate_no} and
+		alarm_category = 'donate_message'
+	</delete>
+	<delete id="donateApplicationAlarmDel2"
+		parameterType="com.joalib.DTO.Donate_ApplicationDTO">
+		delete from member_alarm where alarm_etc =
+		CONCAT(#{donate_no},'/',#{donate_application_member}) and
+		alarm_category = 'donate_application';
+	</delete>
+	<delete id="donateApplicationDel"
+		parameterType="com.joalib.DTO.Donate_ApplicationDTO">
+		delete from donate_application where donate_no =
+		#{donate_no} and donate_application_member =
+		#{donate_application_member};
+	</delete>
+	<select id="DonateApplicationCount" parameterType="int"
+		resultType="int">
+		select count(*) from donate_application where
+		donate_no = #{donate_no};
+	</select>
+	<select id="DonateApplicationMemberList" parameterType="int"
+		resultType="String">
+		select donate_application_member from
+		donate_application where donate_no = #{donate_no};
+	</select>
+	<insert id="donateMessageAlarm"
+		parameterType="com.joalib.DTO.Donate_ApplicationDTO">
+		INSERT INTO member_alarm (`member_id`,
+		`alarm_date`, `alarm_category`, `alarm_etc`, `alarm_check`) VALUES
+		(#{member_id}, now(), 'donate_message', #{alarm_etc}, 0);
+	</insert>
+	<update id="donateMessageChecked"
+		parameterType="com.joalib.DTO.member_alarmDTO">
+		update member_alarm set alarm_check = 1 where
+		alarm_category = #{alarm_category} and alarm_etc = #{alarm_etc};
+	</update>
+	<update id="donateConditionChange"
+		parameterType="com.joalib.DTO.member_alarmDTO">
+		update donate set donate_condition = '거래완료',
+		donate_buyer = #{member_id} where donate_no = #{alarm_etc};
+	</update>
+	<insert id="donateCompletePoint" parameterType="int">
+		insert into
+		point values ((select member_id FROM donate where
+		donate_no = #{donate_no}), 5000, now(), '중고 도서 나눔', ((select
+		total_point from point as temp where member_id = (select
+		member_id FROM donate where donate_no = #{donate_no}) order by
+		update_date desc limit 1)+5000), '+');
+	</insert>
+	<insert id="boardSmallCommentAdd"
+		parameterType="com.joalib.DTO.Board_Small_CommentDTO">
+		insert into board_small_comment (`member_id`,
+		`bc_s_text`, `bc_s_date`, `board_comment_no`) VALUES (#{member_id},
+		#{bc_s_text}, now(), #{board_comment_no});
+	</insert>
+	<select id="boardSmallCommentList" parameterType="int"
+		resultType="com.joalib.DTO.Board_Small_CommentDTO">
+		select * from board_small_comment where
+		board_comment_no = #{board_comment_no};
+	</select>
+	<delete id="boardSmallCommentDelete"
+		parameterType="com.joalib.DTO.Board_Small_CommentDTO">
+		delete from board_small_comment where member_id =
+		#{member_id} and bc_s_date = #{bc_s_date};
 	</delete>
 	<delete id="boardSmallCommentAlarmDelete" parameterType="com.joalib.DTO.Board_Small_CommentDTO">
-		delete from joalib.member_alarm where alarm_date = #{bc_s_date} and alarm_category = 'board_smallcomment' and alarm_etc like CONCAT('%',#{member_id},'%');
+		delete from member_alarm where alarm_date = #{bc_s_date} and alarm_category = 'board_smallcomment' and alarm_etc like CONCAT('%',#{member_id},'%');
 	</delete>
-	<update id="boardSmallCommentChange" parameterType="com.joalib.DTO.Board_Small_CommentDTO">
-		update joalib.board_small_comment set bc_s_text = #{bc_s_text} where member_id = #{member_id} and bc_s_date = #{bc_s_date};
+	<update id="boardSmallCommentChange"
+		parameterType="com.joalib.DTO.Board_Small_CommentDTO">
+		update board_small_comment set bc_s_text =
+		#{bc_s_text} where member_id = #{member_id} and bc_s_date =
+		#{bc_s_date};
 	</update>
-	
-	
-	
+
+
+
 	<delete id="memberDelete" parameterType="String">
-		delete from joalib.memberinfo where member_id = #{member_id};
+		delete from
+		memberinfo where member_id = #{member_id};
 	</delete>
 	<delete id="memberDeletePoint" parameterType="String">
-		delete from joalib.point where member_id = #{member_id};
+		delete from
+		point where member_id = #{member_id};
 	</delete>
 	<delete id="memberDeleteBoard" parameterType="String">
-		delete from joalib.board where member_id = #{member_id};
+		delete from
+		board where member_id = #{member_id};
 	</delete>
 	<delete id="memberDeleteBoardcomment" parameterType="String">
-		delete from joalib.board_comment where member_id = #{member_id};
+		delete from
+		board_comment where member_id = #{member_id};
 	</delete>
 	<delete id="memberDeleteFault" parameterType="String">
-		delete from joalib.fault where member_id = #{member_id};
+		delete from
+		fault where member_id = #{member_id};
 	</delete>
-	
-	<select id="noticeListSelect" resultType="com.joalib.DTO.NoticeDTO">
-		select notice_no, notice_title, notice_date from joalib.notice;
+
+	<select id="noticeListSelect"
+		resultType="com.joalib.DTO.NoticeDTO">
+		select notice_no, notice_title, notice_date from
+		notice;
 	</select>
-	<select id="noticePostDetail" parameterType="int" resultType="com.joalib.DTO.NoticeDTO">
-		select * from joalib.notice where notice_no = #{notice_no}
+	<select id="noticePostDetail" parameterType="int"
+		resultType="com.joalib.DTO.NoticeDTO">
+		select * from notice where notice_no = #{notice_no}
 	</select>
-	
-	
-	
-	<insert id="boardCommentAlarmAdd" parameterType="com.joalib.DTO.member_alarmDTO">
-		INSERT INTO joalib.member_alarm (`member_id`, `alarm_date`, `alarm_category`, `alarm_etc`, `alarm_check`) VALUES (#{member_id}, now(), 'board_comment', #{alarm_etc}, 0);
+
+
+
+	<insert id="boardCommentAlarmAdd"
+		parameterType="com.joalib.DTO.member_alarmDTO">
+		INSERT INTO member_alarm (`member_id`,
+		`alarm_date`, `alarm_category`, `alarm_etc`, `alarm_check`) VALUES
+		(#{member_id}, now(), 'board_comment', #{alarm_etc}, 0);
 	</insert>
-	<insert id="boardSmallCommentAlarmAdd" parameterType="com.joalib.DTO.member_alarmDTO">
-		INSERT INTO joalib.member_alarm (`member_id`, `alarm_date`, `alarm_category`, `alarm_etc`, `alarm_check`) VALUES (#{member_id}, now(), 'board_smallcomment', #{alarm_etc}, 0);
+	<insert id="boardSmallCommentAlarmAdd"
+		parameterType="com.joalib.DTO.member_alarmDTO">
+		INSERT INTO member_alarm (`member_id`,
+		`alarm_date`, `alarm_category`, `alarm_etc`, `alarm_check`) VALUES
+		(#{member_id}, now(), 'board_smallcomment', #{alarm_etc}, 0);
 	</insert>
-	<select id="memberAlarmView" parameterType="String" resultType="com.joalib.DTO.member_alarmDTO">
-		select distinct * from joalib.member_alarm where member_id = #{member_id} order by alarm_check asc, alarm_date desc;
+	<select id="memberAlarmView" parameterType="String"
+		resultType="com.joalib.DTO.member_alarmDTO">
+		select distinct * from member_alarm where member_id
+		= #{member_id} order by alarm_check asc, alarm_date desc;
 	</select>
-	<update id="alarmCheckChange" parameterType="com.joalib.DTO.member_alarmDTO">
-		update joalib.member_alarm set alarm_check = 1 where alarm_category = #{alarm_category} and alarm_date = #{alarm_date} and alarm_etc = #{alarm_etc};
+	<update id="alarmCheckChange"
+		parameterType="com.joalib.DTO.member_alarmDTO">
+		update member_alarm set alarm_check = 1 where
+		alarm_category = #{alarm_category} and alarm_date = #{alarm_date} and
+		alarm_etc = #{alarm_etc};
 	</update>
-	
-	<select id="book_search" resultType="com.joalib.DTO.SearchDTO" parameterType="com.joalib.DTO.SearchDTO">
-		select * from joalib.bookinfo where book_title like CONCAT('%',#{text},'%')
+
+	<select id="book_search" resultType="com.joalib.DTO.SearchDTO"
+		parameterType="com.joalib.DTO.SearchDTO">
+		select * from bookinfo where book_title like
+		CONCAT('%',#{text},'%')
 	</select>
-	<insert id="book_wish_add" parameterType="com.joalib.DTO.BookWishDTO">
-		insert into joalib.wish_book VALUES ( default, #{member_id}, #{wish_title} , #{wish_publisher}, #{wish_author}, #{wish_isbn});
+	<insert id="book_wish_add"
+		parameterType="com.joalib.DTO.BookWishDTO">
+		insert into wish_book VALUES ( default,
+		#{member_id}, #{wish_title} , #{wish_publisher}, #{wish_author},
+		#{wish_isbn});
 	</insert>
-	<select id="book_infoDB" resultType="com.joalib.DTO.BookInfoDTO" parameterType="String">
-		select * from joalib.bookinfo where isbn = #{isbn};
+	<select id="book_infoDB" resultType="com.joalib.DTO.BookInfoDTO"
+		parameterType="String">
+		select * from bookinfo where isbn = #{isbn};
 	</select>
-	
-	
-	
-	
-		
-	</mapper>
+
+
+
+
+
+</mapper>

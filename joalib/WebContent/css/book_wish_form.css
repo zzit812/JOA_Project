@@ -1,57 +1,65 @@
 @charset "UTF-8";
 
-#img1{
+#img1 {
 	position: relative;
 	top: 8px;
 }
-#wish_title{
+
+#wish_title {
 	font-weight: bold;
 	font-size: 22px;
 	position: relative;
-    left: 527px;
+	left: 527px;
 }
+
 #form {
 	padding-top: 20px;
-    padding-left: 49px;
+	padding-left: 49px;
 }
-#form_size{
-		/*border-radius: 40px;*/
-		border-radius: 0 0 40px 40px;
-		width: 100%;
-		height: 300px;
-		/*border: 1.5px solid rgba(65, 65, 79, 10%);*/
-		/*background-color: #F5F5F5;*/
-		/*background-color: rgba(189, 227, 239, 20%);*/
-		margin-top: 125px;
-		padding-bottom: 25px;
+
+#form_size {
+	/*border-radius: 40px;*/
+	border-radius: 0 0 40px 40px;
+	width: 100%;
+	height: 300px;
+	/*border: 1.5px solid rgba(65, 65, 79, 10%);*/
+	/*background-color: #F5F5F5;*/
+	/*background-color: rgba(189, 227, 239, 20%);*/
+	margin-top: 125px;
+	padding-bottom: 25px;
 }
-#wish_button{
-    background: #428BCA;
-    color: #fff;
-    font-family: Sans-serif;
-    font-size: 20px;
-    height: 60px;
-    width: 150px;
-    line-height: 60px;
-    margin: 25px 25px;
-    text-align: center;
-    border: 0;
-    transition: all 0.3s ease 0s;
-}
-#wish_button:hover{
-  background: #3071A9
-}
-#button_div{
+
+#wish_button {
+	background: #428BCA;
+	color: #fff;
+	font-family: Sans-serif;
+	font-size: 20px;
+	height: 60px;
+	width: 150px;
+	line-height: 60px;
+	margin: 25px 25px;
 	text-align: center;
-    padding-bottom: 20px;
-	
+	border: 0;
+	transition: all 0.3s ease 0s;
 }
-#form_table{
+
+#wish_button:hover {
+	background: #3071A9
+}
+
+#button_div {
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+#form_table {
 	text-align: center;
 }
-#wish_form{
-	    padding-left: 500px;
+
+#wish_form {
+	padding-left: 500px;
 }
-table > td {   /*  이거 안되는 거 같음 */
+
+table>td { /*  이거 안되는 거 같음 */
 	padding: 20px;
 }
