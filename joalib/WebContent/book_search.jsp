@@ -133,7 +133,7 @@
 							type="submit" value="Search" />
 				</div>
 			</div>
-
+			실험중 ㅋㅎ
 			<div id="category_box">
 				<!--카테고리검색-->
 				<ul>
