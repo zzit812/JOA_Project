@@ -37,7 +37,7 @@ public class BookFavoriteAction implements Action {
 		}
 		
 		if (exist.equals("관심도서취소")) {
-			//클릭시 값이 있는 경우 관심도서 취소가 전달됨. 그 경우
+			//값이 있는 경우 클릭시 "관심도서취소"가 전달됨. 그 경우
 			//그  경우 DB에서 제외시켜주기
 			BookFavoriteDelService bookFavoriteDelService = new BookFavoriteDelService();
 			bookFavoriteDelService.favDel(dto);

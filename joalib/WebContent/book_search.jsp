@@ -52,7 +52,7 @@
 									}else{
 										out.print("<a href='userJoinRule.html'>회원가입</a></li> | <li><a href='userLogin.html'>로그인</a>");
 									}
-					%>
+						%>
 					</li> |
 					<li><a>포인트충전</a></li>
 				</ul>
