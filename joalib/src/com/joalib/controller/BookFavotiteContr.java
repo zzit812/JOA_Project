@@ -24,7 +24,7 @@ public class BookFavotiteContr extends javax.servlet.http.HttpServlet{
 		ActionForward forward=null;
 		Action action=null;
 		
-		if(command.equals("/bookFavorite.fav")){ 
+		if(command.equals("/bookFavorite.fav")){
 			action  = new BookFavoriteAction();
 			try {
 				forward=action.execute(request, response );				

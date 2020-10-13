@@ -9,6 +9,7 @@ import com.joalib.DAO.FavoriteDAO;
 import com.joalib.DTO.ActionForward;
 import com.joalib.DTO.FavoriteDTO;
 import com.joalib.DTO.LoanDTO;
+import com.joalib.bookfavorite.svc.BookFavoriteDelService;
 import com.joalib.bookfavorite.svc.BookFavoriteService;
 
 public class BookFavoriteAction implements Action {
@@ -20,6 +21,7 @@ public class BookFavoriteAction implements Action {
 		
 		String isbn = request.getParameter("isbn");
 		String member_id = request.getParameter("member_id");
+		String exist = request.getParameter("exist");
 		
 		dto.setIsbn(isbn);
 		dto.setMember_id(member_id);
@@ -27,13 +29,20 @@ public class BookFavoriteAction implements Action {
 		
 		BookFavoriteService bookFavoriteService = new BookFavoriteService();
 		boolean flag =  bookFavoriteService.favorite(dto);
+		
+		if (exist.equals("관심도서취소")) {
+			//클릭시 값이 있는 경우 관심도서 취소가 전달됨. 그 경우
+			//그  경우 DB에서 제외시켜주기
+			BookFavoriteDelService bookFavoriteDelService = new BookFavoriteDelService();
+			bookFavoriteDelService.favDel(dto);
+		}
 
 		String message = "";
 		
 		if(flag)
 			message = "등록 되었습니다.";
 		else {
-			message = "이미 등록된 도서입니다.";
+			message = "등록 취소되었습니다.";
 		}
 
 		

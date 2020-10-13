@@ -21,7 +21,7 @@ public class BookFavoriteDAO {
 
 	public static BookFavoriteDAO getinstance() {
 		if (instance == null) {
-			synchronized (DAO.class) {
+			synchronized (BookFavoriteDAO.class) {
 				instance = new BookFavoriteDAO();
 			}
 		}
@@ -45,6 +45,22 @@ public class BookFavoriteDAO {
 		sqlsession.commit();
 		sqlsession.close();
 
+	}
+
+	public int favoriteSearch(FavoriteDTO favDTO) {
+		getinstance();
+		SqlSession sqlsession = sqlfactory.openSession();
+		
+		System.out.println(favDTO.getIsbn());
+		System.out.println(favDTO.getMember_id());
+		
+		int i = sqlsession.selectOne("favorite_Search", favDTO);
+		System.out.println("BookFavoriteDAO exist: " + i);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return i;
+		
 	}
 
 }

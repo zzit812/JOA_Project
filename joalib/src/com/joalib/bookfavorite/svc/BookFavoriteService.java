@@ -9,7 +9,7 @@ public class BookFavoriteService {
 
 	public boolean favorite(FavoriteDTO dto) {
 		
-		BookFavoriteDAO dao = new BookFavoriteDAO();
+		BookFavoriteDAO dao = BookFavoriteDAO.getinstance();
 		
 		try {
 			dao.favorite(dto);

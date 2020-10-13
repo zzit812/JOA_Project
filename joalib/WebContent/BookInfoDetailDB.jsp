@@ -140,16 +140,26 @@
 				<div id="button">
 
 					<%
+						String exist = (String)request.getAttribute("exist") ;
+					
+						if (exist.equals("1")) {
+							exist = "관심도서취소";
+						}else {
+							exist = "관심도서등록";
+						}
+						
 						if (member_id == null) {
 						out.print("로그인 후 대출 가능합니다.");
 					} else {
 					%>
+
 					<form action="bookLoan.loa" name="loan" method="post">
-						<input type="hidden" name="isbn" value="<%=isbn%>"> <input
-							type="hidden" name="member_id" value="<%=member_id%>"> <input
-							type="submit" value="대출하기"> <a
-							href="bookFavorite.fav?isbn=<%=isbn%>&member_id=<%=member_id%>"><input
-							type="button" value="관심도서"></a>
+						<input type="hidden" name="isbn" value="<%=isbn%>">
+						<input type="hidden" name="member_id" value="<%=member_id%>">
+							<input type="submit" value="대출하기">
+							
+							<a href="bookFavorite.fav?isbn=<%=isbn%>&member_id=<%=member_id%>&exist=<%=exist%>"> <!-- exist도 보낸 후에 exist가 0이면 등록을 하고 1이면 삭제를 해야겠다 -->
+							<input type="button" value=<%=exist %> /></a>
 					</form>
 					<%
 						}

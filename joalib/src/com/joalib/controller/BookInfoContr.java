@@ -27,7 +27,7 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 		ActionForward forward=null;
 		Action action=null;
 
-		 if(command.equals("/bookInfoAdd.bk")){  //책占쏙옙占쏙옙占쌩곤옙占싹깍옙
+		 if(command.equals("/bookInfoAdd.bk")){  
 			 //화占쏙옙
 			// action = new BookInfoAddAction(); ///////////////////북정보 관리자 페이지
 				try{
@@ -35,7 +35,7 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-		  }else if(command.equals("/bookInfoDetail.bk")){   //책占쏙옙占쏙옙占쏙옙占쏙옙
+		  }else if(command.equals("/bookInfoDetail.bk")){   
 				 //화占쏙옙
 			action = new BookInfoDetailAction();
 				try{

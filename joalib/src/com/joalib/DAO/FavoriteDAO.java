@@ -37,9 +37,17 @@ public class FavoriteDAO {
 	}
 	
 	public void favorite(FavoriteDTO dto) {
-		System.out.println("DAO");
+
 		SqlSession sqlsession = sqlfactory.openSession();
 		sqlsession.insert("favarite_book",dto);
+		sqlsession.commit();
+		sqlsession.close();
+		
+	}
+
+	public void favDel(FavoriteDTO dto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		sqlsession.delete("favorite_delete",dto);
 		sqlsession.commit();
 		sqlsession.close();
 		

@@ -176,6 +176,15 @@
 		insert into favorite_book values ( #{member_id},
 		#{isbn} );
 	</insert>
+	<delete id="favorite_delete" parameterType="com.joalib.DTO.FavoriteDTO">
+		delete from joalib2020.favorite_book 
+		where member_id=#{member_id} and isbn=#{isbn};
+	</delete>
+	<select id="favorite_Search" parameterType="com.joalib.DTO.FavoriteDTO" resultType="int">
+		select count(*) from joalib2020.favorite_book 
+		where member_id= #{member_id} and isbn=#{isbn};
+	</select>
+	
 	<insert id="loan" parameterType="com.joalib.DTO.LoanDTO">
 		insert into loan_book
 		(member_id,loan_book,loan_date,return_duedate, loan_condition) values
