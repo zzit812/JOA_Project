@@ -134,14 +134,14 @@
 			<div id="joalib_map" style="width: 85%; height: 550px;"></div>
 
 			<script type="text/javascript"
-				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d8bb56473dbe59066a763c4558c39b43"></script>
+				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d8bb56473dbe59066a763c4558c39b43">
+			</script>
 			<script>
 				var mapContainer = document.getElementById('joalib_map'), // 지도를 표시할 div 
 				    mapOption = { 
 				        center: new kakao.maps.LatLng(37.500127, 127.029090), // 지도의 중심좌표
 				        level: 3 // 지도의 확대 레벨
 				    };
-				
 				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 				
 				// 마커가 표시될 위치입니다 
@@ -155,7 +155,7 @@
 				// 마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
 				
-				</script>
+			</script>
 
 		</div>
 	</section>

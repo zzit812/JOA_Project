@@ -13,9 +13,6 @@ public class BookInfoDetailDBService {
 		BookInfoDTO bookDB =  dao.book_infoDB(isbn);
 		
 
-		
-		
-		
 		return bookDB;
 	}
 

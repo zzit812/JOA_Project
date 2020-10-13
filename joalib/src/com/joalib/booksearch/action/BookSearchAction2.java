@@ -29,14 +29,9 @@ public class BookSearchAction2 implements Action {
 		
 		String option = request.getParameter("select_search");
 		String text= request.getParameter("what");
-		//String page = request.getParameter("page");
 		String check = request.getParameter("check");
 		
 		
-//		System.out.println("�샃�뀡: " + option);
-//		System.out.println("寃��깋�떒�뼱: "+text);
-//		System.out.println("check: "+check);
-//		
 		if(option.equals("도서명")) {
 			option = "book_title";
 		}else if(option.equals("저자")){
@@ -48,12 +43,11 @@ public class BookSearchAction2 implements Action {
 		}
 		
 		if(check==null) {
-			check="100";
+			check="100"; //국내도서전체
 		}
 			
 		sdto.setOption(option);
 		sdto.setText(text);
-		//sdto.setPage(page);
 		sdto.setCheck(check);
 		
 		

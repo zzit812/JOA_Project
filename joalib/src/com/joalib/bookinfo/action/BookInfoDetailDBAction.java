@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.joalib.DTO.ActionForward;
 import com.joalib.DTO.BookInfoDTO;
+import com.joalib.bookfavorite.action.BookFavoriteAction;
 import com.joalib.bookinfo.svc.BookInfoDetailDBService;
 
 
@@ -19,10 +20,12 @@ public class BookInfoDetailDBAction implements Action {
 		String isbn = request.getParameter("isbn");
 		String message = null;
 		
-		if(request.getParameter("message") != null) {
+		if(request.getParameter("message") != null) {  //BookFavoriteAction 에서 받아온 값임
+			
 			message = request.getParameter("message");
 			request.setAttribute("message", message);
 		}
+		BookFavoriteAction bookFavoriteAction = new BookFavoriteAction();
 		
 		BookInfoDetailDBService bookInfoDetailDBService = new BookInfoDetailDBService();
 		BookInfoDTO bookDB = bookInfoDetailDBService.bookDB(isbn);

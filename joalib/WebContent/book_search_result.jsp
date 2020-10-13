@@ -193,32 +193,25 @@
 		<a href="BookInfoAdd.jsp">임시,관리자 도서추가</a>
 		</div>
 		<br/> -->
-
+												<!-- DB도서 디테일~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 		<main id="book_show"> <%
 		List<SearchDTO> DB_list = (List<SearchDTO>)request.getAttribute("searchBookDB");
 		for (int i = 0; i < DB_list.size() ; i ++) { %>
 		<div class="box">
-			<a href="bookInfoDetailDB.bk?isbn=<%=DB_list.get(i).getIsbn() %>">
+			<a href="bookInfoDetailDB.bk?isbn=<%=DB_list.get(i).getIsbn() %>&member_id=<%=member_id%>">
 				<img class="card" src="img/book/<%=DB_list.get(i).getBook_img() %>">
-			</a>
-			<div class="content">
-				<h2 class="title"></h2>
-				<span class="favorite">관심도서</span> <span class="loan">대출가능</span>
-			</div>
-
 			<div class="simple_info">
 				<span><b>도서명</b></span>&nbsp; <span><%=DB_list.get(i).getBook_title() %></span></br>
 				<span><b>저자명</b></span>&nbsp; <span><%=DB_list.get(i).getAuthor()%></span></br>
 				<span><b>출판사</b></span>&nbsp; <span><%=DB_list.get(i).getPublisher() %></span>
 			</div>
+			</a>
 		</div>
 
 		<% } %> <%
 	  	JSONArray parse_listArr = (JSONArray)request.getAttribute("searchBook");
-		JSONObject books = null;
-
-		
+		JSONObject books = null;	
 		  for(int i=0; i< parse_listArr.size() ; i++){
 				books = (JSONObject)parse_listArr.get(i);
 				String title= (String)books.get("title");
@@ -230,16 +223,12 @@
 
 		<div class="box">
 			<a href="bookInfoDetail.bk?isbn=<%=isbn%>"> <img class="card"
-				src="<%=book_img %>"></a>
-			<div class="content">
-				<h2 class="title"></h2>
-				<span class="favorite">관심도서</span> <span class="loan">대출가능</span>
-			</div>
-
+				src="<%=book_img %>">
 			<div class="simple_info">
 				<span><b>도서명</b></span>&nbsp; <span><%=title %></span></br> <span><b>저자명</b></span>&nbsp;
 				<span><%=author%></span></br> <span><b>출판사</b></span>&nbsp; <span><%=publisher %></span>
 			</div>
+			</a>
 		</div>
 
 
