@@ -26,9 +26,15 @@ public class BookFavoriteAction implements Action {
 		dto.setIsbn(isbn);
 		dto.setMember_id(member_id);
 		
-		
-		BookFavoriteService bookFavoriteService = new BookFavoriteService();
+		BookFavoriteService bookFavoriteService = new BookFavoriteService(); //관심도서에 추가를 함. 추가되면 ture 안되면 false
 		boolean flag =  bookFavoriteService.favorite(dto);
+		String message = "";
+		
+		if(flag)
+			message = "등록 되었습니다.";
+		else {
+			message = "등록 취소되었습니다.";
+		}
 		
 		if (exist.equals("관심도서취소")) {
 			//클릭시 값이 있는 경우 관심도서 취소가 전달됨. 그 경우
@@ -37,15 +43,11 @@ public class BookFavoriteAction implements Action {
 			bookFavoriteDelService.favDel(dto);
 		}
 
-		String message = "";
 		
-		if(flag)
-			message = "등록 되었습니다.";
-		else {
-			message = "등록 취소되었습니다.";
-		}
 
 		
+		
+
 		forward = new ActionForward();
 		forward.setPath("bookInfoDetailDB.bk?isbn="+isbn+"&message="+message); 
 		

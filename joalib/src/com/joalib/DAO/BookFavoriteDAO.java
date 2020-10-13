@@ -51,7 +51,7 @@ public class BookFavoriteDAO {
 		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
 		
-		System.out.println(favDTO.getIsbn());
+		System.out.println("BookFavoriteDAO  " + favDTO.getIsbn());
 		System.out.println(favDTO.getMember_id());
 		
 		int i = sqlsession.selectOne("favorite_Search", favDTO);

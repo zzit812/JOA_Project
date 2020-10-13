@@ -20,7 +20,7 @@
 <script type="text/javascript">
 	$(function(){
 		$('body').css('display', 'none');
-		$( document ).ready( function() {			
+		$( document ).ready( function() {
 			$('body').fadeIn(500);
 			$('body').css('display', 'block');
 		});
