@@ -23,6 +23,8 @@ public class BookSearchService {
 		String option = sdto.getOption();
 		String sch = sdto.getText();
 		String check = sdto.getCheck();
+		
+		
 
 		
 		try {
@@ -45,7 +47,7 @@ public class BookSearchService {
             BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(),"UTF-8" ));	
             while ((line = br.readLine()) != null) {	
                 result = result.concat(line);			        
-            }            
+            }
             
             JSONParser parser = new JSONParser();
             JSONObject obj = (JSONObject)parser.parse(result);

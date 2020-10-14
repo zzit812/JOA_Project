@@ -35,10 +35,6 @@
 <body>
 	<header>
 
-
-
-
-
 		<div id="top_size">
 			<!--로고-->
 			<img id="logo" src="img/icon_lib.png">

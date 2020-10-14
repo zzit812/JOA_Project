@@ -51,10 +51,10 @@ public class BookSearchAction2 implements Action {
 		sdto.setCheck(check);
 		
 		
-		BookSearchService bookSearchService = new BookSearchService();
+		BookSearchService bookSearchService = new BookSearchService();  //API정보 가져오기
 		parse_listArr = bookSearchService.search(sdto);
 		
-		BookSearchDBService bookSearchDBService = new BookSearchDBService();
+		BookSearchDBService bookSearchDBService = new BookSearchDBService();  //DB정보 가져오기
 		List<SearchDTO> book_search = bookSearchDBService.dbsearch(sdto);
 	
 		

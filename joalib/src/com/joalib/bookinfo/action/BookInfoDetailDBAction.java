@@ -23,7 +23,7 @@ public class BookInfoDetailDBAction implements Action {
 		String member_id = request.getParameter("member_id");
 		String message = null;
 		
-		if(request.getParameter("message") != null) {  //BookFavoriteAction 에서 받아온 값임
+		if(request.getParameter("message") != null) {  //BookFavoriteAction 에서 받아온 값임. 관심도서를 눌렀을 때에!
 			
 			message = request.getParameter("message");
 			request.setAttribute("message", message);
@@ -43,7 +43,7 @@ public class BookInfoDetailDBAction implements Action {
 		String st = Integer.toString(i);
 		
 		request.setAttribute("bookDB", bookDB);
-		request.setAttribute("exist", st);
+		request.setAttribute("exist", st); //등록된 도서인지 아닌지 값을 저장해 둠
 		
 		System.out.println("BookInfoDetailDBAction exist(st): " + st);
 
