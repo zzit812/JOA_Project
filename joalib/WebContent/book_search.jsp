@@ -11,7 +11,7 @@
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 
-
+<!-- 되라되라 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +38,7 @@
 	<header>
 		<div id="top_size">
 			<!--로고-->
-			<img id="logo" src="img/icon_lib.png">
+			<img id="logo" src="img/Logo_1.png">
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
