@@ -12,8 +12,9 @@ public class BookFavoriteService {
 		BookFavoriteDAO dao = BookFavoriteDAO.getinstance();
 		
 		try {
-			dao.favorite(dto);
+			dao.favorite(dto); //관심도서에 잘 추가된 경우
 		}catch(Exception e){
+			
 			return false;
 		}
 		return true;

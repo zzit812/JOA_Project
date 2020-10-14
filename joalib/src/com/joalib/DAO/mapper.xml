@@ -177,8 +177,7 @@
 		#{isbn} );
 	</insert>
 	<delete id="favorite_delete" parameterType="com.joalib.DTO.FavoriteDTO">
-		delete from joalib2020.favorite_book 
-		where member_id=#{member_id} and isbn=#{isbn};
+		delete from joalib2020.favorite_book where member_id=#{member_id} and isbn=#{isbn};
 	</delete>
 	<select id="favorite_Search" parameterType="com.joalib.DTO.FavoriteDTO" resultType="int">
 		select count(*) from joalib2020.favorite_book 

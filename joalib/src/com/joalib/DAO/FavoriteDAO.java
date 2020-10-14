@@ -11,17 +11,14 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.joalib.DTO.FavoriteDTO;
 
 public class FavoriteDAO {
-	
-	
-	
-	////
+
 	SqlSessionFactory sqlfactory;
 	
 	private static FavoriteDAO instance;
 	
 	public static FavoriteDAO getinstance() {
 		if (instance == null) {	// >DAO 객체 만든적 있어?
-			synchronized (memberinfoDAO.class) {
+			synchronized (FavoriteDAO.class) {
 				instance = new FavoriteDAO();		}
 		}
 		return instance;
@@ -47,7 +44,8 @@ public class FavoriteDAO {
 
 	public void favDel(FavoriteDTO dto) {
 		SqlSession sqlsession = sqlfactory.openSession();
-		sqlsession.delete("favorite_delete",dto);
+		//System.out.println("FavoriteDAO입니다."); 확인 
+		sqlsession.delete("favorite_delete", dto );
 		sqlsession.commit();
 		sqlsession.close();
 		

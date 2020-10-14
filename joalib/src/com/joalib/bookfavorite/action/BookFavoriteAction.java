@@ -36,11 +36,16 @@ public class BookFavoriteAction implements Action {
 			message = "등록 취소되었습니다.";
 		}
 		
+		System.out.println("BookFavoriteAction exist: "+exist);
+		
 		if (exist.equals("관심도서취소")) {
 			//값이 있는 경우 클릭시 "관심도서취소"가 전달됨. 그 경우
 			//그  경우 DB에서 제외시켜주기
+			//System.out.println("관심도서취소인 경우 삭제 서비스로 갑니다");
 			BookFavoriteDelService bookFavoriteDelService = new BookFavoriteDelService();
 			bookFavoriteDelService.favDel(dto);
+		}else {
+			
 		}
 
 		
