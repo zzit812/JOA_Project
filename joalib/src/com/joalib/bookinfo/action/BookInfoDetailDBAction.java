@@ -43,8 +43,6 @@ public class BookInfoDetailDBAction implements Action {
 
 		request.setAttribute("bookDB", bookDB);
 		request.setAttribute("exist", st); // 등록된 도서인지 아닌지 값을 저장해 둠
-
-		System.out.println("BookInfoDetailDBAction exist(st): " + st);
 		
 		//본인아이디, ISBN으로 조회하기. 대출된 이력이 있는지 
 		request.setAttribute("book", bookInfoDetailDBService.getBook(favDTO));

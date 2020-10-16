@@ -19,6 +19,7 @@ public class BookSearchAction2 implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		ActionForward forward = null;
 
 		JSONArray parse_listArr = null;
@@ -63,6 +64,7 @@ public class BookSearchAction2 implements Action {
 
 		return forward;
 
+	
 	}
-
+	
 }

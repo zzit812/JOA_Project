@@ -44,5 +44,14 @@ SqlSessionFactory sqlfactory;
 		
 		return book_search;
 	}
+
+	public List<SearchDTO> all_option_select(SearchDTO sdto) {
+		SqlSession sqlsession = sqlfactory.openSession();
+		List<SearchDTO> book_search = sqlsession.selectList("all_option_select", sdto);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return book_search;
+	}
 	
 }

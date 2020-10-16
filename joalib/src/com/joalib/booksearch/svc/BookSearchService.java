@@ -21,6 +21,9 @@ public class BookSearchService {
 	public JSONArray search(SearchDTO sdto) {
 		
 		String option = sdto.getOption();
+		if(option.equals("book_title")) {
+			option = "title";
+		}
 		String sch = sdto.getText();
 		String check = sdto.getCheck();
 		

@@ -120,13 +120,13 @@
 	<%
 		BookInfoDTO bookInfoDB = (BookInfoDTO) request.getAttribute("bookDB");
 
-	String title = bookInfoDB.getBook_title();
-	String author = bookInfoDB.getAuthor();
-	String book_img = bookInfoDB.getBook_img();
-	String isbn = bookInfoDB.getIsbn();
-	String pubDate = bookInfoDB.getPub_date();
-	String description = bookInfoDB.getBook_story();
-	String publisher = bookInfoDB.getPublisher();
+		String title = bookInfoDB.getBook_title();
+		String author = bookInfoDB.getAuthor();
+		String book_img = bookInfoDB.getBook_img();
+		String isbn = bookInfoDB.getIsbn();
+		String pubDate = bookInfoDB.getPub_date();
+		String description = bookInfoDB.getBook_story();
+		String publisher = bookInfoDB.getPublisher();
 	%>
 
 
@@ -144,7 +144,6 @@
 					<input type="hidden" name="member_id" value="<%=member_id%>">
 						
 						<%
-						
 						if (member_id == null)
 							out.print("로그인 후 대출 가능합니다.");
 						else{
@@ -152,36 +151,27 @@
 							%>
 								<a href="cancelBookLoan.loa?isbn=<%=isbn%>&member_id=<%=member_id%>">
 								<input type="button" value="반납하기"></a>
-							<%
-							}
-							else{
-							%>
+							<%} else {%>
 								<a href="bookLoan.loa?isbn=<%=isbn%>&member_id=<%=member_id%>">
 								<input type="button" value="대출하기"></a>
-							<%
+							<%	}
 							
-							}
-						
 							String exist = (String)request.getAttribute("exist") ;
 						
-							if (exist.equals("1")) {
-								%>
+							if (exist.equals("1")) { %>
 								<a href="cancelBookFavorite.fav?isbn=<%=isbn%>&member_id=<%=member_id%>">
 								<input type="button" value="관심도서취소" /></a>
-								<%
-							}else {
-								%>
+								
+							<%} else {%>
 								<a href="bookFavorite.fav?isbn=<%=isbn%>&member_id=<%=member_id%>">
 								<input type="button" value="관심도서등록" /></a>
-								<%
+							<%	}
 							}
-						}
 						%>
 					</form>
 				</div>
 			</div>
 			<div id="detail_box">
-
 				<div id="detail">
 					<h2><%=title%></h2>
 					<div>
@@ -203,7 +193,6 @@
 						<b>상세정보</b>
 					</div>
 					<div>
-						<!-- 줄거리 집어넣기 -->
 						<%=description%>
 					</div>
 

@@ -29,8 +29,8 @@ public class BookLoanAction implements Action{
 		String message = "";
 		if(flag)
 			message = "대출 완료 되었습니다.";
-		else
-			message = "이미 대출한 도서 입니다.";
+//		else
+//			message = "이미 대출한 도서 입니다.";
 		
 		forward = new ActionForward();
 		forward.setPath("bookInfoDetailDB.bk?isbn="+isbn+"&message="+message);
