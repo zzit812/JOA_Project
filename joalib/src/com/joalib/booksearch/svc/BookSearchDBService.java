@@ -10,10 +10,8 @@ public class BookSearchDBService {
 
 	public List<SearchDTO> dbsearch(SearchDTO sdto) {
 		
-//		System.out.println("sdto" + sdto.getOption());
-//		System.out.println("sdto" + sdto.getText());
-		
-		BookSearchDAO dao = new BookSearchDAO();
+
+		BookSearchDAO dao = BookSearchDAO.getinstance();
 		List<SearchDTO> book_search = dao.select_book(sdto);
 		
 		

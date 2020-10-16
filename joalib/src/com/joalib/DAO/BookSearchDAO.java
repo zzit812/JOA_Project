@@ -17,12 +17,12 @@ public class BookSearchDAO {
 	
 SqlSessionFactory sqlfactory;
 	
-	private static BookInfoDAO instance;
+	private static BookSearchDAO instance;
 	
-	public static BookInfoDAO getinstance() {
+	public static BookSearchDAO getinstance() {
 		if (instance == null) {	// >DAO 객체 만든적 있어?
-			synchronized (DAO.class) {
-				instance = new BookInfoDAO();		}
+			synchronized (BookSearchDAO.class) {
+				instance = new BookSearchDAO();		}
 	}
 		return instance;
 	}
@@ -37,7 +37,6 @@ SqlSessionFactory sqlfactory;
 	}	
 
 	public List<SearchDTO> select_book(SearchDTO sdto) {
-		getinstance();
 		SqlSession sqlsession = sqlfactory.openSession();
 		List<SearchDTO> book_search = sqlsession.selectList("book_search", sdto);
 		sqlsession.commit();
