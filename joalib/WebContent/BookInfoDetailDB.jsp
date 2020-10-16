@@ -144,21 +144,24 @@
 					<input type="hidden" name="member_id" value="<%=member_id%>">
 						
 						<%
-						if(request.getAttribute("book") != null){
-						%>
-							<a href="cancelBookLoan.loa?isbn=<%=isbn%>&member_id=<%=member_id%>">
-							<input type="button" value="반납하기"></a>
-						<%
-						}
-						else{
-						%>
-							<a href="bookLoan.loa?isbn=<%=isbn%>&member_id=<%=member_id%>">
-							<input type="button" value="대출하기"></a>
-						<%
-						}
+						
 						if (member_id == null)
 							out.print("로그인 후 대출 가능합니다.");
 						else{
+							if(request.getAttribute("book") != null){
+							%>
+								<a href="cancelBookLoan.loa?isbn=<%=isbn%>&member_id=<%=member_id%>">
+								<input type="button" value="반납하기"></a>
+							<%
+							}
+							else{
+							%>
+								<a href="bookLoan.loa?isbn=<%=isbn%>&member_id=<%=member_id%>">
+								<input type="button" value="대출하기"></a>
+							<%
+							
+							}
+						
 							String exist = (String)request.getAttribute("exist") ;
 						
 							if (exist.equals("1")) {

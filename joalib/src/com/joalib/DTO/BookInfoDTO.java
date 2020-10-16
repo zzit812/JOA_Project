@@ -3,7 +3,7 @@ package com.joalib.DTO;
 public class BookInfoDTO {
 	
 	String isbn,author,publisher,book_title,
-	pub_date,isbn_pluscode,book_img,book_story;
+	pub_date,isbn_pluscode,book_img,book_story,member_id;
 	int pageTotalCount;
 
 
@@ -85,4 +85,13 @@ public class BookInfoDTO {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public String getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+	 
 }

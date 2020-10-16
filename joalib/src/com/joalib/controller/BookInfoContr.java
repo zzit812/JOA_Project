@@ -31,7 +31,6 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 		Action action=null;
 
 		 if(command.equals("/bookInfoAdd.bk")){  
-			 //화占쏙옙
 			// action = new BookInfoAddAction(); ///////////////////북정보 관리자 페이지
 				try{
 					forward=action.execute(request, response);
@@ -39,7 +38,6 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 					e.printStackTrace();
 				}
 		  }else if(command.equals("/bookInfoDetail.bk")){   
-				 //화占쏙옙
 			action = new BookInfoDetailAction();
 				try{
 					forward=action.execute(request, response);
@@ -47,7 +45,6 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 					e.printStackTrace();
 				}
 		  }else if(command.equals("/bookInfoDetailDB.bk")){ 
-				//System.out.println("여기는 컨트롤 입니다");
 			action = new BookInfoDetailDBAction();
 				try{
 					forward=action.execute(request, response);
@@ -56,27 +53,25 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 				}
 		  }
 
-		 	BookInfoDetailDBService bookInfoDetailDBService = new BookInfoDetailDBService();
-		 	BookInfoDTO bookInfoDTO = new BookInfoDTO();
-
-			String member_id = request.getParameter("member_id");
-			String isbn = request.getParameter("isbn");
+//		 	BookInfoDetailDBService bookInfoDetailDBService = new BookInfoDetailDBService();
+//		 	BookInfoDTO bookInfoDTO = new BookInfoDTO();
+//
+//			String member_id = request.getParameter("member_id");
+//			String isbn = request.getParameter("isbn");
+//			
+//			bookInfoDTO.setIsbn(isbn);
+//			bookInfoDTO.setMember_id(member_id);
+//			
+//			request.setAttribute("book", bookInfoDetailDBService.getBook(bookInfoDTO));
 			
-			bookInfoDTO.setIsbn(isbn);
-			bookInfoDTO.setMember_id(member_id);
 			
-			request.setAttribute("book", bookInfoDetailDBService.getBook(bookInfoDTO));
 				
 		 if(forward != null) {
 				if(forward.isRedirect()) {
-					//boolean占쏙옙占쏙옙 트占쏙옙占싸곤옙荑� 占쏙옙占쏙옙
 					response.sendRedirect(forward.getPath());
 				}else{
 					RequestDispatcher dispatcher=
 							request.getRequestDispatcher(forward.getPath());
-					//RequestDispatcher占쏙옙占� 클占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 request占쏙옙 占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占싹곤옙 占쌍다곤옙
-					//占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쌔댐옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙 占쌍곤옙 占쏙옙占� 占쏙옙占쏙옙占싹댐옙 占쏙옙
-					//占싼몌옙占쏙옙占� 占식띰옙占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙磯占�.
 					dispatcher.forward(request, response);
 				
 				}
