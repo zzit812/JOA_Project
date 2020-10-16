@@ -147,7 +147,7 @@
 						if(request.getAttribute("book") != null){
 						%>
 							<a href="cancelBookLoan.loa?isbn=<%=isbn%>&member_id=<%=member_id%>">
-							<input type="button" value="대출취소"></a>
+							<input type="button" value="반납하기"></a>
 						<%
 						}
 						else{
