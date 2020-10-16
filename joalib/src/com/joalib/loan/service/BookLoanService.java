@@ -17,4 +17,16 @@ public class BookLoanService {
 		return true;
 	}
 
+	public boolean cancelLoan(LoanDTO loanDTO) {
+		LoanDAO dao = new LoanDAO();
+		
+		try {
+			dao.cancelLoan(loanDTO);  //아이디와 	ISBN 동일할 시 넣음
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;	
+		}
+		return true;
+	} 
+	
 }

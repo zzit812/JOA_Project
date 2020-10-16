@@ -12,7 +12,7 @@ import com.joalib.DTO.LoanDTO;
 import com.joalib.bookfavorite.svc.BookFavoriteDelService;
 import com.joalib.bookfavorite.svc.BookFavoriteService;
 
-public class BookFavoriteAction implements Action {
+public class CancelBookFavoriteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -26,13 +26,13 @@ public class BookFavoriteAction implements Action {
 		dto.setMember_id(member_id);
 		
 		BookFavoriteService bookFavoriteService = new BookFavoriteService(); //관심도서에 추가를 함. 추가되면 ture 안되면 false
-		boolean flag =  bookFavoriteService.favorite(dto);
+		boolean flag =  bookFavoriteService.cancelFavorite(dto);
 		String message = "";
 		
 		if(flag)
-			message = "등록 되었습니다.";
+			message = "등록 취소 되었습니다.";
 		else {
-			message = "등록 취소되었습니다.";
+			message = "에러";
 		}
 		
 		forward = new ActionForward();

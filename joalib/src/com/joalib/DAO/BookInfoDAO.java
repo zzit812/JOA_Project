@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.joalib.DTO.BoardDTO;
 import com.joalib.DTO.BookInfoDTO;
 import com.joalib.DTO.BookWishDTO;
+import com.joalib.DTO.LoanDTO;
 
 public class BookInfoDAO {
 
@@ -91,14 +92,16 @@ public class BookInfoDAO {
 		return bookDB;
 		
 	}
-
-
-
 	
-	
-	
-	
-	
+	public BookInfoDTO getBook(BookInfoDTO dto) throws Exception{
+		getinstance();
+		SqlSession sqlsession = sqlfactory.openSession();
+		BookInfoDTO bookInfoDTO = sqlsession.selectOne("getBook",dto);
+		sqlsession.commit();
+		sqlsession.close();
+		
+		return bookInfoDTO;
+	}
 }
 
 

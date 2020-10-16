@@ -51,11 +51,11 @@
 		%>
 		<div id="top_size">
 			<!--로고-->
-			<img id="logo" src="img/icon_lib.png">
+			<img id="logo" src="img/Logo_1.png">
 			<!--탑네비-->
 			<nav>
 				<ul id="top_nav">
-					<li><a>HOME</a></li> |
+					<li><a href='index.jsp'>HOME</a></li> |
 					<li>
 						<%
 							String member_id = null;
@@ -74,45 +74,46 @@
 			<!--탑메뉴-->
 			<nav id="topMenuBorder">
 				<ul id="top_menu">
-					<li><a href="book_search.jsp">자료검색</a>
-						<ul class="sub_menu">
-							<li><a href="book_search.jsp">도서 검색</a></li>
-						</ul></li>
-					<li><a href="book_new.jsp">도서마당</a>
-						<ul>
-							<li><a href="book_new.jsp">신착 도서</a></li>
-							<li><a href="book_best.jsp">베스트 셀러</a></li>
-							<li><a href="book_recommend.jsp">추천 도서</a></li>
-							<li><a href="book_wish.jsp">희망 도서</a></li>
-						</ul></li>
-					<li><a href="place.jsp">이용안내</a>
-						<ul>
-							<li><a href="place.jsp">오시는 길</a></li>
-							<li><a href="book_guide.jsp">도서 이용안내</a></li>
-							<li><a href="point_guide.jsp">포인트 이용안내</a></li>
+				<li><div class="menuHoverEvent"></div>
+					<a href="book_search.jsp">자료검색</a>
+					<ul class="sub_menu">
+						<li><a href="book_search.jsp">도서 검색</a></li>
+					</ul></li>
 
-						</ul></li>
-					<li><a href="#">커뮤니티</a>
-						<ul>
-							<li><a href="">공지사항</a></li>
-							<li><a href="">질문과 답변</a></li>
-							<li><a href="board.jsp">자유게시판</a></li>
-							<li><a href="Fault_list.jsp">불량도서 신고</a></li>
-							<li><a href="">중고도서 나눔</a></li>
-						</ul></li>
-					<li><a href="mypage_main.jsp">나의서재</a>
-						<ul>
-							<li><a href="mypage_main.jsp">나의 서재</a></li>
-							<li><a href="">서비스 이용 내역</a></li>
-							<li><a href="">내가 쓴 글</a></li>
-							<li><a href="">포인트</a></li>
-							<li><a href="">정보 수정/ 탈퇴</a></li>
-						</ul></li>
-				</ul>
-				<div id="window_menu"></div>
-			</nav>
-		</div>
-		<script src="js/lib_top.js"></script>
+				<li><div class="menuHoverEvent"></div>
+					<a href="#">도서마당</a>
+					<ul>
+						<li><a href="">신착 도서</a></li>
+						<li><a href="">베스트 셀러</a></li>
+						<li><a href="">희망도서</a></li>
+					</ul></li>
+
+				<li><div class="menuHoverEvent"></div>
+					<a href="#">이용안내</a>
+					<ul>
+						<li><a href="place.jsp">오시는 길</a></li>
+							<li><a href="book_guide.jsp">도서 이용안내</a></li>
+					</ul></li>
+
+				<li><div class="menuHoverEvent"></div>
+					<a href="board.jsp">커뮤니티</a>
+					<ul>
+						<li><a href="">공지사항</a></li>
+						<li><a href="board.jsp">자유게시판</a></li>
+						<li><a href="Fault_list.jsp">불량도서 신고</a></li>
+						<li><a href="Donate_list.jsp">중고도서 나눔</a></li>
+					</ul></li>
+
+				<li><div class="menuHoverEvent"></div>
+					<a href="mypage_main.jsp">나의서재</a>
+					<ul>
+						<li><a href="mypage_main.jsp">나의 서재</a></li>
+						<li><a href="mypage_myPost.jsp">내가 쓴 글</a></li>
+						<li><a href="mypage_memberinfoChange.jsp">정보 수정/ 탈퇴</a></li>
+					</ul></li>
+			</ul>
+		<div id="window_menu"></div>
+		<script src="js/lib_top.js"></script></nav>
 	</header>
 
 
@@ -138,33 +139,42 @@
 				<span id="category"> </span> <img id="book_img"
 					src="img/book/<%=book_img%>">
 				<div id="button">
-
-					<%
-						String exist = (String)request.getAttribute("exist") ;
-					
-						if (exist.equals("1")) {
-							exist = "관심도서취소";
-						}else {
-							exist = "관심도서등록";
-						}
+				<form action="bookLoan.loa" name="loan" method="post">
+					<input type="hidden" name="isbn" value="<%=isbn%>">
+					<input type="hidden" name="member_id" value="<%=member_id%>">
 						
-						if (member_id == null) {
-						out.print("로그인 후 대출 가능합니다.");
-					} else {
-					%>
-
-					<form action="bookLoan.loa" name="loan" method="post">
-						<input type="hidden" name="isbn" value="<%=isbn%>">
-						<input type="hidden" name="member_id" value="<%=member_id%>">
-							<input type="submit" value="대출하기">
-							
-							<a href="bookFavorite.fav?isbn=<%=isbn%>&member_id=<%=member_id%>&exist=<%=exist%>"> <!-- exist도 보낸 후에 exist가 0이면 등록을 하고 1이면 삭제를 해야겠다 -->
-							<input type="button" value=<%=exist %> /></a>
-					</form>
-					<%
+						<%
+						if(request.getAttribute("book") != null){
+						%>
+							<a href="cancelBookLoan.loa?isbn=<%=isbn%>&member_id=<%=member_id%>">
+							<input type="button" value="대출취소"></a>
+						<%
 						}
-					%>
-
+						else{
+						%>
+							<a href="bookLoan.loa?isbn=<%=isbn%>&member_id=<%=member_id%>">
+							<input type="button" value="대출하기"></a>
+						<%
+						}
+						if (member_id == null)
+							out.print("로그인 후 대출 가능합니다.");
+						else{
+							String exist = (String)request.getAttribute("exist") ;
+						
+							if (exist.equals("1")) {
+								%>
+								<a href="cancelBookFavorite.fav?isbn=<%=isbn%>&member_id=<%=member_id%>">
+								<input type="button" value="관심도서취소" /></a>
+								<%
+							}else {
+								%>
+								<a href="bookFavorite.fav?isbn=<%=isbn%>&member_id=<%=member_id%>">
+								<input type="button" value="관심도서등록" /></a>
+								<%
+							}
+						}
+						%>
+					</form>
 				</div>
 			</div>
 			<div id="detail_box">

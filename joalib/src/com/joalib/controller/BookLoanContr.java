@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.joalib.DTO.ActionForward;
-
+import com.joalib.DTO.LoanDTO;
 import com.joalib.loan.action.Action;
 import com.joalib.loan.action.BookLoanAction;
+import com.joalib.loan.action.CancelBookLoanAction;
+import com.joalib.loan.service.BookLoanService;
 
 
 
@@ -26,10 +28,19 @@ public class BookLoanContr extends javax.servlet.http.HttpServlet{
 		ActionForward forward=null;
 		Action action=null;
 		
+		
 		if(command.equals("/bookLoan.loa")){ 
 			//System.out.println("이곳은 콘드롤요 ");
 			action  = new BookLoanAction();
 			
+			try {
+				forward=action.execute(request, response );				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/cancelBookLoan.loa")){
+			action  = new CancelBookLoanAction();
 			try {
 				forward=action.execute(request, response );				
 			} catch (Exception e) {
@@ -44,7 +55,6 @@ public class BookLoanContr extends javax.servlet.http.HttpServlet{
 				RequestDispatcher dispatcher= request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
-			
 		}
 
 	}

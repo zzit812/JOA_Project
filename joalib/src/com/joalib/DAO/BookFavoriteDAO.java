@@ -46,6 +46,16 @@ public class BookFavoriteDAO {
 		sqlsession.close();
 
 	}
+	
+	public void cancelFavorite(FavoriteDTO dto) {
+
+		getinstance();
+		SqlSession sqlsession = sqlfactory.openSession();
+		sqlsession.delete("favorite_delete", dto);
+		sqlsession.commit();
+		sqlsession.close();
+
+	}
 
 	public int favoriteSearch(FavoriteDTO favDTO) {
 		getinstance();

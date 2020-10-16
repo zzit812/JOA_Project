@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 //import com.jaolib.book.manager.action.BookInfoAddAction;
 import com.joalib.DTO.ActionForward;
 import com.joalib.DTO.BookInfoDTO;
+import com.joalib.DTO.LoanDTO;
 import com.joalib.bookinfo.action.Action;
 import com.joalib.bookinfo.action.BookInfoDetailAction;
 import com.joalib.bookinfo.action.BookInfoDetailDBAction;
+import com.joalib.bookinfo.svc.BookInfoDetailDBService;
+import com.joalib.loan.service.BookLoanService;
 
 @WebServlet("*.bk") 
 public class BookInfoContr extends javax.servlet.http.HttpServlet{
@@ -53,6 +56,16 @@ public class BookInfoContr extends javax.servlet.http.HttpServlet{
 				}
 		  }
 
+		 	BookInfoDetailDBService bookInfoDetailDBService = new BookInfoDetailDBService();
+		 	BookInfoDTO bookInfoDTO = new BookInfoDTO();
+
+			String member_id = request.getParameter("member_id");
+			String isbn = request.getParameter("isbn");
+			
+			bookInfoDTO.setIsbn(isbn);
+			bookInfoDTO.setMember_id(member_id);
+			
+			request.setAttribute("book", bookInfoDetailDBService.getBook(bookInfoDTO));
 				
 		 if(forward != null) {
 				if(forward.isRedirect()) {

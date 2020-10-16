@@ -8,7 +8,6 @@ public class BookFavoriteDelService {
 	public void favDel(FavoriteDTO dto) {
 		FavoriteDAO favDao = FavoriteDAO.getinstance();
 		favDao.favDel(dto);
-		
 	}
 
 }

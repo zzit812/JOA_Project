@@ -32,10 +32,14 @@ public class BookFavotiteContr extends javax.servlet.http.HttpServlet{
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
-		
+		if(command.equals("/cancelBookFavorite.fav")){
+			action  = new CancelBookFavoriteAction();
+			try {
+				forward=action.execute(request, response );				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		if(forward != null){		
 			if(forward.isRedirect()){
