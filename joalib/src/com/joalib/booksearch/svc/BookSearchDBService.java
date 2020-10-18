@@ -9,7 +9,6 @@ import com.joalib.DTO.SearchDTO;
 public class BookSearchDBService {
 
 	public List<SearchDTO> dbsearch(SearchDTO sdto) {
-		System.out.println(sdto.getOption());
 		BookSearchDAO dao = BookSearchDAO.getinstance();
 		if(sdto.getOption().equals("all")) {
 			List<SearchDTO> book_search = dao.all_option_select(sdto);

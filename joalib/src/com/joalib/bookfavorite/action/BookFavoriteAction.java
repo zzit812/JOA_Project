@@ -32,7 +32,7 @@ public class BookFavoriteAction implements Action {
 		if(flag)
 			message = "등록 되었습니다.";
 		else {
-			message = "등록 취소되었습니다.";
+			message = "등록 에러";
 		}
 		
 		forward = new ActionForward();
